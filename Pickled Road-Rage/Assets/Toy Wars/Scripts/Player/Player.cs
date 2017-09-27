@@ -39,5 +39,6 @@ public class Player : MonoBehaviour
     void SoldierManager()
     {
 
+
     }
 }
