@@ -9,7 +9,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // public int for which player this is.
-    public int m_nPlayerNumber; // MAKE SURE CANT GO OVER 2. // TOOLTIPS!
+    [Range(1,2)][Tooltip("Specify which Player it is between 1 and 2.")]
+    public int m_nPlayerNumber;
 
     //--------------------------------------------------------------------------------------
     // initialization

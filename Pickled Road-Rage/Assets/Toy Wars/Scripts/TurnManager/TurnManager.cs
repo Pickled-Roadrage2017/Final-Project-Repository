@@ -9,16 +9,19 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     // public float starting time for the Turn timer.
-    public float m_fStartTime; // TOOLTIPS!
+    [Tooltip("How long should each turn go for. Time in seconds.")]
+    public float m_fStartTime;
 
     // static int for the current players turn.
-    public static int m_snCurrentTurn; // ASK RICHARD ABOUT SEEING IN INSPECTOR. // TOOLTIPS!
+    [Tooltip("Which Player's turn is it currently.")]
+    public static int m_snCurrentTurn; // ASK RICHARD ABOUT SEEING IN INSPECTOR.
 
     // float for the turn timer.
-    public float m_fTurnTimer; // PUBLIC FOR TESTING. // ASK RICHARD IF CAN BE PUBLIC BUT NOT CHANGED. // TOOLTIPS!
+    [Tooltip("What the current ticking turn timer is currently.")]
+    public float m_fTurnTimer; // PUBLIC FOR TESTING. // ASK RICHARD IF CAN BE PUBLIC BUT NOT CHANGED.
 
     // static bool for ending player turns.
-    static bool m_sbEndTurn;  // TOOLTIPS!
+    static bool m_sbEndTurn;
 
     //--------------------------------------------------------------------------------------
     // initialization
