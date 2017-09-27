@@ -15,10 +15,12 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class SoldierActor : MonoBehaviour
 {
-
     // Speed at which the Soldier moves
     [Tooltip("The Speed at which the Soldier moves")]
     public float m_fSpeed;
+
+    //Speed at which the soldier rotates
+    public float m_fRotSpeed;
 
     // The Soldiers health when initilizied
     [Tooltip("The Soldiers health when initilizied")]
@@ -52,20 +54,37 @@ public class SoldierActor : MonoBehaviour
     // The Soldiers current health,
     // (Will be equal to m_nMaxHealth until it takes damage
     private int m_nCurrentHealth;
+
+
+    public RocketLauncher m_goRPG;
     void Start()
     {
         m_rbRigidBody = GetComponent<Rigidbody>();
-        m_rbRigidBody.freezeRotation = true;
 
         // Soldiers Current health should always start at MaxHealth
         m_nCurrentHealth = m_nMaxHealth;
         // Soldier should start off as alive
         m_bAlive = true;
+
+
     }
     //
     void FixedUpdate()
     {
         Move();
+        m_rbRigidBody.freezeRotation = true;
+        PlatformGetSoldierFireDirection();
+        Vector3 v3MousePos = new Vector3(0, Input.GetAxis("Mouse X") * m_fRotSpeed, 0);
+        transform.Rotate(v3MousePos);
+
+        if(Input.GetButtonDown("Fire1"))
+        {
+            // If current weapon is rocketLauncher
+            if(m_nCurrentWeapon == 0)
+            {
+                m_goRPG.Fire();
+            }
+        }
     }
 
 
@@ -111,7 +130,8 @@ public class SoldierActor : MonoBehaviour
         float fMoveHorizontal = Input.GetAxis("Horizontal");
         float fMoveVertical = Input.GetAxis("Vertical");
         Vector3 v3Movement = new Vector3(fMoveHorizontal, 0, fMoveVertical);
-        m_rbRigidBody.AddForce(v3Movement * m_fSpeed);
+        m_rbRigidBody.velocity = v3Movement * m_fSpeed;
+
     }
 
     private Vector3 PlatformGetSoldierFireDirection()
