@@ -12,8 +12,20 @@ public class Player : MonoBehaviour
     [Range(1,2)][Tooltip("Specify which Player it is between 1 and 2.")]
     public int m_nPlayerNumber;
 
+    // public int for current soldiers turn.
+    [Tooltip("Current soldiers turn, out of all the players soldiers.")]
+    public int m_nSoldierTurn; // ASK RICHARD ABOUT SEEING IN INSPECTOR.
+
+    // public array of gameobjects for player soldiers.
+    [Tooltip("List of all the soldiers a player has.")]
+    public GameObject[] m_agSoldiers;
+
+    // public gameobject for the Teddy base of this player.
+    [Tooltip("The Teddy base for this player.")]
+    public GameObject m_gTeddyBase;
+
     //--------------------------------------------------------------------------------------
-    // initialization
+    // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
@@ -39,7 +51,22 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void SoldierManager()
     {
+        // TODO.
+    }
 
+    //--------------------------------------------------------------------------------------
+    // SoldierMovement: Function for the current soldiers movement.
+    //--------------------------------------------------------------------------------------
+    void SoldierMovement()
+    {
+        // TODO.
+    }
 
+    //--------------------------------------------------------------------------------------
+    // SoldierFire: Function for the current soldiers firing.
+    //--------------------------------------------------------------------------------------
+    void SoldierFire()
+    {
+        // TODO.
     }
 }

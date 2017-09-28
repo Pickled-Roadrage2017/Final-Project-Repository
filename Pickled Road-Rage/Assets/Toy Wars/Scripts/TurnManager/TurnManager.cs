@@ -10,26 +10,35 @@ public class TurnManager : MonoBehaviour
 {
     // public float starting time for the Turn timer.
     [Tooltip("How long should each turn go for. Time in seconds.")]
-    public float m_fStartTime;
+    public float m_fTurnTimerLength;
+
+    // public float starting time for the delay timer.
+    [Tooltip("How long should each turn go for. Time in seconds.")]
+    public float m_fDelayTimerLength;
 
     // static int for the current players turn.
     [Tooltip("Which Player's turn is it currently.")]
     public static int m_snCurrentTurn; // ASK RICHARD ABOUT SEEING IN INSPECTOR.
 
     // float for the turn timer.
-    [Tooltip("What the current ticking turn timer is currently.")]
-    public float m_fTurnTimer; // PUBLIC FOR TESTING. // ASK RICHARD IF CAN BE PUBLIC BUT NOT CHANGED.
+    [Tooltip("What the current player ticking turn timer is.")]
+    public float m_fTurnTimer; // ASK RICHARD IF CAN BE PUBLIC BUT NOT CHANGED.
+
+    // float for turn delay.
+    [Tooltip("What the current player ticking delay timer is.")]
+    public float m_fDelayTimer; // ASK RICHARD IF CAN BE PUBLIC BUT NOT CHANGED.
 
     // static bool for ending player turns.
     static bool m_sbEndTurn;
 
     //--------------------------------------------------------------------------------------
-    // initialization
+    // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
         // Set default values.
-        m_fTurnTimer = m_fStartTime;
+        m_fTurnTimer = m_fTurnTimerLength;
+        m_fDelayTimer = m_fDelayTimerLength;
         m_sbEndTurn = false;
         m_snCurrentTurn = 0;
     }
@@ -54,11 +63,31 @@ public class TurnManager : MonoBehaviour
         {
             // set the turn to ended.
             m_sbEndTurn = true;
+
+            // set the delay timer.
+            m_fDelayTimer -= Time.deltaTime;
         }
 
         // Switch players turn.
         SwitchTurn();
 	}
+
+    //--------------------------------------------------------------------------------------
+    // DelayTurn: Delay the player turn from changing.
+    //--------------------------------------------------------------------------------------
+    void DelayTurn()
+    {
+        // Once the timer ends.
+        if (m_fDelayTimer < 0)
+        {
+            // change end turn back to false.
+            m_sbEndTurn = false;
+
+            // Set the timers back to Start time.
+            m_fTurnTimer = m_fTurnTimerLength;
+            m_fDelayTimer = m_fDelayTimerLength;
+        }
+    }
 
     //--------------------------------------------------------------------------------------
     // SwitchTurn: Function switches to the next players turn.
@@ -74,11 +103,8 @@ public class TurnManager : MonoBehaviour
                 // Switch to player 2.
                 m_snCurrentTurn = 2;
 
-                // change end turn back to false.
-                m_sbEndTurn = false;
-
-                // Set the timer back to Start time.
-                m_fTurnTimer = m_fStartTime;
+                // Delay turn start.
+                DelayTurn();
 
                 return;
             }
@@ -89,21 +115,20 @@ public class TurnManager : MonoBehaviour
                 // Switch to player 1.
                 m_snCurrentTurn = 1;
 
-                // change end turn back to false.
-                m_sbEndTurn = false;
-
-                // Set the timer back to Start time.
-                m_fTurnTimer = m_fStartTime;
+                // Delay turn start.
+                DelayTurn();
 
                 return;
             }
 
-            // if for some reason the current turn isnt 1 or 2 reset the turn manager.
+            // if for some reason the current turn isnt 1 or 2.
             else
             {
+                // Reset values.
                 m_snCurrentTurn = 0;
                 m_sbEndTurn = false;
-                m_fTurnTimer = m_fStartTime;
+                m_fTurnTimer = m_fTurnTimerLength;
+                m_fDelayTimer = m_fDelayTimerLength;
             }
         }
     }
