@@ -16,6 +16,8 @@ public class RocketLauncher : Weapon
 
     public float m_fRocketLifespan;
 
+    Rigidbody m_rbRocket;
+
     // Use this for initialization
     void Awake()
     {
@@ -33,6 +35,7 @@ public class RocketLauncher : Weapon
         {
             m_fRocketLifespan -= 1;
         }
+
 	}
 
 
