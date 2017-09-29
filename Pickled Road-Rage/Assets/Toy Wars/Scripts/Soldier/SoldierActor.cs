@@ -19,7 +19,8 @@ public class SoldierActor : MonoBehaviour
     [Tooltip("The Speed at which the Soldier moves")]
     public float m_fSpeed;
 
-    //Speed at which the soldier rotates
+    //Speed at which the soldier rotates towards the mouse
+    [Tooltip("The Speed at which the Soldier rotates towards the mouse")]
     public float m_fRotSpeed;
 
     // The Soldiers health when initilizied
@@ -68,7 +69,7 @@ public class SoldierActor : MonoBehaviour
 
 
     }
-    //
+    
     void FixedUpdate()
     {
         Move();
