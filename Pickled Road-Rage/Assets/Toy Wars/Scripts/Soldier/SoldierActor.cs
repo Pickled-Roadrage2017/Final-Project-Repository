@@ -73,11 +73,9 @@ public class SoldierActor : MonoBehaviour
     {
         Move();
         m_rbRigidBody.freezeRotation = true;
-        PlatformGetSoldierFireDirection();
-        Vector3 v3MousePos = new Vector3(0, Input.GetAxis("Mouse X") * m_fRotSpeed, 0);
-        transform.Rotate(v3MousePos);
+        FaceMouse();
 
-        if(Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             // If current weapon is rocketLauncher
             if(m_nCurrentWeapon == 0)
@@ -122,7 +120,7 @@ public class SoldierActor : MonoBehaviour
     //
     // Returns: Void
     //
-    // NOTE: Soldier will never slow unless you set the Drag value in the RigidBody in the Inspector 
+    //  
     // 
     //--------------------------------------------------------------------------------------
     private void Move()
@@ -134,22 +132,37 @@ public class SoldierActor : MonoBehaviour
 
     }
 
-    private Vector3 PlatformGetSoldierFireDirection()
+    //--------------------------------------------------------------------------------------
+    // FaceMouse: will make the Soldier rotate towards the mouse only along it's y axis
+    //
+    //
+    // Returns: The Quaternion for the Soldier to rotate to the mouse
+    //
+    // NOTE: m_fRotSpeed is the speed modifier for it, the speed will affect how quickly the Soldier rotates 
+    // 
+    //--------------------------------------------------------------------------------------
+    private Quaternion FaceMouse()
     {
-        Vector3 v3MousePos = Input.mousePosition;
-        // use the current camera to convert it to a ray
-        Ray rMouseRay = Camera.main.ScreenPointToRay(v3MousePos);
-        // create a plane that faces up at the same position as the player
+        // Generate a plane that intersects the transform's position.
         Plane pSoldierPlane = new Plane(Vector3.up, transform.position);
-        // find out how far along the ray the intersection is
-        float fRayDistance = 0;
-        pSoldierPlane.Raycast(rMouseRay, out fRayDistance);
-        //find the collision point from the distance
-        Vector3 v3CastPoint = rMouseRay.GetPoint(fRayDistance);
 
-        Vector3 v3ToCastPoint = v3CastPoint - transform.position;
-        v3ToCastPoint.Normalize();
+        // Generate a ray from the cursor position
+        Ray rMouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        return v3ToCastPoint;
+       
+        float fHitDistance = 0.0f;
+        // If the ray is parallel to the plane, Raycast will return false.
+        if (pSoldierPlane.Raycast(rMouseRay, out fHitDistance))
+        {
+            // Get the point along the ray that hits the calculated distance.
+            Vector3 v3TargetPos = rMouseRay.GetPoint(fHitDistance);
+
+            // Determine the target rotation.  This is the rotation if the transform looks at the target point.
+            Quaternion v3TargetRotation = Quaternion.LookRotation(v3TargetPos - transform.position);
+
+            // Smoothly rotate towards the target point.
+            transform.rotation = Quaternion.Slerp(transform.rotation, v3TargetRotation, m_fRotSpeed * Time.deltaTime);
+        }
+        return transform.rotation;
     }
 }
