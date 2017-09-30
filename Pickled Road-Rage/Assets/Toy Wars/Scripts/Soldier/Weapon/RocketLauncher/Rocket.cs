@@ -13,9 +13,6 @@ public class Rocket : Weapon {
     // always collide with something, making this obselete
     public float m_fLifespan;
 
-    // Speed that the rocket travels 
-    public float m_fRocketSpeed;
-
     Vector3 m_v3MoveDirection;
     // Use this for initialization
     void Start ()
@@ -35,7 +32,7 @@ public class Rocket : Weapon {
         }
 
         // Bullet recieves direction from the player
-        m_rbRocket.velocity = m_v3MoveDirection * m_fRocketSpeed;
+        m_rbRocket.velocity = m_v3MoveDirection * m_fSpeed;
         
 
     }

@@ -123,6 +123,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nDamage: 0
   m_nPower: 0
-  m_fSpeed: 0
+  m_fSpeed: 5
   m_fLifespan: 3
-  m_fRocketSpeed: 10
