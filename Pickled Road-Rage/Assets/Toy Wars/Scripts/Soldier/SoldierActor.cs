@@ -15,6 +15,9 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class SoldierActor : MonoBehaviour
 {
+    public GameObject m_gAimingArrow;
+
+
     // Speed at which the Soldier moves
     [Tooltip("The Speed at which the Soldier moves")]
     public float m_fSpeed;
@@ -41,7 +44,7 @@ public class SoldierActor : MonoBehaviour
 
     // Current Charge to pass on to the weapons firing Power (m_fPower) 
     [Tooltip("Current Charge to pass on to the weapons firing Power")]
-    public float m_fCharge;
+    public float m_fCharge = 1;
 
     // This Soldiers rigidBody for movement purposes
     private Rigidbody m_rbRigidBody;
@@ -56,34 +59,32 @@ public class SoldierActor : MonoBehaviour
     // (Will be equal to m_nMaxHealth until it takes damage
     private int m_nCurrentHealth;
 
+    Vector3 RotateRocketLauncher;
 
     public RocketLauncher m_goRPG;
+
+    // Is the Charge bar meant to be ascending?
+    bool m_bIsAscending;
+
+    // Float for Max Charge
+    float m_fMaxCharge = 100;
     void Start()
     {
         m_rbRigidBody = GetComponent<Rigidbody>();
-
         // Soldiers Current health should always start at MaxHealth
         m_nCurrentHealth = m_nMaxHealth;
         // Soldier should start off as alive
         m_bAlive = true;
-
-
     }
-    
+
     void FixedUpdate()
     {
         Move();
         m_rbRigidBody.freezeRotation = true;
         FaceMouse();
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            // If current weapon is rocketLauncher
-            if(m_nCurrentWeapon == 0)
-            {
-                m_goRPG.Fire();
-            }
-        }
+        Fire();
+       
     }
 
 
@@ -111,7 +112,45 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     private void Fire()
     {
-        
+        if (Input.GetButton("Fire1"))
+        {
+            // If current weapon is rocketLauncher
+            if (m_nCurrentWeapon == 0)
+            {
+
+                if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
+                {
+                    m_fCharge += 1;
+
+                    if (m_fCharge == m_fMaxCharge)
+                    {
+                        m_bIsAscending = false;
+                    }
+                }
+                else
+                {
+                    m_bIsAscending = false;
+                    m_fCharge -= 1;
+
+                    if (m_fCharge == 0)
+                    {
+                        m_bIsAscending = true;
+                    }
+                }
+
+            }
+        }
+
+        if (Input.GetButtonUp("Fire1"))
+        {
+            // If current weapon is rocketLauncher
+            if (m_nCurrentWeapon == 0)
+            {
+                m_goRPG.Fire(m_fCharge);
+                m_fCharge = 1;
+            }
+
+        }
     }
 
 
@@ -150,7 +189,7 @@ public class SoldierActor : MonoBehaviour
         // Generate a ray from the cursor position
         Ray rMouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-       
+
         float fHitDistance = 0.0f;
         // If the ray is parallel to the plane, Raycast will return false.
         if (pSoldierPlane.Raycast(rMouseRay, out fHitDistance))
@@ -164,6 +203,11 @@ public class SoldierActor : MonoBehaviour
             // Smoothly rotate towards the target point.
             transform.rotation = Quaternion.Slerp(transform.rotation, v3TargetRotation, m_fRotSpeed * Time.deltaTime);
         }
+
+
+
         return transform.rotation;
     }
+
+
 }

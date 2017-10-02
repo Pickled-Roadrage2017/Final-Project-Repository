@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Wall
   - RocketLauncher
+  - Soldier
+  - CurrentSoldier
+  - Terrain
+  - AimingArrow
   layers:
   - Default
   - TransparentFX

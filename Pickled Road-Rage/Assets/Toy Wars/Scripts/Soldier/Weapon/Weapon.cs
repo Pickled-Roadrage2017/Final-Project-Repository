@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-
+    [Tooltip("How many Health Points the projectile will subtract")]
     public int m_nDamage;
+    [Tooltip("How much power the Soldier has given the projectile(affects distance)")]
     public float m_nPower;
+    [Tooltip("How fast the projectile travels")]
     public float m_fSpeed;
 
 	// Use this for initialization
@@ -21,5 +23,6 @@ public class Weapon : MonoBehaviour
 	
 	}
 
-    public virtual void Fire() {}
+    // Fire function for overriding by every Weapon type
+    public virtual void Fire(float fCharge) {}
 }
