@@ -24,8 +24,6 @@ GameObject:
   - component: {fileID: 23203718258110512}
   - component: {fileID: 114663868660534328}
   - component: {fileID: 54493129431087288}
-  - component: {fileID: 114668956656530168}
-  - component: {fileID: 114824428947495362}
   m_Layer: 0
   m_Name: TestRocket
   m_TagString: Untagged
@@ -127,36 +125,6 @@ MonoBehaviour:
   m_nPower: 0
   m_fSpeed: 5
   m_fLifespan: 3
---- !u!114 &114668956656530168
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1656855712641856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7979cd337869c5541aa96e5ca14304bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_nDamage: 0
-  m_nPower: 0
-  m_fSpeed: 10
-  m_fLifespan: 3
---- !u!114 &114824428947495362
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1656855712641856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94ebb6404f9dbcb41bb0774864c279a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_nDamage: 25
-  m_nPower: 0
-  m_fSpeed: 1000
-  m_fLifespan: 50
-  m_fFallSpeed: 200
+  m_fFallSpeed: 0
   m_fExplosionRadius: 0
   m_fDamageDropoff: 0

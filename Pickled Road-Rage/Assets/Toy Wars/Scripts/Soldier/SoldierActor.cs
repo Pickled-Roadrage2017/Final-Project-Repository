@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 //--------------------------------------------------------------------------------------
@@ -15,8 +16,16 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class SoldierActor : MonoBehaviour
 {
-    public GameObject m_gAimingArrow;
+    // Slider for the aiming arrow
+    public Slider m_sAimSlider;
 
+    // Is the Charge bar meant to be ascending?
+    bool m_bIsAscending;
+
+    // Float for Max Charge
+    public float m_fMaxCharge = 30;
+
+    bool m_bFiring;
 
     // Speed at which the Soldier moves
     [Tooltip("The Speed at which the Soldier moves")]
@@ -63,11 +72,7 @@ public class SoldierActor : MonoBehaviour
 
     public RocketLauncher m_goRPG;
 
-    // Is the Charge bar meant to be ascending?
-    bool m_bIsAscending;
-
-    // Float for Max Charge
-    float m_fMaxCharge = 100;
+    
     void Start()
     {
         m_rbRigidBody = GetComponent<Rigidbody>();
@@ -75,6 +80,7 @@ public class SoldierActor : MonoBehaviour
         m_nCurrentHealth = m_nMaxHealth;
         // Soldier should start off as alive
         m_bAlive = true;
+        m_bFiring = false;
     }
 
     void FixedUpdate()
@@ -83,8 +89,9 @@ public class SoldierActor : MonoBehaviour
         m_rbRigidBody.freezeRotation = true;
         FaceMouse();
 
-        Fire();
-       
+        Fire(m_fCharge);
+        // reset the AimSlider to min value
+        m_sAimSlider.value = m_fCharge;
     }
 
 
@@ -110,10 +117,11 @@ public class SoldierActor : MonoBehaviour
     //
     // 
     //--------------------------------------------------------------------------------------
-    private void Fire()
+    private void Fire(float fCharge)
     {
         if (Input.GetButton("Fire1"))
         {
+            m_bFiring = true;
             // If current weapon is rocketLauncher
             if (m_nCurrentWeapon == 0)
             {
@@ -121,7 +129,7 @@ public class SoldierActor : MonoBehaviour
                 if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
                 {
                     m_fCharge += 1;
-
+                    m_sAimSlider.value = m_fCharge;
                     if (m_fCharge == m_fMaxCharge)
                     {
                         m_bIsAscending = false;
@@ -150,6 +158,7 @@ public class SoldierActor : MonoBehaviour
                 m_fCharge = 1;
             }
 
+            m_bFiring = false;
         }
     }
 
@@ -165,11 +174,13 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     private void Move()
     {
-        float fMoveHorizontal = Input.GetAxis("Horizontal");
-        float fMoveVertical = Input.GetAxis("Vertical");
-        Vector3 v3Movement = new Vector3(fMoveHorizontal, 0, fMoveVertical);
-        m_rbRigidBody.velocity = v3Movement * m_fSpeed;
-
+        if (!m_bFiring)
+        {
+            float fMoveHorizontal = Input.GetAxis("Horizontal");
+            float fMoveVertical = Input.GetAxis("Vertical");
+            Vector3 v3Movement = new Vector3(fMoveHorizontal, 0, fMoveVertical);
+            m_rbRigidBody.velocity = v3Movement * m_fSpeed;
+        }
     }
 
     //--------------------------------------------------------------------------------------

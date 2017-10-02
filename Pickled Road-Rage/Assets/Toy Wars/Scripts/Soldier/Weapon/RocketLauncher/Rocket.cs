@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Rocket : Weapon
 {
-
+    
     Rigidbody m_rbRocket;
     // pointer to the RocketLauncher so it knows where to spawn
-    GameObject m_goLauncher;
+    GameObject m_gLauncher;
+
+    RocketLauncher m_gRocketLauncher;
 
     // The timer for the rocket to delete
     // NOTE: Should only be as high as the time it would take a rocket to travel across the entire map    
@@ -34,22 +36,25 @@ public class Rocket : Weapon
     // Use this for initialization
     void Start()
     {
-        m_goLauncher = GameObject.FindGameObjectWithTag("RocketLauncher");
+        m_gLauncher = GameObject.FindGameObjectWithTag("RocketLauncher");
+        m_gRocketLauncher = m_gLauncher.GetComponent<RocketLauncher>();
+        // Set the rockets power variable to the power variable of the Launcher which was passed down by the Soldier
+        m_fPower = m_gRocketLauncher.m_fPower;
         m_rbRocket = GetComponent<Rigidbody>();
-        m_v3MoveDirection = m_goLauncher.transform.forward;
+        m_v3MoveDirection = m_gLauncher.transform.forward;
     }
 
     private void FixedUpdate()
     {
         m_fLifespan -= Time.deltaTime;
-
         if (m_fLifespan < 0)
         {
             Destroy(gameObject);
         }
 
         // Bullet recieves direction from the player
-        m_rbRocket.velocity = m_v3MoveDirection * m_fSpeed * Time.deltaTime;
+    //    m_rbRocket.velocity = m_v3MoveDirection * m_fSpeed * Time.deltaTime;
+        m_rbRocket.velocity = m_fPower * m_v3MoveDirection;
        // m_rbRocket.AddForce(-Vector3.up * m_fFallSpeed * Time.deltaTime);
     }
 

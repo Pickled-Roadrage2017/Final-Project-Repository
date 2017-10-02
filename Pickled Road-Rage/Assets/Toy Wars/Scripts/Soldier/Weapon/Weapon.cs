@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour
     [Tooltip("How many Health Points the projectile will subtract")]
     public int m_nDamage;
     [Tooltip("How much power the Soldier has given the projectile(affects distance)")]
-    public float m_nPower;
+    public float m_fPower;
     [Tooltip("How fast the projectile travels")]
     public float m_fSpeed;
 

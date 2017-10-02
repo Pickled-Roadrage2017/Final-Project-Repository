@@ -9,9 +9,12 @@ public class RocketLauncher : MonoBehaviour
     public GameObject m_gRocketPrefab;
     // The object that the rocket should spawn from 
     public GameObject m_gRocketSpawn;
+    // float variable passed on for the firing from the Soldier
+    public float m_fPower;
 
     public void Fire(float fCharge)
     {
+        m_fPower = fCharge;
         // Instanciate a new Rocket Prefab
         float spawn_angle = Random.Range(0, 2 * Mathf.PI);
         Vector3 spawn_direction = new Vector3(Mathf.Sin(spawn_angle), 0, Mathf.Cos(spawn_angle));
