@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Check if it is this players turn.
-        if (m_nPlayerNumber == TurnManager.m_snCurrentTurn)
+        if (m_nPlayerNumber == TurnManager.GetCurrentTurn())
         {
             // Update the soldier.
             m_nSoldierTurn = SoldierTurnManager(); // ASK RICHARD.

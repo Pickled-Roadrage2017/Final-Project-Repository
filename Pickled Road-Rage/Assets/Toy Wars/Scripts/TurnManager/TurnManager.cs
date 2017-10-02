@@ -17,19 +17,37 @@ public class TurnManager : MonoBehaviour
     public float m_fDelayTimerLength;
 
     // static int for the current players turn.
-    [Tooltip("Which Player's turn is it currently.")]
-    public static int m_snCurrentTurn; // ASK RICHARD ABOUT SEEING IN INSPECTOR.
+    //[Tooltip("Which Player's turn is it currently.")]
+    private static int m_snCurrentTurn; // ASK RICHARD ABOUT SEEING IN INSPECTOR.
 
     // float for the turn timer.
-    [Tooltip("What the current player ticking turn timer is.")]
-    public float m_fTurnTimer; // ASK RICHARD IF CAN BE PUBLIC BUT NOT CHANGED.
+    //[Tooltip("What the current player ticking turn timer is.")] // ASK RICHARD ABOUT SEEING IN INSPECTOR.
+    private static float m_sfTurnTimer; // ASK RICHARD IF CAN BE PUBLIC BUT NOT CHANGED.
 
     // float for turn delay.
     [Tooltip("What the current player ticking delay timer is.")]
     public float m_fDelayTimer; // ASK RICHARD IF CAN BE PUBLIC BUT NOT CHANGED.
 
     // static bool for ending player turns.
-    static bool m_sbEndTurn;
+    private static bool m_sbEndTurn;
+
+    // Getter for m_snCurrentTurn.
+    public static int GetCurrentTurn()
+    {
+        return m_snCurrentTurn;
+    }
+
+    // Getter for m_sfTurnTimer.
+    public static float GetTurnTimer()
+    {
+        return m_sfTurnTimer;
+    }
+
+    // Getter for m_sbEndTurn.
+    public static bool GetEndTurn()
+    {
+        return m_sbEndTurn;
+    }
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -37,7 +55,7 @@ public class TurnManager : MonoBehaviour
     void Awake()
     {
         // Set default values.
-        m_fTurnTimer = m_fTurnTimerLength;
+        m_sfTurnTimer = m_fTurnTimerLength;
         m_fDelayTimer = m_fDelayTimerLength;
         m_sbEndTurn = false;
         m_snCurrentTurn = 0;
@@ -56,10 +74,10 @@ public class TurnManager : MonoBehaviour
         }
 
         // Update the timer by deltatime.
-        m_fTurnTimer -= Time.deltaTime;
+        m_sfTurnTimer -= Time.deltaTime;
 
         // If the timer runs out.
-        if (m_fTurnTimer < 0)
+        if (m_sfTurnTimer < 0)
         {
             // set the turn to ended.
             m_sbEndTurn = true;
@@ -70,7 +88,7 @@ public class TurnManager : MonoBehaviour
 
         // Switch players turn.
         SwitchTurn();
-	}
+    }
 
     //--------------------------------------------------------------------------------------
     // DelayTurn: Delay the player turn from changing.
@@ -84,7 +102,7 @@ public class TurnManager : MonoBehaviour
             m_sbEndTurn = false;
 
             // Set the timers back to Start time.
-            m_fTurnTimer = m_fTurnTimerLength;
+            m_sfTurnTimer = m_fTurnTimerLength;
             m_fDelayTimer = m_fDelayTimerLength;
         }
     }
@@ -127,7 +145,7 @@ public class TurnManager : MonoBehaviour
                 // Reset values.
                 m_snCurrentTurn = 0;
                 m_sbEndTurn = false;
-                m_fTurnTimer = m_fTurnTimerLength;
+                m_sfTurnTimer = m_fTurnTimerLength;
                 m_fDelayTimer = m_fDelayTimerLength;
             }
         }
