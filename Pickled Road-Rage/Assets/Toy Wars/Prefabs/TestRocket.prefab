@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33097333388498728}
   - component: {fileID: 65822684770977834}
   - component: {fileID: 23203718258110512}
-  - component: {fileID: 114663868660534328}
   - component: {fileID: 54493129431087288}
+  - component: {fileID: 114501321744071674}
   m_Layer: 0
   m_Name: TestRocket
   m_TagString: Untagged
@@ -91,9 +91,9 @@ Rigidbody:
   m_GameObject: {fileID: 1656855712641856}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -110,7 +110,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114663868660534328
+--- !u!114 &114501321744071674
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -118,13 +118,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1656855712641856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d69c49b6986d74f90aad441d9d7d62, type: 3}
+  m_Script: {fileID: 11500000, guid: 94ebb6404f9dbcb41bb0774864c279a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_nDamage: 0
-  m_nPower: 0
-  m_fSpeed: 5
-  m_fLifespan: 3
+  m_nDamage: 50
+  m_fPower: 0
+  m_fSpeed: 0
+  m_fCurrentDropSpeed: 0
+  m_fDropIterator: 0.2
+  m_fLifespan: 60
   m_fFallSpeed: 0
-  m_fExplosionRadius: 0
-  m_fDamageDropoff: 0
+  m_fExplosionRadius: 5
+  m_UnitMask:
+    serializedVersion: 2
+    m_Bits: 256
+  m_psExplosionParticles: {fileID: 0}
+  m_ExplosionForce: 1000

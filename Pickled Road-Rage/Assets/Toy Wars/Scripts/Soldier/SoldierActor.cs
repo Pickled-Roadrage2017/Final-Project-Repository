@@ -19,6 +19,9 @@ public class SoldierActor : MonoBehaviour
     // Slider for the aiming arrow
     public Slider m_sAimSlider;
 
+    // Speed for the slider
+    public float m_fSliderSpeed = 0.0f;
+
     // Is the Charge bar meant to be ascending?
     bool m_bIsAscending;
 
@@ -37,7 +40,7 @@ public class SoldierActor : MonoBehaviour
 
     // The Soldiers health when initilizied
     [Tooltip("The Soldiers health when initilizied")]
-    public int m_nMaxHealth;
+    public int m_nMaxHealth = 100;
 
     // Intiger value for the Soldiers current weapon
     // 0 = RocketLauncher
@@ -62,17 +65,14 @@ public class SoldierActor : MonoBehaviour
     private bool m_bAlive;
 
     // A Number so the PlayerActor can know which soldier to move
-    private int m_nSoldierNumber;
+    public int m_nSoldierNumber;
 
     // The Soldiers current health,
     // (Will be equal to m_nMaxHealth until it takes damage
-    private int m_nCurrentHealth;
-
-    Vector3 RotateRocketLauncher;
+    public int m_nCurrentHealth;
 
     public RocketLauncher m_goRPG;
 
-    
     void Start()
     {
         m_rbRigidBody = GetComponent<Rigidbody>();
@@ -81,6 +81,7 @@ public class SoldierActor : MonoBehaviour
         // Soldier should start off as alive
         m_bAlive = true;
         m_bFiring = false;
+        m_bIsAscending = true;
     }
 
     void FixedUpdate()
@@ -90,8 +91,13 @@ public class SoldierActor : MonoBehaviour
         FaceMouse();
 
         Fire(m_fCharge);
-        // reset the AimSlider to min value
         m_sAimSlider.value = m_fCharge;
+        //m_bIsAscending = true;
+
+        if(m_nCurrentHealth <= 0)
+        {
+            Die();
+        }
     }
 
 
@@ -112,42 +118,43 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     // Fire: Call when the Player commands the Soldier to fire
     //
-    // Returns: Void
-    //
-    //
-    // 
     //--------------------------------------------------------------------------------------
     private void Fire(float fCharge)
     {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             m_bFiring = true;
-            // If current weapon is rocketLauncher
-            if (m_nCurrentWeapon == 0)
+        }
+        if(Input.GetButton("Fire1"))
+        {
+            if (m_bFiring)
             {
-
-                if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
+                // If current weapon is rocketLauncher
+                if (m_nCurrentWeapon == 0)
                 {
-                    m_fCharge += 1;
-                    m_sAimSlider.value = m_fCharge;
-                    if (m_fCharge == m_fMaxCharge)
+                    if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
+                    {
+                        m_fCharge += m_fSliderSpeed /* Time.deltaTime*/;
+                    
+                        if (m_fCharge >= m_fMaxCharge)
+                        {
+                            m_bIsAscending = false;
+                        }
+                    }
+                    else 
                     {
                         m_bIsAscending = false;
+                        m_fCharge -= m_fSliderSpeed /* Time.deltaTime*/;
+
+                        if (m_fCharge <= 0)
+                        {
+                            m_bIsAscending = true;
+                        }
                     }
                 }
-                else
-                {
-                    m_bIsAscending = false;
-                    m_fCharge -= 1;
-
-                    if (m_fCharge == 0)
-                    {
-                        m_bIsAscending = true;
-                    }
-                }
-
             }
-        }
+
+           }
 
         if (Input.GetButtonUp("Fire1"))
         {
@@ -166,10 +173,6 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     // Move: Uses the Soldiers RigibBody to move with a drag value, 
     //       making it so the Soldier doesn't stop instantly
-    //
-    // Returns: Void
-    //
-    //  
     // 
     //--------------------------------------------------------------------------------------
     private void Move()
@@ -221,4 +224,24 @@ public class SoldierActor : MonoBehaviour
     }
 
 
+    //--------------------------------------------------------------------------------------
+    // TakeDamage: Function for taking damage, for weapons to access
+    //
+    //
+    //--------------------------------------------------------------------------------------
+    public void TakeDamage(int nDamage)
+    {
+        m_nCurrentHealth -= nDamage;
+    }
+
+    //--------------------------------------------------------------------------------------
+    // Die: Function for the soldier dying
+    //
+    //
+    //--------------------------------------------------------------------------------------
+    private void Die()
+    {
+        // TODO: Animation and such
+        Destroy(gameObject);
+    }
 }

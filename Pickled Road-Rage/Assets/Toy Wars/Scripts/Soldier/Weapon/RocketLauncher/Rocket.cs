@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Rocket : Weapon
 {
-    
+    // How long the Rocket has been alive
+    public float m_fCurrentDropSpeed;
+    // How much m_fAirTime gets increased per frame
+    public float m_fDropIterator = 0.05f;
+
     Rigidbody m_rbRocket;
     // pointer to the RocketLauncher so it knows where to spawn
     GameObject m_gLauncher;
@@ -26,12 +30,12 @@ public class Rocket : Weapon
 
     // Radius for the Area of Effect Explosion that should follow any Collision
     [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
+    public float m_fExplosionRadius = 5f;
 
-    public float m_fExplosionRadius;
+    public LayerMask m_UnitMask;
+    public ParticleSystem m_psExplosionParticles;
 
-    // The value of how much the damage drops of per unit of distance(metres by default)
-    [Tooltip("The value of how much the damage drop of per unit of distance(metres by default)")]
-    public int m_fDamageDropoff;
+    public float m_ExplosionForce = 1000f;
 
     // Use this for initialization
     void Start()
@@ -42,20 +46,23 @@ public class Rocket : Weapon
         m_fPower = m_gRocketLauncher.m_fPower;
         m_rbRocket = GetComponent<Rigidbody>();
         m_v3MoveDirection = m_gLauncher.transform.forward;
+        m_fCurrentDropSpeed = 0;
     }
 
     private void FixedUpdate()
     {
+        m_fCurrentDropSpeed -= m_fDropIterator;
         m_fLifespan -= Time.deltaTime;
         if (m_fLifespan < 0)
         {
             Destroy(gameObject);
         }
 
-        // Bullet recieves direction from the player
-    //    m_rbRocket.velocity = m_v3MoveDirection * m_fSpeed * Time.deltaTime;
-        m_rbRocket.velocity = m_fPower * m_v3MoveDirection;
-       // m_rbRocket.AddForce(-Vector3.up * m_fFallSpeed * Time.deltaTime);
+        // Bullet recieves direction from the Soldier
+       // m_rbRocket.velocity = m_fPower * m_v3MoveDirection;
+        m_rbRocket.AddForce(m_v3MoveDirection * m_fPower);
+        m_rbRocket.AddForce(new Vector3(0, m_fCurrentDropSpeed, 0));
+        transform.LookAt(transform.position + m_rbRocket.velocity);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,6 +71,31 @@ public class Rocket : Weapon
         if (other.tag == "Terrain")
         {
             //TODO: Explosion Radius should allow you to damage a Soldier without directly hitting them
+            // Collect all possible colliders 
+            Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
+
+            for (int i = 0; i < aColliders.Length; i++)
+            {
+                Rigidbody rbTarget = aColliders[i].GetComponent<Rigidbody>();
+
+                //if it does not have a rigidbody
+                if (!rbTarget)
+                {
+                    continue;
+                }
+
+                // add explosive force
+                // TODO: Replace this line with more predictible coded "physics"
+                rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius);
+
+                SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
+
+                if (!gtarget)
+                {
+                    continue;
+                }
+                gtarget.TakeDamage(m_nDamage);
+            }
 
             Debug.Log("Hit Terrain");
             Destroy(gameObject);
@@ -93,8 +125,28 @@ public class Rocket : Weapon
 
             Destroy(gameObject);
         }
+
+       
     }
 
 
+    private void Explosion()
+    {
 
+    }
+
+    private void CalculateDamage(Vector3 v3TargetPosition)
+    {
+        // create a vector from the shell to the target
+        Vector3 explosionToTarget = v3TargetPosition - transform.position;
+
+        // Calculated the distance from the shell to the target
+        float explosionDistance = explosionToTarget.magnitude;
+
+        // calculate the proportion of the Maximum distance the target is away
+        float relativeDistance = (m_fExplosionRadius - explosionDistance) / m_fExplosionRadius;
+
+        // Calculate damage as this proportion of the maximum possible damage
+        float fDamage = relativeDistance * m_nDamage;
+    }
 }
