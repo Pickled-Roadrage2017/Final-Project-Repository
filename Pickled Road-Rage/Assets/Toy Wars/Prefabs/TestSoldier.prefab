@@ -183,14 +183,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1884897141601300}
-  m_LocalRotation: {x: -0.13694903, y: 0.028163347, z: -0.001475818, w: 0.99017656}
-  m_LocalPosition: {x: -0.43700004, y: 0.46300006, z: 0.05000019}
+  m_LocalRotation: {x: -0.00016986068, y: 0.029761685, z: -0.00570474, w: 0.99954075}
+  m_LocalPosition: {x: -0.43700004, y: 0.463, z: 0.05000019}
   m_LocalScale: {x: 0.16, y: 0.24, z: 1.06}
   m_Children:
   - {fileID: 4584223969051312}
   m_Father: {fileID: 4155550103071750}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -15.731001, y: 3.3460002, z: -0.633}
+  m_LocalEulerAnglesHint: {x: 0, y: 3.4110003, z: -0.65400004}
 --- !u!23 &23186101531787414
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_fCharge: 1
   m_nSoldierNumber: 0
   m_fCurrentHealth: 0
-  m_goRPG: {fileID: 114552859018793376}
+  m_gRPG: {fileID: 114552859018793376}
 --- !u!114 &114552859018793376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -389,6 +389,8 @@ MonoBehaviour:
     type: 2}
   m_gRocketSpawn: {fileID: 1448025323404522}
   m_fPower: 0
+  m_bRocketAlive: 0
+  m_fRocketXRot: 0
 --- !u!114 &114570913392089972
 MonoBehaviour:
   m_ObjectHideFlags: 1

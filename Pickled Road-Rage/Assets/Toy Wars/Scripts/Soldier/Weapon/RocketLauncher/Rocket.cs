@@ -66,9 +66,11 @@ public class Rocket : Weapon
         if (m_fCurrentLifespan < 0)
         {
             gameObject.SetActive(false);
+            m_gRocketLauncher.m_bRocketAlive = false;
         }
 
         m_rbRocket.AddForce(m_v3MoveDirection * m_fPower);
+         //m_rbRocket.velocity = m_v3MoveDirection * m_fPower;
         // This will start pulling the rocket downwards after it reaches the initial y value of it
         m_rbRocket.AddForce(new Vector3(0, m_fAirDrop, 0));
         // Makes the rocket point towards its y-axis
@@ -113,6 +115,7 @@ public class Rocket : Weapon
                
             }
             gameObject.SetActive(false);
+            m_gRocketLauncher.m_bRocketAlive = false;
         }
        
     }

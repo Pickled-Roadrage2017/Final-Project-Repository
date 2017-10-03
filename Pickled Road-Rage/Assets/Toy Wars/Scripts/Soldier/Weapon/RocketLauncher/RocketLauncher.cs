@@ -6,7 +6,7 @@ public class RocketLauncher : MonoBehaviour
 {
    
     // Prefab for the Rocket object
-    [Tooltip("Prefab for instantiating")]
+    [Tooltip("Prefab for instantiating the rockets")]
     public GameObject m_gRocketBlueprint;
     // The object that the rocket should spawn from
     [Tooltip("This gameObjects transform will be the spawn point for the bullet")] 
@@ -14,6 +14,14 @@ public class RocketLauncher : MonoBehaviour
     // float variable passed on for the firing from the Soldier
     [HideInInspector]
     public float m_fPower;
+
+    // Boolean for the locking of fire if a rocket is still alive
+    [HideInInspector]
+    public bool m_bRocketAlive;
+
+    [Range(0,-100)]
+    [Tooltip("This tilts the RocketLauncher, which in turn makes the rockets arc deeper or shallower")]
+    public float m_fRocketXRot;
 
     // Pool for the Rockets (should always be 1)
     int m_nPoolsize = 1;
@@ -33,22 +41,26 @@ public class RocketLauncher : MonoBehaviour
             m_agRocketList[i] = Instantiate(m_gRocketBlueprint);
             m_agRocketList[i].SetActive(false);
         }
-
+        gameObject.transform.Rotate(m_fRocketXRot,0, 0);
     }
 
     public void Fire(float fCharge)
     {
         m_fPower = fCharge;
-
+        
         // re-Initilise all Variables of the rocket
         GameObject gRocket = Allocate();
-        gRocket.GetComponent<Rocket>().m_fCurrentLifespan = gRocket.GetComponent<Rocket>().m_fMaxLifespan;
-        gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
-        gRocket.GetComponent<Rocket>().transform.position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
-        gRocket.GetComponent<Rocket>().m_fPower = fCharge;
-        gRocket.GetComponent<Rocket>().m_fAirDrop = 0;
-        gRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        gRocket.GetComponent<Rocket>().m_v3MoveDirection = transform.forward;
+        if (gRocket.activeInHierarchy)
+        {
+            m_bRocketAlive = true;
+            gRocket.GetComponent<Rocket>().m_fCurrentLifespan = gRocket.GetComponent<Rocket>().m_fMaxLifespan;
+            gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
+            gRocket.GetComponent<Rocket>().transform.position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
+            gRocket.GetComponent<Rocket>().m_fPower = fCharge;
+            gRocket.GetComponent<Rocket>().m_fAirDrop = 0;
+            gRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gRocket.GetComponent<Rocket>().m_v3MoveDirection = transform.forward;
+        }
     } 
 
    GameObject Allocate()

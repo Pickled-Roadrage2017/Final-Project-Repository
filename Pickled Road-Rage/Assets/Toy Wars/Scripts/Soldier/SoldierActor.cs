@@ -74,7 +74,7 @@ public class SoldierActor : MonoBehaviour
     // (Will be equal to m_nMaxHealth until it takes damage
     public float m_fCurrentHealth;
 
-    public RocketLauncher m_goRPG;
+    public RocketLauncher m_gRPG;
 
     void Start()
     {
@@ -89,15 +89,17 @@ public class SoldierActor : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+       
         Move();
         m_rbRigidBody.freezeRotation = true;
         FaceMouse();
 
-        Fire(m_fCharge);
-        // Makes the Slider represent the charge
-        m_sAimSlider.value = m_fCharge;
-        
+        if (!m_gRPG.m_bRocketAlive)
+        {
+            Fire(m_fCharge);
+            // Makes the Slider represent the charge
+            m_sAimSlider.value = m_fCharge;
+        }
         // As health is a float, anything below one will be displayed as 0 to the player
         if(m_fCurrentHealth < 1)
         {
@@ -126,39 +128,41 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     private void Fire(float fCharge)
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            m_bFiring = true;
-        }
-        if(Input.GetButton("Fire1"))
-        {
-            if (m_bFiring)
+        
+          if (Input.GetButtonDown("Fire1"))
             {
-                // If current weapon is rocketLauncher
-                if (m_nCurrentWeapon == 0)
-                {
-                    if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
-                    {
-                        m_fCharge += m_fSliderSpeed /* Time.deltaTime*/;
-                    
-                        if (m_fCharge >= m_fMaxCharge)
-                        {
-                            m_bIsAscending = false;
-                        }
-                    }
-                    else 
-                    {
-                        m_bIsAscending = false;
-                        m_fCharge -= m_fSliderSpeed /* Time.deltaTime*/;
-
-                        if (m_fCharge <= 0)
-                        {
-                            m_bIsAscending = true;
-                        }
-                    }
-                }
+                m_bFiring = true;
             }
+            if (Input.GetButton("Fire1"))
+            {
+            
+                if (m_bFiring)
+                {
+                    // If current weapon is rocketLauncher
+                  if (m_nCurrentWeapon == 0)
+                  {
+                      if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
+                      {
+                         m_fCharge += m_fSliderSpeed /* Time.deltaTime*/;
 
+                         if (m_fCharge >= m_fMaxCharge)
+                         {
+                            m_bIsAscending = false;
+                         }
+                        }
+                        else
+                        {
+                          m_bIsAscending = false;
+                          m_fCharge -= m_fSliderSpeed /* Time.deltaTime*/;
+
+                          if (m_fCharge <= 0)
+                          {
+                           m_bIsAscending = true;
+                          }
+                        }
+                  }
+                
+             }
            }
 
         if (Input.GetButtonUp("Fire1"))
@@ -166,7 +170,7 @@ public class SoldierActor : MonoBehaviour
             // If current weapon is rocketLauncher
             if (m_nCurrentWeapon == 0)
             {
-                m_goRPG.Fire(m_fCharge);
+                m_gRPG.Fire(m_fCharge);
                 m_fCharge = 1;
             }
 
