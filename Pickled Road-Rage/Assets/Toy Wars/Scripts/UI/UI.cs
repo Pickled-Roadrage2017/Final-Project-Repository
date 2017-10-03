@@ -19,7 +19,7 @@ public class UI : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-        //m_tTurnTimer.text = "Turn Timer: " + ActionState.m_sfTurnTimer;
+        m_tTurnTimer.text = "Turn Timer: " + ActionState.GetTurnTimer();
         m_tPlayerTurn.text = "Player " + TurnManager.m_snCurrentTurn + "'s turn!";
     }
 }

@@ -248,8 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nPlayerNumber: 2
   m_nSoldierTurn: 0
-  m_gSoldierBlueprint: {fileID: 1370565980332000, guid: 29fec684dd7edcd49a01b458aeeaeecb,
-    type: 2}
+  m_gSoldierBlueprint: {fileID: 0}
   m_nPoolSize: 2
   m_gTeddyBase: {fileID: 1598131674}
 --- !u!4 &130135980
@@ -378,8 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nPlayerNumber: 1
   m_nSoldierTurn: 0
-  m_gSoldierBlueprint: {fileID: 1370565980332000, guid: 29fec684dd7edcd49a01b458aeeaeecb,
-    type: 2}
+  m_gSoldierBlueprint: {fileID: 0}
   m_nPoolSize: 5
   m_gTeddyBase: {fileID: 2017378613}
 --- !u!4 &585974529

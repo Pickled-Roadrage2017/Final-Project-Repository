@@ -9,7 +9,13 @@ using UnityEngine;
 public class ActionState : State
 {
     // float for the turn timer.
-    public float m_sfTurnTimer;
+    private static float m_sfTurnTimer;
+
+    // turn timer getter
+    public static float GetTurnTimer() // ASK RICHARD ABOUT THIS.
+    {
+        return m_sfTurnTimer;
+    }
 
     //--------------------------------------------------------------------------------------
     // initialization.

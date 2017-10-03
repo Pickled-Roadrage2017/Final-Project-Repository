@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     public int m_nPlayerNumber;
 
     // public int for current soldiers turn.
-    [Tooltip("Current soldiers turn, out of all the players soldiers.")]
-    public int m_nSoldierTurn;
+    //[Tooltip("Current soldiers turn, out of all the players soldiers.")]
+    private static int m_nSoldierTurn; // ASK RICHARD ABOUT THIS BECAUSE I USE THIS SCRIPT ON 2 OBJECTS.
 
     // public gameobject for the soldier prefab.
     [Tooltip("The prefab for the Soldier object.")]
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     // pool size. how many soldiers allowed on screen at once.
     [Range(1, 6)]
-    [Tooltip("Specify the max number of solider on each time at once.")]
+    [Tooltip("Specify the max number of soliders allowed in game at once.")]
     public int m_nPoolSize;
 
     // public gameobject for the Teddy base of this player.
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     public GameObject m_gTeddyBase;
 
     // public array of gameobjects for player soldiers.
-    private GameObject[] m_agSoldierList;
+    private static GameObject[] m_agSoldierList;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -39,6 +39,9 @@ public class Player : MonoBehaviour
     {
         // initialize soldier list with size.
         m_agSoldierList = new GameObject[m_nPoolSize];
+
+        // Start the solider turn at 1.
+        m_nSoldierTurn = 0;
 
         // Go through each soldier.
         for (int i = 0; i < m_nPoolSize; ++i)
@@ -67,11 +70,8 @@ public class Player : MonoBehaviour
         // Check if it is this players turn.
         if (m_nPlayerNumber == TurnManager.m_snCurrentTurn)
         {
-            // Update the soldier.
-            m_nSoldierTurn = SoldierTurnManager(); // ASK RICHARD.
+        
         }
-
-        AllocateSoldier();
     }
 
     //--------------------------------------------------------------------------------------
@@ -104,20 +104,14 @@ public class Player : MonoBehaviour
     // SoldierTurnManager: Function that will manager which soldier the player is able to 
     //                 use per turn.
     //--------------------------------------------------------------------------------------
-    int SoldierTurnManager()
+    public static void SoldierTurnManager()
     {
-        // new int turn.
-        int nTurn = 0;
-
         // Go up one soldiers turn.
-        nTurn += 1;
+        m_nSoldierTurn += 1;
 
         // Go back to the start of the list
-        if (nTurn > m_agSoldierList.Length)
-            nTurn = 1;
-
-        // return turn number.
-        return nTurn;
+        if (m_nSoldierTurn > m_agSoldierList.Length)
+            m_nSoldierTurn = 1;
     }
 
     //--------------------------------------------------------------------------------------

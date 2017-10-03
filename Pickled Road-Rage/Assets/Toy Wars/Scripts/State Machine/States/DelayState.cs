@@ -9,7 +9,13 @@ using UnityEngine;
 public class DelayState : State
 {
     // float for turn delay.
-    public float m_fDelayTimer;
+    private static float m_fDelayTimer;
+
+    // Delay timer getter
+    public static float GetDelayTimer()
+    {
+        return m_fDelayTimer;
+    }
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -45,6 +51,9 @@ public class DelayState : State
     {
         // Reset the timer.
         m_fDelayTimer = TurnManager.m_sfStaticDelayLength;
+
+        // Change Player soldier.
+        Player.SoldierTurnManager(); // ASK RICHARD ABOUT THIS BECAUSE I USE THIS SCRIPT ON 2 OBJECTS.
     }
 
     //--------------------------------------------------------------------------------------
