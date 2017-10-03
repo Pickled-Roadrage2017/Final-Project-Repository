@@ -37,10 +37,10 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        // initialize bullet list with size.
+        // initialize soldier list with size.
         m_agSoldierList = new GameObject[m_nPoolSize];
 
-        // Go through each bullet.
+        // Go through each soldier.
         for (int i = 0; i < m_nPoolSize; ++i)
         {
             // Instantiate and set active state.
@@ -70,6 +70,8 @@ public class Player : MonoBehaviour
             // Update the soldier.
             m_nSoldierTurn = SoldierTurnManager(); // ASK RICHARD.
         }
+
+        AllocateSoldier();
     }
 
     //--------------------------------------------------------------------------------------

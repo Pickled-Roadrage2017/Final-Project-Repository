@@ -32,13 +32,13 @@ public class ActionState : State
         {
             // set the turn to ended.
             TurnManager.m_sbEndTurn = true;
+
+            // Switch players turn.
+            TurnManager.SwitchTurn();
+
+            // Push to the delay state.
+            sMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
         }
-
-        // Switch players turn.
-        TurnManager.SwitchTurn();
-
-        // Push to the delay state.
-        sMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
     }
 
     //--------------------------------------------------------------------------------------

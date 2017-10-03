@@ -18,10 +18,10 @@ public enum ETurnManagerStates
 public class StateMachine
 {
     // private dyanmic array of states.
-    private List<State> m_asStateList;
+    private List<State> m_asStateList = new List<State>();
 
     // private stack of states.
-    private Stack<State> m_CurrentStack;
+    private Stack<State> m_CurrentStack = new Stack<State>();
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -125,10 +125,14 @@ public class StateMachine
     // ChangeState: // FINISH THIS COMMENT
     //--------------------------------------------------------------------------------------
     public void ChangeState(ETurnManagerStates eStateIndex)
-    {
-        // Pop the top state
-        PopState();
-
+    {        
+        // Check if there is anything on the current stack. 
+        if (m_CurrentStack.Count > 0)
+        {
+            // Pop the top state
+            PopState();
+        }        
+        
         // Push the newly seletec state. 
         PushState(eStateIndex);
     }
