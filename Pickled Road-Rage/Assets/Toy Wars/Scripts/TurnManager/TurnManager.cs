@@ -10,44 +10,24 @@ public class TurnManager : MonoBehaviour
 {
     // public float starting time for the Turn timer.
     [Tooltip("How long should each turn go for. Time in seconds.")]
-    public float m_fTurnTimerLength;
+    public float m_fTimerLength;
 
     // public float starting time for the delay timer.
     [Tooltip("How long should each turn go for. Time in seconds.")]
-    public float m_fDelayTimerLength;
+    public float m_fDelayLength;
 
     // static int for the current players turn.
-    //[Tooltip("Which Player's turn is it currently.")]
-    private static int m_snCurrentTurn; // ASK RICHARD ABOUT SEEING IN INSPECTOR.
-
-    // float for the turn timer.
-    //[Tooltip("What the current player ticking turn timer is.")] // ASK RICHARD ABOUT SEEING IN INSPECTOR.
-    private static float m_sfTurnTimer; // ASK RICHARD IF CAN BE PUBLIC BUT NOT CHANGED.
-
-    // float for turn delay.
-    [Tooltip("What the current player ticking delay timer is.")]
-    public float m_fDelayTimer; // ASK RICHARD IF CAN BE PUBLIC BUT NOT CHANGED.
+    public static int m_snCurrentTurn;
 
     // static bool for ending player turns.
-    private static bool m_sbEndTurn;
+    public static bool m_sbEndTurn;
 
-    // Getter for m_snCurrentTurn.
-    public static int GetCurrentTurn()
-    {
-        return m_snCurrentTurn;
-    }
+    // New instance of the state machine.
+    private StateMachine m_sStateMachine;
 
-    // Getter for m_sfTurnTimer.
-    public static float GetTurnTimer()
-    {
-        return m_sfTurnTimer;
-    }
-
-    // Getter for m_sbEndTurn.
-    public static bool GetEndTurn()
-    {
-        return m_sbEndTurn;
-    }
+    // Static values for timers.
+    public static float m_sfStaticTimerLength;
+    public static float m_sfStaticDelayLength;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -55,10 +35,25 @@ public class TurnManager : MonoBehaviour
     void Awake()
     {
         // Set default values.
-        m_sfTurnTimer = m_fTurnTimerLength;
-        m_fDelayTimer = m_fDelayTimerLength;
         m_sbEndTurn = false;
         m_snCurrentTurn = 0;
+
+        // Set static values
+        m_sfStaticTimerLength = m_fTimerLength;
+        m_sfStaticDelayLength = m_fDelayLength;
+
+        // Create a new Statmachine.
+        m_sStateMachine = new StateMachine();
+
+        // Add states to the machine.
+        m_sStateMachine.AddState(ETurnManagerStates.ETURN_DELAY, new DelayState());
+        m_sStateMachine.AddState(ETurnManagerStates.ETURN_ACTION, new ActionState());
+
+        // Set the first state to the delay state.
+        m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
+
+        // Decide who goes first
+        DecideTurn();
     }
 
     //--------------------------------------------------------------------------------------
@@ -66,51 +61,27 @@ public class TurnManager : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
+        // Update the state machine.
+        m_sStateMachine.OnUpdate();
+    }
+
+    //--------------------------------------------------------------------------------------
+    // DecideTurn: Decide who goes first at the start of the game.
+    //--------------------------------------------------------------------------------------
+    void DecideTurn()
+    {
         // If there is no current turn
         if (m_snCurrentTurn == 0)
         {
             // then select a random player.
             m_snCurrentTurn = Random.Range(1, 2);
         }
-
-        // Update the timer by deltatime.
-        m_sfTurnTimer -= Time.deltaTime;
-
-        // If the timer runs out.
-        if (m_sfTurnTimer < 0)
-        {
-            // set the turn to ended.
-            m_sbEndTurn = true;
-
-            // set the delay timer.
-            m_fDelayTimer -= Time.deltaTime;
-        }
-
-        // Switch players turn.
-        SwitchTurn();
-    }
-
-    //--------------------------------------------------------------------------------------
-    // DelayTurn: Delay the player turn from changing.
-    //--------------------------------------------------------------------------------------
-    void DelayTurn()
-    {
-        // Once the timer ends.
-        if (m_fDelayTimer < 0)
-        {
-            // change end turn back to false.
-            m_sbEndTurn = false;
-
-            // Set the timers back to Start time.
-            m_sfTurnTimer = m_fTurnTimerLength;
-            m_fDelayTimer = m_fDelayTimerLength;
-        }
     }
 
     //--------------------------------------------------------------------------------------
     // SwitchTurn: Function switches to the next players turn.
     //--------------------------------------------------------------------------------------
-    void SwitchTurn()
+    public static void SwitchTurn()
     {
         // If turn has ended.
         if (m_sbEndTurn == true)
@@ -121,8 +92,8 @@ public class TurnManager : MonoBehaviour
                 // Switch to player 2.
                 m_snCurrentTurn = 2;
 
-                // Delay turn start.
-                DelayTurn();
+                // Set end turn back to false.
+                m_sbEndTurn = false;
 
                 return;
             }
@@ -133,8 +104,8 @@ public class TurnManager : MonoBehaviour
                 // Switch to player 1.
                 m_snCurrentTurn = 1;
 
-                // Delay turn start.
-                DelayTurn();
+                // Set end turn back to false.
+                m_sbEndTurn = false;
 
                 return;
             }
@@ -145,8 +116,6 @@ public class TurnManager : MonoBehaviour
                 // Reset values.
                 m_snCurrentTurn = 0;
                 m_sbEndTurn = false;
-                m_sfTurnTimer = m_fTurnTimerLength;
-                m_fDelayTimer = m_fDelayTimerLength;
             }
         }
     }

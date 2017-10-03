@@ -14,25 +14,23 @@ public class Player : MonoBehaviour
 
     // public int for current soldiers turn.
     [Tooltip("Current soldiers turn, out of all the players soldiers.")]
-    public int m_nSoldierTurn; // ASK RICHARD ABOUT SEEING IN INSPECTOR.
+    public int m_nSoldierTurn;
 
     // public gameobject for the soldier prefab.
     [Tooltip("The prefab for the Soldier object.")]
     public GameObject m_gSoldierBlueprint;
 
-    // public array of gameobjects for player soldiers.
-    private GameObject[] m_agSoldierList;
-
     // pool size. how many soldiers allowed on screen at once.
-    [Range(1, 6)][Tooltip("Specify the max number of solider on each time at once.")]
+    [Range(1, 6)]
+    [Tooltip("Specify the max number of solider on each time at once.")]
     public int m_nPoolSize;
 
     // public gameobject for the Teddy base of this player.
     [Tooltip("The Teddy base for this player.")]
     public GameObject m_gTeddyBase;
 
-    // Current Soliders with a turn.
-    private GameObject m_gCurrentSoldier;
+    // public array of gameobjects for player soldiers.
+    private GameObject[] m_agSoldierList;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -67,7 +65,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Check if it is this players turn.
-        if (m_nPlayerNumber == TurnManager.GetCurrentTurn())
+        if (m_nPlayerNumber == TurnManager.m_snCurrentTurn)
         {
             // Update the soldier.
             m_nSoldierTurn = SoldierTurnManager(); // ASK RICHARD.

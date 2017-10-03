@@ -137,8 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nPlayerNumber: 2
   m_nSoldierTurn: 0
-  m_gSoldierBlueprint: {fileID: 1635383690171602, guid: 7d42d178c6d0ac141898597cf438aff7,
-    type: 2}
+  m_gSoldierBlueprint: {fileID: 0}
   m_nPoolSize: 2
   m_gTeddyBase: {fileID: 1598131674}
 --- !u!4 &130135980
@@ -267,8 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nPlayerNumber: 1
   m_nSoldierTurn: 0
-  m_gSoldierBlueprint: {fileID: 1635383690171602, guid: 7d42d178c6d0ac141898597cf438aff7,
-    type: 2}
+  m_gSoldierBlueprint: {fileID: 0}
   m_nPoolSize: 2
   m_gTeddyBase: {fileID: 2017378613}
 --- !u!4 &585974529
@@ -390,9 +388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b21e2ad42e8d79418bb878049ce19f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fTurnTimerLength: 10
-  m_fDelayTimerLength: 3
-  m_fDelayTimer: 0
+  m_fTimerLength: 10
+  m_fDelayLength: 3
 --- !u!4 &1190272033
 Transform:
   m_ObjectHideFlags: 0
