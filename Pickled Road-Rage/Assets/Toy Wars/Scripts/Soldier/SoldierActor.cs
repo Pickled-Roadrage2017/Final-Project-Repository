@@ -40,7 +40,7 @@ public class SoldierActor : MonoBehaviour
 
     // The Soldiers health when initilizied
     [Tooltip("The Soldiers health when initilizied")]
-    public int m_nMaxHealth = 100;
+    public float m_fMaxHealth = 100;
 
     // Intiger value for the Soldiers current weapon
     // 0 = RocketLauncher
@@ -69,7 +69,7 @@ public class SoldierActor : MonoBehaviour
 
     // The Soldiers current health,
     // (Will be equal to m_nMaxHealth until it takes damage
-    public int m_nCurrentHealth;
+    public float m_fCurrentHealth;
 
     public RocketLauncher m_goRPG;
 
@@ -77,7 +77,7 @@ public class SoldierActor : MonoBehaviour
     {
         m_rbRigidBody = GetComponent<Rigidbody>();
         // Soldiers Current health should always start at MaxHealth
-        m_nCurrentHealth = m_nMaxHealth;
+        m_fCurrentHealth = m_fMaxHealth;
         // Soldier should start off as alive
         m_bAlive = true;
         m_bFiring = false;
@@ -94,7 +94,7 @@ public class SoldierActor : MonoBehaviour
         m_sAimSlider.value = m_fCharge;
         //m_bIsAscending = true;
 
-        if(m_nCurrentHealth <= 0)
+        if(m_fCurrentHealth < 1)
         {
             Die();
         }
@@ -229,9 +229,9 @@ public class SoldierActor : MonoBehaviour
     //
     //
     //--------------------------------------------------------------------------------------
-    public void TakeDamage(int nDamage)
+    public void TakeDamage(float fDamage)
     {
-        m_nCurrentHealth -= nDamage;
+        m_fCurrentHealth -= fDamage;
     }
 
     //--------------------------------------------------------------------------------------

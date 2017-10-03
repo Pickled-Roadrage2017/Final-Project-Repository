@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [Tooltip("How many Health Points the projectile will subtract")]
-    public int m_nDamage;
+    public float m_fDamage;
     [Tooltip("How much power the Soldier has given the projectile(affects distance)")]
     public float m_fPower;
     [Tooltip("How fast the projectile travels")]

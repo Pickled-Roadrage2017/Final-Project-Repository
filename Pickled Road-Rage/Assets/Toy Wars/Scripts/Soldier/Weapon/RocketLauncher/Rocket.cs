@@ -94,7 +94,8 @@ public class Rocket : Weapon
                 {
                     continue;
                 }
-                gtarget.TakeDamage(m_nDamage);
+                gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+                
             }
 
             Debug.Log("Hit Terrain");
@@ -135,7 +136,7 @@ public class Rocket : Weapon
 
     }
 
-    private void CalculateDamage(Vector3 v3TargetPosition)
+    private float CalculateDamage(Vector3 v3TargetPosition)
     {
         // create a vector from the shell to the target
         Vector3 explosionToTarget = v3TargetPosition - transform.position;
@@ -147,6 +148,10 @@ public class Rocket : Weapon
         float relativeDistance = (m_fExplosionRadius - explosionDistance) / m_fExplosionRadius;
 
         // Calculate damage as this proportion of the maximum possible damage
-        float fDamage = relativeDistance * m_nDamage;
+        float fDamage = relativeDistance * m_fDamage;
+
+        fDamage = Mathf.Max(0f, fDamage);
+
+        return fDamage;
     }
 }
