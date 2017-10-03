@@ -9,7 +9,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // public int for which player this is.
-    [Range(1,2)][Tooltip("Specify which Player it is between 1 and 2.")]
+    [Range(1,2)][Tooltip("Specify which Player it is between 1 and 2. eg. Player1 or Player2.")]
     public int m_nPlayerNumber;
 
     // public int for current soldiers turn.

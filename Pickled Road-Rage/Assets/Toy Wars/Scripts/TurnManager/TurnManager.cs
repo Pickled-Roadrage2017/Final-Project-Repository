@@ -13,7 +13,7 @@ public class TurnManager : MonoBehaviour
     public float m_fTimerLength;
 
     // public float starting time for the delay timer.
-    [Tooltip("How long should each turn go for. Time in seconds.")]
+    [Tooltip("How long should the delay be before a turn starts. Time in seconds.")]
     public float m_fDelayLength;
 
     // static int for the current players turn.
@@ -39,8 +39,8 @@ public class TurnManager : MonoBehaviour
         m_snCurrentTurn = 0;
 
         // Set static values
-        m_sfStaticTimerLength = m_fTimerLength;
-        m_sfStaticDelayLength = m_fDelayLength;
+        m_sfStaticTimerLength = m_fTimerLength; // ASK RICHARD!
+        m_sfStaticDelayLength = m_fDelayLength; // ASK RICHARD!
 
         // Create a new Statmachine.
         m_sStateMachine = new StateMachine();
