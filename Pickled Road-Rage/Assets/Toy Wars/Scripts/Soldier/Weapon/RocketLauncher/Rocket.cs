@@ -4,75 +4,87 @@ using UnityEngine;
 
 public class Rocket : Weapon
 {
-    // How long the Rocket has been alive
-    public float m_fCurrentDropSpeed;
+    // Gets decreased by m_fDropIterator each Update, then works towards the arc of the rocket
+    private float m_fAirDrop;
     // How much m_fAirTime gets increased per frame
+    [Tooltip("This is added into the downward pull of the arc, increasing this will decrease the time it takes to start falling")]
     public float m_fDropIterator = 0.05f;
 
     Rigidbody m_rbRocket;
     // pointer to the RocketLauncher so it knows where to spawn
-    GameObject m_gLauncher;
+    public GameObject m_gSpawnPoint;
 
     RocketLauncher m_gRocketLauncher;
 
     // The timer for the rocket to delete
     // NOTE: Should only be as high as the time it would take a rocket to travel across the entire map    
     [Tooltip("Set this to the time it would take a rocket to travel across the entire map")]
-    public float m_fLifespan;
+    public float m_fMaxLifespan;
+
+
+    public float m_fCurrentLifespan;
 
     // The direction the Rocket should move
     Vector3 m_v3MoveDirection;
-
-    // Speed at which the rocket goes towards the ground
-    [Tooltip("Speed at which the rocket goes towards the ground")]
-    public float m_fFallSpeed;
-
 
     // Radius for the Area of Effect Explosion that should follow any Collision
     [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
     public float m_fExplosionRadius = 5f;
 
+    [Tooltip("Set this to Unit")]
     public LayerMask m_UnitMask;
-    public ParticleSystem m_psExplosionParticles;
+    
+    //Of no use currently
+    //public ParticleSystem m_psExplosionParticles;
 
+    // The force that hits back all Unit layered objects
+    [Tooltip("The force that hits back all Unit layered objects")]
     public float m_ExplosionForce = 1000f;
 
     // Use this for initialization
     void Start()
     {
-        m_gLauncher = GameObject.FindGameObjectWithTag("RocketLauncher");
-        m_gRocketLauncher = m_gLauncher.GetComponent<RocketLauncher>();
+        m_gSpawnPoint = GameObject.FindGameObjectWithTag("RocketLauncher");
+        m_gRocketLauncher = m_gSpawnPoint.GetComponent<RocketLauncher>();
         // Set the rockets power variable to the power variable of the Launcher which was passed down by the Soldier
         m_fPower = m_gRocketLauncher.m_fPower;
         m_rbRocket = GetComponent<Rigidbody>();
-        m_v3MoveDirection = m_gLauncher.transform.forward;
-        m_fCurrentDropSpeed = 0;
+        m_v3MoveDirection = m_gSpawnPoint.transform.forward;
+        m_fAirDrop = 0;
+        m_fCurrentLifespan = m_fMaxLifespan;
     }
 
     private void FixedUpdate()
     {
-        m_fCurrentDropSpeed -= m_fDropIterator;
-        m_fLifespan -= Time.deltaTime;
-        if (m_fLifespan < 0)
+        // Decreases the airDrop value by the iterator, this allows the fake "gravity" of the arc
+        m_fAirDrop -= m_fDropIterator;
+        m_fCurrentLifespan -= Time.deltaTime;
+        if (m_fCurrentLifespan < 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
-        // Bullet recieves direction from the Soldier
-       // m_rbRocket.velocity = m_fPower * m_v3MoveDirection;
         m_rbRocket.AddForce(m_v3MoveDirection * m_fPower);
-        m_rbRocket.AddForce(new Vector3(0, m_fCurrentDropSpeed, 0));
+        // This will start pulling the rocket downwards after it reaches the initial y value of it
+        m_rbRocket.AddForce(new Vector3(0, m_fAirDrop, 0));
+        // Makes the rocket point towards its y-axis
         transform.LookAt(transform.position + m_rbRocket.velocity);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // If the Rocket hits Terrain (Everything that is not a Soldier or a Tessy)
-        if (other.tag == "Terrain")
+        // When the Rocket collides with its firer
+        if (other.tag == "CurrentSoldier")
         {
-            //TODO: Explosion Radius should allow you to damage a Soldier without directly hitting them
-            // Collect all possible colliders 
-            Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
+            // CurrentSoldier is immune to impact(their own rocket leaving the launcher), but not immune to the splash damage
+            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other.GetComponent<Collider>());
+            Debug.Log("Collided with Firer");
+            
+        }
+        if(other.tag != "CurrentSoldier")
+        { 
+        // Collect all possible colliders 
+        Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
 
             for (int i = 0; i < aColliders.Length; i++)
             {
@@ -83,11 +95,10 @@ public class Rocket : Weapon
                 {
                     continue;
                 }
-
                 // add explosive force
                 // TODO: Replace this line with more predictible coded "physics"
                 rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius);
-
+                // TODO: Explosion effect
                 SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
 
                 if (!gtarget)
@@ -95,47 +106,17 @@ public class Rocket : Weapon
                     continue;
                 }
                 gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
-                
+                gameObject.SetActive(false);
             }
-
-            Debug.Log("Hit Terrain");
-            Destroy(gameObject);
         }
-        // If the Rocket Collides with a Soldier, be it friend or foe
-        if (other.tag == "Soldier")
-        {
-            // TODO: Subtract full damage value from others health
-            // TODO: Explosion Radius should allow the damaging of more than one soldier, with the damage being less the further from the point of collision
-            Debug.Log("Hit Soldier");
-            
-            Destroy(gameObject);
-        }
-
-        // When the Rocket collides with its firer
-        if (other.tag == "CurrentSoldier")
-        {
-            // This should remain as a nothing, CurrentSoldier should never be able to shoot themself.
-            // NOTE: CurrentSoldier should be able to damage themself with the Explosion Radius
-            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other.GetComponent<Collider>());
-            Debug.Log("Collided with Firer");
-        }
-
-        // If the Rocket collides with a Teddy Bear
-        if (other.tag == "TeddyBear")
-        {
-
-            Destroy(gameObject);
-        }
-
        
     }
-
-
-    private void Explosion()
-    {
-
-    }
-
+    //--------------------------------------------------------------------------------------
+    //  CalculateDamage: Calculates the damage so being further from the explosion results in less damage
+    //
+    // Returns: the damage for the Soldiers within range to take
+    //
+    //--------------------------------------------------------------------------------------
     private float CalculateDamage(Vector3 v3TargetPosition)
     {
         // create a vector from the shell to the target

@@ -17,15 +17,18 @@ using UnityEngine.UI;
 public class SoldierActor : MonoBehaviour
 {
     // Slider for the aiming arrow
+    [Tooltip("Should be set to the Slider underneath the Soldier")]
     public Slider m_sAimSlider;
 
     // Speed for the slider
+    [Tooltip("Speed that the Slider moves by per update")]
     public float m_fSliderSpeed = 0.0f;
 
     // Is the Charge bar meant to be ascending?
     bool m_bIsAscending;
 
     // Float for Max Charge
+    [Tooltip("Maximum charge for the Charge, be sure that this matches the 'max value' variable in the Sliders inspector")]
     public float m_fMaxCharge = 30;
 
     bool m_bFiring;
@@ -86,14 +89,16 @@ public class SoldierActor : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         Move();
         m_rbRigidBody.freezeRotation = true;
         FaceMouse();
 
         Fire(m_fCharge);
+        // Makes the Slider represent the charge
         m_sAimSlider.value = m_fCharge;
-        //m_bIsAscending = true;
-
+        
+        // As health is a float, anything below one will be displayed as 0 to the player
         if(m_fCurrentHealth < 1)
         {
             Die();
@@ -242,6 +247,7 @@ public class SoldierActor : MonoBehaviour
     private void Die()
     {
         // TODO: Animation and such
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        m_fCurrentHealth = m_fMaxHealth;
     }
 }
