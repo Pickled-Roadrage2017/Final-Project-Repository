@@ -22,9 +22,7 @@ GameObject:
   - component: {fileID: 33364381916897464}
   - component: {fileID: 65083683237109402}
   - component: {fileID: 23173470692824552}
-  - component: {fileID: 114727831242084428}
-  - component: {fileID: 114351261567462616}
-  - component: {fileID: 114140688221438390}
+  - component: {fileID: 114436352673501180}
   m_Layer: 0
   m_Name: TestRocketLauncher
   m_TagString: RocketLauncher
@@ -96,7 +94,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114140688221438390
+--- !u!114 &114436352673501180
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -104,37 +102,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1952802780739128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 058da834a1e2e174caaa72158a0e1383, type: 3}
+  m_Script: {fileID: 11500000, guid: 98bfdc4df9447cb4796e9c30f87e1964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gRocketPrefab: {fileID: 0}
+  m_gRocketBlueprint: {fileID: 1656855712641856, guid: 2fc2e7e374d137248abdfdd8524c3e28,
+    type: 2}
   m_gRocketSpawn: {fileID: 0}
   m_fPower: 0
---- !u!114 &114351261567462616
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1952802780739128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3a9d1d5d3abfb48834420e075e35fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_gRocketPrefab: {fileID: 1656855712641856, guid: 2d05e1a51fc0ea5499062796d30bab6d,
-    type: 2}
-  m_gRocketSpawn: {fileID: 1952802780739128}
---- !u!114 &114727831242084428
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1952802780739128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edc0b7efca51804479aba2fdea51841e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_gRocketPrefab: {fileID: 1656855712641856, guid: 7145c484c62629c45ae13c45b646c089,
-    type: 2}
-  m_gRocketSpawn: {fileID: 1952802780739128}

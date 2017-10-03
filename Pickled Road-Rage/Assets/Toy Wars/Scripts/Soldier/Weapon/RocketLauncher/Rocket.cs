@@ -110,8 +110,9 @@ public class Rocket : Weapon
                     continue;
                 }
                 gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
-                gameObject.SetActive(false);
+               
             }
+            gameObject.SetActive(false);
         }
        
     }

@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 33984791990494118}
   - component: {fileID: 65688867815982268}
   - component: {fileID: 23226793821630964}
-  - component: {fileID: 114791322280571592}
+  - component: {fileID: 114552859018793376}
   m_Layer: 0
   m_Name: TestRocketLauncher
   m_TagString: RocketLauncher
@@ -373,7 +373,22 @@ MonoBehaviour:
   m_fCharge: 1
   m_nSoldierNumber: 0
   m_fCurrentHealth: 0
-  m_goRPG: {fileID: 114791322280571592}
+  m_goRPG: {fileID: 114552859018793376}
+--- !u!114 &114552859018793376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1884897141601300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98bfdc4df9447cb4796e9c30f87e1964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gRocketBlueprint: {fileID: 1656855712641856, guid: 2fc2e7e374d137248abdfdd8524c3e28,
+    type: 2}
+  m_gRocketSpawn: {fileID: 1448025323404522}
+  m_fPower: 0
 --- !u!114 &114570913392089972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -438,21 +453,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114791322280571592
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1884897141601300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edc0b7efca51804479aba2fdea51841e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_gRocketBlueprint: {fileID: 1656855712641856, guid: 7145c484c62629c45ae13c45b646c089,
-    type: 2}
-  m_gRocketSpawn: {fileID: 1448025323404522}
-  m_fPower: 0
 --- !u!114 &114822418248152244
 MonoBehaviour:
   m_ObjectHideFlags: 1

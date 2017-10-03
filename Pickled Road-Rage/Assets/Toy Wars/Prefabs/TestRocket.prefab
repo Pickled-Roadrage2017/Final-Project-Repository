@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23203718258110512}
   - component: {fileID: 54493129431087288}
   - component: {fileID: 114502035711193392}
+  - component: {fileID: 114311332749479866}
   m_Layer: 0
   m_Name: TestRocket
   m_TagString: Untagged
@@ -110,6 +111,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114311332749479866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656855712641856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fc71f7c3d46fa4fbce7b891f2eed9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fDamage: 0
+  m_fPower: 0
+  m_fSpeed: 0
+  m_fAirDrop: 0
+  m_fDropIterator: 0.05
+  m_gSpawnPoint: {fileID: 0}
+  m_fMaxLifespan: 0
+  m_fCurrentLifespan: 0
+  m_v3MoveDirection: {x: 0, y: 0, z: 0}
+  m_fExplosionRadius: 5
+  m_UnitMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExplosionForce: 1000
 --- !u!114 &114502035711193392
 MonoBehaviour:
   m_ObjectHideFlags: 1
