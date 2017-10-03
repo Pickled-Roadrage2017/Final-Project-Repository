@@ -5,13 +5,15 @@ using UnityEngine;
 public class Rocket : Weapon
 {
     // Gets decreased by m_fDropIterator each Update, then works towards the arc of the rocket
-    private float m_fAirDrop;
+    [HideInInspector]
+    public float m_fAirDrop;
     // How much m_fAirTime gets increased per frame
     [Tooltip("This is added into the downward pull of the arc, increasing this will decrease the time it takes to start falling")]
     public float m_fDropIterator = 0.05f;
 
     Rigidbody m_rbRocket;
     // pointer to the RocketLauncher so it knows where to spawn
+    [Tooltip("The GameObject that shall determine the initial spawn of the Rocket")]
     public GameObject m_gSpawnPoint;
 
     RocketLauncher m_gRocketLauncher;
@@ -21,17 +23,19 @@ public class Rocket : Weapon
     [Tooltip("Set this to the time it would take a rocket to travel across the entire map")]
     public float m_fMaxLifespan;
 
-
+    // The current lifepsan is what is effected in the update, to allow easier reinitilisation
+    [Tooltip("Not Advisible to edit this, only public so you can see how much time the rocket has left")]
     public float m_fCurrentLifespan;
 
     // The direction the Rocket should move
-    Vector3 m_v3MoveDirection;
+    [HideInInspector]
+    public Vector3 m_v3MoveDirection;
 
     // Radius for the Area of Effect Explosion that should follow any Collision
     [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
     public float m_fExplosionRadius = 5f;
 
-    [Tooltip("Set this to Unit")]
+    [Tooltip("Set this to the Unit layer, so the Rocket doesn't effect objects that should be stationary")]
     public LayerMask m_UnitMask;
     
     //Of no use currently
@@ -49,7 +53,7 @@ public class Rocket : Weapon
         // Set the rockets power variable to the power variable of the Launcher which was passed down by the Soldier
         m_fPower = m_gRocketLauncher.m_fPower;
         m_rbRocket = GetComponent<Rigidbody>();
-        m_v3MoveDirection = m_gSpawnPoint.transform.forward;
+       // m_v3MoveDirection = m_gSpawnPoint.transform.forward;
         m_fAirDrop = 0;
         m_fCurrentLifespan = m_fMaxLifespan;
     }

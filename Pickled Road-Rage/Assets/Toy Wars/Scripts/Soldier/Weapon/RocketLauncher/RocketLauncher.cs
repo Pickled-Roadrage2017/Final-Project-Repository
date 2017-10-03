@@ -40,12 +40,15 @@ public class RocketLauncher : MonoBehaviour
     {
         m_fPower = fCharge;
 
+        // re-Initilise all Variables of the rocket
         GameObject gRocket = Allocate();
-        gRocket.transform.position = transform.position;
         gRocket.GetComponent<Rocket>().m_fCurrentLifespan = gRocket.GetComponent<Rocket>().m_fMaxLifespan;
+        gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
         gRocket.GetComponent<Rocket>().transform.position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
-
-
+        gRocket.GetComponent<Rocket>().m_fPower = fCharge;
+        gRocket.GetComponent<Rocket>().m_fAirDrop = 0;
+        gRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gRocket.GetComponent<Rocket>().m_v3MoveDirection = transform.forward;
     } 
 
    GameObject Allocate()

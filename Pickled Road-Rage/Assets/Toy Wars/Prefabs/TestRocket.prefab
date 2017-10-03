@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65822684770977834}
   - component: {fileID: 23203718258110512}
   - component: {fileID: 54493129431087288}
-  - component: {fileID: 114292665510184878}
+  - component: {fileID: 114502035711193392}
   m_Layer: 0
   m_Name: TestRocket
   m_TagString: Untagged
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1656855712641856}
   m_LocalRotation: {x: -0, y: 0.07395291, z: -0, w: 0.99726176}
-  m_LocalPosition: {x: 0.5397446, y: 1.863, z: -1.6957929}
+  m_LocalPosition: {x: 9.69701, y: -1.31, z: -2.9764738}
   m_LocalScale: {x: 0.16000006, y: 0.24, z: 1.0600004}
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,7 +110,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114292665510184878
+--- !u!114 &114502035711193392
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -118,14 +118,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1656855712641856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94ebb6404f9dbcb41bb0774864c279a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 97d69c49b6986d74f90aad441d9d7d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_fDamage: 50
   m_fPower: 0
-  m_fSpeed: 0
-  m_fDropIterator: 0.5
-  m_fMaxLifespan: 5
+  m_fSpeed: 2
+  m_fDropIterator: 0.05
+  m_gSpawnPoint: {fileID: 0}
+  m_fMaxLifespan: 10
   m_fCurrentLifespan: 0
   m_fExplosionRadius: 5
   m_UnitMask:
