@@ -8,15 +8,6 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class DelayState : State
 {
-    // float for turn delay.
-    private static float m_fDelayTimer;
-
-    // Delay timer getter
-    public static float GetDelayTimer()
-    {
-        return m_fDelayTimer;
-    }
-
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -31,10 +22,10 @@ public class DelayState : State
     public override void OnUpdate(StateMachine sMachine)
     {
         // Update the timer by deltatime.
-        m_fDelayTimer -= Time.deltaTime;
+        TurnManager.m_fTimer -= Time.deltaTime;
 
         // Once the timer ends.
-        if (m_fDelayTimer < 0)
+        if (TurnManager.m_fTimer < 0)
         {
             // Push to the action state
             sMachine.ChangeState(ETurnManagerStates.ETURN_ACTION);
@@ -50,10 +41,12 @@ public class DelayState : State
     public override void OnEnter(StateMachine sMachine)
     {
         // Reset the timer.
-        m_fDelayTimer = TurnManager.m_sfStaticDelayLength;
+        TurnManager.m_fTimer = TurnManager.m_sfStaticDelayLength;
 
         // Change Player soldier.
-        Player.SoldierTurnManager(); // ASK RICHARD ABOUT THIS BECAUSE I USE THIS SCRIPT ON 2 OBJECTS.
+        //GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+            
+        //Player.SoldierTurnManager(); // ASK RICHARD ABOUT THIS BECAUSE I USE THIS SCRIPT ON 2 OBJECTS.
     }
 
     //--------------------------------------------------------------------------------------
@@ -65,6 +58,6 @@ public class DelayState : State
     public override void OnExit(StateMachine sMachine)
     {
         // Set the delay back to 0
-        m_fDelayTimer = 0;
+        TurnManager.m_fTimer = 0;
     }
 }

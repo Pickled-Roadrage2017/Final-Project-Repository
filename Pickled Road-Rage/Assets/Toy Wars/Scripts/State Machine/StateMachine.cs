@@ -26,7 +26,7 @@ public class StateMachine
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
-    public StateMachine()
+    public StateMachine(TurnManager tTurnManager)
     {
 		
 	}
@@ -136,4 +136,14 @@ public class StateMachine
         // Push the newly seletec state. 
         PushState(eStateIndex);
     }
+
+
+
+
+
+    // RETURN THE STATE FOR CHECKING THE STATE ON THE UI SCRIPT.
+    //public ETurnManagerStates GetState()
+    //{
+    //    //return m_CurrentStack.Peek();
+    //}
 }

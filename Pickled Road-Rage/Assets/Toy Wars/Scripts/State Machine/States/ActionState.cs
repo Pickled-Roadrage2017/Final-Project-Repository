@@ -8,15 +8,6 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class ActionState : State
 {
-    // float for the turn timer.
-    private static float m_sfTurnTimer;
-
-    // turn timer getter
-    public static float GetTurnTimer() // ASK RICHARD ABOUT THIS.
-    {
-        return m_sfTurnTimer;
-    }
-
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -31,10 +22,10 @@ public class ActionState : State
     public override void OnUpdate(StateMachine sMachine)
     {
         // Update the timer by deltatime.
-        m_sfTurnTimer -= Time.deltaTime;
+        TurnManager.m_fTimer -= Time.deltaTime;
 
         // If the timer runs out.
-        if (m_sfTurnTimer < 0)
+        if (TurnManager.m_fTimer < 0)
         {
             // set the turn to ended.
             TurnManager.m_sbEndTurn = true;
@@ -55,7 +46,7 @@ public class ActionState : State
     //--------------------------------------------------------------------------------------
     public override void OnEnter(StateMachine sMachine)
     {
-        m_sfTurnTimer = TurnManager.m_sfStaticTimerLength;
+        TurnManager.m_fTimer = TurnManager.m_sfStaticTimerLength;
     }
 
     //--------------------------------------------------------------------------------------
@@ -66,6 +57,6 @@ public class ActionState : State
     //--------------------------------------------------------------------------------------
     public override void OnExit(StateMachine sMachine)
     {
-        m_sfTurnTimer = 0;
+        TurnManager.m_fTimer = 0;
     }
 }

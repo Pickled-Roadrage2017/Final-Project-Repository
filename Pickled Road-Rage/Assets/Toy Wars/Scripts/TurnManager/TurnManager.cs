@@ -29,6 +29,17 @@ public class TurnManager : MonoBehaviour
     public static float m_sfStaticTimerLength;
     public static float m_sfStaticDelayLength;
 
+    // float for timer.
+    public static float m_fTimer;
+
+    // 2 public gameobjects for player1 and player2
+    // drag the 2 from inspector.
+    // funtion getPlayer(int) returns player or player2.
+
+    // MOVE THE PASS IN OF THE FSM IN STATES TO THE CONSTRUCTOR INSTEAD OF IN EACH FUNCTION.
+
+    
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -39,11 +50,11 @@ public class TurnManager : MonoBehaviour
         m_snCurrentTurn = 0;
 
         // Set static values
-        m_sfStaticTimerLength = m_fTimerLength; // ASK RICHARD!
-        m_sfStaticDelayLength = m_fDelayLength; // ASK RICHARD!
+        m_sfStaticTimerLength = m_fTimerLength;
+        m_sfStaticDelayLength = m_fDelayLength;
 
         // Create a new Statmachine.
-        m_sStateMachine = new StateMachine();
+        m_sStateMachine = new StateMachine(this);
 
         // Add states to the machine.
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_DELAY, new DelayState());
