@@ -41,12 +41,19 @@ public class RocketLauncher : MonoBehaviour
             m_agRocketList[i] = Instantiate(m_gRocketBlueprint);
             m_agRocketList[i].SetActive(false);
         }
-        gameObject.transform.Rotate(m_fRocketXRot,0, 0);
+        gameObject.transform.Rotate(m_fRocketXRot, 0, 0);
+    }
+
+    void Update()
+    {
+       
     }
 
     public void Fire(float fCharge)
     {
         m_fPower = fCharge;
+        m_fRocketXRot = -m_fPower;
+
         
         // re-Initilise all Variables of the rocket
         GameObject gRocket = Allocate();
@@ -61,6 +68,7 @@ public class RocketLauncher : MonoBehaviour
             gRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
             gRocket.GetComponent<Rocket>().m_v3MoveDirection = transform.forward;
         }
+        
     } 
 
    GameObject Allocate()

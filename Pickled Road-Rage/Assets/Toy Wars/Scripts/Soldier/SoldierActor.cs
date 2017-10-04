@@ -76,6 +76,8 @@ public class SoldierActor : MonoBehaviour
 
     public RocketLauncher m_gRPG;
 
+    public GameObject m_gRocketLauncher;
+
     void Start()
     {
         m_rbRigidBody = GetComponent<Rigidbody>();
@@ -89,17 +91,15 @@ public class SoldierActor : MonoBehaviour
 
     void FixedUpdate()
     {
-       
-        Move();
-        m_rbRigidBody.freezeRotation = true;
-        FaceMouse();
-
-        if (!m_gRPG.m_bRocketAlive)
-        {
-            Fire(m_fCharge);
-            // Makes the Slider represent the charge
-            m_sAimSlider.value = m_fCharge;
-        }
+            Move();
+            m_rbRigidBody.freezeRotation = true;
+            FaceMouse();
+                Fire(m_fCharge);
+                // Makes the Slider represent the charge
+                m_sAimSlider.value = m_fCharge;
+            //m_gRPG.m_fRocketXRot = m_fCharge;
+            //m_gRPG.transform.rotation.x = m_fCharge;
+            
         // As health is a float, anything below one will be displayed as 0 to the player
         if(m_fCurrentHealth < 1)
         {
@@ -144,6 +144,7 @@ public class SoldierActor : MonoBehaviour
                       if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
                       {
                          m_fCharge += m_fSliderSpeed /* Time.deltaTime*/;
+                        
 
                          if (m_fCharge >= m_fMaxCharge)
                          {
@@ -206,30 +207,34 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     private Quaternion FaceMouse()
     {
-        // Generate a plane that intersects the transform's position.
-        Plane pSoldierPlane = new Plane(Vector3.up, transform.position);
-
-        // Generate a ray from the cursor position
-        Ray rMouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-
-        float fHitDistance = 0.0f;
-        // If the ray is parallel to the plane, Raycast will return false.
-        if (pSoldierPlane.Raycast(rMouseRay, out fHitDistance))
+        if (!m_bFiring)
         {
-            // Get the point along the ray that hits the calculated distance.
-            Vector3 v3TargetPos = rMouseRay.GetPoint(fHitDistance);
+            // Generate a plane that intersects the transform's position.
+            Plane pSoldierPlane = new Plane(Vector3.up, transform.position);
 
-            // Determine the target rotation.  This is the rotation if the transform looks at the target point.
-            Quaternion v3TargetRotation = Quaternion.LookRotation(v3TargetPos - transform.position);
+            // Generate a ray from the cursor position
+            Ray rMouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            // Smoothly rotate towards the target point.
-            transform.rotation = Quaternion.Slerp(transform.rotation, v3TargetRotation, m_fRotSpeed * Time.deltaTime);
+
+            float fHitDistance = 0.0f;
+            // If the ray is parallel to the plane, Raycast will return false.
+            if (pSoldierPlane.Raycast(rMouseRay, out fHitDistance))
+            {
+                // Get the point along the ray that hits the calculated distance.
+                Vector3 v3TargetPos = rMouseRay.GetPoint(fHitDistance);
+
+                // Determine the target rotation.  This is the rotation if the transform looks at the target point.
+                Quaternion v3TargetRotation = Quaternion.LookRotation(v3TargetPos - transform.position);
+
+                // Smoothly rotate towards the target point.
+                transform.rotation = Quaternion.Slerp(transform.rotation, v3TargetRotation, m_fRotSpeed * Time.deltaTime);
+            }
+            return transform.rotation;
         }
-
-
-
-        return transform.rotation;
+        else
+        {
+            return new Quaternion();
+        }
     }
 
 
