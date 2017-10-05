@@ -60,6 +60,7 @@ public class RocketLauncher : MonoBehaviour
         if (gRocket.activeInHierarchy)
         {
             m_bRocketAlive = true;
+            gRocket.GetComponent<Rocket>().m_gSpawnPoint = gameObject;
             gRocket.GetComponent<Rocket>().m_fCurrentLifespan = gRocket.GetComponent<Rocket>().m_fMaxLifespan;
             gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
             gRocket.GetComponent<Rocket>().transform.position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
@@ -67,6 +68,7 @@ public class RocketLauncher : MonoBehaviour
             gRocket.GetComponent<Rocket>().m_fAirDrop = 0;
             gRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
             gRocket.GetComponent<Rocket>().m_v3MoveDirection = transform.forward;
+            gRocket.GetComponent<Rocket>().m_fCurrentActivateTimer = gRocket.GetComponent<Rocket>().m_fActivateTimer;
         }
         
     } 
@@ -81,6 +83,7 @@ public class RocketLauncher : MonoBehaviour
             {
                 //set active state
                 m_agRocketList[i].SetActive(true);
+                
 
                
                 //return the rocket

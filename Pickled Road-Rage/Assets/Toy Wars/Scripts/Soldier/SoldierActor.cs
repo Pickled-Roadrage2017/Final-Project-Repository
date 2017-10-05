@@ -27,11 +27,16 @@ public class SoldierActor : MonoBehaviour
     // Is the Charge bar meant to be ascending?
     bool m_bIsAscending;
 
+    // Minimum power for a shot
+    [Tooltip("Minimum charge for the Charge, be sure that this matches the 'min value' variable in the Sliders inspector")]
+    public float m_fMinCharge = 15f;
+
     // Float for Max Charge
     [Tooltip("Maximum charge for the Charge, be sure that this matches the 'max value' variable in the Sliders inspector")]
     public float m_fMaxCharge = 30;
 
-    bool m_bFiring;
+    // boolean for if the soldier is in the firing function
+    private bool m_bFiring;
 
     // Speed at which the Soldier moves
     [Tooltip("The Speed at which the Soldier moves")]
@@ -61,6 +66,10 @@ public class SoldierActor : MonoBehaviour
     [Tooltip("Current Charge to pass on to the weapons firing Power")]
     public float m_fCharge = 1;
 
+    // boolean for if the soldier is currently charging up a shot
+    private bool m_bChargingShot;
+
+
     // This Soldiers rigidBody for movement purposes
     private Rigidbody m_rbRigidBody;
 
@@ -74,37 +83,38 @@ public class SoldierActor : MonoBehaviour
     // (Will be equal to m_nMaxHealth until it takes damage
     public float m_fCurrentHealth;
 
-    public RocketLauncher m_gRPG;
+    RocketLauncher m_gLauncherScript;
 
     public GameObject m_gRocketLauncher;
 
     void Start()
     {
         m_rbRigidBody = GetComponent<Rigidbody>();
+        m_gLauncherScript = m_gRocketLauncher.GetComponent<RocketLauncher>();
         // Soldiers Current health should always start at MaxHealth
         m_fCurrentHealth = m_fMaxHealth;
         // Soldier should start off as alive
         m_bAlive = true;
         m_bFiring = false;
         m_bIsAscending = true;
+        m_bChargingShot = false;
+        m_fCharge = m_fMinCharge;
     }
 
     void FixedUpdate()
     {
-            Move();
-            m_rbRigidBody.freezeRotation = true;
-            FaceMouse();
-                Fire(m_fCharge);
-                // Makes the Slider represent the charge
-                m_sAimSlider.value = m_fCharge;
-            //m_gRPG.m_fRocketXRot = m_fCharge;
-            //m_gRPG.transform.rotation.x = m_fCharge;
-            
-        // As health is a float, anything below one will be displayed as 0 to the player
-        if(m_fCurrentHealth < 1)
-        {
-            Die();
-        }
+      Move();
+      m_rbRigidBody.freezeRotation = true;
+      FaceMouse();
+
+      Fire(m_fCharge);
+      // Makes the Slider represent the charge
+      m_sAimSlider.value = m_fCharge;   
+      // As health is a float, anything below one will be displayed as 0 to the player
+      if(m_fCurrentHealth < 1)
+      {
+       Die();
+      }
     }
 
 
@@ -129,53 +139,59 @@ public class SoldierActor : MonoBehaviour
     private void Fire(float fCharge)
     {
         
-          if (Input.GetButtonDown("Fire1"))
+        if (m_gLauncherScript.m_bRocketAlive == false)
+        {
+            //m_sAimSlider.value = m_fMinCharge;
+
+            if (Input.GetButtonDown("Fire1"))
             {
                 m_bFiring = true;
+                m_fCharge = m_fMinCharge;
             }
             if (Input.GetButton("Fire1"))
             {
-            
+                m_bChargingShot = true;
                 if (m_bFiring)
                 {
                     // If current weapon is rocketLauncher
-                  if (m_nCurrentWeapon == 0)
-                  {
-                      if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
-                      {
-                         m_fCharge += m_fSliderSpeed /* Time.deltaTime*/;
-                        
-
-                         if (m_fCharge >= m_fMaxCharge)
-                         {
-                            m_bIsAscending = false;
-                         }
+                    if (m_nCurrentWeapon == 0)
+                    {
+                        if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
+                        {
+                            m_fCharge += m_fSliderSpeed /* Time.deltaTime*/;
+                            if (m_fCharge >= m_fMaxCharge)
+                            {
+                                m_bIsAscending = false;
+                            }
                         }
                         else
                         {
-                          m_bIsAscending = false;
-                          m_fCharge -= m_fSliderSpeed /* Time.deltaTime*/;
-
-                          if (m_fCharge <= 0)
-                          {
-                           m_bIsAscending = true;
-                          }
+                            m_bIsAscending = false;
+                            m_fCharge -= m_fSliderSpeed /* Time.deltaTime*/;
+                            if (m_fCharge <= m_fMinCharge)
+                            {
+                                m_bIsAscending = true;
+                            }
                         }
-                  }
-                
-             }
-           }
-
-        if (Input.GetButtonUp("Fire1"))
-        {
-            // If current weapon is rocketLauncher
-            if (m_nCurrentWeapon == 0)
-            {
-                m_gRPG.Fire(m_fCharge);
-                m_fCharge = 1;
+                    }
+                }
             }
+            
+            if (Input.GetButtonUp("Fire1"))
+            {
+                if (m_bChargingShot)
+                {
+                    // If current weapon is rocketLauncher
+                    if (m_nCurrentWeapon == 0)
+                    {
+                        m_gLauncherScript.Fire(m_fCharge);
+                        m_fCharge = m_fMinCharge;
+                    }
 
-            m_bFiring = false;
+                    m_bFiring = false;
+                    m_bChargingShot = false;
+                }
+            }
         }
     }
 

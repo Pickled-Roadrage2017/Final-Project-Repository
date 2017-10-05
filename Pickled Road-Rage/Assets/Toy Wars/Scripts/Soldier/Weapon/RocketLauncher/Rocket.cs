@@ -11,9 +11,16 @@ public class Rocket : Weapon
     [Tooltip("This is added into the downward pull of the arc, increasing this will decrease the time it takes to start falling")]
     public float m_fDropIterator = 0.05f;
 
+    //A timer to stop the rocket from colliding with its Launcher
+    [Tooltip("Seconds it takes for the missle to not be within collision range of its Launcher")]
+    public float m_fActivateTimer  = 2;
+
+    [HideInInspector]
+    public float m_fCurrentActivateTimer;
+
     Rigidbody m_rbRocket;
     // pointer to the RocketLauncher so it knows where to spawn
-    [Tooltip("The GameObject that shall determine the initial spawn of the Rocket")]
+    [HideInInspector]
     public GameObject m_gSpawnPoint;
 
     RocketLauncher m_gRocketLauncher;
@@ -45,21 +52,22 @@ public class Rocket : Weapon
     [Tooltip("The force that hits back all Unit layered objects")]
     public float m_ExplosionForce = 1000f;
 
-    // Use this for initialization
+    // Initiliazation
     void Start()
     {
-        m_gSpawnPoint = GameObject.FindGameObjectWithTag("RocketLauncher");
         m_gRocketLauncher = m_gSpawnPoint.GetComponent<RocketLauncher>();
         // Set the rockets power variable to the power variable of the Launcher which was passed down by the Soldier
         m_fPower = m_gRocketLauncher.m_fPower;
         m_rbRocket = GetComponent<Rigidbody>();
-       // m_v3MoveDirection = m_gSpawnPoint.transform.forward;
+        m_v3MoveDirection = m_gSpawnPoint.transform.forward;
         m_fAirDrop = 0;
         m_fCurrentLifespan = m_fMaxLifespan;
+        m_fCurrentActivateTimer = m_fActivateTimer;
     }
 
     private void FixedUpdate()
     {
+        m_fCurrentActivateTimer -= 1;
         // Decreases the airDrop value by the iterator, this allows the fake "gravity" of the arc
         m_fAirDrop -= m_fDropIterator;
         m_fCurrentLifespan -= Time.deltaTime;
@@ -79,43 +87,37 @@ public class Rocket : Weapon
 
     private void OnTriggerEnter(Collider other)
     {
-        // When the Rocket collides with its firer
-        if (other.tag == "CurrentSoldier")
-        {
-            // CurrentSoldier is immune to impact(their own rocket leaving the launcher), but not immune to the splash damage
-            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other.GetComponent<Collider>());
-            Debug.Log("Collided with Firer");
-            
-        }
-        if(other.tag != "CurrentSoldier")
+        if(m_fCurrentActivateTimer <= 0)
         { 
-        // Collect all possible colliders 
-        Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
+          
+                // Collect all possible colliders 
+                Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
 
-            for (int i = 0; i < aColliders.Length; i++)
-            {
-                Rigidbody rbTarget = aColliders[i].GetComponent<Rigidbody>();
-
-                //if it does not have a rigidbody
-                if (!rbTarget)
+                for (int i = 0; i < aColliders.Length; i++)
                 {
-                    continue;
-                }
-                // add explosive force
-                // TODO: Replace this line with more predictible coded "physics"
-                rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius);
-                // TODO: Explosion effect
-                SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
+                    Rigidbody rbTarget = aColliders[i].GetComponent<Rigidbody>();
 
-                if (!gtarget)
-                {
-                    continue;
+                    //if it does not have a rigidbody
+                    if (!rbTarget)
+                    {
+                        continue;
+                    }
+                    // add explosive force
+                    // TODO: Replace this line with more predictible coded "physics"
+                    rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius);
+                    // TODO: Explosion effect
+                    SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
+
+                    if (!gtarget)
+                    {
+                        continue;
+                    }
+                    gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+
                 }
-                gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
-               
-            }
-            gameObject.SetActive(false);
-            m_gRocketLauncher.m_bRocketAlive = false;
+                gameObject.SetActive(false);
+                m_gRocketLauncher.m_bRocketAlive = false;
+            
         }
        
     }
