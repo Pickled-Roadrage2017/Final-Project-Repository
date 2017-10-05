@@ -8,9 +8,6 @@ public class RocketLauncher : MonoBehaviour
     // Prefab for the Rocket object
     [Tooltip("Prefab for instantiating the rockets")]
     public GameObject m_gRocketBlueprint;
-    // The object that the rocket should spawn from
-    [Tooltip("This gameObjects transform will be the spawn point for the bullet")] 
-    public GameObject m_gRocketSpawn;
     // float variable passed on for the firing from the Soldier
     [HideInInspector]
     public float m_fPower;
