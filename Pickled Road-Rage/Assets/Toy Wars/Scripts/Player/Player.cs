@@ -12,13 +12,9 @@ public class Player : MonoBehaviour
     [Range(1,2)][Tooltip("Specify which Player it is between 1 and 2. eg. Player1 or Player2.")]
     public int m_nPlayerNumber;
 
-    // public int for current soldiers turn.
-    //[Tooltip("Current soldiers turn, out of all the players soldiers.")]
-    private static int m_nSoldierTurn; // ASK RICHARD ABOUT THIS BECAUSE I USE THIS SCRIPT ON 2 OBJECTS.
-
     // public gameobject for the soldier prefab.
-    [Tooltip("The prefab for the Soldier object.")]
-    public GameObject m_gSoldierBlueprint;
+    //[Tooltip("The prefab for the Soldier object.")]
+    //public GameObject m_gSoldierBlueprint;
 
     // pool size. how many soldiers allowed on screen at once.
     [Range(1, 6)]
@@ -28,6 +24,9 @@ public class Player : MonoBehaviour
     // public gameobject for the Teddy base of this player.
     [Tooltip("The Teddy base for this player.")]
     public GameObject m_gTeddyBase;
+
+    // private int for current soldiers turn.
+    private int m_nSoldierTurn;
 
     // public array of gameobjects for player soldiers.
     private static GameObject[] m_agSoldierList;
@@ -47,19 +46,19 @@ public class Player : MonoBehaviour
         for (int i = 0; i < m_nPoolSize; ++i)
         {
             // Instantiate and set active state.
-            m_agSoldierList[i] = Instantiate(m_gSoldierBlueprint);
-            m_agSoldierList[i].SetActive(false);
+            //m_agSoldierList[i] = Instantiate(m_gSoldierBlueprint);
+            //m_agSoldierList[i].SetActive(false);
         }
 
-        // REDO // REDO // REDO
+        // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
         // Allocate soliders to the pool.
-        GameObject gSoldier1 = AllocateSoldier(); // Allocating 2 at the start for now until..
-        GameObject gSoldier2 = AllocateSoldier(); // ..we have a better idea of solider spawning.
+        //GameObject gSoldier1 = AllocateSoldier(); // Allocating 2 at the start for now until..
+        //GameObject gSoldier2 = AllocateSoldier(); // ..we have a better idea of solider spawning.
 
         // Spawn at the teddy base.
-        gSoldier1.transform.position = m_gTeddyBase.transform.position;
-        gSoldier2.transform.position = m_gTeddyBase.transform.position;
-        // REDO // REDO // REDO
+        //gSoldier1.transform.position = m_gTeddyBase.transform.position;
+        //gSoldier2.transform.position = m_gTeddyBase.transform.position;
+        // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
     }
 
     //--------------------------------------------------------------------------------------
@@ -70,7 +69,7 @@ public class Player : MonoBehaviour
         // Check if it is this players turn.
         if (m_nPlayerNumber == TurnManager.m_snCurrentTurn)
         {
-        
+            // TODO.
         }
     }
 
@@ -104,7 +103,7 @@ public class Player : MonoBehaviour
     // SoldierTurnManager: Function that will manager which soldier the player is able to 
     //                 use per turn.
     //--------------------------------------------------------------------------------------
-    public static void SoldierTurnManager()
+    public void SoldierTurnManager()
     {
         // Go up one soldiers turn.
         m_nSoldierTurn += 1;

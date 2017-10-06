@@ -4,22 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// ActionState object. Inheriting from State. // FINISH THIS COMMENT
+// ActionState object. Inheriting from State. State for turn switching timer.
 //--------------------------------------------------------------------------------------
 public class ActionState : State
 {
+    // State machine instance
+    StateMachine m_sStateMachine;
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
-    public ActionState()
+    public ActionState(StateMachine sMachine)
     {
-
+        // Set the instance of the statemachine.
+        m_sStateMachine = sMachine;
     }
 
     //--------------------------------------------------------------------------------------
     // Update: Function that calls each frame to update game objects.
     //--------------------------------------------------------------------------------------
-    public override void OnUpdate(StateMachine sMachine)
+    public override void OnUpdate()
     {
         // Update the timer by deltatime.
         TurnManager.m_fTimer -= Time.deltaTime;
@@ -34,7 +38,7 @@ public class ActionState : State
             TurnManager.SwitchTurn();
 
             // Push to the delay state.
-            sMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
+            m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
         }
     }
 
@@ -44,7 +48,7 @@ public class ActionState : State
     // Param:
     //		sMachine: a reference to the state machine.
     //--------------------------------------------------------------------------------------
-    public override void OnEnter(StateMachine sMachine)
+    public override void OnEnter()
     {
         TurnManager.m_fTimer = TurnManager.m_sfStaticTimerLength;
     }
@@ -55,7 +59,7 @@ public class ActionState : State
     // Param:
     //		sMachine: a reference to the state machine.
     //--------------------------------------------------------------------------------------
-    public override void OnExit(StateMachine sMachine)
+    public override void OnExit()
     {
         TurnManager.m_fTimer = 0;
     }

@@ -16,6 +16,14 @@ public class TurnManager : MonoBehaviour
     [Tooltip("How long should the delay be before a turn starts. Time in seconds.")]
     public float m_fDelayLength;
 
+    // public gameobject for the player1 object.
+    [Tooltip("The Empty object used for Player1 prefab")]
+    public GameObject m_gPlayer1;
+
+    // public gamobject for the player2 object.
+    [Tooltip("The Empty object used for Player2 prefab.")]
+    public GameObject m_gPlayer2;
+
     // static int for the current players turn.
     public static int m_snCurrentTurn;
 
@@ -31,15 +39,7 @@ public class TurnManager : MonoBehaviour
 
     // float for timer.
     public static float m_fTimer;
-
-    // 2 public gameobjects for player1 and player2
-    // drag the 2 from inspector.
-    // funtion getPlayer(int) returns player or player2.
-
-    // MOVE THE PASS IN OF THE FSM IN STATES TO THE CONSTRUCTOR INSTEAD OF IN EACH FUNCTION.
-
     
-
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -57,8 +57,8 @@ public class TurnManager : MonoBehaviour
         m_sStateMachine = new StateMachine(this);
 
         // Add states to the machine.
-        m_sStateMachine.AddState(ETurnManagerStates.ETURN_DELAY, new DelayState());
-        m_sStateMachine.AddState(ETurnManagerStates.ETURN_ACTION, new ActionState());
+        m_sStateMachine.AddState(ETurnManagerStates.ETURN_DELAY, new DelayState(m_sStateMachine));
+        m_sStateMachine.AddState(ETurnManagerStates.ETURN_ACTION, new ActionState(m_sStateMachine));
 
         // Set the first state to the delay state.
         m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
@@ -74,6 +74,30 @@ public class TurnManager : MonoBehaviour
     {
         // Update the state machine.
         m_sStateMachine.OnUpdate();
+    }
+
+    //--------------------------------------------------------------------------------------
+    // GetPlayer: Return the Player object from the number passed in.
+    //--------------------------------------------------------------------------------------
+    public GameObject GetPlayer(int nPlayerNumber)
+    {
+        // If nPlayerNumber is player1 return player1
+        if (nPlayerNumber == 1)
+        {
+            return m_gPlayer1;
+        }
+
+        // If nPlayerNumber is player2 return player2
+        else if (nPlayerNumber == 2)
+        {
+            return m_gPlayer2;
+        }
+
+        // Else if no player then return null.
+        else
+        {
+            return null;
+        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -106,6 +130,7 @@ public class TurnManager : MonoBehaviour
                 // Set end turn back to false.
                 m_sbEndTurn = false;
 
+                // Return from the function.
                 return;
             }
 
@@ -118,6 +143,7 @@ public class TurnManager : MonoBehaviour
                 // Set end turn back to false.
                 m_sbEndTurn = false;
 
+                // Return from the function.
                 return;
             }
 

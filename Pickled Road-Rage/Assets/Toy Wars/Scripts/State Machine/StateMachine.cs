@@ -23,13 +23,20 @@ public class StateMachine
     // private stack of states.
     private Stack<State> m_CurrentStack = new Stack<State>();
 
+    // Current state value
+    private static ETurnManagerStates m_eCurrentState;
+
+    // TurnManager instance.
+    public TurnManager m_tTurnManger;
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     public StateMachine(TurnManager tTurnManager)
     {
-		
-	}
+        // set the turn manager instance.
+        m_tTurnManger = tTurnManager;
+    }
 
     //--------------------------------------------------------------------------------------
     // Update: Function that calls each frame to update game objects.
@@ -41,7 +48,7 @@ public class StateMachine
             return;
 
         // Update the top of the stack.
-        m_CurrentStack.Peek().OnUpdate(this);
+        m_CurrentStack.Peek().OnUpdate();
     }
 
     //--------------------------------------------------------------------------------------
@@ -56,14 +63,14 @@ public class StateMachine
         if (m_CurrentStack.Count > 0)
         {
             // Run the onExit function for the top stack.
-            m_CurrentStack.Peek().OnExit(this);
+            m_CurrentStack.Peek().OnExit();
         }
 
         // Push the new state to the stack.
         m_CurrentStack.Push(m_asStateList[(int)eStateIndex]);
 
         // Run the onEnter function for the state on the top of the stack.
-        m_CurrentStack.Peek().OnEnter(this);
+        m_CurrentStack.Peek().OnEnter();
     }
 
     //--------------------------------------------------------------------------------------
@@ -88,7 +95,7 @@ public class StateMachine
         if (m_CurrentStack.Count > 0)
         {
             // Run the onExit function for the top stack.
-            m_CurrentStack.Peek().OnExit(this);
+            m_CurrentStack.Peek().OnExit();
         }
 
         // Pop the current stack off the stack.
@@ -98,7 +105,7 @@ public class StateMachine
         if (m_CurrentStack.Count > 0)
         {
             // run the onEnter function for the top stack.
-            m_CurrentStack.Peek().OnEnter(this);
+            m_CurrentStack.Peek().OnEnter();
         }
     }
 
@@ -111,7 +118,7 @@ public class StateMachine
         if (m_CurrentStack.Count > 0)
         {
             // Run the onExit function for the top stack.
-            m_CurrentStack.Peek().OnExit(this);
+            m_CurrentStack.Peek().OnExit();
         }
 
         // Pop all that is in the current stack off the stack.
@@ -122,7 +129,7 @@ public class StateMachine
     }
 
     //--------------------------------------------------------------------------------------
-    // ChangeState: // FINISH THIS COMMENT
+    // ChangeState: Change the machine state, pop top of the stack and push the new state.
     //--------------------------------------------------------------------------------------
     public void ChangeState(ETurnManagerStates eStateIndex)
     {        
@@ -131,19 +138,21 @@ public class StateMachine
         {
             // Pop the top state
             PopState();
-        }        
-        
+        }
+
+        // Set the current State value to eStateIndex
+        m_eCurrentState = eStateIndex;
+
         // Push the newly seletec state. 
         PushState(eStateIndex);
     }
 
-
-
-
-
-    // RETURN THE STATE FOR CHECKING THE STATE ON THE UI SCRIPT.
-    //public ETurnManagerStates GetState()
-    //{
-    //    //return m_CurrentStack.Peek();
-    //}
+    //--------------------------------------------------------------------------------------
+    // GetState: Return the current state the machine is in.
+    //--------------------------------------------------------------------------------------
+    public static ETurnManagerStates GetState()
+    {
+        // Return what the state is as an enum
+        return m_eCurrentState;
+    }
 }

@@ -4,22 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// State object. Inheriting from State. // FINISH THIS COMMENT
+// DelayState object. Inheriting from State. Delays the turn switching.
 //--------------------------------------------------------------------------------------
 public class DelayState : State
 {
+    // State machine instance
+    StateMachine m_sStateMachine;
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
-    public DelayState()
+    public DelayState(StateMachine sMachine)
     {
-
+        // Set the instance of the statemachine.
+        m_sStateMachine = sMachine;
     }
 
     //--------------------------------------------------------------------------------------
     // Update: Function that calls each frame to update game objects.
     //--------------------------------------------------------------------------------------
-    public override void OnUpdate(StateMachine sMachine)
+    public override void OnUpdate()
     {
         // Update the timer by deltatime.
         TurnManager.m_fTimer -= Time.deltaTime;
@@ -28,7 +32,7 @@ public class DelayState : State
         if (TurnManager.m_fTimer < 0)
         {
             // Push to the action state
-            sMachine.ChangeState(ETurnManagerStates.ETURN_ACTION);
+            m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_ACTION);
         }
     }
 
@@ -38,14 +42,27 @@ public class DelayState : State
     // Param:
     //		sMachine: a reference to the state machine.
     //--------------------------------------------------------------------------------------
-    public override void OnEnter(StateMachine sMachine)
+    public override void OnEnter()
     {
         // Reset the timer.
         TurnManager.m_fTimer = TurnManager.m_sfStaticDelayLength;
 
+
+
+
+        // Get current players turn.
+        //GameObject currentPlayer = m_sStateMachine.m_tTurnManger.GetPlayer(TurnManager.m_snCurrentTurn);
+
+        
+
+        //currentPlayer.SoldierTurnManager();
+
+
+
+
         // Change Player soldier.
         //GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-            
+
         //Player.SoldierTurnManager(); // ASK RICHARD ABOUT THIS BECAUSE I USE THIS SCRIPT ON 2 OBJECTS.
     }
 
@@ -55,7 +72,7 @@ public class DelayState : State
     // Param:
     //		sMachine: a reference to the state machine.
     //--------------------------------------------------------------------------------------
-    public override void OnExit(StateMachine sMachine)
+    public override void OnExit()
     {
         // Set the delay back to 0
         TurnManager.m_fTimer = 0;

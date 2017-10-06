@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// State object. Base class for the StateMachine state classes.
+// ExitButton object. Inheriting from MonoBehaviour. Script for the Exit Button UI.
 //--------------------------------------------------------------------------------------
-public class State
+public class ExitButton : MonoBehaviour
 {
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
-    public State()
+    void Awake()
     {
 		
 	}
@@ -19,30 +19,19 @@ public class State
     //--------------------------------------------------------------------------------------
     // Update: Function that calls each frame to update game objects.
     //--------------------------------------------------------------------------------------
-    public virtual void OnUpdate()
+    void Update()
     {
-		
-	}
-
-    //--------------------------------------------------------------------------------------
-    // onEnter: A virtual function that runs first when a state is loaded.
-    //
-    // Param:
-    //		sMachine: a reference to the state machine.
-    //--------------------------------------------------------------------------------------
-    public virtual void OnEnter()
-    {
-
     }
 
     //--------------------------------------------------------------------------------------
-    // onExit: A virtual function that runs on state exit.
-    //
-    // Param:
-    //		sMachine: a reference to the state machine.
+    // QuitGame: Close the game window / quit the game.
     //--------------------------------------------------------------------------------------
-    public virtual void OnExit()
+    public void QuitGame()
     {
+        // Close application.
+        Application.Quit();
 
+        // Check that quit is actually being fired.
+        Debug.Log("Game is exiting");
     }
 }
