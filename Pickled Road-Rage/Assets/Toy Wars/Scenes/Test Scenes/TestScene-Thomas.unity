@@ -108,6 +108,23 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &17555300 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1350086544940090, guid: a6795d86955b37b488a7d271c6fbcbaf,
+    type: 2}
+  m_PrefabInternal: {fileID: 93417749}
+--- !u!114 &17555302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 17555300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51dd24399640015428d875cab6b167b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tTurnTimerText: {fileID: 1889698586}
 --- !u!224 &40167817 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224856243718277782, guid: 152a5e4474f56ec4b8cfc1cee3451945,
@@ -262,6 +279,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &200861236 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1785852204333524, guid: 152a5e4474f56ec4b8cfc1cee3451945,
+    type: 2}
+  m_PrefabInternal: {fileID: 674758748}
+--- !u!114 &200861237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 200861236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c120c09d700b68a46a6e7bfdc13d2076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tPlayerTurnText: {fileID: 40167818}
+  m_fLerpTime: 2.5
+  m_v3StartPos: {x: -100, y: 300, z: 0}
+  m_v3EndPos: {x: 500, y: 300, z: 0}
 --- !u!1001 &217664875
 Prefab:
   m_ObjectHideFlags: 0
@@ -795,6 +832,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1156506332 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1776813768585424, guid: 7f5febae2c6c16144a0726e89bcaedd4,
+    type: 2}
+  m_PrefabInternal: {fileID: 217664875}
+--- !u!114 &1156506334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1156506332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a623fe98e50444eba56ef50b1ad760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tUnitNumber1Text: {fileID: 362651603}
 --- !u!1 &1190272031
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,6 +893,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1459746931 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1907390235614846, guid: e007d7509bd7daf4ab2bccb7cde62588,
+    type: 2}
+  m_PrefabInternal: {fileID: 1063872608}
+--- !u!114 &1459746933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1459746931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a623fe98e50444eba56ef50b1ad760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tUnitNumber1Text: {fileID: 610808456}
 --- !u!1 &1598131674
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,7 +1030,6 @@ GameObject:
   - component: {fileID: 1653489303}
   - component: {fileID: 1653489302}
   - component: {fileID: 1653489301}
-  - component: {fileID: 1653489305}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1046,24 +1116,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1653489305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1653489300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51dd24399640015428d875cab6b167b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tTurnTimerText: {fileID: 1889698586}
-  m_tPlayerTurnText: {fileID: 40167818}
-  m_tUnitNumber1Text: {fileID: 362651603}
-  m_tUnitNumber2Text: {fileID: 610808456}
-  m_fLerpTime: 2.5
-  m_v3LerpStartPos: {x: -100, y: 300, z: 0}
-  m_v3LerpEndPos: {x: 500, y: 300, z: 0}
 --- !u!1 &1713976965
 GameObject:
   m_ObjectHideFlags: 0
