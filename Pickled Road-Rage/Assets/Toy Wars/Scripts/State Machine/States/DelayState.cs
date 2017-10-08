@@ -47,23 +47,16 @@ public class DelayState : State
         // Reset the timer.
         TurnManager.m_fTimer = TurnManager.m_sfStaticDelayLength;
 
+        // if it is no ones turn then dont run.
+        if (TurnManager.m_snCurrentTurn != 0 )
+        {
+            // Get current players turn.
+            GameObject gCurrent = m_sStateMachine.m_tTurnManger.GetPlayer(TurnManager.m_snCurrentTurn); // ASK RICHARD, SLOW WAY OF DOING IT RIGHT? // ONLY GET ONE OF THE PLAYERS, 
+            Player pCurrent = gCurrent.GetComponent<Player>();                                          // POOL SIZES ARE DIFFERENT BUT ONLY USES THE FIRST PLAYERS.
 
-
-
-        // Get current players turn.
-        //GameObject currentPlayer = m_sStateMachine.m_tTurnManger.GetPlayer(TurnManager.m_snCurrentTurn);
-
-        
-
-        //currentPlayer.SoldierTurnManager();
-
-
-
-
-        // Change Player soldier.
-        //GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-
-        //Player.SoldierTurnManager(); // ASK RICHARD ABOUT THIS BECAUSE I USE THIS SCRIPT ON 2 OBJECTS.
+            // Run the soldier manager script.
+            pCurrent.SoldierTurnManager();
+        }
     }
 
     //--------------------------------------------------------------------------------------

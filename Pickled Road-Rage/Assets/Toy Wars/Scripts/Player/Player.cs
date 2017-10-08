@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public GameObject m_gTeddyBase;
 
     // private int for current soldiers turn.
-    private int m_nSoldierTurn;
+    public int m_nSoldierTurn; // ONLY PUBLIC FOR DEBUGGING.
 
     // public array of gameobjects for player soldiers.
     private static GameObject[] m_agSoldierList;
@@ -103,8 +103,18 @@ public class Player : MonoBehaviour
     // SoldierTurnManager: Function that will manager which soldier the player is able to 
     //                 use per turn.
     //--------------------------------------------------------------------------------------
-    public void SoldierTurnManager()
-    {
+    public void SoldierTurnManager() // CHANGE SO THAT IT ONLY CHECKS ACTIVE SOLDIERS AND NOT ALL.
+    {                                // SHOULD ONLY SWITCH TURNS TO ACTIVE SOLDIERS. // ASK RICHARD.
+        // if the solider turn is at 0
+        if (m_nSoldierTurn == 0)
+        {
+            // change it to one.
+            m_nSoldierTurn = 1;
+
+            // skip over the rest of this function.
+            return;
+        }
+
         // Go up one soldiers turn.
         m_nSoldierTurn += 1;
 

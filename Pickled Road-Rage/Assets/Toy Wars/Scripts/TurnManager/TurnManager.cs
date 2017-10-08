@@ -53,6 +53,9 @@ public class TurnManager : MonoBehaviour
         m_sfStaticTimerLength = m_fTimerLength;
         m_sfStaticDelayLength = m_fDelayLength;
 
+        // Decide who goes first
+        DecideTurn();
+
         // Create a new Statmachine.
         m_sStateMachine = new StateMachine(this);
 
@@ -62,9 +65,6 @@ public class TurnManager : MonoBehaviour
 
         // Set the first state to the delay state.
         m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
-
-        // Decide who goes first
-        DecideTurn();
     }
 
     //--------------------------------------------------------------------------------------
