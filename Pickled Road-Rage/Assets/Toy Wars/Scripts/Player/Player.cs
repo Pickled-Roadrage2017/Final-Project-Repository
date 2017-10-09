@@ -9,7 +9,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // public int for which player this is.
-    [Range(1,2)][Tooltip("Specify which Player it is between 1 and 2. eg. Player1 or Player2.")]
+    [Range(1, 2)] [Tooltip("Specify which Player it is between 1 and 2. eg. Player1 or Player2.")]
     public int m_nPlayerNumber;
 
     // public gameobject for the soldier prefab.
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public GameObject m_gTeddyBase;
 
     // private int for current soldiers turn.
-    public int m_nSoldierTurn; // ONLY PUBLIC FOR DEBUGGING.
+    public int m_nSoldierTurn; // ONLY PUBLIC FOR DEBUGGING. // ONLY PUBLIC FOR DEBUGGING. // ONLY PUBLIC FOR DEBUGGING.
 
     // public array of gameobjects for player soldiers.
     private GameObject[] m_agSoldierList;
@@ -52,12 +52,12 @@ public class Player : MonoBehaviour
 
         // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
         // Allocate soliders to the pool.
-        GameObject gSoldier1 = AllocateSoldier(); // Allocating 2 at the start for now until..
-        GameObject gSoldier2 = AllocateSoldier(); // ..we have a better idea of solider spawning.
+        GameObject p1 = AllocateSoldier(); // Allocating 2 at the start for now until..
+        GameObject p2 = AllocateSoldier(); // ..we have a better idea of solider spawning.
 
         // Spawn at the teddy base.
-        gSoldier1.transform.position = m_gTeddyBase.transform.position;
-        gSoldier2.transform.position = m_gTeddyBase.transform.position;
+        p1.transform.position = m_gTeddyBase.transform.position;
+        p2.transform.position = m_gTeddyBase.transform.position;
         // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
     }
 
@@ -69,7 +69,13 @@ public class Player : MonoBehaviour
         // Check if it is this players turn.
         if (m_nPlayerNumber == TurnManager.m_snCurrentTurn)
         {
-            // TODO.
+            // Get the soldier object and script.
+            GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
+            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
+
+            // Get the solider update functions
+            sCurrentSoldier.Move();
+            sCurrentSoldier.Fire(15);
         }
     }
 
@@ -103,24 +109,41 @@ public class Player : MonoBehaviour
     // SoldierTurnManager: Function that will manager which soldier the player is able to 
     //                 use per turn.
     //--------------------------------------------------------------------------------------
-    public void SoldierTurnManager() // CHANGE SO THAT IT ONLY CHECKS ACTIVE SOLDIERS AND NOT ALL.
-    {                                // SHOULD ONLY SWITCH TURNS TO ACTIVE SOLDIERS. // ASK RICHARD.
-        // if the solider turn is at 0
-        if (m_nSoldierTurn == 0)
-        {
-            // change it to one.
-            m_nSoldierTurn = 1;
-
-            // skip over the rest of this function.
-            return;
-        }
-
+    public void SoldierTurnManager()
+    {
         // Go up one soldiers turn.
         m_nSoldierTurn += 1;
 
+        // Loop through the soldier list.
+        while (m_nSoldierTurn < m_agSoldierList.Length && !m_agSoldierList[m_nSoldierTurn].activeInHierarchy)
+        {
+            m_nSoldierTurn += 1;
+        }
+
         // Go back to the start of the list
-        if (m_nSoldierTurn > m_agSoldierList.Length)
-            m_nSoldierTurn = 1;
+        if (m_nSoldierTurn >= m_agSoldierList.Length)
+            m_nSoldierTurn = 0;
+    }
+
+    //--------------------------------------------------------------------------------------
+    // GetCurrentSoldier: Function that returns a requested soldier.
+    //
+    // Param:
+    //		nSoldierNumber: An index for which soldier is wanted.
+    // Return:
+    //      GameObject: the soldier that is being returned.
+    //--------------------------------------------------------------------------------------
+    GameObject GetSoldier(int nSoldierNumber)
+    {
+        // Loop through the soldier list.
+        if (nSoldierNumber < m_agSoldierList.Length)
+        {
+             // return the soldier.
+                return m_agSoldierList[nSoldierNumber];
+        }
+
+        // else return null.
+        return null;
     }
 
     //--------------------------------------------------------------------------------------
@@ -128,7 +151,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void SoldierMovement()
     {
-        // TODO.
+        
     }
 
     //--------------------------------------------------------------------------------------
@@ -136,6 +159,6 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void SoldierFire()
     {
-        // TODO.
+        
     }
 }
