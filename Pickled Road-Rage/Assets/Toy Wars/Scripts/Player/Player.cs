@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     public int m_nPlayerNumber;
 
     // public gameobject for the soldier prefab.
-    //[Tooltip("The prefab for the Soldier object.")]
-    //public GameObject m_gSoldierBlueprint;
+    [Tooltip("The prefab for the Soldier object.")]
+    public GameObject m_gSoldierBlueprint;
 
     // pool size. how many soldiers allowed on screen at once.
     [Range(1, 6)]
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     public int m_nSoldierTurn; // ONLY PUBLIC FOR DEBUGGING.
 
     // public array of gameobjects for player soldiers.
-    private static GameObject[] m_agSoldierList;
+    private GameObject[] m_agSoldierList;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -46,18 +46,18 @@ public class Player : MonoBehaviour
         for (int i = 0; i < m_nPoolSize; ++i)
         {
             // Instantiate and set active state.
-            //m_agSoldierList[i] = Instantiate(m_gSoldierBlueprint);
-            //m_agSoldierList[i].SetActive(false);
+            m_agSoldierList[i] = Instantiate(m_gSoldierBlueprint);
+            m_agSoldierList[i].SetActive(false);
         }
 
         // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
         // Allocate soliders to the pool.
-        //GameObject gSoldier1 = AllocateSoldier(); // Allocating 2 at the start for now until..
-        //GameObject gSoldier2 = AllocateSoldier(); // ..we have a better idea of solider spawning.
+        GameObject gSoldier1 = AllocateSoldier(); // Allocating 2 at the start for now until..
+        GameObject gSoldier2 = AllocateSoldier(); // ..we have a better idea of solider spawning.
 
         // Spawn at the teddy base.
-        //gSoldier1.transform.position = m_gTeddyBase.transform.position;
-        //gSoldier2.transform.position = m_gTeddyBase.transform.position;
+        gSoldier1.transform.position = m_gTeddyBase.transform.position;
+        gSoldier2.transform.position = m_gTeddyBase.transform.position;
         // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
     }
 

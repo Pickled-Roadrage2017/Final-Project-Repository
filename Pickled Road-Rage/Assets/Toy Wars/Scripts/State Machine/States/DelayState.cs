@@ -11,6 +11,9 @@ public class DelayState : State
     // State machine instance
     StateMachine m_sStateMachine;
 
+    // Turn manager instance
+    TurnManager m_tTurnManager;
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -18,6 +21,9 @@ public class DelayState : State
     {
         // Set the instance of the statemachine.
         m_sStateMachine = sMachine;
+
+        // Set the instance of the turn manager.
+        m_tTurnManager = m_sStateMachine.m_tTurnManger;
     }
 
     //--------------------------------------------------------------------------------------
@@ -51,8 +57,8 @@ public class DelayState : State
         if (TurnManager.m_snCurrentTurn != 0 )
         {
             // Get current players turn.
-            GameObject gCurrent = m_sStateMachine.m_tTurnManger.GetPlayer(TurnManager.m_snCurrentTurn); // ASK RICHARD, SLOW WAY OF DOING IT RIGHT? // ONLY GET ONE OF THE PLAYERS, 
-            Player pCurrent = gCurrent.GetComponent<Player>();                                          // POOL SIZES ARE DIFFERENT BUT ONLY USES THE FIRST PLAYERS.
+            GameObject gCurrent = m_tTurnManager.GetPlayer(TurnManager.m_snCurrentTurn);
+            Player pCurrent = gCurrent.GetComponent<Player>();
 
             // Run the soldier manager script.
             pCurrent.SoldierTurnManager();
