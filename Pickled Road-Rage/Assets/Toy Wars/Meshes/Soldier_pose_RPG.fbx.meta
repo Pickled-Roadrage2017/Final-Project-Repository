@@ -1,27 +1,15 @@
 fileFormatVersion: 2
-guid: d6c1095d6d2cefb468cb6035a3f30ab8
-timeCreated: 1507001849
+guid: ee7e8e2d3c9fc4a4dbd1727dc1cce0b2
+timeCreated: 1507507828
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: Brick_05_low
-    100002: //RootNode
-    100004: Brick_1x1
-    100006: Cylinder_low20
-    100008: Low
-    100010: transform25
-    100012: transform26
-    400000: Brick_05_low
-    400002: //RootNode
-    400004: Brick_1x1
-    400006: Cylinder_low20
-    400008: Low
-    400010: transform25
-    400012: transform26
-    2300000: Brick_1x1
-    3300000: Brick_1x1
-    4300000: Brick_1x1
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Soldier_pose_RPG
   materials:
     importMaterials: 1
     materialName: 0

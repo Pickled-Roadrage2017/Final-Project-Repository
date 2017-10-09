@@ -1,39 +1,15 @@
 fileFormatVersion: 2
-guid: 628ebb05e5e69dd44abf906d433dc87a
-timeCreated: 1507001848
+guid: 328b41b35f4c3b342b254bb58111c4ac
+timeCreated: 1507506651
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: Brick_01_low
-    100002: //RootNode
-    100004: Brick_2x2
-    100006: Cylinder_low14
-    100008: Cylinder_low15
-    100010: Cylinder_low16
-    100012: Cylinder_low17
-    100014: Low
-    100016: transform17
-    100018: transform18
-    100020: transform19
-    100022: transform20
-    100024: transform21
-    400000: Brick_01_low
-    400002: //RootNode
-    400004: Brick_2x2
-    400006: Cylinder_low14
-    400008: Cylinder_low15
-    400010: Cylinder_low16
-    400012: Cylinder_low17
-    400014: Low
-    400016: transform17
-    400018: transform18
-    400020: transform19
-    400022: transform20
-    400024: transform21
-    2300000: Brick_2x2
-    3300000: Brick_2x2
-    4300000: Brick_2x2
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Soldier_Mesh_Minigun_pose
   materials:
     importMaterials: 1
     materialName: 0
