@@ -31,6 +31,11 @@ public class Player : MonoBehaviour
     // public array of gameobjects for player soldiers.
     private GameObject[] m_agSoldierList;
 
+    public GameObject m_gSoldier1Spawn;
+    public GameObject m_gSoldier2Spawn;
+
+
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -56,8 +61,8 @@ public class Player : MonoBehaviour
         GameObject p2 = AllocateSoldier(); // ..we have a better idea of solider spawning.
 
         // Spawn at the teddy base.
-        p1.transform.position = m_gTeddyBase.transform.position;
-        p2.transform.position = m_gTeddyBase.transform.position;
+        p1.transform.position = m_gSoldier1Spawn.transform.position;
+        p2.transform.position = m_gSoldier2Spawn.transform.position;
         // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
     }
 
@@ -71,11 +76,12 @@ public class Player : MonoBehaviour
         {
             // Get the soldier object and script.
             GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
-            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
+            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponentInChildren<SoldierActor>(); //Fix this, GetComponentInChildren is slow
 
             // Get the solider update functions
-            //sCurrentSoldier.Move();
-            //sCurrentSoldier.Fire(15);
+            sCurrentSoldier.Move();
+            sCurrentSoldier.FaceMouse();
+            sCurrentSoldier.Fire(sCurrentSoldier.m_fCharge);
         }
     }
 

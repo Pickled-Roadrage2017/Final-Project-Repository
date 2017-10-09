@@ -105,7 +105,7 @@ public class SoldierActor : MonoBehaviour
     {
       //Move();
       m_rbRigidBody.freezeRotation = true;
-      FaceMouse();
+      //FaceMouse();
 
       //Fire(m_fCharge);
       // Makes the Slider represent the charge
@@ -221,7 +221,7 @@ public class SoldierActor : MonoBehaviour
     // NOTE: m_fRotSpeed is the speed modifier for it, the speed will affect how quickly the Soldier rotates 
     // 
     //--------------------------------------------------------------------------------------
-    private Quaternion FaceMouse()
+    public Quaternion FaceMouse()
     {
         if (!m_bFiring)
         {

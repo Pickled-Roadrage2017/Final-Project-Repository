@@ -141,6 +141,8 @@ MonoBehaviour:
   m_nPoolSize: 3
   m_gTeddyBase: {fileID: 1598131674}
   m_nSoldierTurn: 0
+  m_gSoldier1Spawn: {fileID: 2017378613}
+  m_gSoldier2Spawn: {fileID: 1598131674}
 --- !u!4 &130135980
 Transform:
   m_ObjectHideFlags: 0
@@ -382,6 +384,8 @@ MonoBehaviour:
   m_nPoolSize: 3
   m_gTeddyBase: {fileID: 2017378613}
   m_nSoldierTurn: 0
+  m_gSoldier1Spawn: {fileID: 2017378613}
+  m_gSoldier2Spawn: {fileID: 1598131674}
 --- !u!4 &585974529
 Transform:
   m_ObjectHideFlags: 0

@@ -62,7 +62,10 @@ public class TurnManager : MonoBehaviour
         // Add states to the machine.
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_DELAY, new DelayState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_ACTION, new ActionState(m_sStateMachine));
+    }
 
+    private void Start()
+    {
         // Set the first state to the delay state.
         m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
     }
