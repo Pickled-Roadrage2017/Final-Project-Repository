@@ -74,8 +74,8 @@ public class Player : MonoBehaviour
             SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
 
             // Get the solider update functions
-            sCurrentSoldier.Move();
-            sCurrentSoldier.Fire(15);
+            //sCurrentSoldier.Move();
+            //sCurrentSoldier.Fire(15);
         }
     }
 

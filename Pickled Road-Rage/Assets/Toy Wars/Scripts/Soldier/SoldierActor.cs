@@ -103,11 +103,11 @@ public class SoldierActor : MonoBehaviour
 
     void Update()
     {
-      Move();
+      //Move();
       m_rbRigidBody.freezeRotation = true;
       FaceMouse();
 
-      Fire(m_fCharge);
+      //Fire(m_fCharge);
       // Makes the Slider represent the charge
       m_sAimSlider.value = m_fCharge;   
       // As health is a float, anything below one will be displayed as 0 to the player
