@@ -101,7 +101,7 @@ public class SoldierActor : MonoBehaviour
         m_fCharge = m_fMinCharge;
     }
 
-    void FixedUpdate()
+    void Update()
     {
       Move();
       m_rbRigidBody.freezeRotation = true;
@@ -136,7 +136,7 @@ public class SoldierActor : MonoBehaviour
     // Fire: Call when the Player commands the Soldier to fire
     //
     //--------------------------------------------------------------------------------------
-    private void Fire(float fCharge)
+    public void Fire(float fCharge)
     {
         
         if (m_gLauncherScript.m_bRocketAlive == false)
@@ -201,7 +201,7 @@ public class SoldierActor : MonoBehaviour
     //       making it so the Soldier doesn't stop instantly
     // 
     //--------------------------------------------------------------------------------------
-    private void Move()
+    public void Move()
     {
         if (!m_bFiring)
         {

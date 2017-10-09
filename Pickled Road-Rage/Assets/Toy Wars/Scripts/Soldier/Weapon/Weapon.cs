@@ -8,8 +8,6 @@ public class Weapon : MonoBehaviour
     public float m_fDamage;
     [Tooltip("How much power the Soldier has given the projectile(affects distance)")]
     public float m_fPower;
-    [Tooltip("How fast the projectile travels")]
-    public float m_fSpeed;
 
 	// Use this for initialization
 	void Start()

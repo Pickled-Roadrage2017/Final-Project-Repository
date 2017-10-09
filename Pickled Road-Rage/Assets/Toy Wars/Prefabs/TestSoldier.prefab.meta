@@ -1,7 +1,17 @@
 fileFormatVersion: 2
+<<<<<<< .mine
+guid: e182ac2274822854786bb61b22aafeec
+timeCreated: 1507080839
+licenseType: Free
+||||||| .r45
+guid: 29fec684dd7edcd49a01b458aeeaeecb
+timeCreated: 1507002134
+licenseType: Pro
+=======
 guid: fc2b2cbe59fe25e4db22c69840457fc0
 timeCreated: 1507185089
 licenseType: Free
+>>>>>>> .r61
 NativeFormatImporter:
   mainObjectFileID: 0
   userData: 

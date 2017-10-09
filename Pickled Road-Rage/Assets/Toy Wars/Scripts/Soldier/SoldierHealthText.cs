@@ -6,14 +6,20 @@ using UnityEngine.UI;
 
 public class SoldierHealthText : MonoBehaviour
 {
-    public TextMesh m_tmHealthText;
+    private TextMesh m_tmHealthText;
+    // the soldier which is having its health represented
     public SoldierActor m_gSoldier;
+    // health of the soldier converted to a string
     string m_sHealth;
+
+    //public GameObject m_gParent;
 
 	// Use this for initialization
 	void Start ()
     {
+      //  transform.SetParent(m_gParent.transform);
         m_tmHealthText = GetComponentInChildren<TextMesh>();
+        m_tmHealthText = GetComponent<TextMesh>();
         m_tmHealthText.transform.localScale = transform.localScale.Inverse();  	
 	}
 	

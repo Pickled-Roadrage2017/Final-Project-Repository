@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33678693391512856}
   - component: {fileID: 65823825924449742}
   - component: {fileID: 23983064171140370}
-  - component: {fileID: 114245070277592098}
+  - component: {fileID: 114517117272660112}
   m_Layer: 0
   m_Name: TestRocketLauncher
   m_TagString: RocketLauncher
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1566479626656110}
   m_LocalRotation: {x: -0.00016986068, y: 0.029761685, z: -0.00570474, w: 0.99954075}
-  m_LocalPosition: {x: -0.43700004, y: 0.463, z: 0.05000019}
+  m_LocalPosition: {x: 7.87, y: 0.463, z: 0.83}
   m_LocalScale: {x: 0.16, y: 0.24, z: 1.06}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114245070277592098
+--- !u!114 &114517117272660112
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -102,12 +102,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1566479626656110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edc0b7efca51804479aba2fdea51841e, type: 3}
+  m_Script: {fileID: 11500000, guid: c8e2d220f83d87b4e8346ea1455c90e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gRocketBlueprint: {fileID: 1480935180070650, guid: 7145c484c62629c45ae13c45b646c089,
+  m_gRocketBlueprint: {fileID: 1480935180070650, guid: af2676544f701ed4198b43f67985729c,
     type: 2}
-  m_gRocketSpawn: {fileID: 1566479626656110}
-  m_fPower: 0
-  m_bRocketAlive: 0
-  m_fRocketXRot: 0
+  m_fPower: 17.399998
+  m_bRocketAlive: 1
+  m_fRocketXRot: -17.399998

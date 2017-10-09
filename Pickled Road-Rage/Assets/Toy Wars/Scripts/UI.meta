@@ -1,8 +1,22 @@
 fileFormatVersion: 2
+<<<<<<< .mine
+guid: c39bc17def9a22f4d89975cc8b6270bc
+||||||| .r35
+guid: 90cc70af41732b7458f2f8890e2aa990
+=======
 guid: 889f68d682b374d4dbf6ac8bd7646d41
+>>>>>>> .r43
 folderAsset: yes
+<<<<<<< .mine
+timeCreated: 1506896497
+licenseType: Free
+||||||| .r35
+timeCreated: 1506897685
+licenseType: Pro
+=======
 timeCreated: 1506663723
 licenseType: Free
+>>>>>>> .r43
 DefaultImporter:
   userData: 
   assetBundleName: 

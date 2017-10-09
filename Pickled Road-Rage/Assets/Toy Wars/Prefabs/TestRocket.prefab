@@ -23,14 +23,14 @@ GameObject:
   - component: {fileID: 65185210722851466}
   - component: {fileID: 23082496437012516}
   - component: {fileID: 54508881412687604}
-  - component: {fileID: 114087078277772924}
+  - component: {fileID: 114403835928817230}
   m_Layer: 0
   m_Name: TestRocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4398011424822858
 Transform:
   m_ObjectHideFlags: 1
@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1480935180070650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.43, y: 2.28, z: -2.66}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.4}
+  m_LocalScale: {x: 0.01, y: 0.005, z: 0.02}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -108,9 +108,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.01, y: 0.01, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114087078277772924
+--- !u!114 &114403835928817230
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -118,17 +118,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1480935180070650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d69c49b6986d74f90aad441d9d7d62, type: 3}
+  m_Script: {fileID: 11500000, guid: 94ebb6404f9dbcb41bb0774864c279a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_fDamage: 50
   m_fPower: 0
-  m_fSpeed: 1
   m_fAirDrop: 0
-  m_fDropIterator: 0.5
-  m_fActivateTimer: 2
+  m_fDropIterator: 0.05
+  m_fActivateTimer: 1
   m_fCurrentActivateTimer: 0
-  m_gSpawnPoint: {fileID: 0}
+  m_gSpawnPoint: {fileID: 1566479626656110, guid: 8b66a0fd11024c842b97741cc2f8da22,
+    type: 2}
   m_fMaxLifespan: 5
   m_fCurrentLifespan: 0
   m_v3MoveDirection: {x: 0, y: 0, z: 0}
