@@ -31,10 +31,22 @@ public class Player : MonoBehaviour
     // public array of gameobjects for player soldiers.
     private GameObject[] m_agSoldierList;
 
+    //
+    [Tooltip("")]
     public GameObject m_gSoldier1Spawn;
+
+    //
+    [Tooltip("")]
     public GameObject m_gSoldier2Spawn;
 
+    // An int for how many active soldier there is.
+    private int m_nActiveSoldiers;
 
+    // Active Soldiers getter.
+    public int GetActiveSoldiers()
+    {
+        return m_nActiveSoldiers;
+    }
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -72,11 +84,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Check if it is this players turn.
-        if (m_nPlayerNumber == TurnManager.m_snCurrentTurn)
+        if (m_nPlayerNumber == TurnManager.m_snCurrentTurn) // TODO: There are errors here when soldiers are null.
         {
             // Get the soldier object and script.
             GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
-            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponentInChildren<SoldierActor>(); //Fix this, GetComponentInChildren is slow
+            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponentInChildren<SoldierActor>(); // TODO: Fix this, GetComponentInChildren is slow.
 
             // Get the solider update functions
             sCurrentSoldier.Move();
@@ -101,6 +113,9 @@ public class Player : MonoBehaviour
             {
                 // Set active state.
                 m_agSoldierList[i].SetActive(true);
+
+                // increment the active soldier number by 1.
+                m_nActiveSoldiers += 1;
 
                 // return the bullet.
                 return m_agSoldierList[i];

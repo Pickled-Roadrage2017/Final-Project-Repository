@@ -14,6 +14,10 @@ public class UnitNumbersUI : MonoBehaviour {
     [Tooltip("The Player unit number text object in the Canvas.")]
     public Text m_tUnitNumber1Text;
 
+    // public object for the player object to tie this object to.
+    [Tooltip("Player object to tie this UI element to.")]
+    public GameObject m_gPlayerObject;
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -28,8 +32,13 @@ public class UnitNumbersUI : MonoBehaviour {
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        // TODO
-        // Solider Numbers for each team.
-        // TODO
+        // Get current player.
+        Player pPlayer = m_gPlayerObject.GetComponent<Player>();
+
+        // new string for the active soldiers for the player.
+        string sActiveSoldiers = string.Format("{0}", pPlayer.GetActiveSoldiers());
+
+        // Set the text to the active soldier string.
+        m_tUnitNumber1Text.text = sActiveSoldiers;
     }
 }
