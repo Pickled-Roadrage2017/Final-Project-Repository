@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3065,15 +3065,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dae2375154c710e4296b85367dfa928d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.010000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dae2375154c710e4296b85367dfa928d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.010000004
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dae2375154c710e4296b85367dfa928d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.0100000035
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dae2375154c710e4296b85367dfa928d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -6887,7 +6887,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh14812
+  m_Name: pb_Mesh14926
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
