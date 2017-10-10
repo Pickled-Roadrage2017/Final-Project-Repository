@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //--------------------------------------------------------------------------------------
-// SwapTurnUI object. Inheriting from MonoBehaviour. Script Swap Turn text object.
+// SwapTurnUI object. Inheriting from MonoBehaviour. Script for displaying the swap turn
+// text and lerp across the screen.
 //--------------------------------------------------------------------------------------
 public class SwapTurnUI : MonoBehaviour
 {

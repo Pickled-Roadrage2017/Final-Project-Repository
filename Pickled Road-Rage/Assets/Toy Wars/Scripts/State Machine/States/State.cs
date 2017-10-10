@@ -26,9 +26,6 @@ public class State
 
     //--------------------------------------------------------------------------------------
     // onEnter: A virtual function that runs first when a state is loaded.
-    //
-    // Param:
-    //		sMachine: a reference to the state machine.
     //--------------------------------------------------------------------------------------
     public virtual void OnEnter()
     {
@@ -37,9 +34,6 @@ public class State
 
     //--------------------------------------------------------------------------------------
     // onExit: A virtual function that runs on state exit.
-    //
-    // Param:
-    //		sMachine: a reference to the state machine.
     //--------------------------------------------------------------------------------------
     public virtual void OnExit()
     {

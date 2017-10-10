@@ -30,7 +30,10 @@ public class StateMachine
     public TurnManager m_tTurnManger;
 
     //--------------------------------------------------------------------------------------
-    // initialization.
+    // Initialization: Constructor for the StateMachine.
+    //
+    // Param:
+    //      tTurnManager: A reference to the TurnManager.
     //--------------------------------------------------------------------------------------
     public StateMachine(TurnManager tTurnManager)
     {
@@ -55,7 +58,7 @@ public class StateMachine
     // PushState: A function to push a state onto the statemachine stack.
     //
     // Param:
-    //		nStateIndex: An int index for the state you want to push.
+    //		eStateIndex: An index for the state you want to push.
     //--------------------------------------------------------------------------------------
     void PushState(ETurnManagerStates eStateIndex)
     {
@@ -77,7 +80,7 @@ public class StateMachine
     // AddState: A function to add states to the statemachine array.
     //
     // Param:
-    //		nStateIndex: An int index for the state.
+    //		eStateIndex: An index for the state.
     //		sState: reference to the state you want to add.
     //--------------------------------------------------------------------------------------
     public void AddState(ETurnManagerStates eStateIndex, State sState)
@@ -130,6 +133,9 @@ public class StateMachine
 
     //--------------------------------------------------------------------------------------
     // ChangeState: Change the machine state, pop top of the stack and push the new state.
+    //
+    // Param: 
+    //      eStateIndex: An index for the state to change to.
     //--------------------------------------------------------------------------------------
     public void ChangeState(ETurnManagerStates eStateIndex)
     {        
@@ -149,6 +155,9 @@ public class StateMachine
 
     //--------------------------------------------------------------------------------------
     // GetState: Return the current state the machine is in.
+    //
+    // Return: 
+    //      ETurnManagerStates: Returns an enum of the current state the machine is in.
     //--------------------------------------------------------------------------------------
     public static ETurnManagerStates GetState()
     {

@@ -31,13 +31,13 @@ public class Player : MonoBehaviour
     // public array of gameobjects for player soldiers.
     private GameObject[] m_agSoldierList;
 
-    //
-    [Tooltip("")]
-    public GameObject m_gSoldier1Spawn;
+    // Temp spawn postion for the player.
+    [Tooltip("Spawn postion for the soldier spawn, pass in a gameobject.")]
+    public GameObject m_gSoldier1Spawn; // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
 
-    //
-    [Tooltip("")]
-    public GameObject m_gSoldier2Spawn;
+    // Temp spawn postion for the player.
+    [Tooltip("Spawn postion for the soldier spawn, pass in a gameobject.")]
+    public GameObject m_gSoldier2Spawn; // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
 
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
 
     //--------------------------------------------------------------------------------------
     // SoldierTurnManager: Function that will manager which soldier the player is able to 
-    //                 use per turn.
+    // use per turn.
     //--------------------------------------------------------------------------------------
     public void SoldierTurnManager()
     {

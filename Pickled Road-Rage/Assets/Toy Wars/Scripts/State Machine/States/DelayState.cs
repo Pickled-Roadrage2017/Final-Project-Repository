@@ -15,7 +15,10 @@ public class DelayState : State
     TurnManager m_tTurnManager;
 
     //--------------------------------------------------------------------------------------
-    // initialization.
+    // Initialization: Constructor for the State.
+    //
+    // Param:
+    //      sMachine: A reference to the StateMachine.
     //--------------------------------------------------------------------------------------
     public DelayState(StateMachine sMachine)
     {
@@ -44,9 +47,6 @@ public class DelayState : State
 
     //--------------------------------------------------------------------------------------
     // onEnter: A virtual function that runs first when a state is loaded.
-    //
-    // Param:
-    //		sMachine: a reference to the state machine.
     //--------------------------------------------------------------------------------------
     public override void OnEnter()
     {
@@ -67,9 +67,6 @@ public class DelayState : State
 
     //--------------------------------------------------------------------------------------
     // onExit: A virtual function that runs on state exit.
-    //
-    // Param:
-    //		sMachine: a reference to the state machine.
     //--------------------------------------------------------------------------------------
     public override void OnExit()
     {

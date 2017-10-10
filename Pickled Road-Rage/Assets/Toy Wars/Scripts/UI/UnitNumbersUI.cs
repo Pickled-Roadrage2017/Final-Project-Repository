@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 //--------------------------------------------------------------------------------------
 // UnitNumbersUI object. Inheriting from MonoBehaviour. Script for the Players 
-// unit numbers text object.
+// unit numbers text object. 
 //--------------------------------------------------------------------------------------
-public class UnitNumbersUI : MonoBehaviour {
-
+public class UnitNumbersUI : MonoBehaviour
+{
     // public text object for displaying player1s unit numbers.
     [Tooltip("The Player unit number text object in the Canvas.")]
     public Text m_tUnitNumber1Text;

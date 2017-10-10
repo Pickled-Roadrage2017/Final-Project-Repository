@@ -41,7 +41,7 @@ public class TurnManager : MonoBehaviour
     public static float m_fTimer;
     
     //--------------------------------------------------------------------------------------
-    // initialization.
+    // initialization. Awake.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
@@ -64,6 +64,9 @@ public class TurnManager : MonoBehaviour
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_ACTION, new ActionState(m_sStateMachine));
     }
 
+    //--------------------------------------------------------------------------------------
+    // initialization. Start.
+    //--------------------------------------------------------------------------------------
     private void Start()
     {
         // Set the first state to the delay state.

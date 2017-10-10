@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //--------------------------------------------------------------------------------------
-// TimerUI object. Inheriting from MonoBehaviour. Script for showing displaying the timer.
+// TimerUI object. Inheriting from MonoBehaviour. Script for displaying the turn timer.
 //--------------------------------------------------------------------------------------
 public class TimerUI : MonoBehaviour
 {

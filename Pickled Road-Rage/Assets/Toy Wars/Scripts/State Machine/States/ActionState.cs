@@ -12,7 +12,10 @@ public class ActionState : State
     StateMachine m_sStateMachine;
 
     //--------------------------------------------------------------------------------------
-    // initialization.
+    // Initialization: Constructor for the State.
+    //
+    // Param:
+    //      sMachine: A reference to the StateMachine.
     //--------------------------------------------------------------------------------------
     public ActionState(StateMachine sMachine)
     {
@@ -44,23 +47,19 @@ public class ActionState : State
 
     //--------------------------------------------------------------------------------------
     // onEnter: A virtual function that runs first when a state is loaded.
-    //
-    // Param:
-    //		sMachine: a reference to the state machine.
     //--------------------------------------------------------------------------------------
     public override void OnEnter()
     {
+        // Reset the timer.
         TurnManager.m_fTimer = TurnManager.m_sfStaticTimerLength;
     }
 
     //--------------------------------------------------------------------------------------
     // onExit: A virtual function that runs on state exit.
-    //
-    // Param:
-    //		sMachine: a reference to the state machine.
     //--------------------------------------------------------------------------------------
     public override void OnExit()
     {
+        // Set timer back to 0.
         TurnManager.m_fTimer = 0;
     }
 }
