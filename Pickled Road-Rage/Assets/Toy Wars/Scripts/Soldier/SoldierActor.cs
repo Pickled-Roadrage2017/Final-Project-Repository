@@ -5,14 +5,7 @@ using UnityEngine.UI;
 
 
 //--------------------------------------------------------------------------------------
-// SoldierActor: The controller that PlayerActor will access when it is its turn to act
-//
-// PlayerActor has a Uni-Directional Association with SoldierActor
-// (SoldierActor does not know about the relationship)
-//
-// SoldierActor has a Bi-Directional Association with the WeaponClass and all of its children
-//  SoldierActor will pass down it's m_fCharge value to its currentWeapons m_fPower
-//
+// SoldierActor: Inheriting from MonoBehaviour. Used to be controlled by Player
 //--------------------------------------------------------------------------------------
 public class SoldierActor : MonoBehaviour
 {
@@ -24,8 +17,8 @@ public class SoldierActor : MonoBehaviour
     [Tooltip("Speed that the Slider moves by per update")]
     public float m_fSliderSpeed = 0.0f;
 
-    // Is the Charge bar meant to be ascending?
-    bool m_bIsAscending;
+    // Boolean for the slider bar to bounce between m_fMinCharge and m_fMaxCharge
+    private bool m_bIsAscending;
 
     // Minimum power for a shot
     [Tooltip("Minimum charge for the Charge, be sure that this matches the 'min value' variable in the Sliders inspector")]
@@ -54,13 +47,15 @@ public class SoldierActor : MonoBehaviour
     // 0 = RocketLauncher
     // 1 = Minigun
     // 2 = Grenade
-    [HideInInspector]
+    [Range(0,2)]
+    [Tooltip("0 = RocketLauncher, 1 = Minigun, 2 = Grenade")]
     public int m_nCurrentWeapon;
 
     // Values for the inventory count of this Soldier
-    public int m_nGrenadeCount;
-    public int m_nGotMinigun;
-    public int m_nGotGrenade;
+    [Tooltip("How many Grenades this Soldier has")]
+    public int m_nGrenadeCount = 0;
+    public int m_nGotMinigun = 0;
+    public int m_nGotGrenade = 0;
 
     // Current Charge to pass on to the weapons firing Power (m_fPower) 
     [Tooltip("Current Charge to pass on to the weapons firing Power")]
@@ -69,47 +64,59 @@ public class SoldierActor : MonoBehaviour
     // boolean for if the soldier is currently charging up a shot
     private bool m_bChargingShot;
 
-
-    // This Soldiers rigidBody for movement purposes
+    // Will be set to the Soldiers rigidbody property
     private Rigidbody m_rbRigidBody;
-
-    // A boolean for living, will be false when the soldier dies
-    private bool m_bAlive;
 
     // A Number so the PlayerActor can know which soldier to move
     public int m_nSoldierNumber;
 
     // The Soldiers current health,
-    // (Will be equal to m_nMaxHealth until it takes damage
+    // (Will be equal to m_nMaxHealth until it takes damage)
     public float m_fCurrentHealth;
 
-    RocketLauncher m_gLauncherScript;
-
+    // The GameObject RocketLauncher that the Soldier will be using
     public GameObject m_gRocketLauncher;
 
-    void Start()
+    // The RocketLauncher script of GameObject RocketLauncherS
+    private RocketLauncher m_gLauncherScript;
+
+    // Movement vector for the Soldier
+    [HideInInspector]
+    public Vector3 m_v3Movement;
+
+    //--------------------------------------------------------------------------------------
+    // initialization.
+    //--------------------------------------------------------------------------------------
+    void Awake()
     {
+        // get the soldiers rigidbody
         m_rbRigidBody = GetComponent<Rigidbody>();
+        // get the rocketlaunchers script
         m_gLauncherScript = m_gRocketLauncher.GetComponent<RocketLauncher>();
         // Soldiers Current health should always start at MaxHealth
         m_fCurrentHealth = m_fMaxHealth;
-        // Soldier should start off as alive
-        m_bAlive = true;
+        // the soldier won't be firing at awake
         m_bFiring = false;
+        // the slider should always start as ascending
         m_bIsAscending = true;
+        // the soldier won't be charging a shot at Awake
         m_bChargingShot = false;
+        // m_fCharge should never be below m_fMinCharge
         m_fCharge = m_fMinCharge;
+        // so the soldiers cannot move upwards
+        m_rbRigidBody.constraints = RigidbodyConstraints.FreezePositionY;
+        // so the soldier doesn't rotate unless it is to FaceMouse()
+        m_rbRigidBody.freezeRotation = true;
     }
 
+    //--------------------------------------------------------------------------------------
+    // Update: Function that calls each frame to update game objects.
+    //--------------------------------------------------------------------------------------
     void Update()
     {
-      //Move();
-      m_rbRigidBody.freezeRotation = true;
-      //FaceMouse();
-
-      //Fire(m_fCharge);
       // Makes the Slider represent the charge
       m_sAimSlider.value = m_fCharge;   
+
       // As health is a float, anything below one will be displayed as 0 to the player
       if(m_fCurrentHealth < 1)
       {
@@ -121,14 +128,12 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     //  SwitchWeapon: Call when the Player wants to change the Soldiers currentWeapon
     //
-    // Returns: Void
-    //
-    // 
+    // NOTE: Made for the future, may actually be put into Player.cs 
     //
     //--------------------------------------------------------------------------------------
     private void SwitchWeapon()
     {
-
+        
     }
 
 
@@ -141,13 +146,13 @@ public class SoldierActor : MonoBehaviour
         
         if (m_gLauncherScript.m_bRocketAlive == false)
         {
-            //m_sAimSlider.value = m_fMinCharge;
-
+            // When leftMouseButton is pressed down
             if (Input.GetButtonDown("Fire1"))
             {
                 m_bFiring = true;
                 m_fCharge = m_fMinCharge;
             }
+            // While leftMouseButton is pressed down
             if (Input.GetButton("Fire1"))
             {
                 m_bChargingShot = true;
@@ -176,7 +181,7 @@ public class SoldierActor : MonoBehaviour
                     }
                 }
             }
-            
+            // When leftMouseButton is released
             if (Input.GetButtonUp("Fire1"))
             {
                 if (m_bChargingShot)
@@ -203,18 +208,25 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void Move()
     {
+        // The Soldier cannot move whilst firing
         if (!m_bFiring)
         {
+            // HorizontalAxis is controlled with A and D. Or the left and right arrow keys
             float fMoveHorizontal = Input.GetAxis("Horizontal");
+            // VerticalAxis is controlled with W and S. Or the Up and Down arrow keys
             float fMoveVertical = Input.GetAxis("Vertical");
-            Vector3 v3Movement = new Vector3(fMoveHorizontal, 0, fMoveVertical);
-            m_rbRigidBody.velocity = v3Movement * m_fSpeed;
+            m_v3Movement = new Vector3(fMoveHorizontal, 0, fMoveVertical);
+            m_rbRigidBody.velocity = m_v3Movement * m_fSpeed;
+        }
+        // Sets soldier velocity to zero if they are firing.
+        else
+        {
+            m_rbRigidBody.velocity = Vector3.zero;
         }
     }
 
     //--------------------------------------------------------------------------------------
     // FaceMouse: will make the Soldier rotate towards the mouse only along it's y axis
-    //
     //
     // Returns: The Quaternion for the Soldier to rotate to the mouse
     //
@@ -257,22 +269,24 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     // TakeDamage: Function for taking damage, for weapons to access
     //
+    // Param: The amount of damage that the soldier will take to m_fCurrentHealth
     //
     //--------------------------------------------------------------------------------------
     public void TakeDamage(float fDamage)
     {
+        // Minus the soldiers currentHealth by the fDamage argument
         m_fCurrentHealth -= fDamage;
     }
 
     //--------------------------------------------------------------------------------------
-    // Die: Function for the soldier dying
-    //
-    //
+    // Die: Sets the soldier to inactive and resets its variables
     //--------------------------------------------------------------------------------------
-    private void Die()
+    public void Die()
     {
         // TODO: Animation and such
+        // Set the Soldier to inactive
         gameObject.SetActive(false);
+        // Reset the Soldiers values to initial
         m_fCurrentHealth = m_fMaxHealth;
     }
 }

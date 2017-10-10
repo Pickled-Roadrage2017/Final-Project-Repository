@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//--------------------------------------------------------------------------------------
+// Rocket: Inheriting from Weapon.cs. Used for propelling rockets and their collison/damage numbers
+//--------------------------------------------------------------------------------------
 public class Rocket : Weapon
 {
     // Gets decreased by m_fDropIterator each Update, then works towards the arc of the rocket
@@ -13,16 +16,19 @@ public class Rocket : Weapon
 
     //A timer to stop the rocket from colliding with its Launcher
     [Tooltip("Seconds it takes for the missle to not be within collision range of its Launcher")]
-    public float m_fActivateTimer  = 2;
+    public float m_fMaxActivateTimer  = 2;
 
+    // Starts at m_fMaxActivateTimer and ticks down to zero, then resetting upon being set Inactive
     [HideInInspector]
     public float m_fCurrentActivateTimer;
 
+    // its own rigidbody
     Rigidbody m_rbRocket;
     // pointer to the RocketLauncher so it knows where to spawn
     [HideInInspector]
     public GameObject m_gSpawnPoint;
 
+    //To be set to its SpawPoints rocketLauncher script in the Awake function
     RocketLauncher m_gRocketLauncher;
 
     // The timer for the rocket to delete
@@ -45,30 +51,38 @@ public class Rocket : Weapon
     [Tooltip("Set this to the Unit layer, so the Rocket doesn't effect objects that should be stationary")]
     public LayerMask m_UnitMask;
     
-    //Of no use currently
-    //public ParticleSystem m_psExplosionParticles;
-
     // The force that hits back all Unit layered objects
     [Tooltip("The force that hits back all Unit layered objects")]
     public float m_ExplosionForce = 1000f;
 
-    // Initiliazation
-    void Start()
+    //--------------------------------------------------------------------------------------
+    // initialization.
+    //--------------------------------------------------------------------------------------
+    void Awake()
     {
+        // Gets the code of the spawning RocketLauncher GameObject
         m_gRocketLauncher = m_gSpawnPoint.GetComponent<RocketLauncher>();
         // Set the rockets power variable to the power variable of the Launcher which was passed down by the Soldier
         m_fPower = m_gRocketLauncher.m_fPower;
+        // Get the rockets Rigidbody
         m_rbRocket = GetComponent<Rigidbody>();
+        // Set the direction for the rocket to go to the forward vector of the RocketLauncher at the time of firing
         m_v3MoveDirection = m_gSpawnPoint.transform.forward;
+        // Initilize AirDrop 
         m_fAirDrop = 0;
+        // CurrentLifespan should start out as equal to MaxLifespan
         m_fCurrentLifespan = m_fMaxLifespan;
-        m_fCurrentActivateTimer = m_fActivateTimer;
+        // CurrentActivateTimer should start out as equal to the MaxActivateTimer
+        m_fCurrentActivateTimer = m_fMaxActivateTimer;
     }
 
-    private void FixedUpdate()
+    //--------------------------------------------------------------------------------------
+    // Update: Function that calls each frame to update game objects.
+    //--------------------------------------------------------------------------------------
+    private void Update()
     {
         m_fCurrentActivateTimer -= 1;
-        // Decreases the airDrop value by the iterator, this allows the fake "gravity" of the arc
+        // Decreases the airDrop value by the iterator, this allows the "gravity" of the arc
         m_fAirDrop -= m_fDropIterator;
         m_fCurrentLifespan -= Time.deltaTime;
         if (m_fCurrentLifespan < 0)
@@ -78,7 +92,7 @@ public class Rocket : Weapon
         }
 
         m_rbRocket.AddForce(m_v3MoveDirection * m_fPower);
-         //m_rbRocket.velocity = m_v3MoveDirection * m_fPower;
+        //m_rbRocket.velocity = m_v3MoveDirection * m_fPower;
         // This will start pulling the rocket downwards after it reaches the initial y value of it
         m_rbRocket.AddForce(new Vector3(0, m_fAirDrop, 0));
         // Makes the rocket point towards its y-axis
@@ -87,29 +101,31 @@ public class Rocket : Weapon
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("COLLISION");
+        // if the rocket can now activate
         if(m_fCurrentActivateTimer <= 0)
         { 
-          
                 // Collect all possible colliders 
                 Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
-
+         
                 for (int i = 0; i < aColliders.Length; i++)
                 {
-                    Rigidbody rbTarget = aColliders[i].GetComponent<Rigidbody>();
-
+                 Rigidbody rbTarget = aColliders[i].GetComponent<Rigidbody>();
+                
                     //if it does not have a rigidbody
                     if (!rbTarget)
                     {
                         continue;
                     }
                     // add explosive force
-                    // TODO: Replace this line with more predictible coded "physics"
+                    // TODO: Replace this line with more predictible coded "physics" possibly
                     rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius);
+                    
                     // TODO: Explosion effect
                     SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
 
                     if (!gtarget)
-                    {
+                    { 
                         continue;
                     }
                     gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
@@ -121,6 +137,7 @@ public class Rocket : Weapon
         }
        
     }
+
     //--------------------------------------------------------------------------------------
     //  CalculateDamage: Calculates the damage so being further from the explosion results in less damage
     //
