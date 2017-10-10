@@ -1,4 +1,9 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// The UnitNumberUI script is gonna be used for displaying the chosen players total 
+// active units. This script is to be attached to a textobject.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +16,11 @@ using UnityEngine.UI;
 public class UnitNumbersUI : MonoBehaviour
 {
     // public text object for displaying player1s unit numbers.
-    [Tooltip("The Player unit number text object in the Canvas.")]
+    [Tooltip("The text object in the canvas that this script is attached to.")]
     public Text m_tUnitNumber1Text;
 
     // public object for the player object to tie this object to.
-    [Tooltip("Player object to tie this UI element to.")]
+    [Tooltip("The Player object you wish to see the total active units of.")]
     public GameObject m_gPlayerObject;
 
     //--------------------------------------------------------------------------------------
