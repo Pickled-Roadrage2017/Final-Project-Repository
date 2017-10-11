@@ -1,4 +1,13 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// Purpose: The state of delay between player turns.
+//
+// Description: The DelayState script is gonna be used for when the player turn is in a
+// delay state. This delay state happens during the delay timer.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

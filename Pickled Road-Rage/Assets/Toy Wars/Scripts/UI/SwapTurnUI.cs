@@ -1,4 +1,15 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// Purpose: Display current player and soldier text.
+//
+// Description: The SwapTurnUI script is gonna be used for displaying the current 
+// players turn and their current soldier. The Text lerps across the screen, settings 
+// for this are in the inspector. This script is to be attached to a textobject.
+// This only runs during the Delay timer so make sure it as long as you need it to be.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,20 +21,26 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------------------
 public class SwapTurnUI : MonoBehaviour
 {
+    // Title for this section of public values.
+    [Header("Text Object:")]
+
     // public text object for displaying the current player turn.
-    [Tooltip("The Player turn text object in the Canvas.")]
+    [LabelOverride("Player Turn Text")][Tooltip("The text object in the canvas that this script is attached to.")]
     public Text m_tPlayerTurnText;
 
+    // Title for this section of public values.
+    [Header("Lerp Settings:")]
+
     // public float for how long the lerp is to go for
-    [Tooltip("How long do you want the Lerp to play for.")]
+    [LabelOverride("Lerp Time")][Tooltip("The length of time in seconds that the lerp should run for.")]
     public float m_fLerpTime;
 
     // public vector 3 for the starting postion of the lerp.
-    [Tooltip("The starting postion of the Lerp.")]
+    [LabelOverride("Start Position")][Tooltip("The starting position of the Lerp.")]
     public Vector3 m_v3StartPos;
 
     // public vector 3 for the ending postion of the lerp.
-    [Tooltip("The ending postion of the Lerp.")]
+    [LabelOverride("End Position")][Tooltip("The ending position of the Lerp.")]
     public Vector3 m_v3EndPos;
 
     // private float for the current lerp timer.

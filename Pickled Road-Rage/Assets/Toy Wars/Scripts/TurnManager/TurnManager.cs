@@ -1,4 +1,13 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// Purpose: Manager Player turns.
+//
+// Description: The TurnManager script is gonna be used for switching the players turns.
+// This script is to be attached to an empty gameobject.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,20 +17,26 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class TurnManager : MonoBehaviour
 {
+    // Title for this section of public values.
+    [Header("Timer:")]
+
     // public float starting time for the Turn timer.
-    [Tooltip("How long should each turn go for. Time in seconds.")]
+    [LabelOverride("Timer Length")][Tooltip("The time in seconds for how long each turn should go for.")]
     public float m_fTimerLength;
 
     // public float starting time for the delay timer.
-    [Tooltip("How long should the delay be before a turn starts. Time in seconds.")]
+    [LabelOverride("Delay Timer Length")][Tooltip("The time in seconds for how long the delay between turns should be.")]
     public float m_fDelayLength;
 
+    // Title for this section of public values.
+    [Header("Player Objects:")]
+
     // public gameobject for the player1 object.
-    [Tooltip("The Empty object used for Player1 prefab")]
+    [LabelOverride("Player1 Object")][Tooltip("The Player1 object in the scene.")]
     public GameObject m_gPlayer1;
 
     // public gamobject for the player2 object.
-    [Tooltip("The Empty object used for Player2 prefab.")]
+    [LabelOverride("Player2 Object")][Tooltip("The Player2 object in the scene.")]
     public GameObject m_gPlayer2;
 
     // static int for the current players turn.
@@ -30,15 +45,15 @@ public class TurnManager : MonoBehaviour
     // static bool for ending player turns.
     public static bool m_sbEndTurn;
 
-    // New instance of the state machine.
-    private StateMachine m_sStateMachine;
-
     // Static values for timers.
     public static float m_sfStaticTimerLength;
     public static float m_sfStaticDelayLength;
 
     // float for timer.
     public static float m_fTimer;
+
+    // New instance of the state machine.
+    private StateMachine m_sStateMachine;
     
     //--------------------------------------------------------------------------------------
     // initialization. Awake.
@@ -83,7 +98,7 @@ public class TurnManager : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------
-    // GetPlayer: Return the Player object from the number passed in.
+    // GetPlayer: Return the Player object from the index passed in.
     //--------------------------------------------------------------------------------------
     public GameObject GetPlayer(int nPlayerNumber)
     {

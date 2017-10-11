@@ -1,16 +1,26 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// Purpose: Display the turn timer.
+//
+// Description: The TimerUI script is gonna be used for displaying the current game 
+// turn timer. This script is to be attached to a textobject.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 //--------------------------------------------------------------------------------------
-// TimerUI object. Inheriting from MonoBehaviour. Script for displaying the turn timer.
+// TimerUI object. Inheriting from MonoBehaviour. Script for displaying the turn timer
+// text object.
 //--------------------------------------------------------------------------------------
 public class TimerUI : MonoBehaviour
 {
     // public text object for displaying the current player turn timer.
-    [Tooltip("The Turn Timer text object in the Canvas.")]
+    [LabelOverride("Turn Timer Text")][Tooltip("The text object in the canvas that this script is attached to.")]
     public Text m_tTurnTimerText;
 
     //--------------------------------------------------------------------------------------

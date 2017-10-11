@@ -1,4 +1,10 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// Purpose: State Machine design pattern.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

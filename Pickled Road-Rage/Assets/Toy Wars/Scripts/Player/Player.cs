@@ -1,4 +1,13 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// Purpose: Player functionality.
+//
+// Description: The Player script is gonna be used for controlling each player when it is
+// their turn. This script is to be attached to an empty gameobject for each player.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,28 +17,33 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class Player : MonoBehaviour
 {
+    // Title for this section of public values.
+    [Header("Player:")]
+
     // public int for which player this is.
-    [Range(1, 2)] [Tooltip("Specify which Player it is between 1 and 2. eg. Player1 or Player2.")]
+    [LabelOverride("Player Number")][Range(1, 2)][Tooltip("Which Player is this between 1 and 2. eg. Player1 or Player2.")]
     public int m_nPlayerNumber;
 
+    // Title for this section of public values.
+    [Header("Soldier:")]
+
     // public gameobject for the soldier prefab.
-    [Tooltip("The prefab for the Soldier object.")]
+    [LabelOverride("Soldier Object")][Tooltip("The prefab for the Soldier object.")]
     public GameObject m_gSoldierBlueprint;
 
     // pool size. how many soldiers allowed on screen at once.
-    [Range(1, 6)]
-    [Tooltip("Specify the max number of soliders allowed in game at once.")]
+    [LabelOverride("Pool Size")][Range(1, 6)][Tooltip("The max number of soliders allowed in game at once.")]
     public int m_nPoolSize;
 
+    // Title for this section of public values.
+    [Header("Teddy:")]
+
     // public gameobject for the Teddy base of this player.
-    [Tooltip("The Teddy base for this player.")]
+    [LabelOverride("Teddy Object")][Tooltip("The Teddy Object for this player.")]
     public GameObject m_gTeddyBase;
 
-    // private int for current soldiers turn.
-    public int m_nSoldierTurn; // ONLY PUBLIC FOR DEBUGGING. // ONLY PUBLIC FOR DEBUGGING. // ONLY PUBLIC FOR DEBUGGING.
-
-    // public array of gameobjects for player soldiers.
-    private GameObject[] m_agSoldierList;
+    // Title for this section of public values.
+    [Header("Temporally Values:")]
 
     // Temp spawn postion for the player.
     [Tooltip("Spawn postion for the soldier spawn, pass in a gameobject.")]
@@ -38,6 +52,13 @@ public class Player : MonoBehaviour
     // Temp spawn postion for the player.
     [Tooltip("Spawn postion for the soldier spawn, pass in a gameobject.")]
     public GameObject m_gSoldier2Spawn; // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
+
+    // private int for current soldiers turn.
+    [Tooltip("ONLY PUBLIC FOR DEBUGGING, DONT CHANGE!")]
+    public int m_nSoldierTurn; // ONLY PUBLIC FOR DEBUGGING. // ONLY PUBLIC FOR DEBUGGING. // ONLY PUBLIC FOR DEBUGGING.
+
+    // public array of gameobjects for player soldiers.
+    private GameObject[] m_agSoldierList;
 
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;

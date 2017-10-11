@@ -1,6 +1,10 @@
 ﻿//--------------------------------------------------------------------------------------
-// The UnitNumberUI script is gonna be used for displaying the chosen players total 
-// active units. This script is to be attached to a textobject.
+// Purpose: Display players total active units.
+//
+// Description: The UnitNumberUI script is gonna be used for displaying the chosen 
+// players total active units. This script is to be attached to a textobject.
+//
+// Author: Thomas Wiltshire.
 //--------------------------------------------------------------------------------------
 
 // Using, etc
@@ -18,18 +22,15 @@ public class UnitNumbersUI : MonoBehaviour
     // Title for this section of public values.
     [Header("Text Object:")]
 
-    // TEST
-    [LabelOverride("Hello")]
-
     // public text object for displaying player1s total active units.
-    [Tooltip("The text object in the canvas that this script is attached to.")]
+    [LabelOverride("Unit Number Text")][Tooltip("The text object in the canvas that this script is attached to.")]
     public Text m_tUnitNumber1Text;
 
     // Title for this section of public values.
     [Header("Game Object:")]
 
     // public object for the player object to tie this object to.
-    [Tooltip("The Player object you wish to see the total active units of.")]
+    [LabelOverride("Player Object")][Tooltip("The Player object you wish to see the total active units of.")]
     public GameObject m_gPlayerObject;
 
     //--------------------------------------------------------------------------------------

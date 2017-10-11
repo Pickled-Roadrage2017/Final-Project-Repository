@@ -1,4 +1,13 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// Purpose: The state of action between player turns.
+//
+// Description: The ActionState script is gonna be used for when the player turn is in an
+// action state. This action state happens during the normal turn timer.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

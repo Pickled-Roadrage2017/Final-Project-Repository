@@ -1,4 +1,10 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// Purpose: Base State class for the state machine.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
