@@ -7,9 +7,6 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class Rocket : Weapon
 {
-    // Gets decreased by m_fDropIterator each Update, then works towards the arc of the rocket
-    [HideInInspector]
-    public float m_fAirDrop;
     // How much m_fAirTime gets increased per frame
     [Tooltip("This is added into the downward pull of the arc, increasing this will decrease the time it takes to start falling")]
     public float m_fDropIterator = 0.05f;
@@ -17,19 +14,6 @@ public class Rocket : Weapon
     //A timer to stop the rocket from colliding with its Launcher
     [Tooltip("Seconds it takes for the missle to not be within collision range of its Launcher")]
     public float m_fMaxActivateTimer  = 2;
-
-    // Starts at m_fMaxActivateTimer and ticks down to zero, then resetting upon being set Inactive
-    [HideInInspector]
-    public float m_fCurrentActivateTimer;
-
-    // its own rigidbody
-    Rigidbody m_rbRocket;
-    // pointer to the RocketLauncher so it knows where to spawn
-    [HideInInspector]
-    public GameObject m_gSpawnPoint;
-
-    //To be set to its SpawPoints rocketLauncher script in the Awake function
-    RocketLauncher m_gRocketLauncher;
 
     // The timer for the rocket to delete
     // NOTE: Should only be as high as the time it would take a rocket to travel across the entire map    
@@ -40,20 +24,39 @@ public class Rocket : Weapon
     [Tooltip("Not Advisible to edit this, only public so you can see how much time the rocket has left")]
     public float m_fCurrentLifespan;
 
-    // The direction the Rocket should move
-    [HideInInspector]
-    public Vector3 m_v3MoveDirection;
+    [Tooltip("Set this to the Unit layer, so the Rocket doesn't knockback objects that should be stationary")]
+    public LayerMask m_UnitMask;
+    
+    // The force that hits back all Unit layered objects
+    [Header("Explosion Variables")]
+    [Tooltip("The force that hits back all Unit layered objects")]
+    public float m_ExplosionForce = 1000f;
 
     // Radius for the Area of Effect Explosion that should follow any Collision
     [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
     public float m_fExplosionRadius = 5f;
 
-    [Tooltip("Set this to the Unit layer, so the Rocket doesn't effect objects that should be stationary")]
-    public LayerMask m_UnitMask;
-    
-    // The force that hits back all Unit layered objects
-    [Tooltip("The force that hits back all Unit layered objects")]
-    public float m_ExplosionForce = 1000f;
+    // Gets decreased by m_fDropIterator each Update, then works towards the arc of the rocket
+    [HideInInspector]
+    public float m_fAirDrop;
+
+    // Starts at m_fMaxActivateTimer and ticks down to zero, then resetting upon being set Inactive
+    [HideInInspector]
+    public float m_fCurrentActivateTimer;
+
+    // pointer to the RocketLauncher so it knows where to spawn
+    [HideInInspector]
+    public GameObject m_gSpawnPoint;
+
+    // The direction the Rocket should move
+    [HideInInspector]
+    public Vector3 m_v3MoveDirection;
+
+    //To be set to its SpawPoints rocketLauncher script in the Awake function
+    private RocketLauncher m_gRocketLauncher;
+
+    // its own rigidbody
+    private Rigidbody m_rbRocket;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -90,7 +93,7 @@ public class Rocket : Weapon
             gameObject.SetActive(false);
             m_gRocketLauncher.m_bRocketAlive = false;
         }
-
+        // NOTE: Maybe replace this with the velocity line underneath
         m_rbRocket.AddForce(m_v3MoveDirection * m_fPower);
         //m_rbRocket.velocity = m_v3MoveDirection * m_fPower;
         // This will start pulling the rocket downwards after it reaches the initial y value of it
@@ -99,6 +102,12 @@ public class Rocket : Weapon
         transform.LookAt(transform.position + m_rbRocket.velocity);
     }
 
+    //--------------------------------------------------------------------------------------
+    // OnTriggerEnter: When a rocket Collides (Is Trigger)
+    //
+    // Param: other is the other object it is colliding with at call
+    //
+    //--------------------------------------------------------------------------------------
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("COLLISION");

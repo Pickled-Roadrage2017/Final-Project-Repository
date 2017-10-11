@@ -12,6 +12,10 @@ public class RocketLauncher : MonoBehaviour
     [Tooltip("Prefab for instantiating the rockets")]
     public GameObject m_gRocketBlueprint;
 
+    [Range(0,-100)]
+    [Tooltip("This tilts the RocketLauncher, which in turn makes the rockets arc deeper or shallower")]
+    public float m_fRocketXRot;
+
     // float variable passed on for the firing from the Soldier
     [HideInInspector]
     public float m_fPower;
@@ -20,12 +24,8 @@ public class RocketLauncher : MonoBehaviour
     [HideInInspector]
     public bool m_bRocketAlive;
 
-    [Range(0,-100)]
-    [Tooltip("This tilts the RocketLauncher, which in turn makes the rockets arc deeper or shallower")]
-    public float m_fRocketXRot;
-
     // Pool for the Rockets (should always be 1)
-    int m_nPoolsize = 1;
+    private int m_nPoolsize = 1;
 
     // An array of Rockets for instantiating rockets
     private GameObject[] m_agRocketList;

@@ -577,11 +577,10 @@ MonoBehaviour:
   m_nGrenadeCount: 0
   m_nGotMinigun: 0
   m_nGotGrenade: 0
-  m_fCharge: 1
-  m_nSoldierNumber: 0
-  m_fCurrentHealth: 0
   m_gRocketLauncher: {fileID: 1823804380680846}
+  m_fCurrentHealth: 0
   m_v3Movement: {x: 0, y: 0, z: 0}
+  m_fCharge: 1
 --- !u!114 &114712151217340090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -611,9 +610,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gRocketBlueprint: {fileID: 1480935180070650, guid: af2676544f701ed4198b43f67985729c,
     type: 2}
+  m_fRocketXRot: -17.799997
   m_fPower: 17.799997
   m_bRocketAlive: 0
-  m_fRocketXRot: -17.799997
 --- !u!222 &222062082867092664
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------------------
 public class SoldierActor : MonoBehaviour
 {
+    [Header("Slider Variables")]
     // Slider for the aiming arrow
     [Tooltip("Should be set to the Slider underneath the Soldier")]
     public Slider m_sAimSlider;
@@ -17,9 +18,7 @@ public class SoldierActor : MonoBehaviour
     [Tooltip("Speed that the Slider moves by per update")]
     public float m_fSliderSpeed = 0.0f;
 
-    // Boolean for the slider bar to bounce between m_fMinCharge and m_fMaxCharge
-    private bool m_bIsAscending;
-
+    [Header("Firing Variables")]
     // Minimum power for a shot
     [Tooltip("Minimum charge for the Charge, be sure that this matches the 'min value' variable in the Sliders inspector")]
     public float m_fMinCharge = 15f;
@@ -28,9 +27,7 @@ public class SoldierActor : MonoBehaviour
     [Tooltip("Maximum charge for the Charge, be sure that this matches the 'max value' variable in the Sliders inspector")]
     public float m_fMaxCharge = 30;
 
-    // boolean for if the soldier is in the firing function
-    private bool m_bFiring;
-
+    [Header("Moving Variables")]
     // Speed at which the Soldier moves
     [Tooltip("The Speed at which the Soldier moves")]
     public float m_fSpeed;
@@ -47,6 +44,7 @@ public class SoldierActor : MonoBehaviour
     // 0 = RocketLauncher
     // 1 = Minigun
     // 2 = Grenade
+    [Header("Soldier Weapons")]
     [Range(0,2)]
     [Tooltip("0 = RocketLauncher, 1 = Minigun, 2 = Grenade")]
     public int m_nCurrentWeapon;
@@ -57,32 +55,41 @@ public class SoldierActor : MonoBehaviour
     public int m_nGotMinigun = 0;
     public int m_nGotGrenade = 0;
 
+    // A Number so the PlayerActor can know which soldier to move
+    // public int m_nSoldierNumber;
+
+    // The GameObject RocketLauncher that the Soldier will be using
+    [Space(10)]
+    [Tooltip("This Soldiers RocketLauncher")]
+    public GameObject m_gRocketLauncher;
+
+    // The Soldiers current health,
+    // (Will be equal to m_nMaxHealth until it takes damage)
+    [HideInInspector]
+    public float m_fCurrentHealth;
+
+    // Movement vector for the Soldier
+    [HideInInspector]
+    public Vector3 m_v3Movement;
+
     // Current Charge to pass on to the weapons firing Power (m_fPower) 
-    [Tooltip("Current Charge to pass on to the weapons firing Power")]
+    [HideInInspector]
     public float m_fCharge = 1;
+
+    // The RocketLauncher script of GameObject RocketLauncherS
+    private RocketLauncher m_gLauncherScript;
+
+    // Boolean for the slider bar to bounce between m_fMinCharge and m_fMaxCharge
+    private bool m_bIsAscending;
+
+    // boolean for if the soldier is in the firing function
+    private bool m_bFiring;
 
     // boolean for if the soldier is currently charging up a shot
     private bool m_bChargingShot;
 
     // Will be set to the Soldiers rigidbody property
     private Rigidbody m_rbRigidBody;
-
-    // A Number so the PlayerActor can know which soldier to move
-    public int m_nSoldierNumber;
-
-    // The Soldiers current health,
-    // (Will be equal to m_nMaxHealth until it takes damage)
-    public float m_fCurrentHealth;
-
-    // The GameObject RocketLauncher that the Soldier will be using
-    public GameObject m_gRocketLauncher;
-
-    // The RocketLauncher script of GameObject RocketLauncherS
-    private RocketLauncher m_gLauncherScript;
-
-    // Movement vector for the Soldier
-    [HideInInspector]
-    public Vector3 m_v3Movement;
 
     //--------------------------------------------------------------------------------------
     // initialization.
