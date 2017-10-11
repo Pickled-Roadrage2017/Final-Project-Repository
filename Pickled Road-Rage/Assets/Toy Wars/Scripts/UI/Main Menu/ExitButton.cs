@@ -1,4 +1,9 @@
-﻿// Using, etc
+﻿//--------------------------------------------------------------------------------------
+// The UnitNumberUI script is gonna be used for displaying the chosen players total 
+// active units. This script is to be attached to a textobject.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
