@@ -10,6 +10,7 @@ TagManager:
   - CurrentSoldier
   - Terrain
   - AimingArrow
+  - Teddy
   layers:
   - Default
   - TransparentFX

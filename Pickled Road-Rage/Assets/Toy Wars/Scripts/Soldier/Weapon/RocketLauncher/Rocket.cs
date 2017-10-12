@@ -129,15 +129,19 @@ public class Rocket : Weapon
                     // add explosive force
                     // TODO: Replace this line with more predictible coded "physics" possibly
                     rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius);
-                    
+
+                if (other.gameObject.tag == "Soldier")
+                {
                     // TODO: Explosion effect
                     SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
-
-                    if (!gtarget)
-                    { 
-                        continue;
-                    }
                     gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+                }
+                else if (other.gameObject.tag == "Teddy")
+                {
+                    Teddy gtarget = rbTarget.GetComponent<Teddy>();
+                    gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+                }
+                   
 
                 }
                 gameObject.SetActive(false);
