@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1480935180070650}
   m_IsPrefabParent: 1
+--- !u!1 &1308399955182344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4803316057455852}
+  - component: {fileID: 119918221389181220}
+  m_Layer: 0
+  m_Name: BlobShadowProjector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1480935180070650
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4398011424822858
 Transform:
   m_ObjectHideFlags: 1
@@ -38,12 +54,26 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1480935180070650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.43, y: 2.28, z: -2.66}
+  m_LocalPosition: {x: -0.05744791, y: 0.0315, z: -0.2549196}
   m_LocalScale: {x: 0.01, y: 0.005, z: 0.02}
-  m_Children: []
+  m_Children:
+  - {fileID: 4803316057455852}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4803316057455852
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1308399955182344}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4398011424822858}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &23082496437012516
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -123,17 +153,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fDamage: 75
   m_fPower: 0
-  m_fAirDrop: 0
-  m_fDropIterator: 0.05
-  m_fActivateTimer: 3
-  m_fCurrentActivateTimer: 0
-  m_gSpawnPoint: {fileID: 1566479626656110, guid: 8b66a0fd11024c842b97741cc2f8da22,
-    type: 2}
-  m_fMaxLifespan: 3
+  m_fDropIterator: 0.07
+  m_fMaxActivateTimer: 1
+  m_fMaxLifespan: 2
   m_fCurrentLifespan: 0
-  m_v3MoveDirection: {x: 0, y: 0, z: 0}
-  m_fExplosionRadius: 0.1
   m_UnitMask:
     serializedVersion: 2
     m_Bits: 256
-  m_ExplosionForce: 5
+  m_ExplosionForce: 80
+  m_fExplosionRadius: 0.2
+  m_fAirDrop: 0
+  m_fCurrentActivateTimer: 0
+  m_gSpawnPoint: {fileID: 1566479626656110, guid: 8b66a0fd11024c842b97741cc2f8da22,
+    type: 2}
+  m_v3MoveDirection: {x: 0, y: 0, z: 0}
+--- !u!119 &119918221389181220
+Projector:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1308399955182344}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: 0.01
+  m_FarClipPlane: 0.2
+  m_FieldOfView: 60
+  m_AspectRatio: 1
+  m_Orthographic: 0
+  m_OrthographicSize: 2
+  m_Material: {fileID: 2100000, guid: e30ff3588e719f34bbf0c66f22d97487, type: 2}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
