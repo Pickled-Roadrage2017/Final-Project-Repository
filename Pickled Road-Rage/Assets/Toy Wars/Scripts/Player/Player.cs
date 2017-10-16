@@ -111,20 +111,6 @@ public class Player : MonoBehaviour
             GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
             SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponentInChildren<SoldierActor>(); // TODO: Fix this, GetComponentInChildren is slow.
 
-            bool canFire;
-
-            if (Input.GetButton("Fire1"))
-            {
-                canFire = true;
-            }
-            else
-            {
-                canFire = false;
-            }
-
-            sCurrentSoldier.Fire(canFire);
-
-
 
 
 
@@ -133,6 +119,7 @@ public class Player : MonoBehaviour
             // Get the solider update functions
             sCurrentSoldier.Move();
             sCurrentSoldier.FaceMouse();
+            SoldierFire(sCurrentSoldier);
         }
     }
 
@@ -208,17 +195,39 @@ public class Player : MonoBehaviour
 
     //--------------------------------------------------------------------------------------
     // SoldierMovement: Function for the current soldiers movement.
+    //
+    // Param:
+    //		sCurrentSoldier: A SoldierActor object for which soldier wants to move.
     //--------------------------------------------------------------------------------------
-    void SoldierMovement()
+    void SoldierMovement(SoldierActor sCurrentSoldier)
     {
         
     }
 
     //--------------------------------------------------------------------------------------
     // SoldierFire: Function for the current soldiers firing.
+    //
+    // Param:
+    //		sCurrentSoldier: A SoldierActor object for which soldier is firing.
     //--------------------------------------------------------------------------------------
     void SoldierFire(SoldierActor sCurrentSoldier)
     {
+        // new bool for if the mouse is down.
+        bool bMouseDown;
 
+        // if the left mouse button is held down.
+        if (Input.GetButton("Fire1"))
+        {
+            bMouseDown = true;
+        }
+
+        // If the left mouse button is let go.
+        else
+        {
+            bMouseDown = false;
+        }
+
+        // Run the soldier fire script.
+        sCurrentSoldier.Fire(bMouseDown);
     }
 }

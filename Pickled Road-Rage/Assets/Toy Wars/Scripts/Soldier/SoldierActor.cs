@@ -82,6 +82,8 @@ public class SoldierActor : MonoBehaviour
         m_rbRigidBody.constraints = RigidbodyConstraints.FreezePositionY;
         // so the soldier doesn't rotate unless it is to FaceMouse()
         m_rbRigidBody.freezeRotation = true;
+
+        m_bFiring = false;
     }
 
     //--------------------------------------------------------------------------------------
@@ -105,6 +107,7 @@ public class SoldierActor : MonoBehaviour
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
             m_gLauncherScript.Fire(bMouseDown);
+            //m_bFiring = bMouseDown;
         }
 
         else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
@@ -115,7 +118,12 @@ public class SoldierActor : MonoBehaviour
         else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
         {
 
-        } 
+        }
+
+        else
+        {
+            //m_bFiring = false;
+        }
     }
 
     //--------------------------------------------------------------------------------------
