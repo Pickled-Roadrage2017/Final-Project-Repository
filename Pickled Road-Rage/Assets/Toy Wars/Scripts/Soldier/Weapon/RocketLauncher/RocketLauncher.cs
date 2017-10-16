@@ -7,13 +7,13 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class RocketLauncher : MonoBehaviour
 {
-   
+
     // Prefab for the Rocket object
-    [Tooltip("Prefab for instantiating the rockets")]
+    [LabelOverride("Rocket")][Tooltip("Prefab for instantiating the rockets")]
     public GameObject m_gRocketBlueprint;
 
     [Range(0,-100)]
-    [Tooltip("This tilts the RocketLauncher, which in turn makes the rockets arc deeper or shallower")]
+    [LabelOverride("Rocket Rotation")][Tooltip("This tilts the RocketLauncher, which in turn makes the rockets arc deeper or shallower")]
     public float m_fRocketXRot;
 
     // float variable passed on for the firing from the Soldier

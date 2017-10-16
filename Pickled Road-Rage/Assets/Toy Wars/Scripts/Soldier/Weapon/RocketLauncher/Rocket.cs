@@ -7,33 +7,36 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class Rocket : Weapon
 {
+    [Header("'Gravity' Variables")]
     // How much m_fAirTime gets increased per frame
-    [Tooltip("This is added into the downward pull of the arc, increasing this will decrease the time it takes to start falling")]
+    [LabelOverride("Drop Iterator")][Tooltip("This is added into the downward pull of the arc, increasing this will decrease the time it takes to start falling")]
     public float m_fDropIterator = 0.05f;
 
+
     //A timer to stop the rocket from colliding with its Launcher
-    [Tooltip("Seconds it takes for the missle to not be within collision range of its Launcher")]
+    [Header("Lifespan Variables")]
+    [LabelOverride("Maximum time for Activation")][Tooltip("Seconds it takes for the missle to not be within collision range of its Launcher")]
     public float m_fMaxActivateTimer  = 2;
 
     // The timer for the rocket to delete
     // NOTE: Should only be as high as the time it would take a rocket to travel across the entire map    
-    [Tooltip("Set this to the time it would take a rocket to travel across the entire map")]
+    [LabelOverride("Maximum Lifespan")][Tooltip("Set this to the time it would take a rocket to travel across the entire map")]
     public float m_fMaxLifespan;
 
     // The current lifepsan is what is effected in the update, to allow easier reinitilisation
-    [Tooltip("Not Advisible to edit this, only public so you can see how much time the rocket has left")]
+    [LabelOverride("Current Remaining Lifespan")][Tooltip("Not Advisible to edit this, only public so you can see how much time the rocket has left")]
     public float m_fCurrentLifespan;
 
-    [Tooltip("Set this to the Unit layer, so the Rocket doesn't knockback objects that should be stationary")]
+    [LabelOverride("Mask for Knockback and/or damage")][Tooltip("Set this to the Unit layer, so the Rocket doesn't knockback objects that should be stationary")]
     public LayerMask m_UnitMask;
     
     // The force that hits back all Unit layered objects
     [Header("Explosion Variables")]
-    [Tooltip("The force that hits back all Unit layered objects")]
+    [LabelOverride("Force of Explosion")][Tooltip("The force that hits back all Unit layered objects")]
     public float m_ExplosionForce = 1000f;
 
     // Radius for the Area of Effect Explosion that should follow any Collision
-    [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
+    [LabelOverride("Radius of Explosion")][Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
     public float m_fExplosionRadius = 5f;
 
     // Gets decreased by m_fDropIterator each Update, then works towards the arc of the rocket

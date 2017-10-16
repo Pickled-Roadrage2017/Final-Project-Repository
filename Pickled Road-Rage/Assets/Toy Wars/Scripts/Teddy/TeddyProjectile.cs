@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// TeddyProjectile: Inheriting from MonoBehaviour, 
-// this will spawn an object that will be fired and then move Teddys m_gSoldier to its landing spot
-//                                               
+// Purpose: A projectile that will allow the throwing of soldiers
+//
+// Description: Inheriting from MonoBehaviour, 
+// this will spawn an object that will be fired 
+// and then move Teddys currently held Soldier to its landing spot 
+//
+// Author: Callan Davies
 //--------------------------------------------------------------------------------------
 public class TeddyProjectile : MonoBehaviour
 {
     // How much m_fAirTime gets increased per frame
-    [Tooltip("This is added into the downward pull of the arc, increasing this will decrease the time it takes to start falling")]
+    [Header("'Gravity' Variables")]
+    [LabelOverride("Drop Iterator")][Tooltip("This is added into the downward pull of the arc, increasing this will decrease the time it takes to start falling")]
     public float m_fDropIterator = 0.05f;
 
     //A timer to stop the rocket from colliding with its Launcher
-    [Tooltip("Seconds it takes for the projectile to not be within collision range of its Teddy")]
+    [Header("Firing Variables")]
+    [LabelOverride("Maximum time for Activation")][Tooltip("Seconds it takes for the projectile to not be within collision range of its Teddy")]
     public float m_fMaxActivateTimer = 2;
 
     // Gets decreased by m_fDropIterator each Update, then works towards the arc of the soldier/projectile

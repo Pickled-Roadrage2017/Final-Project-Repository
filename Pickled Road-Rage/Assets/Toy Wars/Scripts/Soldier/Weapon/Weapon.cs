@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [Tooltip("How many Health Points the projectile will subtract")]
+    [LabelOverride("Damage")][Tooltip("How many Health Points the projectile will subtract")]
     public float m_fDamage;
     // Power for the Rocket and Grenade, Minigun will not use this variable 
     [HideInInspector]

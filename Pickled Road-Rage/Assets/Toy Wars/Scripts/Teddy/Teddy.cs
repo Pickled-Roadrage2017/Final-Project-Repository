@@ -5,51 +5,65 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //--------------------------------------------------------------------------------------
-// Teddy object. Inheriting from MonoBehaviour. Used for controling the Teddy base.
+// Purpose: Scripting for the Bears
+//
+// Description: Inheriting from MonoBehaviour, 
+// All of the funtionality of the Teddy is in here
+//
+// Author: Thomas Wiltshire
+// Edited: Callan Davies
 //--------------------------------------------------------------------------------------
 public class Teddy : MonoBehaviour
 {
-    [Tooltip("Teddy bear Maximum health.")]
+    [Header("Health Variables")]
+    [LabelOverride("Teddy Max Health")][Tooltip("Teddy bear Maximum health.")]
     public float m_fMaxHealth;
 
-
     // health that will be set to MaxHealth in Awake
+    [LabelOverride("Current Teddy Health")]
     [Tooltip("For displaying the current health, will be made private when we have a diplay for it somewhere on-screen")]
     public float m_fCurrentHealth;
 
+    [Header("Throwing Variables")]
+    // Speed for the rotation of the aiming arrow
+    [LabelOverride("Facing Speed")]
+    public float m_fRotSpeed;
+
     // public float for the teddy throwing charge.
-    [Tooltip("The charge of the Teddy throwing mechanic.")]
+    [LabelOverride("Current Charge")][Tooltip("The charge of the Teddy throwing mechanic.")]
     public float m_fCharge;
 
+    // Minimum power for a shot
+    [LabelOverride("Charge Minimum")][Tooltip("Minimum charge for the Charge, be sure that this matches the 'min value' variable in the Sliders inspector")]
+    public float m_fMinCharge = 1f;
+
+    // Float for Max Charge
+    [LabelOverride("Charge Maximum")][Tooltip("Maximum charge for the Charge, be sure that this matches the 'max value' variable in the Sliders inspector")]
+    public float m_fMaxCharge = 2f;
+
     // This will be null, unless the teddy is holding a soldier
-    // public GameObject m_gSoldier;
+    [LabelOverride("Held Soldier")]
+    public GameObject m_gSoldier;
 
     // An empty game object where a held soldier will appear
-    [Tooltip("An empty game object where a held soldier will appear")]
+    [LabelOverride("Hand Transform")][Tooltip("An empty game object where a held soldier will appear")]
     public GameObject m_gBearHand;
 
-    // The blueprint fot the teddy projectile
-    //public GameObject m_gProjectileBlueprint;
+    // The blueprint for the teddy projectile
+    [LabelOverride("Teddy Projectile Prefab")]
+    public GameObject m_gProjectileBlueprint;
 
+    [LabelOverride("Teddy Canvas")][Tooltip("Canvas object for the bear to access")]
     public Canvas m_cTeddyCanvas;
 
     [Header("Slider Variables")]
     // Slider for the aiming arrow
-    [Tooltip("Should be set to the Slider underneath the Soldier")]
+    [LabelOverride("UI Slider")][Tooltip("Should be set to the Slider underneath the Soldier")]
     public Slider m_sAimSlider;
 
     // Speed for the slider
-    [Tooltip("Speed that the Slider moves by per update")]
+    [LabelOverride("Slider Speed")][Tooltip("Speed that the Slider moves by per update")]
     public float m_fSliderSpeed = 0.0f;
-
-    [Header("Firing Variables")]
-    // Minimum power for a shot
-    [Tooltip("Minimum charge for the Charge, be sure that this matches the 'min value' variable in the Sliders inspector")]
-    public float m_fMinCharge = 15f;
-
-    // Float for Max Charge
-    [Tooltip("Maximum charge for the Charge, be sure that this matches the 'max value' variable in the Sliders inspector")]
-    public float m_fMaxCharge = 30;
 
     // Boolean for the slider bar to bounce between m_fMinCharge and m_fMaxCharge
     private bool m_bIsAscending;
@@ -64,16 +78,16 @@ public class Teddy : MonoBehaviour
 
 
     //--------------------------------------------------------------------------------------
-    // initialization.
+    // Initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        // initilize projectile list with size
-       // m_gProjectile = new GameObject();
-       // m_gProjectile.transform.SetParent(transform);
-       // Instantiate and set active state
-        //m_gProjectile = Instantiate(m_gProjectileBlueprint);
-       // m_gProjectile.SetActive(false);
+        //Initilize projectile list with size
+        m_gProjectile = new GameObject();
+        m_gProjectile.transform.SetParent(transform);
+        //Instantiate and set active state
+        m_gProjectile = Instantiate(m_gProjectileBlueprint);
+        m_gProjectile.SetActive(false);
 
         m_fCurrentHealth = m_fMaxHealth;
         m_bIsAscending = true;
@@ -88,14 +102,15 @@ public class Teddy : MonoBehaviour
     void Update()
     {
         //Throw();
-	}
+        FaceMouse();
+    }
 
     //--------------------------------------------------------------------------------------
     // Throw: Function for throwing a solider across the map.
     //--------------------------------------------------------------------------------------
     void Throw()
     {
-      /*  if(m_gSoldier != null)
+        if(m_gSoldier != null)
         {
             m_cTeddyCanvas.gameObject.SetActive(true);
                 // When leftMouseButton is pressed down
@@ -141,7 +156,7 @@ public class Teddy : MonoBehaviour
                     }
                 m_cTeddyCanvas.gameObject.SetActive(false);
             }
-        }*/
+        }
     }
 
 
@@ -153,14 +168,15 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void OnTriggerEnter(Collider other)
     {
-     /*   if(other.gameObject.tag == "Soldier")
+        if(other.gameObject.tag == "Soldier")
         {
             m_gSoldier = other.gameObject;
             // Set the object parent to the Bearhand
             m_gSoldier.transform.parent.SetParent(m_gBearHand.transform);
             m_gSoldier.transform.position = m_gBearHand.transform.position;
             //other.gameObject.SetActive(false);
-        } */
+            m_cTeddyCanvas.gameObject.SetActive(true);
+        } 
     }
 
     //--------------------------------------------------------------------------------------
@@ -171,11 +187,11 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void OnTriggerExit(Collider other)
     {
-       /* if(m_gSoldier != null)
+        if(m_gSoldier != null)
         {
             m_gSoldier.transform.parent.SetParent(null);
             m_gSoldier = null;
-        } */
+        } 
     }
 
 
@@ -228,6 +244,38 @@ public class Teddy : MonoBehaviour
     {
         // Minus the Teddys currentHealth by the fDamage argument
         m_fCurrentHealth -= fDamage;
+    }
+
+    public Quaternion FaceMouse()
+    {
+        if (!m_bFiring)
+        {
+            // Generate a plane that intersects the transform's position.
+            Plane pSoldierPlane = new Plane(Vector3.up, transform.position);
+
+            // Generate a ray from the cursor position
+            Ray rMouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+
+            float fHitDistance = 0.0f;
+            // If the ray is parallel to the plane, Raycast will return false.
+            if (pSoldierPlane.Raycast(rMouseRay, out fHitDistance))
+            {
+                // Get the point along the ray that hits the calculated distance.
+                Vector3 v3TargetPos = rMouseRay.GetPoint(fHitDistance);
+
+                // Determine the target rotation.  This is the rotation if the transform looks at the target point.
+                Quaternion v3TargetRotation = Quaternion.LookRotation(v3TargetPos - transform.position);
+
+                // Smoothly rotate towards the target point.
+                transform.rotation = Quaternion.Slerp(transform.rotation, v3TargetRotation, m_fRotSpeed * Time.deltaTime);
+            }
+            return transform.rotation;
+        }
+        else
+        {
+            return new Quaternion();
+        }
     }
 }
 
