@@ -101,9 +101,11 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        //Throw();
-        //m_cTeddyCanvas.transform.rotation = FaceMouse();
-        //FaceMouse();
+        Throw();
+        if(!IsAlive())
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -169,7 +171,7 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void OnTriggerEnter(Collider other)
     {
-        /*if(other.gameObject.tag == "Soldier")
+        if(other.gameObject.tag == "Soldier")
         {
             m_gSoldier = other.gameObject;
             // Set the object parent to the Bearhand
@@ -177,7 +179,7 @@ public class Teddy : MonoBehaviour
             m_gSoldier.transform.position = m_gBearHand.transform.position;
             //other.gameObject.SetActive(false);
             m_cTeddyCanvas.gameObject.SetActive(true);
-        } */
+        } 
     }
 
     //--------------------------------------------------------------------------------------
@@ -276,6 +278,18 @@ public class Teddy : MonoBehaviour
         else
         {
             return new Quaternion();
+        }
+    }
+
+    public bool IsAlive()
+    {
+        if(m_fCurrentHealth <= 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 }

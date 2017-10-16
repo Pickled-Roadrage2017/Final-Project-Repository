@@ -128,17 +128,16 @@ public class Rocket : Weapon
                     {
                         continue;
                     }
-                    // add explosive force
-                    // TODO: Replace this line with more predictible coded "physics" possibly
-                    rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius);
 
-                if (other.gameObject.tag == "Soldier")
+                if (aColliders[i].gameObject.tag == "Soldier")
                 {
-                    // TODO: Explosion effect
+                    // TODO: Explosion particle effect
                     SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
                     gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+                    // add explosive force
+                    rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius);
                 }
-                else if (other.gameObject.tag == "Teddy")
+                else if (aColliders[i].gameObject.tag == "Teddy")
                 {
                     Teddy gtarget = rbTarget.GetComponent<Teddy>();
                     gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
