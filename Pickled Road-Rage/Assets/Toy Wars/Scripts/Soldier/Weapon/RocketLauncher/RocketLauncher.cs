@@ -49,9 +49,6 @@ public class RocketLauncher : MonoBehaviour
     // Boolean for the slider bar to bounce between m_fMinCharge and m_fMaxCharge
     private bool m_bIsAscending;
 
-    // boolean for if the soldier is in the firing function
-    private bool m_bFiring;
-
     // boolean for if the soldier is currently charging up a shot
     private bool m_bChargingShot;
 
@@ -65,7 +62,7 @@ public class RocketLauncher : MonoBehaviour
     void Awake()
     {
         m_fChargeSpeed = m_fMinCharge;
-        m_bFiring = false;
+        m_bChargingShot = false;
 
         // initilize rocket list with size
         m_agRocketList = new GameObject[m_nPoolsize];
@@ -83,7 +80,17 @@ public class RocketLauncher : MonoBehaviour
 
     void Update()
     {
-        m_sSlider.value = m_fCharge;
+        if (m_sSlider != null)
+        {
+            if (m_bChargingShot)
+            {
+                m_sSlider.value = m_fCharge;
+            }
+            else
+            {
+                m_sSlider.value = m_fMinCharge;
+            }
+        }
     }
     public void SpawnBullet()
     {
@@ -120,7 +127,7 @@ public class RocketLauncher : MonoBehaviour
 
             if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
             {
-                m_fCharge += m_fChargeSpeed;
+                m_fCharge += m_fChargeSpeed * Time.deltaTime;
                 if (m_fCharge >= m_fMaxCharge)
                 {
                     m_bIsAscending = false;
@@ -129,7 +136,7 @@ public class RocketLauncher : MonoBehaviour
             else
             {
                 m_bIsAscending = false;
-                m_fCharge -= m_fChargeSpeed;
+                m_fCharge -= m_fChargeSpeed * Time.deltaTime;
                 if (m_fCharge <= m_fMinCharge)
                 {
                     m_bIsAscending = true;

@@ -118,67 +118,6 @@ public class SoldierActor : MonoBehaviour
         } 
     }
 
-        /*
-        if (m_gLauncherScript.m_bRocketAlive == false)
-        {
-            // When leftMouseButton is pressed down
-            if (Input.GetButtonDown("Fire1"))
-            {
-                m_bFiring = true;
-                m_fCharge = m_fMinCharge;
-            }
-            // While leftMouseButton is pressed down
-            if (Input.GetButton("Fire1"))
-            {
-                m_bChargingShot = true;
-                if (m_bFiring)
-                {
-                    // If current weapon is rocketLauncher
-                    if (m_nCurrentWeapon == 0)
-                    {
-                        if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
-                        {
-                            m_fCharge += m_fSliderSpeed;
-                            if (m_fCharge >= m_fMaxCharge)
-                            {
-                                m_bIsAscending = false;
-                            }
-                        }
-                        else
-                        {
-                            m_bIsAscending = false;
-                            m_fCharge -= m_fSliderSpeed;
-                            if (m_fCharge <= m_fMinCharge)
-                            {
-                                m_bIsAscending = true;
-                            }
-                        }
-                    }
-                }
-            }
-            // When leftMouseButton is released
-            if (Input.GetButtonUp("Fire1"))
-            {
-                if (m_bChargingShot)
-                {
-                    // If current weapon is rocketLauncher
-                    if (m_nCurrentWeapon == 0)
-                    {
-                        m_gLauncherScript.Fire(m_fCharge);
-                        m_fCharge = m_fMinCharge;
-                    }
-
-                    m_bFiring = false;
-                    m_bChargingShot = false;
-                }
-            }
-        }*/
-    
-    public void Charge()
-    {
-        
-    }
-
     //--------------------------------------------------------------------------------------
     // Move: Uses the Soldiers RigibBody to move with a drag value, 
     //       making it so the Soldier doesn't stop instantly

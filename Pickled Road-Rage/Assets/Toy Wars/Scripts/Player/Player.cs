@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
             m_agSoldierList[i] = Instantiate(m_gSoldierBlueprint);
             m_agSoldierList[i].SetActive(false);
         }
-
+        
         // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
         // Allocate soliders to the pool.
         GameObject p1 = AllocateSoldier(); // Allocating 2 at the start for now until..
@@ -111,10 +111,28 @@ public class Player : MonoBehaviour
             GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
             SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponentInChildren<SoldierActor>(); // TODO: Fix this, GetComponentInChildren is slow.
 
+            bool canFire;
+
+            if (Input.GetButton("Fire1"))
+            {
+                canFire = true;
+            }
+            else
+            {
+                canFire = false;
+            }
+
+            sCurrentSoldier.Fire(canFire);
+
+
+
+
+
+
+
             // Get the solider update functions
             sCurrentSoldier.Move();
             sCurrentSoldier.FaceMouse();
-            sCurrentSoldier.Fire(sCurrentSoldier.m_fCharge);
         }
     }
 
@@ -199,8 +217,8 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     // SoldierFire: Function for the current soldiers firing.
     //--------------------------------------------------------------------------------------
-    void SoldierFire()
+    void SoldierFire(SoldierActor sCurrentSoldier)
     {
-        
+
     }
 }
