@@ -12,7 +12,6 @@ public class Rocket : Weapon
     [LabelOverride("Drop Iterator")][Tooltip("This is added into the downward pull of the arc, increasing this will decrease the time it takes to start falling")]
     public float m_fDropIterator = 0.05f;
 
-
     //A timer to stop the rocket from colliding with its Launcher
     [Header("Lifespan Variables")]
     [LabelOverride("Maximum time for Activation")][Tooltip("Seconds it takes for the missle to not be within collision range of its Launcher")]
@@ -69,7 +68,7 @@ public class Rocket : Weapon
         // Gets the code of the spawning RocketLauncher GameObject
         m_gRocketLauncher = m_gSpawnPoint.GetComponent<RocketLauncher>();
         // Set the rockets power variable to the power variable of the Launcher which was passed down by the Soldier
-        m_fPower = m_gRocketLauncher.m_fPower;
+        m_fPower = m_gRocketLauncher.m_fCharge;
         // Get the rockets Rigidbody
         m_rbRocket = GetComponent<Rigidbody>();
         // Set the direction for the rocket to go to the forward vector of the RocketLauncher at the time of firing

@@ -3,30 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum EWeaponType
+{
+    EWEP_RPG,
+    EWEP_MINIGUN,
+    EWEP_GRENADE
+}
+
 
 //--------------------------------------------------------------------------------------
 // SoldierActor: Inheriting from MonoBehaviour. Used to be controlled by Player
 //--------------------------------------------------------------------------------------
 public class SoldierActor : MonoBehaviour
 {
-    [Header("Slider Variables")]
-    // Slider for the aiming arrow
-    [Tooltip("Should be set to the Slider underneath the Soldier")]
-    public Slider m_sAimSlider;
-
-    // Speed for the slider
-    [Tooltip("Speed that the Slider moves by per update")]
-    public float m_fSliderSpeed = 0.0f;
-
-    [Header("Firing Variables")]
-    // Minimum power for a shot
-    [Tooltip("Minimum charge for the Charge, be sure that this matches the 'min value' variable in the Sliders inspector")]
-    public float m_fMinCharge = 15f;
-
-    // Float for Max Charge
-    [Tooltip("Maximum charge for the Charge, be sure that this matches the 'max value' variable in the Sliders inspector")]
-    public float m_fMaxCharge = 30;
-
     [Header("Moving Variables")]
     // Speed at which the Soldier moves
     [Tooltip("The Speed at which the Soldier moves")]
@@ -45,18 +34,15 @@ public class SoldierActor : MonoBehaviour
     // 1 = Minigun
     // 2 = Grenade
     [Header("Soldier Weapons")]
-    [Range(0,2)]
+    //[Range(0,2)]
     [Tooltip("0 = RocketLauncher, 1 = Minigun, 2 = Grenade")]
-    public int m_nCurrentWeapon;
+    public EWeaponType m_eCurrentWeapon;
 
     // Values for the inventory count of this Soldier
     [Tooltip("How many Grenades this Soldier has")]
     public int m_nGrenadeCount = 0;
     public int m_nGotMinigun = 0;
     public int m_nGotGrenade = 0;
-
-    // A Number so the PlayerActor can know which soldier to move
-    // public int m_nSoldierNumber;
 
     // The GameObject RocketLauncher that the Soldier will be using
     [Space(10)]
@@ -72,21 +58,11 @@ public class SoldierActor : MonoBehaviour
     [HideInInspector]
     public Vector3 m_v3Movement;
 
-    // Current Charge to pass on to the weapons firing Power (m_fPower) 
-    [HideInInspector]
-    public float m_fCharge = 1;
-
     // The RocketLauncher script of GameObject RocketLauncherS
     private RocketLauncher m_gLauncherScript;
 
-    // Boolean for the slider bar to bounce between m_fMinCharge and m_fMaxCharge
-    private bool m_bIsAscending;
-
     // boolean for if the soldier is in the firing function
     private bool m_bFiring;
-
-    // boolean for if the soldier is currently charging up a shot
-    private bool m_bChargingShot;
 
     // Will be set to the Soldiers rigidbody property
     private Rigidbody m_rbRigidBody;
@@ -102,14 +78,6 @@ public class SoldierActor : MonoBehaviour
         m_gLauncherScript = m_gRocketLauncher.GetComponent<RocketLauncher>();
         // Soldiers Current health should always start at MaxHealth
         m_fCurrentHealth = m_fMaxHealth;
-        // the soldier won't be firing at awake
-        m_bFiring = false;
-        // the slider should always start as ascending
-        m_bIsAscending = true;
-        // the soldier won't be charging a shot at Awake
-        m_bChargingShot = false;
-        // m_fCharge should never be below m_fMinCharge
-        m_fCharge = m_fMinCharge;
         // so the soldiers cannot move upwards
         m_rbRigidBody.constraints = RigidbodyConstraints.FreezePositionY;
         // so the soldier doesn't rotate unless it is to FaceMouse()
@@ -121,9 +89,6 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-      // Makes the Slider represent the charge
-      m_sAimSlider.value = m_fCharge;   
-
       // As health is a float, anything below one will be displayed as 0 to the player
       if(m_fCurrentHealth < 1)
       {
@@ -131,26 +96,29 @@ public class SoldierActor : MonoBehaviour
       }
     }
 
-
-    //--------------------------------------------------------------------------------------
-    //  SwitchWeapon: Call when the Player wants to change the Soldiers currentWeapon
-    //
-    // NOTE: Made for the future, may actually be put into Player.cs 
-    //
-    //--------------------------------------------------------------------------------------
-    private void SwitchWeapon()
-    {
-        
-    }
-
-
     //--------------------------------------------------------------------------------------
     // Fire: Call when the Player commands the Soldier to fire
     //
     //--------------------------------------------------------------------------------------
-    public void Fire(float fCharge)
+    public void Fire(bool bMouseDown)
     {
-        
+        if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
+        {
+            m_gLauncherScript.Fire(bMouseDown);
+        }
+
+        else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
+        {
+
+        }
+
+        else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
+        {
+
+        } 
+    }
+
+        /*
         if (m_gLauncherScript.m_bRocketAlive == false)
         {
             // When leftMouseButton is pressed down
@@ -170,7 +138,7 @@ public class SoldierActor : MonoBehaviour
                     {
                         if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
                         {
-                            m_fCharge += m_fSliderSpeed /* Time.deltaTime*/;
+                            m_fCharge += m_fSliderSpeed;
                             if (m_fCharge >= m_fMaxCharge)
                             {
                                 m_bIsAscending = false;
@@ -179,7 +147,7 @@ public class SoldierActor : MonoBehaviour
                         else
                         {
                             m_bIsAscending = false;
-                            m_fCharge -= m_fSliderSpeed /* Time.deltaTime*/;
+                            m_fCharge -= m_fSliderSpeed;
                             if (m_fCharge <= m_fMinCharge)
                             {
                                 m_bIsAscending = true;
@@ -204,9 +172,12 @@ public class SoldierActor : MonoBehaviour
                     m_bChargingShot = false;
                 }
             }
-        }
+        }*/
+    
+    public void Charge()
+    {
+        
     }
-
 
     //--------------------------------------------------------------------------------------
     // Move: Uses the Soldiers RigibBody to move with a drag value, 
@@ -249,7 +220,6 @@ public class SoldierActor : MonoBehaviour
 
             // Generate a ray from the cursor position
             Ray rMouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
 
             float fHitDistance = 0.0f;
             // If the ray is parallel to the plane, Raycast will return false.

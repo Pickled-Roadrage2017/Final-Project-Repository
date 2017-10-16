@@ -102,7 +102,8 @@ public class Teddy : MonoBehaviour
     void Update()
     {
         //Throw();
-        FaceMouse();
+        //m_cTeddyCanvas.transform.rotation = FaceMouse();
+        //FaceMouse();
     }
 
     //--------------------------------------------------------------------------------------
@@ -168,7 +169,7 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Soldier")
+        /*if(other.gameObject.tag == "Soldier")
         {
             m_gSoldier = other.gameObject;
             // Set the object parent to the Bearhand
@@ -176,7 +177,7 @@ public class Teddy : MonoBehaviour
             m_gSoldier.transform.position = m_gBearHand.transform.position;
             //other.gameObject.SetActive(false);
             m_cTeddyCanvas.gameObject.SetActive(true);
-        } 
+        } */
     }
 
     //--------------------------------------------------------------------------------------
@@ -187,11 +188,11 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void OnTriggerExit(Collider other)
     {
-        if(m_gSoldier != null)
+       /* if(m_gSoldier != null)
         {
             m_gSoldier.transform.parent.SetParent(null);
             m_gSoldier = null;
-        } 
+        } */ 
     }
 
 
