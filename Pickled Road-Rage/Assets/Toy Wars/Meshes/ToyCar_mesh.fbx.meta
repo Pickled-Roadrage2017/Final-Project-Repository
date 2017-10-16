@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 328b41b35f4c3b342b254bb58111c4ac
-timeCreated: 1507506651
+guid: ecc8ff83db9b2494d92df4ae9275a60d
+timeCreated: 1508124064
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Soldier_Mesh_Minigun_pose
+    4300000: CarToy_mesh
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -79,7 +80,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

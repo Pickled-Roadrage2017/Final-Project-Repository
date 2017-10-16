@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 328b41b35f4c3b342b254bb58111c4ac
-timeCreated: 1507506651
+guid: 45ee092ca1c0f1f42a392e2a3e1ce9e5
+timeCreated: 1508123972
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Soldier_Mesh_Minigun_pose
+    4300000: Ring_Toss_Ring_Mesh
   materials:
     importMaterials: 1
     materialName: 0

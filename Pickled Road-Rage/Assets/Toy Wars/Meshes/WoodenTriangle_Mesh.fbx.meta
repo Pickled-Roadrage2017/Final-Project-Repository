@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 328b41b35f4c3b342b254bb58111c4ac
-timeCreated: 1507506651
+guid: 79e997d3ca5438e4e8ea86afe025ce31
+timeCreated: 1508114242
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Soldier_Mesh_Minigun_pose
+    4300000: WoodenTriangle_Mesh
   materials:
     importMaterials: 1
     materialName: 0
