@@ -296,18 +296,18 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 24265914}
-  m_LocalRotation: {x: 0.43104163, y: 0.5605385, z: -0.56053835, w: 0.43104115}
-  m_LocalPosition: {x: 0, y: 0, z: -0.036}
+  m_LocalRotation: {x: 0.43104166, y: 0.5605385, z: -0.56053835, w: 0.43104115}
+  m_LocalPosition: {x: 0, y: 0, z: -0.036000054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1071208391}
   - {fileID: 1637672095}
-  m_Father: {fileID: 1708497974}
+  m_Father: {fileID: 1556826223}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 75.118996}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.099, y: 0.012}
+  m_AnchoredPosition: {x: 0.09900002, y: 0.012}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &24265916
@@ -1664,7 +1664,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4288,7 +4288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -38.539978, y: 52.69998}
+  m_AnchoredPosition: {x: -38.54004, y: 52.69995}
   m_SizeDelta: {x: 46.47, y: 66.97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416970766
@@ -6384,7 +6384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &611700263
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6392,18 +6392,18 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 611700262}
-  m_LocalRotation: {x: 0.43104163, y: 0.5605385, z: -0.56053835, w: 0.43104115}
-  m_LocalPosition: {x: 0, y: 0, z: -0.036}
+  m_LocalRotation: {x: 0.4310416, y: 0.56053853, z: -0.5605384, w: 0.4310412}
+  m_LocalPosition: {x: 0, y: 0, z: -0.036000025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1800386401}
   - {fileID: 1098374898}
-  m_Father: {fileID: 2100300149}
+  m_Father: {fileID: 1976585510}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 75.118996}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.099, y: 0.012}
+  m_AnchoredPosition: {x: 0.09899998, y: 0.012}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &611700264
@@ -14780,6 +14780,35 @@ Transform:
   m_Father: {fileID: 223464260}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1556826222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1556826223}
+  m_Layer: 8
+  m_Name: Arrow Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1556826223
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1556826222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 24265915}
+  m_Father: {fileID: 1708497974}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1559913274
 Prefab:
   m_ObjectHideFlags: 0
@@ -16367,6 +16396,7 @@ GameObject:
   - component: {fileID: 1708497971}
   - component: {fileID: 1708497970}
   - component: {fileID: 1708497968}
+  - component: {fileID: 1708497969}
   m_Layer: 8
   m_Name: TeddyBear_02
   m_TagString: Teddy
@@ -16374,19 +16404,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1708497968
-BoxCollider:
+--- !u!64 &1708497968
+MeshCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65289524622237800, guid: bdd00a6b7ceb13a4c860a556830ee833,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1708497967}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.12090239, y: 0.17824596, z: 0.15119536}
-  m_Center: {x: -0.0013965804, y: 0.090691924, z: 0.002419201}
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: a6f033a49af0ac54bafac98dc0b0f45a, type: 3}
+--- !u!54 &1708497969
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1708497967}
+  serializedVersion: 2
+  m_Mass: 100000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1708497970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16399,18 +16445,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08748984b756ce04b80a1dc216b24c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fMaxHealth: 1000
+  m_fMaxHealth: 100
   m_fCurrentHealth: 0
   m_fRotSpeed: 0
   m_fCharge: 0
   m_fMinCharge: 15
   m_fMaxCharge: 30
+  m_fChargeSpeed: 0
   m_gSoldier: {fileID: 0}
   m_gBearHand: {fileID: 1918380928}
-  m_gProjectileBlueprint: {fileID: 0}
+  m_gProjectileBlueprint: {fileID: 1791886021429760, guid: 3fb9a760e32d4224ea8e5b300db82454,
+    type: 2}
   m_cTeddyCanvas: {fileID: 24265919}
   m_sAimSlider: {fileID: 1637672094}
-  m_fSliderSpeed: 0
+  m_gPivot: {fileID: 1556826222}
 --- !u!95 &1708497971
 Animator:
   serializedVersion: 3
@@ -16481,7 +16529,7 @@ Transform:
   m_LocalPosition: {x: -7.8320003, y: 1.05, z: -2.7900002}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
-  - {fileID: 24265915}
+  - {fileID: 1556826223}
   - {fileID: 1918380929}
   m_Father: {fileID: 1554053148}
   m_RootOrder: 1
@@ -20398,6 +20446,35 @@ MeshFilter:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 457d2f176928a924f8b9d7d8a5fc148a, type: 3}
   m_PrefabInternal: {fileID: 1655963376}
+--- !u!1 &1976585509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1976585510}
+  m_Layer: 8
+  m_Name: Arrow Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1976585510
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1976585509}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 611700263}
+  m_Father: {fileID: 2100300149}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1989155489
 GameObject:
   m_ObjectHideFlags: 0
@@ -21496,6 +21573,7 @@ GameObject:
   - component: {fileID: 2100300153}
   - component: {fileID: 2100300152}
   - component: {fileID: 2100300150}
+  - component: {fileID: 2100300151}
   m_Layer: 8
   m_Name: TeddyBear_01
   m_TagString: Teddy
@@ -21514,24 +21592,40 @@ Transform:
   m_LocalPosition: {x: 1.399, y: 1.05, z: 1.513}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
-  - {fileID: 611700263}
+  - {fileID: 1976585510}
   - {fileID: 1250694093}
   m_Father: {fileID: 1554053148}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -130.14, z: 0}
---- !u!65 &2100300150
-BoxCollider:
+--- !u!64 &2100300150
+MeshCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65461018215151566, guid: bdd00a6b7ceb13a4c860a556830ee833,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2100300148}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.12090239, y: 0.17824596, z: 0.15119536}
-  m_Center: {x: -0.0013965804, y: 0.090691924, z: 0.002419201}
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: a6f033a49af0ac54bafac98dc0b0f45a, type: 3}
+--- !u!54 &2100300151
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2100300148}
+  serializedVersion: 2
+  m_Mass: 100000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &2100300152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21544,18 +21638,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08748984b756ce04b80a1dc216b24c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fMaxHealth: 1000
+  m_fMaxHealth: 100
   m_fCurrentHealth: 0
   m_fRotSpeed: 0
   m_fCharge: 0
   m_fMinCharge: 15
   m_fMaxCharge: 30
+  m_fChargeSpeed: 0
   m_gSoldier: {fileID: 0}
   m_gBearHand: {fileID: 1250694092}
-  m_gProjectileBlueprint: {fileID: 0}
+  m_gProjectileBlueprint: {fileID: 1791886021429760, guid: 3fb9a760e32d4224ea8e5b300db82454,
+    type: 2}
   m_cTeddyCanvas: {fileID: 611700267}
   m_sAimSlider: {fileID: 1098374899}
-  m_fSliderSpeed: 0
+  m_gPivot: {fileID: 1976585509}
 --- !u!95 &2100300153
 Animator:
   serializedVersion: 3
