@@ -34,7 +34,7 @@ public class RocketLauncher : MonoBehaviour
 
     // float variable passed on for the firing from the Soldier
     [HideInInspector]
-    public float m_fCharge;
+    public float m_fCharge = 0;
 
     // Boolean for the locking of fire if a rocket is still alive
     [HideInInspector]
@@ -62,6 +62,7 @@ public class RocketLauncher : MonoBehaviour
     void Awake()
     {
         m_fChargeSpeed = m_fMinCharge;
+        m_fCharge = m_fMinCharge;
         m_bChargingShot = false;
 
         // initilize rocket list with size
@@ -128,6 +129,7 @@ public class RocketLauncher : MonoBehaviour
             if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
             {
                 m_fCharge += m_fChargeSpeed * Time.deltaTime;
+                
                 if (m_fCharge >= m_fMaxCharge)
                 {
                     m_bIsAscending = false;

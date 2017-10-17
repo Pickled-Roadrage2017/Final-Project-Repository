@@ -28,6 +28,10 @@ public class TurnManager : MonoBehaviour
     [LabelOverride("Delay Timer Length")][Tooltip("The time in seconds for how long the delay between turns should be.")]
     public float m_fDelayLength;
 
+    // public float starting time for the end timer.
+    [LabelOverride("End Turn Timer Length")][Tooltip("The time in seconds for how long the end of turn state should be. This end turn state is just a delay for the end of turns.")]
+    public float m_fEndLength;
+
     // Title for this section of public values.
     [Header("Player Objects:")]
 
@@ -48,6 +52,7 @@ public class TurnManager : MonoBehaviour
     // Static values for timers.
     public static float m_sfStaticTimerLength;
     public static float m_sfStaticDelayLength;
+    public static float m_sfStaticEndLength;
 
     // float for timer.
     public static float m_fTimer;
@@ -67,6 +72,7 @@ public class TurnManager : MonoBehaviour
         // Set static values
         m_sfStaticTimerLength = m_fTimerLength;
         m_sfStaticDelayLength = m_fDelayLength;
+        m_sfStaticEndLength = m_fEndLength;
 
         // Decide who goes first
         DecideTurn();
@@ -77,6 +83,11 @@ public class TurnManager : MonoBehaviour
         // Add states to the machine.
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_DELAY, new DelayState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_ACTION, new ActionState(m_sStateMachine));
+        m_sStateMachine.AddState(ETurnManagerStates.ETURN_END, new EndTurnState(m_sStateMachine));
+
+        // Pass the state machine instance to the players.
+        m_gPlayer1.GetComponent<Player>().SetInstances(this, m_sStateMachine); // Might be useless?
+        m_gPlayer2.GetComponent<Player>().SetInstances(this, m_sStateMachine); // Might be useless?
     }
 
     //--------------------------------------------------------------------------------------

@@ -1,8 +1,8 @@
 ﻿//--------------------------------------------------------------------------------------
-// Purpose: The state of action between player turns.
+// Purpose: The state of turn ending for players.
 //
-// Description: The ActionState script is gonna be used for when the player turn is in an
-// action state. This action state happens during the normal turn timer.
+// Description: The EndTurnState script is gonna be used for when the player turn is
+// ending. The state will end on a timer, giving time for animation, reseting, etc.
 //
 // Author: Thomas Wiltshire.
 //--------------------------------------------------------------------------------------
@@ -13,12 +13,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// ActionState object. Inheriting from State. State for turn switching timer.
+// DelayState object. Inheriting from State. Delays the turn switching.
 //--------------------------------------------------------------------------------------
-public class ActionState : State
+public class EndTurnState : State
 {
     // State machine instance
     StateMachine m_sStateMachine;
+
+    // Turn manager instance
+    TurnManager m_tTurnManager;
 
     //--------------------------------------------------------------------------------------
     // Initialization: Constructor for the State.
@@ -26,10 +29,13 @@ public class ActionState : State
     // Param:
     //      sMachine: A reference to the StateMachine.
     //--------------------------------------------------------------------------------------
-    public ActionState(StateMachine sMachine)
+    public EndTurnState(StateMachine sMachine)
     {
         // Set the instance of the statemachine.
         m_sStateMachine = sMachine;
+
+        // Set the instance of the turn manager.
+        m_tTurnManager = m_sStateMachine.m_tTurnManger;
     }
 
     //--------------------------------------------------------------------------------------
@@ -40,11 +46,17 @@ public class ActionState : State
         // Update the timer by deltatime.
         TurnManager.m_fTimer -= Time.deltaTime;
 
-        // If the timer runs out or end turn is true.
-        if (TurnManager.m_fTimer < 0 || TurnManager.m_sbEndTurn == true)
+        // Once the timer ends.
+        if (TurnManager.m_fTimer < 0)
         {
-            // Push to the delay state.
-            m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_END);
+            // set the turn to ended.
+            TurnManager.m_sbEndTurn = true;
+
+            // Switch players turn.
+            TurnManager.SwitchTurn();
+
+            // Push to the action state
+            m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
         }
     }
 
@@ -54,7 +66,7 @@ public class ActionState : State
     public override void OnEnter()
     {
         // Reset the timer.
-        TurnManager.m_fTimer = TurnManager.m_sfStaticTimerLength;
+        TurnManager.m_fTimer = TurnManager.m_sfStaticEndLength;
     }
 
     //--------------------------------------------------------------------------------------
@@ -62,7 +74,7 @@ public class ActionState : State
     //--------------------------------------------------------------------------------------
     public override void OnExit()
     {
-        // Set timer back to 0.
+        // Set the delay back to 0
         TurnManager.m_fTimer = 0;
     }
 }

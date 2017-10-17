@@ -21,25 +21,25 @@ public class Player : MonoBehaviour
     [Header("Player:")]
 
     // public int for which player this is.
-    [LabelOverride("Player Number")][Range(1, 2)][Tooltip("Which Player is this between 1 and 2. eg. Player1 or Player2.")]
+    [LabelOverride("Player Number")] [Range(1, 2)] [Tooltip("Which Player is this between 1 and 2. eg. Player1 or Player2.")]
     public int m_nPlayerNumber;
 
     // Title for this section of public values.
     [Header("Soldier:")]
 
     // public gameobject for the soldier prefab.
-    [LabelOverride("Soldier Object")][Tooltip("The prefab for the Soldier object.")]
+    [LabelOverride("Soldier Object")] [Tooltip("The prefab for the Soldier object.")]
     public GameObject m_gSoldierBlueprint;
 
     // pool size. how many soldiers allowed on screen at once.
-    [LabelOverride("Pool Size")][Range(1, 6)][Tooltip("The max number of soliders allowed in game at once.")]
+    [LabelOverride("Pool Size")] [Range(1, 6)] [Tooltip("The max number of soliders allowed in game at once.")]
     public int m_nPoolSize;
 
     // Title for this section of public values.
     [Header("Teddy:")]
 
     // public gameobject for the Teddy base of this player.
-    [LabelOverride("Teddy Object")][Tooltip("The Teddy Object for this player.")]
+    [LabelOverride("Teddy Object")] [Tooltip("The Teddy Object for this player.")]
     public GameObject m_gTeddyBase;
 
     // Title for this section of public values.
@@ -60,8 +60,17 @@ public class Player : MonoBehaviour
     // public array of gameobjects for player soldiers.
     private GameObject[] m_agSoldierList;
 
+    // state machine instance for the player.
+    private StateMachine m_sStateMachine;
+
+    // turn manager instance for the player.
+    private TurnManager m_tTurnManager;
+
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;
+
+    // private bool for if the mouse is pressed or not.
+    private bool m_bMouseDown = false;
 
     // Active Soldiers getter.
     public int GetActiveSoldiers()
@@ -87,7 +96,7 @@ public class Player : MonoBehaviour
             m_agSoldierList[i] = Instantiate(m_gSoldierBlueprint);
             m_agSoldierList[i].SetActive(false);
         }
-        
+
         // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
         // Allocate soliders to the pool.
         GameObject p1 = AllocateSoldier(); // Allocating 2 at the start for now until..
@@ -105,22 +114,42 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Check if it is this players turn.
-        if (m_nPlayerNumber == TurnManager.m_snCurrentTurn) // TODO: There are errors here when soldiers are null.
+        if (m_nPlayerNumber == TurnManager.m_snCurrentTurn)
         {
             // Get the soldier object and script.
             GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
-            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponentInChildren<SoldierActor>(); // TODO: Fix this, GetComponentInChildren is slow.
+            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
 
+            // new bool for if the player is firing or not.
+            bool bFiring = false;
 
+            // Fire the soldier weapon. apply its state of fire to a bool.
+            if(StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
+                bFiring = SoldierFire(sCurrentSoldier);
 
-
-
-
-            // Get the solider update functions
-            sCurrentSoldier.Move();
-            sCurrentSoldier.FaceMouse();
-            SoldierFire(sCurrentSoldier);
+            // if not firing the soldier.
+            if (!bFiring && StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
+            {
+                // Move the soldier.
+                SoldierMovement(sCurrentSoldier);
+            }
         }
+    }
+
+    //--------------------------------------------------------------------------------------
+    // SetInstances: Set the instances of objects that are needed from the TurnManager.
+    //
+    // Param:
+    //      tTurnManager: A reference to the TurnManager.
+    //      sStateMachine: A reference to the StateMachine.
+    //--------------------------------------------------------------------------------------
+    public void SetInstances(TurnManager tTurnManager, StateMachine sStateMachine)
+    {
+        // Set the turn manager instance.
+        m_tTurnManager = tTurnManager;
+
+        // Set statemachine instance.
+        m_sStateMachine = sStateMachine;
     }
 
     //--------------------------------------------------------------------------------------
@@ -158,6 +187,11 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void SoldierTurnManager()
     {
+
+
+        // reset soldier here before changing to next one.
+        // Create a reset soldier function and reset anything that needs to be fresh on turn starting.
+
         // Go up one soldiers turn.
         m_nSoldierTurn += 1;
 
@@ -201,7 +235,12 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void SoldierMovement(SoldierActor sCurrentSoldier)
     {
-        
+        // Get the horizontal and vertical axis.
+        float fMoveHorizontal = Input.GetAxis("Horizontal");
+        float fMoveVertical = Input.GetAxis("Vertical");
+
+        // Apply Axis to the current soldier.
+        sCurrentSoldier.Move(fMoveHorizontal, fMoveVertical);
     }
 
     //--------------------------------------------------------------------------------------
@@ -209,25 +248,42 @@ public class Player : MonoBehaviour
     //
     // Param:
     //		sCurrentSoldier: A SoldierActor object for which soldier is firing.
+    // Return:
+    //      bool: Return if the soldier is firing or not.
     //--------------------------------------------------------------------------------------
-    void SoldierFire(SoldierActor sCurrentSoldier)
+    bool SoldierFire(SoldierActor sCurrentSoldier)
     {
         // new bool for if the mouse is down.
-        bool bMouseDown;
+        //bool bMouseDown = false;
 
         // if the left mouse button is held down.
         if (Input.GetButton("Fire1"))
         {
-            bMouseDown = true;
+            // Mouse down is true.
+            m_bMouseDown = true;
+
+            // Run the soldier fire script.
+            sCurrentSoldier.Fire(m_bMouseDown);
+
+            // Return the mouse down.
+            return m_bMouseDown;
         }
 
         // If the left mouse button is let go.
         else
         {
-            bMouseDown = false;
-        }
+            // Set to end turn.
+            if (m_bMouseDown)
+                TurnManager.m_sbEndTurn = true;
 
-        // Run the soldier fire script.
-        sCurrentSoldier.Fire(bMouseDown);
+            // MouseDown is false.
+            m_bMouseDown = false;
+
+            // Run the soldier fire script.
+            sCurrentSoldier.Fire(m_bMouseDown);
+
+            // return the mouse down.
+            return m_bMouseDown;
+        }
     }
 }

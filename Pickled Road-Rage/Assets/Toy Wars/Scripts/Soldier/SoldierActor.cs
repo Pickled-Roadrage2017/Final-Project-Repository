@@ -91,11 +91,11 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-      // As health is a float, anything below one will be displayed as 0 to the player
-      if(m_fCurrentHealth < 1)
-      {
-       Die();
-      }
+        // As health is a float, anything below one will be displayed as 0 to the player
+        if (m_fCurrentHealth < 1)
+        {
+            Die();
+        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -107,7 +107,6 @@ public class SoldierActor : MonoBehaviour
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
             m_gLauncherScript.Fire(bMouseDown);
-            //m_bFiring = bMouseDown;
         }
 
         else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
@@ -131,23 +130,11 @@ public class SoldierActor : MonoBehaviour
     //       making it so the Soldier doesn't stop instantly
     // 
     //--------------------------------------------------------------------------------------
-    public void Move()
+    public void Move(float fMoveHorizontal, float fMoveVertical)
     {
-        // The Soldier cannot move whilst firing
-        if (!m_bFiring)
-        {
-            // HorizontalAxis is controlled with A and D. Or the left and right arrow keys
-            float fMoveHorizontal = Input.GetAxis("Horizontal");
-            // VerticalAxis is controlled with W and S. Or the Up and Down arrow keys
-            float fMoveVertical = Input.GetAxis("Vertical");
-            m_v3Movement = new Vector3(fMoveHorizontal, 0, fMoveVertical);
-            m_rbRigidBody.velocity = m_v3Movement * m_fSpeed;
-        }
-        // Sets soldier velocity to zero if they are firing.
-        else
-        {
-            m_rbRigidBody.velocity = Vector3.zero;
-        }
+        m_v3Movement = new Vector3(fMoveHorizontal, 0, fMoveVertical);
+        m_rbRigidBody.velocity = m_v3Movement * m_fSpeed;
+        FaceMouse();
     }
 
     //--------------------------------------------------------------------------------------
@@ -160,8 +147,6 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public Quaternion FaceMouse()
     {
-        if (!m_bFiring)
-        {
             // Generate a plane that intersects the transform's position.
             Plane pSoldierPlane = new Plane(Vector3.up, transform.position);
 
@@ -182,11 +167,6 @@ public class SoldierActor : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, v3TargetRotation, m_fRotSpeed * Time.deltaTime);
             }
             return transform.rotation;
-        }
-        else
-        {
-            return new Quaternion();
-        }
     }
 
 
