@@ -34,6 +34,9 @@ public class Rocket : Weapon
     [LabelOverride("Force of Explosion")][Tooltip("The force that hits back all Unit layered objects")]
     public float m_ExplosionForce = 1000f;
 
+    [LabelOverride("Direct Hit Modifier")][Tooltip("The velocity is multiplied by this to reach an acceptable knockback")]
+    public float m_fHitMultiplier = 0.5f;
+
     // Radius for the Area of Effect Explosion that should follow any Collision
     [LabelOverride("Radius of Explosion")][Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
     public float m_fExplosionRadius = 5f;
@@ -112,44 +115,52 @@ public class Rocket : Weapon
     //--------------------------------------------------------------------------------------
     private void OnTriggerEnter(Collider other)
     {
+
         Debug.Log("COLLISION");
-        // if the rocket can now activate
-        if(m_fCurrentActivateTimer <= 0)
-        { 
-                // Collect all possible colliders 
-                Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
-         
+            // if the rocket can now activate
+            if (m_fCurrentActivateTimer <= 0)
+            {
+
+            if (other.tag == "Soldier")
+            {
+
+                Rigidbody rbTarget = other.GetComponent<Rigidbody>();
+                rbTarget = other.GetComponent<Rigidbody>();
+                rbTarget.AddForce(m_rbRocket.velocity * m_fHitMultiplier, ForceMode.Impulse);
+            }
+
+            // Collect all possible colliders 
+            Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
+
                 for (int i = 0; i < aColliders.Length; i++)
                 {
-                 Rigidbody rbTarget = aColliders[i].GetComponent<Rigidbody>();
-                
+                    Rigidbody rbTarget = aColliders[i].GetComponent<Rigidbody>();
+
                     //if it does not have a rigidbody
                     if (!rbTarget)
                     {
                         continue;
                     }
 
-                if (aColliders[i].gameObject.tag == "Soldier")
-                {
-                    // TODO: Explosion particle effect
-                    SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
-                    gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
-                    // add explosive force
-                    rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius);
+                 
+                    if (aColliders[i].gameObject.tag == "Soldier")
+                    {
+                        // TODO: Explosion particle effect
+                        SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
+                        gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+                        // add explosive force
+                        rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 3.0f, ForceMode.Impulse);
+                    }
+                    else if (aColliders[i].gameObject.tag == "Teddy")
+                    {
+                        Teddy gtarget = rbTarget.GetComponent<Teddy>();
+                        gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+                    }
+                
                 }
-                else if (aColliders[i].gameObject.tag == "Teddy")
-                {
-                    Teddy gtarget = rbTarget.GetComponent<Teddy>();
-                    gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
-                }
-                   
-
-                }
-                gameObject.SetActive(false);
-                m_gRocketLauncher.m_bRocketAlive = false;
-            
-        }
-       
+            gameObject.SetActive(false);
+            m_gRocketLauncher.m_bRocketAlive = false;
+            }
     }
 
     //--------------------------------------------------------------------------------------

@@ -59,14 +59,14 @@ public class TeddyProjectile : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        // Gets the code of the spawning RocketLauncher GameObject
+        // Gets the code of the spawning Teddy GameObject
         m_gTeddy = GetComponentInParent <Teddy>();
         // Set the rockets power variable to the power variable of the Launcher which was passed down by the Soldier
-        m_fPower = m_gTeddy.m_fCharge;
+        //m_fPower = m_gTeddy.m_fCharge;
         // Get the rockets Rigidbody
         m_rbProjectile = GetComponent<Rigidbody>();
-        // Set the direction for the rocket to go to the forward vector of the RocketLauncher at the time of firing
-        m_v3MoveDirection = m_gSpawnPoint.transform.forward;
+        // Set the direction for the projectile to go to the forward vector of the Teddy at the time of firing
+        //m_v3MoveDirection = m_gSpawnPoint.transform.forward;
         // Initilize AirDrop 
         m_fAirDrop = 0;
         // CurrentActivateTimer should start out as equal to the MaxActivateTimer
@@ -90,17 +90,21 @@ public class TeddyProjectile : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------
-    // OnTriggerEnter: When something collides with the Teddy (Is Trigger)
+    // OnTriggerEnter: When the projectile collides (Is Trigger)
     //
     // Param: other is the other object it is colliding with at call
     //
     //--------------------------------------------------------------------------------------
     private void OnTriggerEnter(Collider other)
     {
-        if (m_fCurrentActivateTimer <= 0)
-        {
-            m_gSoldier.transform.position = transform.position;
-            gameObject.SetActive(false);
+        if (m_gSoldier)
+        { 
+            if (m_fCurrentActivateTimer <= 0)
+            {
+                m_gSoldier.transform.position = transform.position;
+                //m_gSoldier.SetActive(true);
+                gameObject.SetActive(false);
+            }
         }
     }
 }
