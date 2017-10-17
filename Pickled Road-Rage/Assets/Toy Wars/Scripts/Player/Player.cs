@@ -187,8 +187,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void SoldierTurnManager()
     {
-
-
+        // TODO // TODO // TODO // TODO
         // reset soldier here before changing to next one.
         // Create a reset soldier function and reset anything that needs to be fresh on turn starting.
 
