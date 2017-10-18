@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
             bool bFiring = false;
 
             // Fire the soldier weapon. apply its state of fire to a bool.
-            if(StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
+            if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
                 bFiring = SoldierFire(sCurrentSoldier);
 
             // if not firing the soldier.
@@ -132,6 +132,27 @@ public class Player : MonoBehaviour
             {
                 // Move the soldier.
                 SoldierMovement(sCurrentSoldier);
+            }
+        }
+
+        // Set Active soldier count to 0
+        m_nActiveSoldiers = 0;
+
+        // Go through each soldier and count how many are alive.
+        for (int i = 0; i < m_agSoldierList.Length; ++i)
+        {
+            // if the soldier is active.
+            if (m_agSoldierList[i].activeInHierarchy)
+            {
+                // Get soldier script.
+                SoldierActor soldier = m_agSoldierList[i].GetComponent<SoldierActor>();
+
+                // soldier is alive.
+                if (soldier.m_fCurrentHealth > 0)
+                {
+                    // increment the active soldier number by 1.
+                    m_nActiveSoldiers += 1;
+                }
             }
         }
     }
@@ -169,9 +190,6 @@ public class Player : MonoBehaviour
                 // Set active state.
                 m_agSoldierList[i].SetActive(true);
 
-                // increment the active soldier number by 1.
-                m_nActiveSoldiers += 1;
-
                 // return the bullet.
                 return m_agSoldierList[i];
             }
@@ -190,6 +208,7 @@ public class Player : MonoBehaviour
         // TODO // TODO // TODO // TODO
         // reset soldier here before changing to next one.
         // Create a reset soldier function and reset anything that needs to be fresh on turn starting.
+        // TODO // TODO // TODO // TODO
 
         // Go up one soldiers turn.
         m_nSoldierTurn += 1;

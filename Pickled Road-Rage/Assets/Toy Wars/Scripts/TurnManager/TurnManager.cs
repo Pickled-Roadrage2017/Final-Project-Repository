@@ -84,10 +84,32 @@ public class TurnManager : MonoBehaviour
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_DELAY, new DelayState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_ACTION, new ActionState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_END, new EndTurnState(m_sStateMachine));
+        m_sStateMachine.AddState(ETurnManagerStates.ETURN_GAMEOVER, new GameOverState(m_sStateMachine));
 
         // Pass the state machine instance to the players.
         m_gPlayer1.GetComponent<Player>().SetInstances(this, m_sStateMachine); // Might be useless?
         m_gPlayer2.GetComponent<Player>().SetInstances(this, m_sStateMachine); // Might be useless?
+
+        
+
+
+
+
+
+
+
+
+
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("EndMenu");
+        GameObject canvas = null;
+
+        foreach (GameObject go in gos)
+        {
+            canvas = go;
+        }
+
+        canvas.SetActive(false);
+
     }
 
     //--------------------------------------------------------------------------------------

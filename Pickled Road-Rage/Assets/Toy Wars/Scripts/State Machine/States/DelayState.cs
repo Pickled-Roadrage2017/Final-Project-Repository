@@ -72,6 +72,8 @@ public class DelayState : State
             // Run the soldier manager script.
             pCurrent.SoldierTurnManager();
         }
+
+        GameOver();
     }
 
     //--------------------------------------------------------------------------------------
@@ -81,5 +83,30 @@ public class DelayState : State
     {
         // Set the delay back to 0
         TurnManager.m_fTimer = 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    private void GameOver()
+    {
+        // Get current players turn.
+        GameObject gCurrent = m_tTurnManager.GetPlayer(TurnManager.m_snCurrentTurn);
+        Player pCurrent = gCurrent.GetComponent<Player>();
+
+        // Check if the player has any soldiers left or if the teddy is dead.
+        if (pCurrent.m_gTeddyBase.GetComponent<Teddy>().m_fCurrentHealth <= 0)
+        {
+            // Push to the game over state.
+            m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_GAMEOVER);
+        }
     }
 }
