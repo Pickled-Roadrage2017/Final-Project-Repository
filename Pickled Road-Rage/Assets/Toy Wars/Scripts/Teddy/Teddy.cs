@@ -67,7 +67,7 @@ public class Teddy : MonoBehaviour
     public Slider m_sAimSlider;
 
     // pivot for the canvas
-    public GameObject m_gPivot;
+    //public GameObject m_gPivot;
 
     // Boolean for the slider bar to bounce between m_fMinCharge and m_fMaxCharge
     private bool m_bIsAscending;
@@ -107,7 +107,7 @@ public class Teddy : MonoBehaviour
         m_bChargingShot = false;
         m_cTeddyCanvas.gameObject.SetActive(false);
         m_fCharge = m_fMinCharge;
-        m_gPivot.transform.rotation = new Quaternion(0, 0, 0, 0);
+       // m_gPivot.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 
     //--------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        if(Input.GetButton("Fire1"))
+    /*    if(Input.GetButton("Fire1"))
         {
             m_bFiring = true;
         }
@@ -123,13 +123,13 @@ public class Teddy : MonoBehaviour
         {
             m_bFiring = false;
         }
-        Throw(m_bFiring);
+        Throw(m_bFiring); */
         if(!IsAlive())
         {
             gameObject.SetActive(false);
         }
-        m_gPivot.transform.rotation = new Quaternion(0, 0, 0, 0);
-        m_gPivot.transform.rotation = FaceMouse();
+      //  m_gPivot.transform.rotation = new Quaternion(0, 0, 0, 0);
+      //  m_gPivot.transform.rotation = FaceMouse();
     }
 
     //--------------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ public class Teddy : MonoBehaviour
         m_fCurrentHealth -= fDamage;
     }
 
-    public Quaternion FaceMouse()
+  /*  public Quaternion FaceMouse()
     {
         if (!m_bFiring)
         {
@@ -291,7 +291,7 @@ public class Teddy : MonoBehaviour
         {
             return new Quaternion();
         }
-    }
+    } */
 
     public bool IsAlive()
     {
