@@ -51,9 +51,7 @@ public class GameOverState : State
     //--------------------------------------------------------------------------------------
     public override void OnEnter()
     {
-        GameObject EndCanvas = GetEndCanvas();
-
-        EndCanvas.SetActive(true);
+        m_tTurnManager.canvas.SetActive(true);
     }
 
     //--------------------------------------------------------------------------------------
@@ -62,23 +60,5 @@ public class GameOverState : State
     public override void OnExit()
     {
 
-    }
-
-
-
-
-
-
-    private GameObject GetEndCanvas()
-    {
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("EndMenu");
-        GameObject canvas = null;
-
-        foreach (GameObject go in gos)
-        {
-            canvas = go;
-        }
-
-        return canvas;
     }
 }

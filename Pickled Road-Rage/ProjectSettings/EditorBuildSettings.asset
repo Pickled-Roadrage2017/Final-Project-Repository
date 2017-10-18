@@ -4,4 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Toy Wars/Scenes/Main Menu.unity
+    guid: f2914f85bd2f26e4f9d1e5f590d5c142
+  - enabled: 1
+    path: Assets/Toy Wars/Scenes/Grey Boxes/GreyBox_08.unity
+    guid: 8a78a82f46aa0e44583168ee8e113d37
+  - enabled: 1
+    path: Assets/Toy Wars/Scenes/Credits.unity
+    guid: 181da65391496474d95cd2d2eabedc2c

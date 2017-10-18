@@ -59,7 +59,24 @@ public class TurnManager : MonoBehaviour
 
     // New instance of the state machine.
     private StateMachine m_sStateMachine;
-    
+
+
+
+
+
+
+
+    [HideInInspector]
+    public GameObject canvas;
+
+
+
+
+
+
+
+
+
     //--------------------------------------------------------------------------------------
     // initialization. Awake.
     //--------------------------------------------------------------------------------------
@@ -93,21 +110,7 @@ public class TurnManager : MonoBehaviour
         
 
 
-
-
-
-
-
-
-
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("EndMenu");
-        GameObject canvas = null;
-
-        foreach (GameObject go in gos)
-        {
-            canvas = go;
-        }
-
+        canvas = GameObject.FindGameObjectWithTag("EndMenu");
         canvas.SetActive(false);
 
     }
