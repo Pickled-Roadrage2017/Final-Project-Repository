@@ -2528,7 +2528,7 @@ Prefab:
     - target: {fileID: 2300000, guid: 4e6475c3767137e47b8b8c9951f4fc83, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 177134d353d92fa4dbc2afd7c501d1dd, type: 2}
+      objectReference: {fileID: 2100000, guid: 088ba9ee280a14d479935ef4b4a3693b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e6475c3767137e47b8b8c9951f4fc83, type: 3}
   m_IsPrefabParent: 0
@@ -4575,7 +4575,7 @@ MonoBehaviour:
   m_fEndLength: 1.5
   m_gPlayer1: {fileID: 38781045}
   m_gPlayer2: {fileID: 200991976}
-  canvas: {fileID: 0}
+  GameOverCanvas: {fileID: 0}
 --- !u!4 &346915821
 Transform:
   m_ObjectHideFlags: 0
@@ -20292,7 +20292,7 @@ Prefab:
     - target: {fileID: 2300000, guid: b88fb7c9a95c08c43a4e3a42e9c2e8a1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 177134d353d92fa4dbc2afd7c501d1dd, type: 2}
+      objectReference: {fileID: 2100000, guid: 088ba9ee280a14d479935ef4b4a3693b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b88fb7c9a95c08c43a4e3a42e9c2e8a1, type: 3}
   m_IsPrefabParent: 0
