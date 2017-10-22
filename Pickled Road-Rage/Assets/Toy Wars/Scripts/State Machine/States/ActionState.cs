@@ -43,7 +43,7 @@ public class ActionState : State
         // If the timer runs out or end turn is true.
         if (TurnManager.m_fTimer < 0 || TurnManager.m_sbEndTurn == true)
         {
-            // Push to the delay state.
+            // Push to the endturn state.
             m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_END);
         }
     }

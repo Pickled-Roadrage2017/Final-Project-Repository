@@ -55,7 +55,7 @@ public class EndTurnState : State
             // Switch players turn.
             TurnManager.SwitchTurn();
 
-            // Push to the action state
+            // Push to the delay state
             m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
         }
     }

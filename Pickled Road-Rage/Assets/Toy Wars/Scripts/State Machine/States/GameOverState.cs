@@ -1,8 +1,8 @@
 ﻿//--------------------------------------------------------------------------------------
 // Purpose: The state for when the game has eneded.
 //
-// Description: The DelayState script is gonna be used for when the player turn is in a
-// delay state. This delay state happens during the delay timer. // REWIRTE COMMENT!
+// Description: The GameOverState script is gonna be used for when the game hits its end
+// end state. Will enable the gameover UI etc.
 //
 // Author: Thomas Wiltshire.
 //--------------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// DelayState object. Inheriting from State. Delays the turn switching.
+// GameOverState object. Inheriting from State. The end of game state.
 //--------------------------------------------------------------------------------------
 public class GameOverState : State
 {
@@ -51,7 +51,8 @@ public class GameOverState : State
     //--------------------------------------------------------------------------------------
     public override void OnEnter()
     {
-        m_tTurnManager.canvas.SetActive(true);
+        // Set the gameover canvas to true.
+        m_tTurnManager.GameOverCanvas.SetActive(true);
     }
 
     //--------------------------------------------------------------------------------------

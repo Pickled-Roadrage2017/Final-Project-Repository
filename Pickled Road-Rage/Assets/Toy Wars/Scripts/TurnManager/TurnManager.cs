@@ -43,6 +43,10 @@ public class TurnManager : MonoBehaviour
     [LabelOverride("Player2 Object")][Tooltip("The Player2 object in the scene.")]
     public GameObject m_gPlayer2;
 
+    // The canvas for the gameover canvas.
+    [HideInInspector]
+    public GameObject GameOverCanvas;
+
     // static int for the current players turn.
     public static int m_snCurrentTurn;
 
@@ -59,23 +63,6 @@ public class TurnManager : MonoBehaviour
 
     // New instance of the state machine.
     private StateMachine m_sStateMachine;
-
-
-
-
-
-
-
-    [HideInInspector]
-    public GameObject canvas;
-
-
-
-
-
-
-
-
 
     //--------------------------------------------------------------------------------------
     // initialization. Awake.
@@ -107,12 +94,9 @@ public class TurnManager : MonoBehaviour
         m_gPlayer1.GetComponent<Player>().SetInstances(this, m_sStateMachine); // Might be useless?
         m_gPlayer2.GetComponent<Player>().SetInstances(this, m_sStateMachine); // Might be useless?
 
-        
-
-
-        canvas = GameObject.FindGameObjectWithTag("EndMenu");
-        canvas.SetActive(false);
-
+        // Get the canvas and set it to inactive.
+        GameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
+        GameOverCanvas.SetActive(false);
     }
 
     //--------------------------------------------------------------------------------------
