@@ -47,36 +47,36 @@ public class Teddy : MonoBehaviour
     public float m_fChargeSpeed = 0.0f;
 
     // This will be null, unless the teddy is holding a soldier
-    [LabelOverride("Held Soldier")]
-    public GameObject m_gSoldier;
+   //[LabelOverride("Held Soldier")]
+    //public GameObject m_gSoldier;
 
     // An empty game object where a held soldier will appear
-    [LabelOverride("Hand Transform")][Tooltip("An empty game object where a held soldier will appear")]
-    public GameObject m_gBearHand;
+    //[LabelOverride("Hand Transform")][Tooltip("An empty game object where a held soldier will appear")]
+   // public GameObject m_gBearHand;
 
     // The blueprint for the teddy projectile
-    [LabelOverride("Teddy Projectile Prefab")]
-    public GameObject m_gProjectileBlueprint;
+    //[LabelOverride("Teddy Projectile Prefab")]
+    //public GameObject m_gProjectileBlueprint;
 
-    [LabelOverride("Teddy Canvas")][Tooltip("Canvas object for the bear to access")]
-    public Canvas m_cTeddyCanvas;
+    //[LabelOverride("Teddy Canvas")][Tooltip("Canvas object for the bear to access")]
+    //public Canvas m_cTeddyCanvas;
 
-    [Header("Slider Variables")]
+    //[Header("Slider Variables")]
     // Slider for the aiming arrow
-    [LabelOverride("UI Slider")][Tooltip("Should be set to the Slider underneath the Soldier")]
-    public Slider m_sAimSlider;
+    //[LabelOverride("UI Slider")][Tooltip("Should be set to the Slider underneath the Soldier")]
+    //public Slider m_sAimSlider;
 
     // pivot for the canvas
     //public GameObject m_gPivot;
 
     // Boolean for the slider bar to bounce between m_fMinCharge and m_fMaxCharge
-    private bool m_bIsAscending;
+    //private bool m_bIsAscending;
 
     // boolean for if the soldier is in the firing function
-    private bool m_bFiring;
+    //private bool m_bFiring;
 
     // boolean for if the soldier is currently charging up a shot
-    private bool m_bChargingShot;
+   // private bool m_bChargingShot;
 
     // Pool of Projectile objects
     private GameObject[] m_agProjectileList;
@@ -91,22 +91,22 @@ public class Teddy : MonoBehaviour
     {
         // initilize rocket list with size
         m_agProjectileList = new GameObject[m_nPoolSize];
-        m_gBearHand.transform.Rotate(0, 0, 30);
+     //   m_gBearHand.transform.Rotate(0, 0, 30);
         // go through each projectile
         for (int i = 0; i < m_nPoolSize; ++i)
         {
             // Instantiate and set active state
-            m_agProjectileList[i] = Instantiate(m_gProjectileBlueprint);
-            m_agProjectileList[i].GetComponent<TeddyProjectile>().m_gSpawnPoint = m_gBearHand;
-            m_agProjectileList[i].SetActive(false);
+            //m_agProjectileList[i] = Instantiate(m_gProjectileBlueprint);
+            //m_agProjectileList[i].GetComponent<TeddyProjectile>().m_gSpawnPoint = m_gBearHand;
+           // m_agProjectileList[i].SetActive(false);
             
         }
         m_fCurrentHealth = m_fMaxHealth;
-        m_bIsAscending = true;
+       /* m_bIsAscending = true;
         m_bFiring = false;
         m_bChargingShot = false;
         m_cTeddyCanvas.gameObject.SetActive(false);
-        m_fCharge = m_fMinCharge;
+        m_fCharge = m_fMinCharge; */
        // m_gPivot.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 
@@ -167,7 +167,7 @@ public class Teddy : MonoBehaviour
     }
 
 
-    public void SpawnProjectile()
+ /*   public void SpawnProjectile()
     {
         if (m_bChargingShot)
         {
@@ -191,8 +191,8 @@ public class Teddy : MonoBehaviour
             m_bChargingShot = false;
         }
 
-    }
-    public void Throw(bool bMouseDown)
+    } */
+ /*   public void Throw(bool bMouseDown)
     {
         if (bMouseDown)
         {
@@ -221,7 +221,7 @@ public class Teddy : MonoBehaviour
         {
             SpawnProjectile();
         }
-    }
+    } */
 
     //--------------------------------------------------------------------------------------
     // Allocate: For accessing a projeectile that isn't currently active in m_agPreojectileList 
