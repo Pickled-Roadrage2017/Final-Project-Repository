@@ -4,8 +4,6 @@
 // Description:
 //
 // Author: Callan Davies
-// 
-// Edited: Thomas Wiltshire
 //--------------------------------------------------------------------------------------
 
 using System.Collections;
@@ -71,11 +69,12 @@ public class SoldierActor : MonoBehaviour
     // The RocketLauncher script of GameObject RocketLauncherS
     private RocketLauncher m_gLauncherScript;
 
-    // boolean for if the soldier is in the firing function
-    private bool m_bFiring;
-
     // Will be set to the Soldiers rigidbody property
     private Rigidbody m_rbRigidBody;
+
+
+   
+    public Canvas SoldierCanvas;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -93,7 +92,7 @@ public class SoldierActor : MonoBehaviour
         // so the soldier doesn't rotate unless it is to FaceMouse()
         m_rbRigidBody.freezeRotation = true;
 
-        m_bFiring = false;
+        SoldierCanvas.gameObject.SetActive(false);
     }
 
     //--------------------------------------------------------------------------------------
@@ -107,6 +106,22 @@ public class SoldierActor : MonoBehaviour
             Die();
         }
     }
+
+
+
+
+
+    public void CanvasActive(bool bActive)
+    {
+        if (bActive)
+            SoldierCanvas.gameObject.SetActive(true);
+        else if (!bActive)
+            SoldierCanvas.gameObject.SetActive(false);
+    }
+
+
+
+
 
     //--------------------------------------------------------------------------------------
     // Fire: Call when the Player commands the Soldier to fire
@@ -131,7 +146,6 @@ public class SoldierActor : MonoBehaviour
 
         else
         {
-            //m_bFiring = false;
         }
     }
 

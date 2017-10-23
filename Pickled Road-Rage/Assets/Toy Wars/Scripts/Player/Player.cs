@@ -54,17 +54,10 @@ public class Player : MonoBehaviour
     public GameObject m_gSoldier2Spawn; // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
 
     // private int for current soldiers turn.
-    [Tooltip("ONLY PUBLIC FOR DEBUGGING, DONT CHANGE!")]
-    public int m_nSoldierTurn; // ONLY PUBLIC FOR DEBUGGING. // ONLY PUBLIC FOR DEBUGGING. // ONLY PUBLIC FOR DEBUGGING.
+    private int m_nSoldierTurn;
 
     // public array of gameobjects for player soldiers.
     private GameObject[] m_agSoldierList;
-
-    // state machine instance for the player.
-    private StateMachine m_sStateMachine;
-
-    // turn manager instance for the player.
-    private TurnManager m_tTurnManager;
 
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;
@@ -120,6 +113,14 @@ public class Player : MonoBehaviour
             GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
             SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
 
+
+
+
+            sCurrentSoldier.CanvasActive(true);
+
+
+
+
             // new bool for if the player is firing or not.
             bool bFiring = false;
 
@@ -133,6 +134,15 @@ public class Player : MonoBehaviour
                 // Move the soldier.
                 SoldierMovement(sCurrentSoldier);
             }
+        }
+
+        else if (m_nPlayerNumber != TurnManager.m_snCurrentTurn)
+        {
+            // Get the soldier object and script.
+            GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
+            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
+
+            sCurrentSoldier.CanvasActive(false);
         }
 
         // Set Active soldier count to 0
@@ -155,22 +165,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-    }
-
-    //--------------------------------------------------------------------------------------
-    // SetInstances: Set the instances of objects that are needed from the TurnManager.
-    //
-    // Param:
-    //      tTurnManager: A reference to the TurnManager.
-    //      sStateMachine: A reference to the StateMachine.
-    //--------------------------------------------------------------------------------------
-    public void SetInstances(TurnManager tTurnManager, StateMachine sStateMachine)
-    {
-        // Set the turn manager instance.
-        m_tTurnManager = tTurnManager;
-
-        // Set statemachine instance.
-        m_sStateMachine = sStateMachine;
     }
 
     //--------------------------------------------------------------------------------------
@@ -205,10 +199,10 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void SoldierTurnManager()
     {
-        // TODO // TODO // TODO // TODO
+        // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO
         // reset soldier here before changing to next one.
         // Create a reset soldier function and reset anything that needs to be fresh on turn starting.
-        // TODO // TODO // TODO // TODO
+        // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO
 
         // Go up one soldiers turn.
         m_nSoldierTurn += 1;

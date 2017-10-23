@@ -85,18 +85,10 @@ public class DelayState : State
         TurnManager.m_fTimer = 0;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    private void GameOver()
+    //--------------------------------------------------------------------------------------
+    // GameOver: Function for how to hit the gameover state.
+    //--------------------------------------------------------------------------------------
+    private void GameOver() // Maybe move to the action state.
     {
         // Get current players turn.
         GameObject gCurrent = m_tTurnManager.GetPlayer(TurnManager.m_snCurrentTurn);

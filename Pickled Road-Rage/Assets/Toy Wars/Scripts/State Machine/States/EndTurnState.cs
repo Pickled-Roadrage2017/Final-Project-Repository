@@ -20,9 +20,6 @@ public class EndTurnState : State
     // State machine instance
     StateMachine m_sStateMachine;
 
-    // Turn manager instance
-    TurnManager m_tTurnManager;
-
     //--------------------------------------------------------------------------------------
     // Initialization: Constructor for the State.
     //
@@ -33,9 +30,6 @@ public class EndTurnState : State
     {
         // Set the instance of the statemachine.
         m_sStateMachine = sMachine;
-
-        // Set the instance of the turn manager.
-        m_tTurnManager = m_sStateMachine.m_tTurnManger;
     }
 
     //--------------------------------------------------------------------------------------

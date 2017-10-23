@@ -90,13 +90,11 @@ public class TurnManager : MonoBehaviour
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_END, new EndTurnState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_GAMEOVER, new GameOverState(m_sStateMachine));
 
-        // Pass the state machine instance to the players.
-        m_gPlayer1.GetComponent<Player>().SetInstances(this, m_sStateMachine); // Might be useless?
-        m_gPlayer2.GetComponent<Player>().SetInstances(this, m_sStateMachine); // Might be useless?
 
+        // put a check here!!! // TODO ?? TODO
         // Get the canvas and set it to inactive.
-        GameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
-        GameOverCanvas.SetActive(false);
+        //GameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
+        //GameOverCanvas.SetActive(false);
     }
 
     //--------------------------------------------------------------------------------------
