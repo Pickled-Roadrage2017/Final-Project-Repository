@@ -158,7 +158,7 @@ public class SoldierActor : MonoBehaviour
     {
         m_v3Movement = new Vector3(fMoveHorizontal, 0, fMoveVertical);
         m_rbRigidBody.velocity = m_v3Movement * m_fSpeed;
-        FaceMouse();
+        //FaceMouse();
     }
 
     //--------------------------------------------------------------------------------------

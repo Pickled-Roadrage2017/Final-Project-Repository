@@ -53,6 +53,16 @@ public class Player : MonoBehaviour
     [Tooltip("Spawn postion for the soldier spawn, pass in a gameobject.")]
     public GameObject m_gSoldier2Spawn; // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
 
+
+
+
+    public float m_fMovePoints; // PUBLIC FOR TESTING!
+    public float m_fMaxMovePoints;
+
+
+
+
+
     // private int for current soldiers turn.
     private int m_nSoldierTurn;
 
@@ -81,6 +91,17 @@ public class Player : MonoBehaviour
 
         // Start the solider turn at 1.
         m_nSoldierTurn = 0;
+
+
+
+
+
+        m_fMovePoints = m_fMaxMovePoints;
+
+
+
+
+
 
         // Go through each soldier.
         for (int i = 0; i < m_nPoolSize; ++i)
@@ -116,6 +137,7 @@ public class Player : MonoBehaviour
 
 
 
+
             sCurrentSoldier.CanvasActive(true);
 
 
@@ -133,6 +155,13 @@ public class Player : MonoBehaviour
             {
                 // Move the soldier.
                 SoldierMovement(sCurrentSoldier);
+            }
+
+            // If the movement points are below or 0 and in the end turn state
+            if (StateMachine.GetState() == ETurnManagerStates.ETURN_END)
+            {
+                // Reset the movement points.
+                m_fMovePoints = m_fMaxMovePoints;
             }
         }
 
@@ -247,12 +276,22 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void SoldierMovement(SoldierActor sCurrentSoldier)
     {
-        // Get the horizontal and vertical axis.
-        float fMoveHorizontal = Input.GetAxis("Horizontal");
-        float fMoveVertical = Input.GetAxis("Vertical");
+        if (m_fMovePoints > 0)
+        {
+            // Get the horizontal and vertical axis.
+            float fMoveHorizontal = Input.GetAxis("Horizontal");
+            float fMoveVertical = Input.GetAxis("Vertical");
 
-        // Apply Axis to the current soldier.
-        sCurrentSoldier.Move(fMoveHorizontal, fMoveVertical);
+            // Apply Axis to the current soldier.
+            sCurrentSoldier.Move(fMoveHorizontal, fMoveVertical);
+
+            // decrease the movement point value.
+            if (fMoveHorizontal != 0 || fMoveVertical != 0)
+                m_fMovePoints -= 0.5f;
+        }
+
+        // Update the mpuse face function in soldier.
+        sCurrentSoldier.FaceMouse();
     }
 
     //--------------------------------------------------------------------------------------
@@ -265,11 +304,8 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     bool SoldierFire(SoldierActor sCurrentSoldier)
     {
-        // new bool for if the mouse is down.
-        //bool bMouseDown = false;
-
-        // if the left mouse button is held down.
-        if (Input.GetButton("Fire1"))
+        // if the left mouse button is held down and timer is greater than 1
+        if (Input.GetButton("Fire1") && TurnManager.m_fTimer > 1)
         {
             // Mouse down is true.
             m_bMouseDown = true;
@@ -281,8 +317,8 @@ public class Player : MonoBehaviour
             return m_bMouseDown;
         }
 
-        // If the left mouse button is let go.
-        else
+        // Else if the mouse is not down or the timer is less than 1
+        else if (Input.GetButtonUp("Fire1")  || TurnManager.m_fTimer < 1)
         {
             // Set to end turn.
             if (m_bMouseDown)
@@ -297,5 +333,7 @@ public class Player : MonoBehaviour
             // return the mouse down.
             return m_bMouseDown;
         }
+
+        return false;
     }
 }

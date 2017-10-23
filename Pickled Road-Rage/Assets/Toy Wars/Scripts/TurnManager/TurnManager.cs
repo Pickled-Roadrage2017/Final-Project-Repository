@@ -93,8 +93,8 @@ public class TurnManager : MonoBehaviour
 
         // put a check here!!! // TODO ?? TODO
         // Get the canvas and set it to inactive.
-        //GameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
-        //GameOverCanvas.SetActive(false);
+        GameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
+        GameOverCanvas.SetActive(false);
     }
 
     //--------------------------------------------------------------------------------------
