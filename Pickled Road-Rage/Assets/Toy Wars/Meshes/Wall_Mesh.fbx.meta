@@ -7,11 +7,16 @@ ModelImporter:
   fileIDToRecycleName:
     100000: Wall_Mesh
     100002: //RootNode
+    100004: Floor_Mesh
     400000: Wall_Mesh
     400002: //RootNode
+    400004: Floor_Mesh
     2300000: Wall_Mesh
+    2300002: Floor_Mesh
     3300000: Wall_Mesh
+    3300002: Floor_Mesh
     4300000: Wall_Mesh
+    4300002: Floor_Mesh
   materials:
     importMaterials: 1
     materialName: 0

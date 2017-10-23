@@ -55,7 +55,7 @@ Transform:
   m_GameObject: {fileID: 1480935180070650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.05744791, y: 0.0315, z: -0.2549196}
-  m_LocalScale: {x: 0.01, y: 0.005, z: 0.02}
+  m_LocalScale: {x: 0.1, y: 0.05, z: 0.2}
   m_Children:
   - {fileID: 4803316057455852}
   m_Father: {fileID: 0}
@@ -153,15 +153,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fDamage: 50
   m_fPower: 0
-  m_fDropIterator: 0.07
+  m_fDropIterator: 0.25
   m_fMaxActivateTimer: 1
   m_fMaxLifespan: 2
   m_fCurrentLifespan: 0
   m_UnitMask:
     serializedVersion: 2
     m_Bits: 256
-  m_ExplosionForce: 20
-  m_fExplosionRadius: 0.1
+  m_ExplosionForce: 100
+  m_fHitMultiplier: 0.5
+  m_fExplosionRadius: 1
   m_fAirDrop: 0
   m_fCurrentActivateTimer: 0
   m_gSpawnPoint: {fileID: 1566479626656110, guid: 8b66a0fd11024c842b97741cc2f8da22,
