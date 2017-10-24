@@ -1,7 +1,7 @@
 ﻿//--------------------------------------------------------------------------------------
 // Purpose: The state of turn ending for players.
 //
-// Description: The EndTurnState script is gonna be used for when the player turn is
+// Description: The EndState script is gonna be used for when the player turn is
 // ending. The state will end on a timer, giving time for animation, reseting, etc.
 //
 // Author: Thomas Wiltshire.
@@ -17,39 +17,14 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class EndState : State
 {
-    // State machine instance
-    StateMachine m_sStateMachine;
-
-    // Turn manager instance
-    TurnManager m_tTurnManager;
-
-    // Get player1
-    Player m_pPlayer1;
-
-    // Get player2
-    Player m_pPlayer2;
-
     //--------------------------------------------------------------------------------------
     // Initialization: Constructor for the State.
     //
     // Param:
     //      sMachine: A reference to the StateMachine.
     //--------------------------------------------------------------------------------------
-    public EndState(StateMachine sMachine)
+    public EndState(StateMachine sMachine) : base(sMachine)
     {
-        // Set the instance of the statemachine.
-        m_sStateMachine = sMachine;
-
-        // Set the instance of the turn manager.
-        m_tTurnManager = m_sStateMachine.m_tTurnManger;
-
-        // Get player1 and assign to pPlayer1
-        GameObject gPlayer1 = m_tTurnManager.GetPlayer(1);
-        m_pPlayer1 = gPlayer1.GetComponent<Player>();
-
-        // Get player2 and assign to pPlayer2
-        GameObject gPlayer2 = m_tTurnManager.GetPlayer(2);
-        m_pPlayer2 = gPlayer2.GetComponent<Player>();
     }
 
     //--------------------------------------------------------------------------------------
@@ -70,7 +45,7 @@ public class EndState : State
             if (!IsGameOver)
             {
                 // if a player has no soldiers dont swap to that player.
-                if (m_pPlayer1.GetActiveSoldiers() != 0 && m_pPlayer2.GetActiveSoldiers() != 0)
+                if (GetPlayerScript(1).GetActiveSoldiers() != 0 && GetPlayerScript(2).GetActiveSoldiers() != 0)
                 {
                     // set the turn to ended.
                     TurnManager.m_sbEndTurn = true;
@@ -98,32 +73,23 @@ public class EndState : State
         // Reset the timer.
         TurnManager.m_fTimer = TurnManager.m_sfStaticEndLength;
 
-        // Get current players turn.
-        GameObject gCurrentPlayer = m_tTurnManager.GetPlayer(TurnManager.m_snCurrentTurn);
-        Player pCurrentPlayer = gCurrentPlayer.GetComponent<Player>();
-
-        // Get the current soldier object and script.
-        GameObject gCurrentSoldier = pCurrentPlayer.GetSoldier(pCurrentPlayer.m_nSoldierTurn);
-        SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
-
         // Activate the soldier canvas when it is the players turn.
-        sCurrentSoldier.CanvasActive(false); // MAYBE GOING TO CHANGE!
+        GetCurrentSoldierScript().CanvasActive(false); // MAYBE GOING TO CHANGE!
 
-        int nActiveSoldiersP1 = m_pPlayer1.GetActiveSoldiers();
-        int nActiveSoldiersP2 = m_pPlayer2.GetActiveSoldiers();
+        // Get active soldiers for each player.
+        int nActiveSoldiersP1 = GetPlayerScript(1).GetActiveSoldiers();
+        int nActiveSoldiersP2 = GetPlayerScript(2).GetActiveSoldiers();
 
+        // Go through each soldier for player2 and set the kinematic to true.
         for (int i = 0; i < nActiveSoldiersP1; i++)
         {
-            GameObject g1CurrentSoldier = m_pPlayer1.GetSoldier(i);
-            SoldierActor s1CurrentSoldier = g1CurrentSoldier.GetComponent<SoldierActor>();
-            s1CurrentSoldier.m_rbRigidBody.isKinematic = false;
+            GetSoldierScript(1, i).m_rbRigidBody.isKinematic = false;
         }
 
+        // Go through each soldier for player2 and set the kinematic to true.
         for (int i = 0; i < nActiveSoldiersP2; i++)
         {
-            GameObject g1CurrentSoldier = m_pPlayer2.GetSoldier(i);
-            SoldierActor s1CurrentSoldier = g1CurrentSoldier.GetComponent<SoldierActor>();
-            s1CurrentSoldier.m_rbRigidBody.isKinematic = false;
+            GetSoldierScript(2, i).m_rbRigidBody.isKinematic = false;
         }
     }
 
@@ -142,10 +108,10 @@ public class EndState : State
     private bool GameOver()
     {
         // Get player1 and Teddy.
-        float fTeddyHealth1 = m_pPlayer1.GetComponent<Player>().m_gTeddyBase.GetComponent<Teddy>().m_fCurrentHealth;
+        float fTeddyHealth1 = GetPlayerScript(1).m_gTeddyBase.GetComponent<Teddy>().m_fCurrentHealth;
 
         // Get player2 and Teddy.
-        float fTeddyHealth2 = m_pPlayer2.GetComponent<Player>().m_gTeddyBase.GetComponent<Teddy>().m_fCurrentHealth;
+        float fTeddyHealth2 = GetPlayerScript(2).m_gTeddyBase.GetComponent<Teddy>().m_fCurrentHealth;
 
         // Check Teddy current health for each player.
         if (fTeddyHealth1 <= 0 || fTeddyHealth2 <= 0 )

@@ -547,7 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nPlayerNumber: 1
-  m_gSoldierBlueprint: {fileID: 1087192944953356, guid: 71b47524c1625cf4586a0a71b0b21043,
+  m_gSoldierBlueprint: {fileID: 1087192944953356, guid: 0208806617b5123408a08fd330e71436,
     type: 2}
   m_nPoolSize: 3
   m_gTeddyBase: {fileID: 1847669473}
@@ -1519,7 +1519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nPlayerNumber: 2
-  m_gSoldierBlueprint: {fileID: 1087192944953356, guid: 71b47524c1625cf4586a0a71b0b21043,
+  m_gSoldierBlueprint: {fileID: 1087192944953356, guid: 0208806617b5123408a08fd330e71436,
     type: 2}
   m_nPoolSize: 3
   m_gTeddyBase: {fileID: 647825625}

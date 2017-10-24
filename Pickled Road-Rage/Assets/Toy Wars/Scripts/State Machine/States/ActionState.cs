@@ -17,19 +17,14 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class ActionState : State
 {
-    // State machine instance
-    StateMachine m_sStateMachine;
-
     //--------------------------------------------------------------------------------------
     // Initialization: Constructor for the State.
     //
     // Param:
     //      sMachine: A reference to the StateMachine.
     //--------------------------------------------------------------------------------------
-    public ActionState(StateMachine sMachine)
+    public ActionState(StateMachine sMachine) : base(sMachine)
     {
-        // Set the instance of the statemachine.
-        m_sStateMachine = sMachine;
     }
 
     //--------------------------------------------------------------------------------------

@@ -17,25 +17,14 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class GameOverState : State
 {
-    // State machine instance
-    StateMachine m_sStateMachine;
-
-    // Turn manager instance
-    TurnManager m_tTurnManager;
-
     //--------------------------------------------------------------------------------------
     // Initialization: Constructor for the State.
     //
     // Param:
     //      sMachine: A reference to the StateMachine.
     //--------------------------------------------------------------------------------------
-    public GameOverState(StateMachine sMachine)
+    public GameOverState(StateMachine sMachine) : base(sMachine)
     {
-        // Set the instance of the statemachine.
-        m_sStateMachine = sMachine;
-
-        // Set the instance of the turn manager.
-        m_tTurnManager = m_sStateMachine.m_tTurnManger;
     }
 
     //--------------------------------------------------------------------------------------
@@ -43,7 +32,6 @@ public class GameOverState : State
     //--------------------------------------------------------------------------------------
     public override void OnUpdate()
     {
-        
     }
 
     //--------------------------------------------------------------------------------------
@@ -60,6 +48,5 @@ public class GameOverState : State
     //--------------------------------------------------------------------------------------
     public override void OnExit()
     {
-
     }
 }

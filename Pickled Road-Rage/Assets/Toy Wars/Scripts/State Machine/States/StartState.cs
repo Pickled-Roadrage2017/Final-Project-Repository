@@ -13,43 +13,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// DelayState object. Inheriting from State. Delays the turn switching.
+// StartState object. Inheriting from State. Start of the Player turn after switching.
 //--------------------------------------------------------------------------------------
 public class StartState : State
 {
-    // State machine instance
-    StateMachine m_sStateMachine;
-
-    // Turn manager instance
-    TurnManager m_tTurnManager;
-
-    // Get player1
-    Player m_pPlayer1;
-
-    // Get player2
-    Player m_pPlayer2;
-
     //--------------------------------------------------------------------------------------
     // Initialization: Constructor for the State.
     //
     // Param:
     //      sMachine: A reference to the StateMachine.
     //--------------------------------------------------------------------------------------
-    public StartState(StateMachine sMachine)
+    public StartState(StateMachine sMachine) : base(sMachine)
     {
-        // Set the instance of the statemachine.
-        m_sStateMachine = sMachine;
-
-        // Set the instance of the turn manager.
-        m_tTurnManager = m_sStateMachine.m_tTurnManger;
-
-        // Get player1 and assign to pPlayer1
-        GameObject gPlayer1 = m_tTurnManager.GetPlayer(1);
-        m_pPlayer1 = gPlayer1.GetComponent<Player>();
-
-        // Get player2 and assign to pPlayer2
-        GameObject gPlayer2 = m_tTurnManager.GetPlayer(2);
-        m_pPlayer2 = gPlayer2.GetComponent<Player>();
     }
 
     //--------------------------------------------------------------------------------------
@@ -79,51 +54,30 @@ public class StartState : State
         // if it is no ones turn then dont run.
         if (TurnManager.m_snCurrentTurn != 0)
         {
-            // Get current players turn.
-            GameObject gCurrentPlayer = m_tTurnManager.GetPlayer(TurnManager.m_snCurrentTurn);
-            Player pCurrentPlayer = gCurrentPlayer.GetComponent<Player>();
-
             // Run the soldier manager script.
-            pCurrentPlayer.SoldierTurnManager();
+            GetCurrentPlayerScript().SoldierTurnManager();
+  
+            // activate the soldier canvas when it is the players turn.
+            GetCurrentSoldierScript().CanvasActive(true); // MAYBE GOING TO CHANGE!
 
-            // Get the current soldier object and script.
-            GameObject gCurrentSoldier = pCurrentPlayer.GetSoldier(pCurrentPlayer.m_nSoldierTurn);
-            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
+            // Get active soldiers for each player.
+            int nActiveSoldiersP1 = GetPlayerScript(1).GetActiveSoldiers();
+            int nActiveSoldiersP2 = GetPlayerScript(2).GetActiveSoldiers();
 
-            // Activate the soldier canvas when it is the players turn.
-            sCurrentSoldier.CanvasActive(true); // MAYBE GOING TO CHANGE!
-
-
-
-
-
-
-
-            int nActiveSoldiersP1 = m_pPlayer1.GetActiveSoldiers();
-            int nActiveSoldiersP2 = m_pPlayer2.GetActiveSoldiers();
-
+            // Go through each soldier for player2 and set the kinematic to true.
             for (int i = 0; i < nActiveSoldiersP1; i++)
             {
-                GameObject g1CurrentSoldier = m_pPlayer1.GetSoldier(i);
-                SoldierActor s1CurrentSoldier = g1CurrentSoldier.GetComponent<SoldierActor>();
-                s1CurrentSoldier.m_rbRigidBody.isKinematic = true;
+                GetSoldierScript(1, i).m_rbRigidBody.isKinematic = true;
             }
 
+            // Go through each soldier for player2 and set the kinematic to true.
             for (int i = 0; i < nActiveSoldiersP2; i++)
             {
-                GameObject g1CurrentSoldier = m_pPlayer2.GetSoldier(i);
-                SoldierActor s1CurrentSoldier = g1CurrentSoldier.GetComponent<SoldierActor>();
-                s1CurrentSoldier.m_rbRigidBody.isKinematic = true;
+                GetSoldierScript(2, i).m_rbRigidBody.isKinematic = true;
             }
 
-
-
-
-            sCurrentSoldier.m_rbRigidBody.isKinematic = false;
-            
-
-
-
+            // Set the current soldier isKinematic to false.
+            GetCurrentSoldierScript().m_rbRigidBody.isKinematic = false;
         }
     }
 
