@@ -13,6 +13,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
+// Enum EMouseFiringState. Used for what the stage the mouse is in when firing the weapon.
+//--------------------------------------------------------------------------------------
+public enum EMouseFiringState
+{
+    EMOUSE_DOWN,
+    EMOUSE_HELD,
+    EMOUSE_UP,
+}
+
+//--------------------------------------------------------------------------------------
 // Player object. Inheriting from MonoBehaviour. Used for controling turns and soldiers.
 //--------------------------------------------------------------------------------------
 public class Player : MonoBehaviour
@@ -53,27 +63,19 @@ public class Player : MonoBehaviour
     [Tooltip("Spawn postion for the soldier spawn, pass in a gameobject.")]
     public GameObject m_gSoldier2Spawn; // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
 
-
-
-
-    public float m_fMovePoints; // PUBLIC FOR TESTING!
-    public float m_fMaxMovePoints;
-
-
-
-
-
     // private int for current soldiers turn.
-    private int m_nSoldierTurn;
+    [HideInInspector]
+    public int m_nSoldierTurn;
 
     // public array of gameobjects for player soldiers.
     private GameObject[] m_agSoldierList;
 
+    // private EMouseFiringState for if the mouse is pressed or not.
+    [HideInInspector]
+    public EMouseFiringState m_eFiringState;
+
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;
-
-    // private bool for if the mouse is pressed or not.
-    private bool m_bMouseDown = false;
 
     // Active Soldiers getter.
     public int GetActiveSoldiers()
@@ -92,16 +94,8 @@ public class Player : MonoBehaviour
         // Start the solider turn at 1.
         m_nSoldierTurn = 0;
 
-
-
-
-
-        m_fMovePoints = m_fMaxMovePoints;
-
-
-
-
-
+        // Start the firing state to mouse up.
+        m_eFiringState = EMouseFiringState.EMOUSE_UP;
 
         // Go through each soldier.
         for (int i = 0; i < m_nPoolSize; ++i)
@@ -134,46 +128,21 @@ public class Player : MonoBehaviour
             GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
             SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
 
-
-
-
-
-            sCurrentSoldier.CanvasActive(true);
-
-
-
-
-            // new bool for if the player is firing or not.
-            bool bFiring = false;
+            // new EMouseFiringState for if the player is firing or not.
+            EMouseFiringState eFiring = EMouseFiringState.EMOUSE_UP;
 
             // Fire the soldier weapon. apply its state of fire to a bool.
             if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
-                bFiring = SoldierFire(sCurrentSoldier);
+                eFiring = SoldierFire(sCurrentSoldier);
 
             // if not firing the soldier.
-            if (!bFiring && StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
+            if (eFiring == EMouseFiringState.EMOUSE_UP && StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
             {
                 // Move the soldier.
                 SoldierMovement(sCurrentSoldier);
             }
-
-            // If the movement points are below or 0 and in the end turn state
-            if (StateMachine.GetState() == ETurnManagerStates.ETURN_END)
-            {
-                // Reset the movement points.
-                m_fMovePoints = m_fMaxMovePoints;
-            }
         }
-
-        else if (m_nPlayerNumber != TurnManager.m_snCurrentTurn)
-        {
-            // Get the soldier object and script.
-            GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
-            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
-
-            sCurrentSoldier.CanvasActive(false);
-        }
-
+        
         // Set Active soldier count to 0
         m_nActiveSoldiers = 0;
 
@@ -233,18 +202,21 @@ public class Player : MonoBehaviour
         // Create a reset soldier function and reset anything that needs to be fresh on turn starting.
         // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO
 
-        // Go up one soldiers turn.
-        m_nSoldierTurn += 1;
+        // Check if there is active soldier so the while loop doesnt go forever.
+        if (GetActiveSoldiers() <= 0)
+            return;
 
         // Loop through the soldier list.
-        while (m_nSoldierTurn < m_agSoldierList.Length && !m_agSoldierList[m_nSoldierTurn].activeInHierarchy)
+        do
         {
+            // Go up one soldiers turn.
             m_nSoldierTurn += 1;
-        }
 
-        // Go back to the start of the list
-        if (m_nSoldierTurn >= m_agSoldierList.Length)
-            m_nSoldierTurn = 0;
+            // Go back to the start of the list
+            if (m_nSoldierTurn >= m_agSoldierList.Length)
+                m_nSoldierTurn = 0;
+        }
+        while (m_nSoldierTurn < m_agSoldierList.Length && !m_agSoldierList[m_nSoldierTurn].activeInHierarchy);
     }
 
     //--------------------------------------------------------------------------------------
@@ -255,7 +227,7 @@ public class Player : MonoBehaviour
     // Return:
     //      GameObject: the soldier that is being returned.
     //--------------------------------------------------------------------------------------
-    GameObject GetSoldier(int nSoldierNumber)
+    public GameObject GetSoldier(int nSoldierNumber)
     {
         // Loop through the soldier list.
         if (nSoldierNumber < m_agSoldierList.Length)
@@ -276,19 +248,12 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void SoldierMovement(SoldierActor sCurrentSoldier)
     {
-        if (m_fMovePoints > 0)
-        {
-            // Get the horizontal and vertical axis.
-            float fMoveHorizontal = Input.GetAxis("Horizontal");
-            float fMoveVertical = Input.GetAxis("Vertical");
+        // Get the horizontal and vertical axis.
+        float fMoveHorizontal = Input.GetAxis("Horizontal");
+        float fMoveVertical = Input.GetAxis("Vertical");
 
-            // Apply Axis to the current soldier.
-            sCurrentSoldier.Move(fMoveHorizontal, fMoveVertical);
-
-            // decrease the movement point value.
-            if (fMoveHorizontal != 0 || fMoveVertical != 0)
-                m_fMovePoints -= 0.5f;
-        }
+        // Apply Axis to the current soldier.
+        sCurrentSoldier.Move(fMoveHorizontal, fMoveVertical);
 
         // Update the mpuse face function in soldier.
         sCurrentSoldier.FaceMouse();
@@ -302,38 +267,39 @@ public class Player : MonoBehaviour
     // Return:
     //      bool: Return if the soldier is firing or not.
     //--------------------------------------------------------------------------------------
-    bool SoldierFire(SoldierActor sCurrentSoldier)
+    EMouseFiringState SoldierFire(SoldierActor sCurrentSoldier)
     {
         // if the left mouse button is held down and timer is greater than 1
         if (Input.GetButton("Fire1") && TurnManager.m_fTimer > 1)
         {
             // Mouse down is true.
-            m_bMouseDown = true;
+            m_eFiringState = EMouseFiringState.EMOUSE_HELD;
 
             // Run the soldier fire script.
-            sCurrentSoldier.Fire(m_bMouseDown);
+            sCurrentSoldier.Fire(m_eFiringState);
 
             // Return the mouse down.
-            return m_bMouseDown;
+            return m_eFiringState;
         }
 
         // Else if the mouse is not down or the timer is less than 1
         else if (Input.GetButtonUp("Fire1")  || TurnManager.m_fTimer < 1)
         {
             // Set to end turn.
-            if (m_bMouseDown)
+            if (m_eFiringState == EMouseFiringState.EMOUSE_HELD)
                 TurnManager.m_sbEndTurn = true;
 
             // MouseDown is false.
-            m_bMouseDown = false;
+            m_eFiringState = EMouseFiringState.EMOUSE_UP;
 
             // Run the soldier fire script.
-            sCurrentSoldier.Fire(m_bMouseDown);
+            sCurrentSoldier.Fire(m_eFiringState);
 
             // return the mouse down.
-            return m_bMouseDown;
+            return m_eFiringState;
         }
 
-        return false;
+        // return false
+        return EMouseFiringState.EMOUSE_UP;
     }
 }

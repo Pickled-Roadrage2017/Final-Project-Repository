@@ -127,11 +127,11 @@ public class SoldierActor : MonoBehaviour
     // Fire: Call when the Player commands the Soldier to fire
     //
     //--------------------------------------------------------------------------------------
-    public void Fire(bool bMouseDown)
+    public void Fire(EMouseFiringState eMouseState)
     {
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
-            m_gLauncherScript.Fire(bMouseDown);
+            m_gLauncherScript.Fire(eMouseState);
         }
 
         else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)

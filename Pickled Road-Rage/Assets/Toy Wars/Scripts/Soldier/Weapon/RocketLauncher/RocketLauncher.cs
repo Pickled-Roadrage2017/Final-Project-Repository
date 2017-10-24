@@ -120,9 +120,9 @@ public class RocketLauncher : MonoBehaviour
         }
         
     }
-    public void Fire(bool bMouseDown)
+    public void Fire(EMouseFiringState eMouseState)
     {
-        if (bMouseDown)
+        if (eMouseState == EMouseFiringState.EMOUSE_HELD)
         {
             m_bChargingShot = true;
 

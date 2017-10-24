@@ -63,17 +63,22 @@ public class DelayState : State
         TurnManager.m_fTimer = TurnManager.m_sfStaticDelayLength;
 
         // if it is no ones turn then dont run.
-        if (TurnManager.m_snCurrentTurn != 0 )
+        if (TurnManager.m_snCurrentTurn != 0)
         {
             // Get current players turn.
-            GameObject gCurrent = m_tTurnManager.GetPlayer(TurnManager.m_snCurrentTurn);
-            Player pCurrent = gCurrent.GetComponent<Player>();
+            GameObject gCurrentPlayer = m_tTurnManager.GetPlayer(TurnManager.m_snCurrentTurn);
+            Player pCurrentPlayer = gCurrentPlayer.GetComponent<Player>();
 
             // Run the soldier manager script.
-            pCurrent.SoldierTurnManager();
-        }
+            pCurrentPlayer.SoldierTurnManager();
 
-        GameOver();
+            // Get the current soldier object and script.
+            GameObject gCurrentSoldier = pCurrentPlayer.GetSoldier(pCurrentPlayer.m_nSoldierTurn);
+            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
+
+            // Activate the soldier canvas when it is the players turn.
+            sCurrentSoldier.CanvasActive(true); // MAYBE GOING TO CHANGE!
+        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -83,22 +88,5 @@ public class DelayState : State
     {
         // Set the delay back to 0
         TurnManager.m_fTimer = 0;
-    }
-
-    //--------------------------------------------------------------------------------------
-    // GameOver: Function for how to hit the gameover state.
-    //--------------------------------------------------------------------------------------
-    private void GameOver() // Maybe move to the action state.
-    {
-        // Get current players turn.
-        GameObject gCurrent = m_tTurnManager.GetPlayer(TurnManager.m_snCurrentTurn);
-        Player pCurrent = gCurrent.GetComponent<Player>();
-
-        // Check if the player has any soldiers left or if the teddy is dead.
-        if (pCurrent.m_gTeddyBase.GetComponent<Teddy>().m_fCurrentHealth <= 0)
-        {
-            // Push to the game over state.
-            m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_GAMEOVER);
-        }
     }
 }

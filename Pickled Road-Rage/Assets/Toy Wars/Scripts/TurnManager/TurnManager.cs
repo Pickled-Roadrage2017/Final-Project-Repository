@@ -89,12 +89,15 @@ public class TurnManager : MonoBehaviour
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_ACTION, new ActionState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_END, new EndTurnState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_GAMEOVER, new GameOverState(m_sStateMachine));
-
-
-        // put a check here!!! // TODO ?? TODO
+        
         // Get the canvas and set it to inactive.
-        //GameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
-        //GameOverCanvas.SetActive(false);
+        GameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
+        
+        // Check if there is a valid GameOverCanvas
+        if (GameOverCanvas != null)
+        {
+            GameOverCanvas.SetActive(false);
+        }
     }
 
     //--------------------------------------------------------------------------------------
