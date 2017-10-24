@@ -23,6 +23,12 @@ public class DelayState : State
     // Turn manager instance
     TurnManager m_tTurnManager;
 
+    // Get player1
+    Player m_pPlayer1;
+
+    // Get player2
+    Player m_pPlayer2;
+
     //--------------------------------------------------------------------------------------
     // Initialization: Constructor for the State.
     //
@@ -36,6 +42,14 @@ public class DelayState : State
 
         // Set the instance of the turn manager.
         m_tTurnManager = m_sStateMachine.m_tTurnManger;
+
+        // Get player1 and assign to pPlayer1
+        GameObject gPlayer1 = m_tTurnManager.GetPlayer(1);
+        m_pPlayer1 = gPlayer1.GetComponent<Player>();
+
+        // Get player2 and assign to pPlayer2
+        GameObject gPlayer2 = m_tTurnManager.GetPlayer(2);
+        m_pPlayer2 = gPlayer2.GetComponent<Player>();
     }
 
     //--------------------------------------------------------------------------------------
@@ -78,6 +92,38 @@ public class DelayState : State
 
             // Activate the soldier canvas when it is the players turn.
             sCurrentSoldier.CanvasActive(true); // MAYBE GOING TO CHANGE!
+
+
+
+
+
+
+
+            int nActiveSoldiersP1 = m_pPlayer1.GetActiveSoldiers();
+            int nActiveSoldiersP2 = m_pPlayer2.GetActiveSoldiers();
+
+            for (int i = 0; i < nActiveSoldiersP1; i++)
+            {
+                GameObject g1CurrentSoldier = m_pPlayer1.GetSoldier(i);
+                SoldierActor s1CurrentSoldier = g1CurrentSoldier.GetComponent<SoldierActor>();
+                s1CurrentSoldier.m_rbRigidBody.isKinematic = true;
+            }
+
+            for (int i = 0; i < nActiveSoldiersP2; i++)
+            {
+                GameObject g1CurrentSoldier = m_pPlayer2.GetSoldier(i);
+                SoldierActor s1CurrentSoldier = g1CurrentSoldier.GetComponent<SoldierActor>();
+                s1CurrentSoldier.m_rbRigidBody.isKinematic = true;
+            }
+
+
+
+
+            sCurrentSoldier.m_rbRigidBody.isKinematic = false;
+            
+
+
+
         }
     }
 

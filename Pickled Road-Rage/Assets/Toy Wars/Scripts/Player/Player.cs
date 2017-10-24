@@ -182,6 +182,8 @@ public class Player : MonoBehaviour
                 // Set active state.
                 m_agSoldierList[i].SetActive(true);
 
+                ++m_nActiveSoldiers;
+
                 // return the bullet.
                 return m_agSoldierList[i];
             }

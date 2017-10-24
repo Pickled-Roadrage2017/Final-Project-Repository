@@ -108,6 +108,23 @@ public class EndTurnState : State
 
         // Activate the soldier canvas when it is the players turn.
         sCurrentSoldier.CanvasActive(false); // MAYBE GOING TO CHANGE!
+
+        int nActiveSoldiersP1 = m_pPlayer1.GetActiveSoldiers();
+        int nActiveSoldiersP2 = m_pPlayer2.GetActiveSoldiers();
+
+        for (int i = 0; i < nActiveSoldiersP1; i++)
+        {
+            GameObject g1CurrentSoldier = m_pPlayer1.GetSoldier(i);
+            SoldierActor s1CurrentSoldier = g1CurrentSoldier.GetComponent<SoldierActor>();
+            s1CurrentSoldier.m_rbRigidBody.isKinematic = false;
+        }
+
+        for (int i = 0; i < nActiveSoldiersP2; i++)
+        {
+            GameObject g1CurrentSoldier = m_pPlayer2.GetSoldier(i);
+            SoldierActor s1CurrentSoldier = g1CurrentSoldier.GetComponent<SoldierActor>();
+            s1CurrentSoldier.m_rbRigidBody.isKinematic = false;
+        }
     }
 
     //--------------------------------------------------------------------------------------

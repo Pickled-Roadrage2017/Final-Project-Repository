@@ -70,7 +70,8 @@ public class SoldierActor : MonoBehaviour
     private RocketLauncher m_gLauncherScript;
 
     // Will be set to the Soldiers rigidbody property
-    private Rigidbody m_rbRigidBody;
+    [HideInInspector]
+    public Rigidbody m_rbRigidBody;
 
 
    
