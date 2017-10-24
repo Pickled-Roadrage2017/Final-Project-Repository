@@ -15,7 +15,7 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 // DelayState object. Inheriting from State. Delays the turn switching.
 //--------------------------------------------------------------------------------------
-public class EndTurnState : State
+public class EndState : State
 {
     // State machine instance
     StateMachine m_sStateMachine;
@@ -35,7 +35,7 @@ public class EndTurnState : State
     // Param:
     //      sMachine: A reference to the StateMachine.
     //--------------------------------------------------------------------------------------
-    public EndTurnState(StateMachine sMachine)
+    public EndState(StateMachine sMachine)
     {
         // Set the instance of the statemachine.
         m_sStateMachine = sMachine;
@@ -85,7 +85,7 @@ public class EndTurnState : State
                 }
 
                 // Push to the delay state
-                m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
+                m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_START);
             }
         }
     }

@@ -49,8 +49,8 @@ public class TimerUI : MonoBehaviour
             m_tTurnTimerText.text = nTimer;
         }
 
-        // If it is currently the delay state.
-        if (StateMachine.GetState() == ETurnManagerStates.ETURN_DELAY)
+        // If it is currently the start state.
+        if (StateMachine.GetState() == ETurnManagerStates.ETURN_START)
         {
             // display the ui timer at 0.
             m_tTurnTimerText.text = "0:00";

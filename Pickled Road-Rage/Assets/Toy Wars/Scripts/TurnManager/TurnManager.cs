@@ -85,9 +85,9 @@ public class TurnManager : MonoBehaviour
         m_sStateMachine = new StateMachine(this);
 
         // Add states to the machine.
-        m_sStateMachine.AddState(ETurnManagerStates.ETURN_DELAY, new DelayState(m_sStateMachine));
+        m_sStateMachine.AddState(ETurnManagerStates.ETURN_START, new StartState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_ACTION, new ActionState(m_sStateMachine));
-        m_sStateMachine.AddState(ETurnManagerStates.ETURN_END, new EndTurnState(m_sStateMachine));
+        m_sStateMachine.AddState(ETurnManagerStates.ETURN_END, new EndState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_GAMEOVER, new GameOverState(m_sStateMachine));
         
         // Get the canvas and set it to inactive.
@@ -106,7 +106,7 @@ public class TurnManager : MonoBehaviour
     private void Start()
     {
         // Set the first state to the delay state.
-        m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_DELAY);
+        m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_START);
     }
 
     //--------------------------------------------------------------------------------------

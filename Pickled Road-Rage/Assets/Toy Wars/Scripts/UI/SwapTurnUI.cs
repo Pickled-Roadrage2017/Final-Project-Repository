@@ -73,8 +73,8 @@ public class SwapTurnUI : MonoBehaviour
             m_fCurrentLerpTime = 0f;
         }
 
-        // If it is currently the delay state.
-        if (StateMachine.GetState() == ETurnManagerStates.ETURN_DELAY)
+        // If it is currently the start state.
+        if (StateMachine.GetState() == ETurnManagerStates.ETURN_START)
         {
             // Set the PlayerTurn text element to enabled.
             m_tPlayerTurnText.enabled = true;

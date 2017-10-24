@@ -14,7 +14,7 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public enum ETurnManagerStates
 {
-    ETURN_DELAY,
+    ETURN_START,
     ETURN_ACTION,
     ETURN_END,
     ETURN_GAMEOVER
