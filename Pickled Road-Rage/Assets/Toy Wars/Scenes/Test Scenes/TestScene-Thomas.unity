@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nPlayerNumber: 1
-  m_gSoldierBlueprint: {fileID: 1087192944953356, guid: 0208806617b5123408a08fd330e71436,
+  m_gSoldierBlueprint: {fileID: 1087192944953356, guid: 8765a1f70bbe6bd448286caa348af400,
     type: 2}
   m_nPoolSize: 3
   m_gTeddyBase: {fileID: 1847669473}
@@ -1519,7 +1519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nPlayerNumber: 2
-  m_gSoldierBlueprint: {fileID: 1087192944953356, guid: 0208806617b5123408a08fd330e71436,
+  m_gSoldierBlueprint: {fileID: 1087192944953356, guid: 8765a1f70bbe6bd448286caa348af400,
     type: 2}
   m_nPoolSize: 3
   m_gTeddyBase: {fileID: 647825625}
