@@ -153,21 +153,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fDamage: 50
   m_fPower: 0
-  m_fDropIterator: 0.25
-  m_fMaxActivateTimer: 1
-  m_fMaxLifespan: 2
-  m_fCurrentLifespan: 0
+  m_fMaxActivateTimer: 2
   m_UnitMask:
     serializedVersion: 2
     m_Bits: 256
   m_ExplosionForce: 100
   m_fHitMultiplier: 0.5
   m_fExplosionRadius: 1
-  m_fAirDrop: 0
-  m_fCurrentActivateTimer: 0
+  m_fSpeed: 1
   m_gSpawnPoint: {fileID: 1566479626656110, guid: 8b66a0fd11024c842b97741cc2f8da22,
     type: 2}
-  m_v3MoveDirection: {x: 0, y: 0, z: 0}
+  m_fLerpTime: 0
+  m_v3Target: {x: 0, y: 0, z: 0}
+  m_fCurrentActivateTimer: 0
+  m_fArcHeight: 0
 --- !u!119 &119918221389181220
 Projector:
   m_ObjectHideFlags: 1

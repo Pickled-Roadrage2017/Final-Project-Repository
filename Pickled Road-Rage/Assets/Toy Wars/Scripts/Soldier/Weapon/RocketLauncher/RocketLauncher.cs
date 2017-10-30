@@ -9,36 +9,29 @@ using UnityEngine.UI;
 public class RocketLauncher : MonoBehaviour
 {
     [Header("Firing Variables")]
-    // Minimum power for a shot
-    [Tooltip("Minimum charge for the Charge, be sure that this matches the 'min value' variable in the Sliders inspector")]
-    public float m_fMinCharge = 1f;
+    // speed for the moving of the target line
+    public float m_fAimSpeed;
 
-    // Float for Max Charge
-    [Tooltip("Maximum charge for the Charge, be sure that this matches the 'max value' variable in the Sliders inspector")]
-    public float m_fMaxCharge = 2;
-    //
-    public float m_fChargeSpeed = 0.02f;
+    // The furthest the target can go.
+    public float m_fMaxLength;
 
-    // Prefab for the Rocket object
-    [LabelOverride("Rocket")][Tooltip("Prefab for instantiating the rockets")]
+    // Prefab for the Rocket object.
+    [LabelOverride("Rocket")]
+    [Tooltip("Prefab for instantiating the rockets")]
     public GameObject m_gRocketBlueprint;
 
-    [LabelOverride("RocketLauncher Tilt")][Range(0, -100)][Tooltip("This tilts the RocketLauncher, which in turn makes the rockets arc deeper or shallower")]
-    public float m_fRocketXRot;
+    [LabelOverride("Rocket Arc Height")]
+    [Tooltip("How high the peak of the rockets arc will be")]
+    public float m_fArcHeight;
 
-    //[LabelOverride("Canvas")]
-    //public Canvas m_cCanvas;
-
-    [LabelOverride("Aim Slider (red thing)")]
-    public Slider m_sSlider; 
+    // count for how many parts of the line will show
+    [LabelOverride("Line Nodes")]
+    [Range(1, 10)]
+    public int m_nLineNodes;
 
     // float variable passed on for the firing from the Soldier
     [HideInInspector]
     public float m_fCharge = 0;
-
-    // Boolean for the locking of fire if a rocket is still alive
-    [HideInInspector]
-    public bool m_bRocketAlive;
 
     // Pool for the Rockets (should always be 1)
     private int m_nPoolsize = 1;
@@ -52,22 +45,19 @@ public class RocketLauncher : MonoBehaviour
     // boolean for if the soldier is currently charging up a shot
     private bool m_bChargingShot;
 
-   
-
-
+    // where the rocket will be fired towards
+    private Vector3 m_v3CastingLine;
 
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        m_fChargeSpeed = m_fMinCharge;
-        m_fCharge = m_fMinCharge;
         m_bChargingShot = false;
-
+        m_bIsAscending = true;
         // initilize rocket list with size
         m_agRocketList = new GameObject[m_nPoolsize];
-        
+
         // go through each rocket
         for (int i = 0; i < m_nPoolsize; ++i)
         {
@@ -75,80 +65,107 @@ public class RocketLauncher : MonoBehaviour
             m_agRocketList[i] = Instantiate(m_gRocketBlueprint);
             m_agRocketList[i].SetActive(false);
         }
-        gameObject.transform.Rotate(m_fRocketXRot, 0, 0);
     }
 
 
     void Update()
     {
-        if (m_sSlider != null)
+
+    }
+
+    //--------------------------------------------------------------------------------------
+    // MouseDown: Restes variables of the Launcher when the mouse button is pressed.
+    //--------------------------------------------------------------------------------------
+    public void MouseDown()
+    {
+        // Reset CastingLine
+        m_v3CastingLine = transform.position + transform.forward;
+    }
+
+    //--------------------------------------------------------------------------------------
+    // MouseHeld: Charges the shot until it is no longer called.
+    //--------------------------------------------------------------------------------------
+    public void MouseHeld()
+    {
+        // It is charging a shot
+        m_bChargingShot = true;
+        // If the counter should be ascending and the CastingLine.magnitude is less than MaxLength
+        if (m_bIsAscending && m_v3CastingLine.magnitude <= m_fMaxLength)
         {
-            if (m_bChargingShot)
+            // Increase the CastingLine forwards by AimSpeed
+            m_v3CastingLine += transform.forward * m_fAimSpeed * Time.deltaTime;
+
+            // If the magnitude is higher or equal to MaxLength
+            if (m_v3CastingLine.magnitude >= m_fMaxLength)
             {
-                m_sSlider.value = m_fCharge;
-            }
-            else
-            {
-                m_sSlider.value = m_fMinCharge;
+                // then it should not be ascening anymore
+                m_bIsAscending = false;
             }
         }
+
+        else
+        {
+            // it musn't be ascending if it got here
+            m_bIsAscending = false;
+
+            // Decrease the CastingLine forwards by AimSpeed
+            m_v3CastingLine -= transform.forward * m_fAimSpeed * Time.deltaTime;
+
+            // if the magnitude is lower than a set number
+            if (m_v3CastingLine.magnitude <= 0.2f)
+            {
+                // start ascending
+                m_bIsAscending = true;
+            }
+        }
+        // Draw the Aiming line
+        GetComponent<LineRenderer>().positionCount = m_nLineNodes;
+        for (int iIndex = 0; iIndex < m_nLineNodes; iIndex++)
+        {
+            Vector3 Point = BezierCurve.CalculateBezier(transform.position, m_v3CastingLine, (float)iIndex * 0.1f, m_fArcHeight);
+            GetComponent<LineRenderer>().SetPosition(iIndex, Point);
+        }
     }
-    public void SpawnBullet()
+
+    //--------------------------------------------------------------------------------------
+    // MouseUp: Spawns a bullet if the Mouse had been held beforehand.
+    //--------------------------------------------------------------------------------------
+    public void MouseUp()
     {
         if (m_bChargingShot)
         {
-            // re-Initilise all Variables of the rocket
-            GameObject gRocket = Allocate();
-            if (gRocket.activeInHierarchy)
-            {
-                // Resets all of gRockets current values to their initial values
-                m_bRocketAlive = true;
-                gRocket.GetComponent<Rocket>().m_gSpawnPoint = gameObject;
-                gRocket.GetComponent<Rocket>().m_fCurrentLifespan = gRocket.GetComponent<Rocket>().m_fMaxLifespan;
-                gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
-                gRocket.GetComponent<Rocket>().transform.position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
-                gRocket.GetComponent<Rocket>().m_fPower = m_fCharge;
-                gRocket.GetComponent<Rocket>().m_fAirDrop = 0;
-                gRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                gRocket.GetComponent<Rocket>().m_v3MoveDirection = transform.forward;
-                gRocket.GetComponent<Rocket>().m_fCurrentActivateTimer = gRocket.GetComponent<Rocket>().m_fMaxActivateTimer;
-            }
-
-            m_fCharge = m_fMinCharge;
-
-            m_bChargingShot = false;
-        }
-        
-    }
-    public void Fire(EMouseFiringState eMouseState)
-    {
-        if (eMouseState == EMouseFiringState.EMOUSE_HELD)
-        {
-            m_bChargingShot = true;
-
-            if (m_bIsAscending && m_fCharge <= m_fMaxCharge)
-            {
-                m_fCharge += m_fChargeSpeed * Time.deltaTime;
-                
-                if (m_fCharge >= m_fMaxCharge)
-                {
-                    m_bIsAscending = false;
-                }
-            }
-            else
-            {
-                m_bIsAscending = false;
-                m_fCharge -= m_fChargeSpeed * Time.deltaTime;
-                if (m_fCharge <= m_fMinCharge)
-                {
-                    m_bIsAscending = true;
-                }
-            }
-        }
-        else if (m_bChargingShot)
-        {
             SpawnBullet();
         }
+    }
+
+    //--------------------------------------------------------------------------------------
+    // SpawnBullet: Resets and Spawns a Rocket.       
+    //--------------------------------------------------------------------------------------
+    public void SpawnBullet()
+    {
+        // if this is called while a shot is being charged
+        if (m_bChargingShot)
+        {
+            // Allocate a Rocket from the pool and set it to active
+            GameObject gRocket = Allocate();
+            // if the rocket is active
+            if (gRocket.activeInHierarchy)
+            {
+                // Reset all of the Rockets variables
+                gRocket.GetComponent<Rocket>().m_gSpawnPoint = gameObject;
+                gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
+                gRocket.GetComponent<Rocket>().m_fArcHeight = m_fArcHeight;
+                gRocket.GetComponent<Rocket>().transform.position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
+                gRocket.GetComponent<Rocket>().m_fPower = m_fCharge;
+                gRocket.GetComponent<Rocket>().m_v3Target = m_v3CastingLine;
+                gRocket.GetComponent<Rocket>().m_fCurrentActivateTimer = gRocket.GetComponent<Rocket>().m_fMaxActivateTimer;
+                gRocket.GetComponent<Rocket>().m_fLerpTime = 0.0f;
+            }
+            // Reset variables for the firing functions
+            m_bChargingShot = false;
+            m_v3CastingLine = new Vector3(0, 0, 0);
+        }
+
     }
     //--------------------------------------------------------------------------------------
     // Allocate: For accessing a rocket that isn't currently active in m_agRocketList 
@@ -166,9 +183,7 @@ public class RocketLauncher : MonoBehaviour
             {
                 //set active state
                 m_agRocketList[i].SetActive(true);
-                
 
-               
                 //return the rocket
                 return m_agRocketList[i];
             }
@@ -176,4 +191,8 @@ public class RocketLauncher : MonoBehaviour
         //if all fail, return null
         return null;
     }
+
+    
 }
+
+
