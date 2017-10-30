@@ -9,7 +9,6 @@ public class TestingLauncher : MonoBehaviour
     // Minimum power for a shot
     [Tooltip("Minimum charge for the Charge, be sure that this matches the 'min value' variable in the Sliders inspector")]
     public float m_fMinCharge = 1f;
-
     // speed for the moving of the target line
     public float m_fAimSpeed;
     // Float for Max Charge
@@ -23,7 +22,8 @@ public class TestingLauncher : MonoBehaviour
     [LabelOverride("Rocket")]
     [Tooltip("Prefab for instantiating the rockets")]
     public GameObject m_gRocketBlueprint;
-
+    // The Aiming Arrow for scaling purposes
+    public GameObject m_gArrow;
     [LabelOverride("RocketLauncher Tilt")]
     [Range(0, -100)]
     [Tooltip("This tilts the RocketLauncher, which in turn makes the rockets arc deeper or shallower")]
@@ -50,8 +50,7 @@ public class TestingLauncher : MonoBehaviour
     private bool m_bChargingShot;
 
     // where the rocket will be fired towards
-    public Vector3 m_v3CastingLine;
-
+    private Vector3 m_v3CastingLine;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -62,7 +61,7 @@ public class TestingLauncher : MonoBehaviour
         m_fChargeSpeed = m_fMinCharge;
         m_fCharge = m_fMinCharge;
         m_bChargingShot = false;
-        
+        m_bIsAscending = true;
         // initilize rocket list with size
         m_agRocketList = new GameObject[m_nPoolsize];
 
@@ -74,12 +73,13 @@ public class TestingLauncher : MonoBehaviour
             m_agRocketList[i].SetActive(false);
         }
         gameObject.transform.Rotate(m_fRocketXRot, 0, 0);
+
     }
 
 
     void Update()
     {
-        
+       
     }
 
     public void SpawnBullet()
@@ -97,6 +97,7 @@ public class TestingLauncher : MonoBehaviour
                 gRocket.GetComponent<TestingRocket>().transform.position = gRocket.GetComponent<TestingRocket>().m_gSpawnPoint.transform.position;
                 gRocket.GetComponent<TestingRocket>().m_fPower = m_fCharge;
                 gRocket.GetComponent<TestingRocket>().m_v3Target = m_v3CastingLine;
+                gRocket.GetComponent<TestingRocket>().m_v3ArcTarget = gRocket.GetComponent<TestingRocket>().Bezier(gRocket.transform.position, m_v3CastingLine, 0.25f);
                 gRocket.GetComponent<TestingRocket>().m_fCurrentActivateTimer = gRocket.GetComponent<TestingRocket>().m_fMaxActivateTimer;
             }
             // reset the launchers charge value
@@ -115,13 +116,15 @@ public class TestingLauncher : MonoBehaviour
 
         if (eMouseState == EMouseFiringState.EMOUSE_HELD)
         {
+           
             Debug.DrawLine(transform.position, m_v3CastingLine);
             m_bChargingShot = true;
 
             if (m_bIsAscending && m_v3CastingLine.magnitude <= m_fMaxLength)
             {
                 m_v3CastingLine += transform.forward * m_fAimSpeed * Time.deltaTime;
-                
+                m_gArrow.transform.localScale += m_gArrow.transform.forward * 0.05f;
+                    
                 if (m_v3CastingLine.magnitude >= m_fMaxLength)
                 {
                     m_bIsAscending = false;
@@ -131,7 +134,8 @@ public class TestingLauncher : MonoBehaviour
             {
                 m_bIsAscending = false;
                 m_v3CastingLine -= transform.forward * m_fAimSpeed * Time.deltaTime;
-                if (m_v3CastingLine.magnitude <= m_fMaxLength)
+                m_gArrow.transform.localScale -= m_gArrow.transform.forward * 0.05f;
+                if (m_v3CastingLine.magnitude <= 0.5f)
                 {
                     m_bIsAscending = true;
                 }
@@ -158,8 +162,6 @@ public class TestingLauncher : MonoBehaviour
             {
                 //set active state
                 m_agRocketList[i].SetActive(true);
-
-
 
                 //return the rocket
                 return m_agRocketList[i];
