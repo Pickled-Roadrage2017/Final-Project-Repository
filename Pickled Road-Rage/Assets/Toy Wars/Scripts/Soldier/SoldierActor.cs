@@ -18,7 +18,6 @@ public enum EWeaponType
     EWEP_GRENADE
 }
 
-
 //--------------------------------------------------------------------------------------
 // SoldierActor: Inheriting from MonoBehaviour. Used to be controlled by Player
 //--------------------------------------------------------------------------------------
@@ -73,9 +72,23 @@ public class SoldierActor : MonoBehaviour
     [HideInInspector]
     public Rigidbody m_rbRigidBody;
 
+    // public cavnas for the displaying of the aimming arrow. to be changed.
+    [LabelOverride("Aiming Canvas")][Tooltip("The Canvas that the Solider Aiming arrow is on.")]
+    public Canvas m_cSoldierCanvas;
 
-   
-    public Canvas SoldierCanvas;
+    // public float for the radius of the movement circle.
+    [LabelOverride("Movement Radius")][Tooltip("The Radius of the movement circle, this is how far the soldier can move.")]
+    public float m_fMovementRadius;
+
+    // public gameobject for the movement circle prefab.
+    [LabelOverride("Radius Object")][Tooltip("The Prefab for the Radius object.")]
+    public GameObject m_gMovementCirlceBluePrint;
+
+    // The gameobject for the soldier moevement circle.
+    private GameObject m_gMovementCircle;
+
+    // The current position of the soldier.
+    private Vector3 m_v3CurrentPostion;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -93,7 +106,18 @@ public class SoldierActor : MonoBehaviour
         // so the soldier doesn't rotate unless it is to FaceMouse()
         m_rbRigidBody.freezeRotation = true;
 
-        SoldierCanvas.gameObject.SetActive(false);
+        // Instantiate and setActive of MovementCircle to false.
+        m_gMovementCircle = Instantiate(m_gMovementCirlceBluePrint);
+        m_gMovementCircle.SetActive(false);
+
+        // Set the Current position to the soldiers postion.
+        m_v3CurrentPostion = transform.position;
+
+        // Set the SoliderCanvas setActive to false.
+        m_cSoldierCanvas.gameObject.SetActive(false);
+
+        // Make the size of the MovementCircle the same as the MovementRadius.
+        m_gMovementCircle.transform.localScale *= m_fMovementRadius;
     }
 
     //--------------------------------------------------------------------------------------
@@ -108,21 +132,40 @@ public class SoldierActor : MonoBehaviour
         }
     }
 
-
-
-
-
-    public void CanvasActive(bool bActive)
+    //--------------------------------------------------------------------------------------
+    // CurrentTurn: A function for resting soldier values for turn starts or turn ends.
+    //
+    // Param:
+    //      bActive: a bool for if this soldiers is currently having a turn or not.
+    //--------------------------------------------------------------------------------------
+    public void CurrentTurn(bool bActive)
     {
+        // if true is passed in.
         if (bActive)
-            SoldierCanvas.gameObject.SetActive(true);
+        {
+            // Set the current soldier postion.
+            m_v3CurrentPostion = transform.position;
+
+            // Set the movementcircle postion.
+            m_gMovementCircle.transform.position = m_v3CurrentPostion;
+
+            // activate the soldier canvas.
+            m_cSoldierCanvas.gameObject.SetActive(true);
+
+            // activate the movememntcircle.
+            m_gMovementCircle.SetActive(true);
+        }
+
+        // if false is passed in.
         else if (!bActive)
-            SoldierCanvas.gameObject.SetActive(false);
+        {
+            // deactivate the solider canvas.
+            m_cSoldierCanvas.gameObject.SetActive(false);
+
+            // deactivate the movementcircle.
+            m_gMovementCircle.SetActive(false);
+        }
     }
-
-
-
-
 
     //--------------------------------------------------------------------------------------
     // Fire: Call when the Player commands the Soldier to fire
@@ -157,8 +200,13 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void Move(float fMoveHorizontal, float fMoveVertical)
     {
+        // Apply fMoveHor and fMoveVer to the movement vector.
         m_v3Movement = new Vector3(fMoveHorizontal, 0, fMoveVertical);
+
+        // Update the rigidbody velocity.
         m_rbRigidBody.velocity = m_v3Movement * m_fSpeed;
+        
+        // Rotate the soldier towards mouse direction.
         //FaceMouse();
     }
 
@@ -193,7 +241,6 @@ public class SoldierActor : MonoBehaviour
             }
             return transform.rotation;
     }
-
 
     //--------------------------------------------------------------------------------------
     // TakeDamage: Function for taking damage, for weapons to access

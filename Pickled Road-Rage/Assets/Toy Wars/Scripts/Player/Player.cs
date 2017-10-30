@@ -41,10 +41,6 @@ public class Player : MonoBehaviour
     [LabelOverride("Soldier Object")] [Tooltip("The prefab for the Soldier object.")]
     public GameObject m_gSoldierBlueprint;
 
-    // pool size. how many soldiers allowed on screen at once.
-    [LabelOverride("Pool Size")] [Range(1, 6)] [Tooltip("The max number of soliders allowed in game at once.")]
-    public int m_nPoolSize;
-
     // Title for this section of public values.
     [Header("Teddy:")]
 
@@ -55,13 +51,22 @@ public class Player : MonoBehaviour
     // Title for this section of public values.
     [Header("Temporally Values:")]
 
-    // Temp spawn postion for the player.
-    [Tooltip("Spawn postion for the soldier spawn, pass in a gameobject.")]
-    public GameObject m_gSoldier1Spawn; // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
+
+
 
     // Temp spawn postion for the player.
     [Tooltip("Spawn postion for the soldier spawn, pass in a gameobject.")]
-    public GameObject m_gSoldier2Spawn; // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
+    public GameObject[] m_agSoldierSpawn; // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
+
+    // public material to apply to soldiers.
+
+
+
+
+
+
+    // pool size. how many soldiers allowed on screen at once.
+    private int m_nPoolSize;
 
     // private int for current soldiers turn.
     [HideInInspector]
@@ -88,6 +93,9 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Awake()
     {
+        //
+        m_nPoolSize = m_agSoldierSpawn.Length;
+
         // initialize soldier list with size.
         m_agSoldierList = new GameObject[m_nPoolSize];
 
@@ -105,15 +113,11 @@ public class Player : MonoBehaviour
             m_agSoldierList[i].SetActive(false);
         }
 
-        // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
-        // Allocate soliders to the pool.
-        GameObject p1 = AllocateSoldier(); // Allocating 2 at the start for now until..
-        GameObject p2 = AllocateSoldier(); // ..we have a better idea of solider spawning.
-
-        // Spawn at the teddy base.
-        p1.transform.position = m_gSoldier1Spawn.transform.position;
-        p2.transform.position = m_gSoldier2Spawn.transform.position;
-        // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
+        for (int i = 0; i < m_agSoldierSpawn.Length; ++i)
+        {
+            GameObject o = AllocateSoldier();
+            o.transform.position = m_agSoldierSpawn[i].transform.position;
+        }
     }
 
     //--------------------------------------------------------------------------------------

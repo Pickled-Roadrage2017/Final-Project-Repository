@@ -73,8 +73,8 @@ public class EndState : State
         // Reset the timer.
         TurnManager.m_fTimer = TurnManager.m_sfStaticEndLength;
 
-        // Activate the soldier canvas when it is the players turn.
-        GetCurrentSoldierScript().CanvasActive(false); // MAYBE GOING TO CHANGE!
+        // Set the soldier turn to false
+        GetCurrentSoldierScript().CurrentTurn(false); // MAYBE GOING TO CHANGE!
 
         // Get active soldiers for each player.
         int nActiveSoldiersP1 = GetPlayerScript(1).GetActiveSoldiers();

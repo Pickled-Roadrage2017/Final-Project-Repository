@@ -56,9 +56,9 @@ public class StartState : State
         {
             // Run the soldier manager script.
             GetCurrentPlayerScript().SoldierTurnManager();
-  
-            // activate the soldier canvas when it is the players turn.
-            GetCurrentSoldierScript().CanvasActive(true); // MAYBE GOING TO CHANGE!
+
+            // Set the soldier turn to true.
+            GetCurrentSoldierScript().CurrentTurn(true); // MAYBE GOING TO CHANGE!
 
             // Get active soldiers for each player.
             int nActiveSoldiersP1 = GetPlayerScript(1).GetActiveSoldiers();

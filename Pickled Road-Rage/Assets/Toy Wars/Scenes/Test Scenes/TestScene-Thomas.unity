@@ -549,10 +549,10 @@ MonoBehaviour:
   m_nPlayerNumber: 1
   m_gSoldierBlueprint: {fileID: 1087192944953356, guid: 8765a1f70bbe6bd448286caa348af400,
     type: 2}
-  m_nPoolSize: 3
   m_gTeddyBase: {fileID: 1847669473}
-  m_gSoldier1Spawn: {fileID: 1931059606}
-  m_gSoldier2Spawn: {fileID: 450367954}
+  m_agSoldierSpawn:
+  - {fileID: 1931059606}
+  - {fileID: 450367954}
   m_nSoldierTurn: 0
   m_eFiringState: 0
 --- !u!4 &38781047
@@ -1521,10 +1521,10 @@ MonoBehaviour:
   m_nPlayerNumber: 2
   m_gSoldierBlueprint: {fileID: 1087192944953356, guid: 8765a1f70bbe6bd448286caa348af400,
     type: 2}
-  m_nPoolSize: 3
   m_gTeddyBase: {fileID: 647825625}
-  m_gSoldier1Spawn: {fileID: 1124444304}
-  m_gSoldier2Spawn: {fileID: 836319309}
+  m_agSoldierSpawn:
+  - {fileID: 1124444304}
+  - {fileID: 836319309}
   m_nSoldierTurn: 0
   m_eFiringState: 0
 --- !u!4 &200991978
