@@ -6,36 +6,26 @@ using UnityEngine.UI;
 public class TestingLauncher : MonoBehaviour
 {
     [Header("Firing Variables")]
-    // Minimum power for a shot
-    [Tooltip("Minimum charge for the Charge, be sure that this matches the 'min value' variable in the Sliders inspector")]
-    public float m_fMinCharge = 1f;
     // speed for the moving of the target line
     public float m_fAimSpeed;
-    // Float for Max Charge
-    [Tooltip("Maximum charge for the Charge, be sure that this matches the 'max value' variable in the Sliders inspector")]
-    public float m_fMaxCharge = 2;
-    // speed of the charge variable
-    public float m_fChargeSpeed;
+
     // The furthest the target can go.
     public float m_fMaxLength;
+
     // Prefab for the Rocket object.
-    [LabelOverride("Rocket")]
-    [Tooltip("Prefab for instantiating the rockets")]
+    [LabelOverride("Rocket")][Tooltip("Prefab for instantiating the rockets")]
     public GameObject m_gRocketBlueprint;
-    // The Aiming Arrow for scaling purposes
-    public GameObject m_gArrow;
-    [LabelOverride("RocketLauncher Tilt")]
-    [Range(0, -100)]
-    [Tooltip("This tilts the RocketLauncher, which in turn makes the rockets arc deeper or shallower")]
-    public float m_fRocketXRot;
+
+    [LabelOverride("Rocket Arc Height")][Tooltip("How high the peak of the rockets arc will be")]
+    public float m_fArcHeight;
+
+    // count for how many parts of the line will show
+    [LabelOverride("Line Nodes")][Range(1,10)]
+    public int m_nLineNodes;
 
     // float variable passed on for the firing from the Soldier
     [HideInInspector]
     public float m_fCharge = 0;
-
-    // Boolean for the locking of fire if a rocket is still alive
-    [HideInInspector]
-    public bool m_bRocketAlive;
 
     // Pool for the Rockets (should always be 1)
     private int m_nPoolsize = 1;
@@ -57,9 +47,6 @@ public class TestingLauncher : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        Cursor.visible = false;
-        m_fChargeSpeed = m_fMinCharge;
-        m_fCharge = m_fMinCharge;
         m_bChargingShot = false;
         m_bIsAscending = true;
         // initilize rocket list with size
@@ -72,8 +59,6 @@ public class TestingLauncher : MonoBehaviour
             m_agRocketList[i] = Instantiate(m_gRocketBlueprint);
             m_agRocketList[i].SetActive(false);
         }
-        gameObject.transform.Rotate(m_fRocketXRot, 0, 0);
-
     }
 
 
@@ -90,20 +75,17 @@ public class TestingLauncher : MonoBehaviour
             GameObject gRocket = Allocate();
             if (gRocket.activeInHierarchy)
             {
-                // Resets all of gRockets current values to their initial values
-                m_bRocketAlive = true;
                 gRocket.GetComponent<TestingRocket>().m_gSpawnPoint = gameObject;
                 gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<TestingRocket>().m_gSpawnPoint.transform.position;
+                gRocket.GetComponent<Rigidbody>().velocity = transform.forward * m_fCharge;
                 gRocket.GetComponent<TestingRocket>().transform.position = gRocket.GetComponent<TestingRocket>().m_gSpawnPoint.transform.position;
                 gRocket.GetComponent<TestingRocket>().m_fPower = m_fCharge;
                 gRocket.GetComponent<TestingRocket>().m_v3Target = m_v3CastingLine;
-                gRocket.GetComponent<TestingRocket>().m_v3ArcTarget = gRocket.GetComponent<TestingRocket>().Bezier(gRocket.transform.position, m_v3CastingLine, 0.25f);
                 gRocket.GetComponent<TestingRocket>().m_fCurrentActivateTimer = gRocket.GetComponent<TestingRocket>().m_fMaxActivateTimer;
             }
-            // reset the launchers charge value
-            m_fCharge = m_fMinCharge;
             // launcher is no longer charging a shot
             m_bChargingShot = false;
+            m_v3CastingLine = new Vector3(0, 0, 0);
         }
 
     }
@@ -123,7 +105,6 @@ public class TestingLauncher : MonoBehaviour
             if (m_bIsAscending && m_v3CastingLine.magnitude <= m_fMaxLength)
             {
                 m_v3CastingLine += transform.forward * m_fAimSpeed * Time.deltaTime;
-                m_gArrow.transform.localScale += m_gArrow.transform.forward * 0.05f;
                     
                 if (m_v3CastingLine.magnitude >= m_fMaxLength)
                 {
@@ -133,12 +114,19 @@ public class TestingLauncher : MonoBehaviour
             else
             {
                 m_bIsAscending = false;
+
                 m_v3CastingLine -= transform.forward * m_fAimSpeed * Time.deltaTime;
-                m_gArrow.transform.localScale -= m_gArrow.transform.forward * 0.05f;
-                if (m_v3CastingLine.magnitude <= 0.5f)
+                if (m_v3CastingLine.magnitude <= 0.2f)
                 {
                     m_bIsAscending = true;
                 }
+            }
+
+            GetComponent<LineRenderer>().positionCount = m_nLineNodes;
+            for (int iIndex = 0; iIndex < m_nLineNodes; iIndex++)
+            {
+                Vector3 Point = CalculateBezier(transform.position, m_v3CastingLine, (float)iIndex * 0.1f);
+                GetComponent<LineRenderer>().SetPosition(iIndex, Point);
             }
         }
         else if (m_bChargingShot)
@@ -171,7 +159,21 @@ public class TestingLauncher : MonoBehaviour
         return null;
     }
 
+    public Vector3 CalculateBezier(Vector3 v3Start, Vector3 v3End, float t)
+    {
+        t = Mathf.Clamp01(t);
+        Vector3 v3Control = (v3Start + v3End) / 2;
+        v3Control.y += 3.0f;
 
+        Vector3 A1 = Vector3.Lerp(v3Start, v3Control, t);
+        Vector3 A2 = Vector3.Lerp(v3Control, v3End, t);
+        //Vector3 A3 = Vector3.Lerp(v3Control, v3End, t);
+
+        //Vector3 B1 = Vector3.Lerp(A1, A2, t);
+        //Vector3 B2 = Vector3.Lerp(A2, A3, t);
+
+        return Vector3.Lerp(A1, A2, t);
+    }
 }
 
 

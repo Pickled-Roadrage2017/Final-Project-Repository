@@ -43,9 +43,12 @@ public class TestingRocket : Weapon
     // The direction the Rocket should move
     //[HideInInspector]
     public Vector3 m_v3Target;
-    [HideInInspector]
-    public Vector3 m_v3ArcTarget;
 
+    //public Vector3 m_v3SecondTarget;
+
+    //public Vector3 m_v3ThirdTarget;
+
+    //public int m_nTargetCounter;
     // Starts at m_fMaxActivateTimer and ticks down to zero, then resetting upon being set Inactive
     [HideInInspector]
     public float m_fCurrentActivateTimer;
@@ -71,15 +74,9 @@ public class TestingRocket : Weapon
         m_fLerpTime += Time.deltaTime * m_fSpeed;
         if (m_fLerpTime > 1.0f)
             m_fLerpTime = 1.0f;
-        
-        //transform.position = Vector3.Lerp(m_gSpawnPoint.transform.position, m_v3Target, m_fLerpTime);
-   
-        transform.position = Vector3.Lerp(m_gSpawnPoint.transform.position, m_v3ArcTarget, m_fLerpTime);
-        if (transform.position != m_v3Target)
-        {
-           m_v3ArcTarget = Bezier(transform.position, m_v3Target, 0.25f);
-        }
-       
+
+        transform.position = CalculateBezier(m_gSpawnPoint.transform.position, m_v3Target,m_fLerpTime);
+
     }
 
     //--------------------------------------------------------------------------------------
@@ -161,12 +158,25 @@ public class TestingRocket : Weapon
         return fDamage;
     }
 
-    public Vector3 Bezier(Vector3 v3Start, Vector3 v3End, float t)
+    //--------------------------------------------------------------------------------------
+    //  CalculateBezier: Calculates a bezier lerp from vector3 to another
+    //
+    //  Returns: Lerp path for the rocket
+    //
+    //--------------------------------------------------------------------------------------
+    public Vector3 CalculateBezier(Vector3 v3Start, Vector3 v3End, float t)
     {
+        t = Mathf.Clamp01(t);
         Vector3 v3Control = (v3Start + v3End) / 2;
-        v3Control.y = 1f;
-        float rt = 1 - t;
+        v3Control.y += 3.0f;
 
-        return rt * rt * v3Start + 2f * rt * t * v3Control + t * t * v3End;
+        Vector3 A1 = Vector3.Lerp(v3Start, v3Control, t);
+        Vector3 A2 = Vector3.Lerp(v3Control, v3End, t);
+        //Vector3 A3 = Vector3.Lerp(v3Control, v3End, t);
+
+        //Vector3 B1 = Vector3.Lerp(A1, A2, t);
+        //Vector3 B2 = Vector3.Lerp(A2, A3, t);
+
+        return Vector3.Lerp(A1, A2, t);
     }
 }
