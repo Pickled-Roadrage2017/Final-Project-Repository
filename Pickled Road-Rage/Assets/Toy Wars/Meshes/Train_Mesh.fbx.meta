@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 61f55f5d6ea83234ab6ff730d715a240
-timeCreated: 1508123591
+guid: e40521da5cf505f479c5d45a83fd5a5b
+timeCreated: 1509403208
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Train_Mesh
+    4300000: Train_mesh
   materials:
     importMaterials: 1
     materialName: 0

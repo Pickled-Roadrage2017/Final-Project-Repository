@@ -6,9 +6,13 @@ ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
+    100002: WoodenArch_Mesh
     400000: //RootNode
+    400002: WoodenArch_Mesh
     2300000: //RootNode
+    2300002: WoodenArch_Mesh
     3300000: //RootNode
+    3300002: WoodenArch_Mesh
     4300000: WoodenArch_Mesh
   materials:
     importMaterials: 1

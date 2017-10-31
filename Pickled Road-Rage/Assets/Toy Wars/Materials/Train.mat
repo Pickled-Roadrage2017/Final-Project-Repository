@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Train
+  m_Shader: {fileID: 4800000, guid: 460c6ac08feeaf34cbbf0dd13043b111, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _node_1418:
+        m_Texture: {fileID: 2800000, guid: ee73eb78152bf6d44ab22a961eeb69c6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_1967:
+        m_Texture: {fileID: 2800000, guid: abdc6e16e13aaea48bcc23fc8c0c462c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_6878:
+        m_Texture: {fileID: 2800000, guid: bf0b7c973fb6217439fe7ef13b413da6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_8292:
+        m_Texture: {fileID: 2800000, guid: 2d9f7b10440862947b421feff04ef249, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors: []

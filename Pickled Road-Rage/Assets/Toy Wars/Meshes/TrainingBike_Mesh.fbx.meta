@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: e952039b96e4a094e83db627a0d9c8ce
-timeCreated: 1507001307
+guid: 14f8304e0ccaa824896e837e1f8ab095
+timeCreated: 1509403871
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -10,7 +10,7 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Training_bike
-    4300002: Trainingbike_mesh
+    4300002: polySurface1
   materials:
     importMaterials: 1
     materialName: 0
