@@ -13,16 +13,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// Enum EMouseFiringState. Used for what the stage the mouse is in when firing the weapon.
-//--------------------------------------------------------------------------------------
-public enum EMouseFiringState
-{
-    EMOUSE_DOWN,
-    EMOUSE_HELD,
-    EMOUSE_UP,
-}
-
-//--------------------------------------------------------------------------------------
 // Player object. Inheriting from MonoBehaviour. Used for controling turns and soldiers.
 //--------------------------------------------------------------------------------------
 public class Player : MonoBehaviour
@@ -48,23 +38,25 @@ public class Player : MonoBehaviour
     [LabelOverride("Teddy Object")] [Tooltip("The Teddy Object for this player.")]
     public GameObject m_gTeddyBase;
 
-    // Title for this section of public values.
-    [Header("Temporally Values:")]
 
 
 
-
-    // Temp spawn postion for the player.
-    [Tooltip("Spawn postion for the soldier spawn, pass in a gameobject.")]
-    public GameObject[] m_agSoldierSpawn; // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO // REDO
 
     // public material to apply to soldiers.
+    [LabelOverride("")] [Tooltip("")]
+    public Material m_mSoldierMaterial;
 
 
 
 
 
+    // Title for this section of public values.
+    [Header("Spawn Points:")]
 
+    // public array for the spawn postion for the players soldiers.
+    [LabelOverride("Soldier Spawn Point")] [Tooltip("Spawn postion for the soldier spawn, pass in an empty gameobject.")]
+    public GameObject[] m_agSoldierSpawn;
+    
     // pool size. how many soldiers allowed on screen at once.
     private int m_nPoolSize;
 
@@ -74,10 +66,6 @@ public class Player : MonoBehaviour
 
     // public array of gameobjects for player soldiers.
     private GameObject[] m_agSoldierList;
-
-    // private EMouseFiringState for if the mouse is pressed or not.
-    [HideInInspector]
-    public EMouseFiringState m_eFiringState;
 
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;
@@ -93,7 +81,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        //
+        // Pool size equel the amount of spawn points.
         m_nPoolSize = m_agSoldierSpawn.Length;
 
         // initialize soldier list with size.
@@ -102,10 +90,7 @@ public class Player : MonoBehaviour
         // Start the solider turn at 1.
         m_nSoldierTurn = 0;
 
-        // Start the firing state to mouse up.
-        m_eFiringState = EMouseFiringState.EMOUSE_UP;
-
-        // Go through each soldier.
+        // Go through each soldier in the pool.
         for (int i = 0; i < m_nPoolSize; ++i)
         {
             // Instantiate and set active state.
@@ -113,9 +98,13 @@ public class Player : MonoBehaviour
             m_agSoldierList[i].SetActive(false);
         }
 
+        // Go through each spawn point in the soldier spawn array.
         for (int i = 0; i < m_agSoldierSpawn.Length; ++i)
         {
+            // Allocate some soldiers to the pool.
             GameObject o = AllocateSoldier();
+
+            // Set the postion of the soldiers to the postion of the spawn point.
             o.transform.position = m_agSoldierSpawn[i].transform.position;
         }
     }
@@ -131,19 +120,21 @@ public class Player : MonoBehaviour
             // Get the soldier object and script.
             GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
             SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
-
-            // new EMouseFiringState for if the player is firing or not.
-            EMouseFiringState eFiring = EMouseFiringState.EMOUSE_UP;
-
+            
             // Fire the soldier weapon. apply its state of fire to a bool.
             if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
-                eFiring = SoldierFire(sCurrentSoldier);
-
-            // if not firing the soldier.
-            if (eFiring == EMouseFiringState.EMOUSE_UP && StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
             {
-                // Move the soldier.
-                SoldierMovement(sCurrentSoldier);
+                // Get the mouse input functions.
+                bool bMouseDown = MouseDown(sCurrentSoldier);
+                bool bMouseHeld = MouseHeld(sCurrentSoldier);
+                bool bMouseUp = MouseUp(sCurrentSoldier);
+
+                // if the mouse is not held.
+                if (!bMouseHeld)
+                {
+                    // Move the soldier.
+                    SoldierMovement(sCurrentSoldier);
+                }
             }
         }
         
@@ -264,48 +255,79 @@ public class Player : MonoBehaviour
         // Update the mpuse face function in soldier.
         sCurrentSoldier.FaceMouse();
     }
-
+    
     //--------------------------------------------------------------------------------------
-    // SoldierFire: Function for the current soldiers firing.
+    // MouseDown: Function for when the mouse is pressed down.
     //
     // Param:
     //		sCurrentSoldier: A SoldierActor object for which soldier is firing.
     // Return:
-    //      bool: Return if the soldier is firing or not.
+    //      bool: Returns a bool if the mouse is pressed or not.
     //--------------------------------------------------------------------------------------
-    EMouseFiringState SoldierFire(SoldierActor sCurrentSoldier)
+    private bool MouseDown(SoldierActor sCurrentSoldier)
     {
-        // if the left mouse button is held down and timer is greater than 1
+        // if the left mouse button is pressed and the timer is greater than 1.
+        if (Input.GetButtonDown("Fire1") && TurnManager.m_fTimer > 1)
+        {
+            // Run the soldier MouseDown fucntion.
+            sCurrentSoldier.MouseDown();
+
+            // if mouse is pressed down return bool
+            return true;
+        }
+
+        // if mouse isnt pressed return false.
+        return false;
+    }
+
+    //--------------------------------------------------------------------------------------
+    // MouseHeld: Function for when the mouse is held down.
+    //
+    // Param:
+    //		sCurrentSoldier: A SoldierActor object for which soldier is firing.
+    // Return:
+    //      bool: Returns a bool if the mouse is held or not.
+    //--------------------------------------------------------------------------------------
+    private bool MouseHeld(SoldierActor sCurrentSoldier)
+    {
+        // if the left mouse button is held down and timer is greater than 1.
         if (Input.GetButton("Fire1") && TurnManager.m_fTimer > 1)
         {
-            // Mouse down is true.
-            m_eFiringState = EMouseFiringState.EMOUSE_HELD;
+            // Run the soldier MouseHeld function.
+            sCurrentSoldier.MouseHeld();
 
-            // Run the soldier fire script.
-            sCurrentSoldier.Fire(m_eFiringState);
-
-            // Return the mouse down.
-            return m_eFiringState;
+            // if mouse is held return true. 
+            return true;
         }
 
-        // Else if the mouse is not down or the timer is less than 1
-        else if (Input.GetButtonUp("Fire1")  || TurnManager.m_fTimer < 1)
+        // if mouse isnt held down return false.
+        return false;
+    }
+
+    //--------------------------------------------------------------------------------------
+    // MouseUp: Function for the when the mouse is released from being down.
+    //
+    // Param:
+    //		sCurrentSoldier: A SoldierActor object for which soldier is firing.
+    // Return:
+    //      bool: Returns a bool if the mouse is released or not.
+    //--------------------------------------------------------------------------------------
+    private bool MouseUp(SoldierActor sCurrentSoldier)
+    {
+        // if the mouse is released or the timer is less than 1.
+        if (Input.GetButtonUp("Fire1") || TurnManager.m_fTimer < 1)
         {
             // Set to end turn.
-            if (m_eFiringState == EMouseFiringState.EMOUSE_HELD)
-                TurnManager.m_sbEndTurn = true;
+            TurnManager.m_sbEndTurn = true;
 
-            // MouseDown is false.
-            m_eFiringState = EMouseFiringState.EMOUSE_UP;
+            // Run the soldier MouseUp function.
+            sCurrentSoldier.MouseUp();
 
-            // Run the soldier fire script.
-            sCurrentSoldier.Fire(m_eFiringState);
-
-            // return the mouse down.
-            return m_eFiringState;
+            // if the mouse is released return true.
+            return true;
         }
 
-        // return false
-        return EMouseFiringState.EMOUSE_UP;
+        // if the mouse isnt released return false.
+        return false;
     }
 }

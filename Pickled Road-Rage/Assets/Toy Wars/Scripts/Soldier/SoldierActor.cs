@@ -73,15 +73,15 @@ public class SoldierActor : MonoBehaviour
     public Rigidbody m_rbRigidBody;
 
     // public cavnas for the displaying of the aimming arrow. to be changed.
-    [LabelOverride("Aiming Canvas")][Tooltip("The Canvas that the Solider Aiming arrow is on.")]
+    [LabelOverride("Aiming Canvas")] [Tooltip("The Canvas that the Solider Aiming arrow is on.")]
     public Canvas m_cSoldierCanvas;
 
     // public float for the radius of the movement circle.
-    [LabelOverride("Movement Radius")][Tooltip("The Radius of the movement circle, this is how far the soldier can move.")]
+    [LabelOverride("Movement Radius")] [Tooltip("The Radius of the movement circle, this is how far the soldier can move.")]
     public float m_fMovementRadius;
 
     // public gameobject for the movement circle prefab.
-    [LabelOverride("Radius Object")][Tooltip("The Prefab for the Radius object.")]
+    [LabelOverride("Radius Object")] [Tooltip("The Prefab for the Radius object.")]
     public GameObject m_gMovementCirlceBluePrint;
 
     // The gameobject for the soldier moevement circle.
@@ -171,23 +171,59 @@ public class SoldierActor : MonoBehaviour
     // Fire: Call when the Player commands the Soldier to fire
     //
     //--------------------------------------------------------------------------------------
-    public void Fire(EMouseFiringState eMouseState)
+    public void MouseDown()
     {
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
-            m_gLauncherScript.Fire(eMouseState);
+            m_gLauncherScript.MouseDown();
         }
-
         else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
         {
 
         }
-
         else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
         {
 
         }
 
+        else
+        {
+        }
+    }
+
+    public void MouseHeld()
+    {
+        if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
+        {
+            m_gLauncherScript.MouseHeld();
+        }
+        else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
+        {
+
+        }
+        else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
+        {
+
+        }
+        else
+        {
+        }
+    }
+
+    public void MouseUp()
+    {
+        if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
+        {
+            m_gLauncherScript.MouseUp();
+        }
+        else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
+        {
+
+        }
+        else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
+        {
+
+        }
         else
         {
         }
