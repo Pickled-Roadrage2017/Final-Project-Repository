@@ -56,6 +56,11 @@ public class SoldierActor : MonoBehaviour
     [Tooltip("This Soldiers RocketLauncher")]
     public GameObject m_gRocketLauncher;
 
+    // The GameObject GrenadeLauncher that the Soldier will be using
+    [Space(10)]
+    [Tooltip("This Soldiers Grenadelauncher")]
+    public GameObject m_gGrenadeLauncher;
+
     // The Soldiers current health,
     // (Will be equal to m_nMaxHealth until it takes damage)
     [HideInInspector]
@@ -65,19 +70,24 @@ public class SoldierActor : MonoBehaviour
     [HideInInspector]
     public Vector3 m_v3Movement;
 
-    // The RocketLauncher script of GameObject RocketLauncherS
+    // The RocketLauncher script of GameObject RocketLauncher
     private RocketLauncher m_gLauncherScript;
+
+    // The GrenadeLauncher script of GameObject GrenadeLauncher
+    private GrenadeLauncher m_gGrenadeScript;
 
     // Will be set to the Soldiers rigidbody property
     [HideInInspector]
     public Rigidbody m_rbRigidBody;
 
     // public float for the radius of the movement circle.
-    [LabelOverride("Movement Radius")] [Tooltip("The Radius of the movement circle, this is how far the soldier can move.")]
+    [LabelOverride("Movement Radius")]
+    [Tooltip("The Radius of the movement circle, this is how far the soldier can move.")]
     public float m_fMovementRadius;
 
     // public gameobject for the movement circle prefab.
-    [LabelOverride("Radius Object")] [Tooltip("The Prefab for the Radius object.")]
+    [LabelOverride("Radius Object")]
+    [Tooltip("The Prefab for the Radius object.")]
     public GameObject m_gMovementCirlceBluePrint;
 
     // The gameobject for the soldier moevement circle.
@@ -95,6 +105,8 @@ public class SoldierActor : MonoBehaviour
         m_rbRigidBody = GetComponent<Rigidbody>();
         // get the rocketlaunchers script
         m_gLauncherScript = m_gRocketLauncher.GetComponent<RocketLauncher>();
+        // get the grenadeLaunchers script
+        m_gGrenadeScript = m_gGrenadeLauncher.GetComponent<GrenadeLauncher>();
         // Soldiers Current health should always start at MaxHealth
         m_fCurrentHealth = m_fMaxHealth;
         // so the soldiers cannot move upwards
@@ -139,6 +151,9 @@ public class SoldierActor : MonoBehaviour
             // Set the current soldier postion.
             m_v3CurrentPostion = transform.position;
 
+            // activate the solider aim line.
+            m_gRocketLauncher.GetComponent<LineRenderer>().enabled = true;
+
             // Set the movementcircle postion.
             m_gMovementCircle.transform.position = m_v3CurrentPostion;
 
@@ -149,8 +164,9 @@ public class SoldierActor : MonoBehaviour
         // if false is passed in.
         else if (!bActive)
         {
-            // deactivate the solider canvas.
+            // deactivate the solider aimming line and set the position count to 0.
             m_gRocketLauncher.GetComponent<LineRenderer>().enabled = false;
+            m_gRocketLauncher.GetComponent<LineRenderer>().positionCount = 0;
 
             // deactivate the movementcircle.
             m_gMovementCircle.SetActive(false);
@@ -173,11 +189,12 @@ public class SoldierActor : MonoBehaviour
         }
         else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
         {
-
+            m_gGrenadeScript.MouseDown();
         }
 
         else
         {
+
         }
     }
 
@@ -193,7 +210,7 @@ public class SoldierActor : MonoBehaviour
         }
         else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
         {
-
+            m_gGrenadeScript.MouseHeld();
         }
         else
         {
@@ -212,7 +229,7 @@ public class SoldierActor : MonoBehaviour
         }
         else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
         {
-
+            m_gGrenadeScript.MouseUp();
         }
         else
         {
@@ -231,7 +248,7 @@ public class SoldierActor : MonoBehaviour
 
         // Update the rigidbody velocity.
         m_rbRigidBody.velocity = m_v3Movement * m_fSpeed;
-        
+
         // Rotate the soldier towards mouse direction.
         //FaceMouse();
     }
@@ -246,26 +263,26 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public Quaternion FaceMouse()
     {
-            // Generate a plane that intersects the transform's position.
-            Plane pSoldierPlane = new Plane(Vector3.up, transform.position);
+        // Generate a plane that intersects the transform's position.
+        Plane pSoldierPlane = new Plane(Vector3.up, transform.position);
 
-            // Generate a ray from the cursor position
-            Ray rMouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // Generate a ray from the cursor position
+        Ray rMouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            float fHitDistance = 0.0f;
-            // If the ray is parallel to the plane, Raycast will return false.
-            if (pSoldierPlane.Raycast(rMouseRay, out fHitDistance))
-            {
-                // Get the point along the ray that hits the calculated distance.
-                Vector3 v3TargetPos = rMouseRay.GetPoint(fHitDistance);
+        float fHitDistance = 0.0f;
+        // If the ray is parallel to the plane, Raycast will return false.
+        if (pSoldierPlane.Raycast(rMouseRay, out fHitDistance))
+        {
+            // Get the point along the ray that hits the calculated distance.
+            Vector3 v3TargetPos = rMouseRay.GetPoint(fHitDistance);
 
-                // Determine the target rotation.  This is the rotation if the transform looks at the target point.
-                Quaternion v3TargetRotation = Quaternion.LookRotation(v3TargetPos - transform.position);
+            // Determine the target rotation.  This is the rotation if the transform looks at the target point.
+            Quaternion v3TargetRotation = Quaternion.LookRotation(v3TargetPos - transform.position);
 
-                // Smoothly rotate towards the target point.
-                transform.rotation = Quaternion.Slerp(transform.rotation, v3TargetRotation, m_fRotSpeed * Time.deltaTime);
-            }
-            return transform.rotation;
+            // Smoothly rotate towards the target point.
+            transform.rotation = Quaternion.Slerp(transform.rotation, v3TargetRotation, m_fRotSpeed * Time.deltaTime);
+        }
+        return transform.rotation;
     }
 
     //--------------------------------------------------------------------------------------
@@ -290,5 +307,6 @@ public class SoldierActor : MonoBehaviour
         gameObject.SetActive(false);
         // Reset the Soldiers values to initial
         m_fCurrentHealth = m_fMaxHealth;
+        m_rbRigidBody.isKinematic = false;
     }
 }

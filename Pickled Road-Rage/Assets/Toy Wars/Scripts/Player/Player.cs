@@ -38,17 +38,9 @@ public class Player : MonoBehaviour
     [LabelOverride("Teddy Object")] [Tooltip("The Teddy Object for this player.")]
     public GameObject m_gTeddyBase;
 
-
-
-
-
     // public material to apply to soldiers.
-    [LabelOverride("")] [Tooltip("")]
+    [LabelOverride("Soldier Material")] [Tooltip("The material object this players soldier should use.")]
     public Material m_mSoldierMaterial;
-
-
-
-
 
     // Title for this section of public values.
     [Header("Spawn Points:")]
@@ -56,7 +48,15 @@ public class Player : MonoBehaviour
     // public array for the spawn postion for the players soldiers.
     [LabelOverride("Soldier Spawn Point")] [Tooltip("Spawn postion for the soldier spawn, pass in an empty gameobject.")]
     public GameObject[] m_agSoldierSpawn;
-    
+
+    // public empty gameobject for respawn point.
+    [LabelOverride("Respawn Point")] [Tooltip("Spawn postion for a soldier when it respawns, pass in an empty gameobject.")]
+    public GameObject m_gRespawnPoint;
+
+    // public empty gameobject for respawn point.
+    [LabelOverride("Respawn Rate")] [Tooltip("How long does it take in turns for this players soliders to respawn.")]
+    public int m_nRespawnRate;
+
     // pool size. how many soldiers allowed on screen at once.
     private int m_nPoolSize;
 
@@ -66,6 +66,9 @@ public class Player : MonoBehaviour
 
     // public array of gameobjects for player soldiers.
     private GameObject[] m_agSoldierList;
+
+    // int for how many turns until respawn.
+    private int m_nRespawnCounter;
 
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;
@@ -189,16 +192,59 @@ public class Player : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------
+    // RespawnSoldier: Reswpawn a dead soldier to the respawn postion.
+    //--------------------------------------------------------------------------------------
+    public void RespawnSoldier()
+    {
+        // if there is dead soliders.
+        if (m_nActiveSoldiers < m_agSoldierSpawn.Length)
+        {
+            // Allocate some soldiers to the pool.
+            GameObject o = AllocateSoldier();
+
+            // Set the postion of the soldiers to the postion of the spawn point.
+            o.transform.position = m_gRespawnPoint.transform.position;
+
+            // reset the spawn counter.
+            m_nRespawnCounter = 0;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------
+    // RespawnSoldier: Check if the player can respawn a solider.
+    //
+    // Return:
+    //      bool: Return if the solider can spawn or not.
+    //--------------------------------------------------------------------------------------
+    public bool CheckRespawn()
+    {
+        // if there is dead soliders.
+        if (m_nActiveSoldiers < m_agSoldierSpawn.Length)
+        {
+            // Incriment respawn counter each turn.
+            m_nRespawnCounter++;
+        }
+
+        // if respawn counter is the same as respawn rate.
+        if (m_nRespawnCounter == m_nRespawnRate)
+        {
+            // Respawn a solider at the teddy base.
+            RespawnSoldier();
+
+            // Return true if the solider respawns.
+            return true;
+        }
+
+        // if no respawn return false.
+        return false;
+    }
+
+    //--------------------------------------------------------------------------------------
     // SoldierTurnManager: Function that will manager which soldier the player is able to 
     // use per turn.
     //--------------------------------------------------------------------------------------
     public void SoldierTurnManager()
     {
-        // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO
-        // reset soldier here before changing to next one.
-        // Create a reset soldier function and reset anything that needs to be fresh on turn starting.
-        // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO // TODO
-
         // Check if there is active soldier so the while loop doesnt go forever.
         if (GetActiveSoldiers() <= 0)
             return;

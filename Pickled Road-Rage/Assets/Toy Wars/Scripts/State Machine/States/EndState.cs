@@ -39,10 +39,10 @@ public class EndState : State
         if (TurnManager.m_fTimer < 0)
         {
             // Check if gameover.
-            bool IsGameOver = GameOver();
+            bool bIsGameOver = GameOver();
 
             // if game over function is true.
-            if (!IsGameOver)
+            if (!bIsGameOver)
             {
                 // if a player has no soldiers dont swap to that player.
                 if (GetPlayerScript(1).GetActiveSoldiers() != 0 && GetPlayerScript(2).GetActiveSoldiers() != 0)
@@ -59,8 +59,8 @@ public class EndState : State
                     TurnManager.m_sbEndTurn = false;
                 }
 
-                // Push to the delay state
-                m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_START);
+                // Push to the spawn state
+                m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_SPAWN);
             }
         }
     }

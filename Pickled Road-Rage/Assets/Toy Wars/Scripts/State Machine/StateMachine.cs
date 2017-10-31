@@ -17,7 +17,8 @@ public enum ETurnManagerStates
     ETURN_START,
     ETURN_ACTION,
     ETURN_END,
-    ETURN_GAMEOVER
+    ETURN_GAMEOVER,
+    ETURN_SPAWN
 }
 
 //--------------------------------------------------------------------------------------

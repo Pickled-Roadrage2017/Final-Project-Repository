@@ -32,6 +32,11 @@ public class TurnManager : MonoBehaviour
     [LabelOverride("End Turn Timer Length")][Tooltip("The time in seconds for how long the end of turn state should be. This end turn state is just a delay for the end of turns.")]
     public float m_fEndLength;
 
+    // public float starting time for the spawm timer.
+    [LabelOverride("Respawn Timer Length")]
+    [Tooltip("The time in seconds for how long the soldier respawning state should be. This spawning state is just a delay for the spawning animation.")]
+    public float m_fSpawnLength;
+
     // Title for this section of public values.
     [Header("Player Objects:")]
 
@@ -57,6 +62,7 @@ public class TurnManager : MonoBehaviour
     public static float m_sfStaticTimerLength;
     public static float m_sfStaticDelayLength;
     public static float m_sfStaticEndLength;
+    public static float m_sfStaticSpawnLength;
 
     // float for timer.
     public static float m_fTimer;
@@ -77,6 +83,7 @@ public class TurnManager : MonoBehaviour
         m_sfStaticTimerLength = m_fTimerLength;
         m_sfStaticDelayLength = m_fDelayLength;
         m_sfStaticEndLength = m_fEndLength;
+        m_sfStaticSpawnLength = m_fSpawnLength;
 
         // Decide who goes first
         DecideTurn();
@@ -89,7 +96,8 @@ public class TurnManager : MonoBehaviour
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_ACTION, new ActionState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_END, new EndState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_GAMEOVER, new GameOverState(m_sStateMachine));
-        
+        m_sStateMachine.AddState(ETurnManagerStates.ETURN_SPAWN, new SpawnState(m_sStateMachine));
+
         // Get the canvas and set it to inactive.
         GameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
         
