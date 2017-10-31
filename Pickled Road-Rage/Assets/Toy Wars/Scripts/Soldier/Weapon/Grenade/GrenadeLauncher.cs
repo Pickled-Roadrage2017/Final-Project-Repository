@@ -1,7 +1,7 @@
 ﻿//--------------------------------------------------------------------------------------
 // Purpose: A weapon for the player to access through a Soldier
 //
-// Description: Inheriting from MonoBehaviour. Used to instantiate rockets
+// Description: Inheriting from MonoBehaviour. Used to instantiate Grenades
 //
 // Author: Callan Davies
 //--------------------------------------------------------------------------------------
@@ -10,7 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class RocketLauncher : MonoBehaviour
+public class GrenadeLauncher : MonoBehaviour
 {
     [Header("Firing Variables")]
     // speed for the moving of the target line
@@ -19,13 +19,13 @@ public class RocketLauncher : MonoBehaviour
     // The furthest the target can go.
     public float m_fMaxLength;
 
-    // Prefab for the Rocket object.
-    [LabelOverride("Rocket")]
-    [Tooltip("Prefab for instantiating the rockets")]
-    public GameObject m_gRocketBlueprint;
+    // Prefab for the Grenade object.
+    [LabelOverride("Grenade")]
+    [Tooltip("Prefab for instantiating the grenades")]
+    public GameObject m_gGrenadePrefab;
 
-    [LabelOverride("Rocket Arc Height")]
-    [Tooltip("How high the peak of the rockets arc will be")]
+    [LabelOverride("Grenade Arc Height")]
+    [Tooltip("How high the peak of the grenade arc will be")]
     public float m_fArcHeight;
 
     // count for how many parts of the line will show
@@ -41,12 +41,12 @@ public class RocketLauncher : MonoBehaviour
     private int m_nPoolsize = 1;
 
     // An array of Rockets for instantiating rockets
-    private GameObject[] m_agRocketList;
+    private GameObject[] m_agGrenadeList;
 
     // Boolean for the slider bar to bounce between m_fMinCharge and m_fMaxCharge
     private bool m_bIsAscending;
 
-    // boolean for if the soldier is currently charging up a shot
+    // boolean for if the soldier is currently charging up a throw
     private bool m_bChargingShot;
 
     // where the rocket will be fired towards
@@ -59,15 +59,15 @@ public class RocketLauncher : MonoBehaviour
     {
         m_bChargingShot = false;
         m_bIsAscending = true;
-        // initilize rocket list with size
-        m_agRocketList = new GameObject[m_nPoolsize];
+        // initilize grenade list with size
+        m_agGrenadeList = new GameObject[m_nPoolsize];
 
-        // go through each rocket
+        // go through each grenade
         for (int i = 0; i < m_nPoolsize; ++i)
         {
             // Instantiate and set active state
-            m_agRocketList[i] = Instantiate(m_gRocketBlueprint);
-            m_agRocketList[i].SetActive(false);
+            m_agGrenadeList[i] = Instantiate(m_gGrenadePrefab);
+            m_agGrenadeList[i].SetActive(false);
         }
     }
 
@@ -107,7 +107,6 @@ public class RocketLauncher : MonoBehaviour
                 m_bIsAscending = false;
             }
         }
-
         else
         {
             // it musn't be ascending if it got here
@@ -143,7 +142,7 @@ public class RocketLauncher : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------
-    // SpawnBullet: Resets and Spawns a Rocket.       
+    // SpawnBullet: Resets and Spawns a Grenade.       
     //--------------------------------------------------------------------------------------
     public void SpawnBullet()
     {
@@ -151,20 +150,20 @@ public class RocketLauncher : MonoBehaviour
         if (m_bChargingShot)
         {
             // Allocate a Rocket from the pool and set it to active
-            GameObject gRocket = Allocate();
+            GameObject gGrenade = Allocate();
             // if the rocket is active
-            if (gRocket.activeInHierarchy)
+            if (gGrenade.activeInHierarchy)
             {
                 // Reset all of the Rockets variables
-                gRocket.GetComponent<Rocket>().m_gSpawnPoint = gameObject;
-                gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
-                gRocket.GetComponent<Rocket>().m_fArcHeight = m_fArcHeight;
-                gRocket.GetComponent<Rocket>().transform.position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
-                gRocket.GetComponent<Rocket>().m_fPower = m_fCharge;
+                gGrenade.GetComponent<Grenade>().m_gSpawnPoint = gameObject;
+                gGrenade.GetComponent<Rigidbody>().position = gGrenade.GetComponent<Grenade>().m_gSpawnPoint.transform.position;
+                gGrenade.GetComponent<Grenade>().m_fArcHeight = m_fArcHeight;
+                gGrenade.GetComponent<Grenade>().transform.position = gGrenade.GetComponent<Grenade>().m_gSpawnPoint.transform.position;
+                gGrenade.GetComponent<Grenade>().m_fPower = m_fCharge;
                 m_v3CastingLine.y = 0;
-                gRocket.GetComponent<Rocket>().m_v3Target = m_v3CastingLine;
-                gRocket.GetComponent<Rocket>().m_fCurrentActivateTimer = gRocket.GetComponent<Rocket>().m_fMaxActivateTimer;
-                gRocket.GetComponent<Rocket>().m_fLerpTime = 0.0f;
+                gGrenade.GetComponent<Grenade>().m_v3Target = m_v3CastingLine;
+                gGrenade.GetComponent<Grenade>().m_fCurrentActivateTimer = gGrenade.GetComponent<Grenade>().m_fMaxActivateTimer;
+                gGrenade.GetComponent<Grenade>().m_fLerpTime = 0.0f;
             }
             // Reset variables for the firing functions
             m_bChargingShot = false;
@@ -173,9 +172,9 @@ public class RocketLauncher : MonoBehaviour
 
     }
     //--------------------------------------------------------------------------------------
-    // Allocate: For accessing a rocket that isn't currently active in m_agRocketList 
+    // Allocate: For accessing a Grenade that isn't currently active in m_agGrenadeList 
     //           
-    // Returns: A Rocket from m_agRocketList
+    // Returns: A grenade from m_agGrenadeList
     //
     //--------------------------------------------------------------------------------------
     GameObject Allocate()
@@ -184,20 +183,16 @@ public class RocketLauncher : MonoBehaviour
         for (int i = 0; i < m_nPoolsize; ++i)
         {
             //check if active
-            if (!m_agRocketList[i].activeInHierarchy)
+            if (!m_agGrenadeList[i].activeInHierarchy)
             {
                 //set active state
-                m_agRocketList[i].SetActive(true);
+                m_agGrenadeList[i].SetActive(true);
 
                 //return the rocket
-                return m_agRocketList[i];
+                return m_agGrenadeList[i];
             }
         }
         //if all fail, return null
         return null;
     }
-    
-    
 }
-
-

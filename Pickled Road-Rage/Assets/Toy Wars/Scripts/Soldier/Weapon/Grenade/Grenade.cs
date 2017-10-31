@@ -1,71 +1,89 @@
-﻿//-------------------------------------------------------------------------------------------------
-// Purpose: How the rocket weapon will act when spawned
+﻿//--------------------------------------------------------------------------------------
+// Purpose: How the grenade weapon will act when spawned
 //
-// Description: Inheriting from Weapon.cs. Used for propelling rockets and their collison/damage numbers
+// Description: Inheriting from Weapon.cs, Used for propelling grenades and their collison/damage numbers 
 //
 // Author: Callan Davies
-//-------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
 
 // Using, etc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Rocket : Weapon
+public class Grenade : Weapon
 {
-    //A timer to stop the rocket from colliding with its Launcher
+
+    //A timer to stop the grenade from colliding with its Launcher
     [LabelOverride("Activation Timer")]
-    [Tooltip("Seconds it takes for the missle to not be within collision range of its Launcher")]
+    [Tooltip("Seconds it takes for the grenade to not be within collision range of its Launcher")]
     public float m_fMaxActivateTimer = 2;
+
+    [Header("Grenade-specific Variables")]
+    [LabelOverride("Bounciness")]
+    [Tooltip("How bouncy the grenade is")]
+    public float m_fBounceFactor;
+
+    [LabelOverride("Grenade Fuse")]
+    [Tooltip("The grenade will explode when this reaches zero")]
+    public float m_fMaxFuseTimer = 4;
 
     // The force that hits back all Unit layered objects
     [Header("Explosion Variables")]
-    [LabelOverride("Force of Explosion")]
+    [LabelOverride("Explosion Force")]
     [Tooltip("The force that hits back all Unit layered objects")]
-    public float m_ExplosionForce = 1000f;
+    public float m_ExplosionForce = 50.0f;
+
+    // Radius for the Area of Effect Explosion that should follow any Collision
+    [LabelOverride("Explosion Radius")]
+    [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
+    public float m_fExplosionRadius = 5f;
 
     [LabelOverride("Direct Hit Modifier")]
     [Tooltip("The velocity is multiplied by this to reach an acceptable knockback")]
     public float m_fHitMultiplier = 0.5f;
 
-    // Radius for the Area of Effect Explosion that should follow any Collision
-    [LabelOverride("Radius of Explosion")]
-    [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
-    public float m_fExplosionRadius = 5f;
-
-    // how fast the rocket will reach its target
-    [LabelOverride("Rocket Speed")]
-    [Tooltip("How quickly the rocket will reach its objective")]
+    // how fast the grenade will reach its target
+    [LabelOverride("Speed")]
+    [Tooltip("How quickly the grenade will reach its objective")]
     public float m_fSpeed;
 
-    // pointer to the RocketLauncher so it knows where to spawn
+    // pointer to the GrenadeLauncher so it knows where to spawn
     [HideInInspector]
     public GameObject m_gSpawnPoint;
 
-    // time it will take for the rocket to reach its target position.
+    // time it will take for the grenade to reach its target position.
     [HideInInspector]
     public float m_fLerpTime = 0.0f;
 
-    // The direction the Rocket should move
+    // The direction the grenade should move
     [HideInInspector]
     public Vector3 m_v3Target;
 
     // Starts at m_fMaxActivateTimer and ticks down to zero, then resetting upon being set Inactive
     [HideInInspector]
     public float m_fCurrentActivateTimer;
-    
-    // The height that the rocket will arc to, this is passed down from its Launcher
+
+    // The height that the grenade will arc to, this is passed down from its Launcher
     [HideInInspector]
     public float m_fArcHeight;
 
     // its own rigidbody
-    private Rigidbody m_rbRocket;
+    private Rigidbody m_rbGrenade;
+
+    // boolean for if the grenade should be counting down to explosion
+    private bool m_bFuseTicking;
+
+    // When this is less than or equal to zero, the grenade will explode
+    private float m_fFuseTimer;
 
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        m_rbRocket = GetComponent<Rigidbody>();
+        m_rbGrenade = GetComponent<Rigidbody>();
+        m_fFuseTimer = m_fMaxFuseTimer;
+        m_bFuseTicking = false;
     }
 
     //--------------------------------------------------------------------------------------
@@ -73,49 +91,37 @@ public class Rocket : Weapon
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        // ActivateTimer decreases by 1 each frame (Rocket can only collide when this is lower than 1)
+        // ActivateTimer decreases by 1 each frame (Grenade can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
 
-        m_fLerpTime += Time.deltaTime * m_fSpeed;
-        if (m_fLerpTime > 1.0f)
+        // if the timer has set off
+        if (m_fFuseTimer <= 0)
         {
-            m_fLerpTime = 1.0f;
+            //explode
+            GrenadeExplode();
+            GrenadeDisable();
+        } 
+        // if the grenade has hit the ground
+        if (m_bFuseTicking)
+        {
+            m_fFuseTimer -= 1 * Time.deltaTime;
         }
 
-        transform.position = BezierCurve.CalculateBezier(m_gSpawnPoint.transform.position, m_v3Target, m_fLerpTime, m_fArcHeight);
-        if (transform.position == m_v3Target)
+        if (m_fLerpTime < 1.0f)
         {
-            RocketExplode();
-            RocketDisable();
-        }
-    }
+            m_rbGrenade.isKinematic = true;
+            Vector3 v3Pos = transform.position;
+            transform.position = BezierCurve.CalculateBezier(m_gSpawnPoint.transform.position, m_v3Target, m_fLerpTime, m_fArcHeight);
 
-    //--------------------------------------------------------------------------------------
-    // OnTriggerEnter: When a rocket Collides (Is Trigger)
-    //
-    // Param: other is the other object it is colliding with at call
-    //
-    //--------------------------------------------------------------------------------------
-    private void OnTriggerEnter(Collider other)
-    {
-        // if the rocket can now activate
-        if (m_fCurrentActivateTimer <= 0)
-        {
-            // Rocket Explodes, damaging anything within the radius
-            RocketExplode();
-
-            // if the rocket directly hits a Soldier, this will be called to apply knockback
-            if (other.tag == "Soldier")
+            m_fLerpTime += Time.deltaTime * m_fSpeed;
+            if (m_fLerpTime > 1.0f)
             {
-                Rigidbody rbTarget = other.GetComponent<Rigidbody>();
-                rbTarget = other.GetComponent<Rigidbody>();
-                // Directly knockback the Soldier, 
-                // NOTE: This soldier would of already taken damage from the RocketExplode() function
-                rbTarget.AddForce(m_rbRocket.velocity * m_fHitMultiplier, ForceMode.Impulse);
+                m_fLerpTime = 1.0f;
+                m_rbGrenade.isKinematic = false;
+                m_rbGrenade.velocity = (transform.position - v3Pos).normalized * m_fBounceFactor;
+                Debug.Log(m_rbGrenade.velocity);
+                m_bFuseTicking = true;
             }
-           
-            // Disable Rocket after it has completed all damage dealing and knockbacks
-            RocketDisable();
         }
     }
 
@@ -144,8 +150,11 @@ public class Rocket : Weapon
         return fDamage;
     }
 
-
-    private void RocketExplode()
+    //--------------------------------------------------------------------------------------
+    //  GrenadeExplode: Finds all colliders in the m_fExplosionRadius and calls damage functions
+    //
+    //--------------------------------------------------------------------------------------
+    private void GrenadeExplode()
     {
         // Collect all possible colliders 
         Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
@@ -178,11 +187,13 @@ public class Rocket : Weapon
     }
 
     //--------------------------------------------------------------------------------------
-    //  RocketDisable: Disables rocket and allows for resetting of variables if needed
-    //
+    //  GrenadeDisable: Disables grenade and resets values
     //--------------------------------------------------------------------------------------
-    private void RocketDisable()
+    private void GrenadeDisable()
     {
+        m_fCurrentActivateTimer = m_fMaxActivateTimer;
+        m_fFuseTimer = m_fMaxFuseTimer;
+        m_bFuseTicking = false;
         gameObject.SetActive(false);
     }
 }
