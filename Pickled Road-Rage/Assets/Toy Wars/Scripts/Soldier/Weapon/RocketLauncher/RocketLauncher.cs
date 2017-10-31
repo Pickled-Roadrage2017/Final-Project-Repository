@@ -80,6 +80,7 @@ public class RocketLauncher : MonoBehaviour
     {
         // Reset CastingLine
         m_v3CastingLine = transform.position + transform.forward;
+        m_bIsAscending = true;
     }
 
     //--------------------------------------------------------------------------------------
@@ -90,13 +91,13 @@ public class RocketLauncher : MonoBehaviour
         // It is charging a shot
         m_bChargingShot = true;
         // If the counter should be ascending and the CastingLine.magnitude is less than MaxLength
-        if (m_bIsAscending && m_v3CastingLine.magnitude <= m_fMaxLength)
+        if (m_bIsAscending && Vector3.Distance(m_v3CastingLine, transform.position) <= m_fMaxLength)
         {
             // Increase the CastingLine forwards by AimSpeed
             m_v3CastingLine += transform.forward * m_fAimSpeed * Time.deltaTime;
 
             // If the magnitude is higher or equal to MaxLength
-            if (m_v3CastingLine.magnitude >= m_fMaxLength)
+            if (Vector3.Distance(m_v3CastingLine, transform.position) >= m_fMaxLength)
             {
                 // then it should not be ascening anymore
                 m_bIsAscending = false;
@@ -107,12 +108,11 @@ public class RocketLauncher : MonoBehaviour
         {
             // it musn't be ascending if it got here
             m_bIsAscending = false;
-
             // Decrease the CastingLine forwards by AimSpeed
             m_v3CastingLine -= transform.forward * m_fAimSpeed * Time.deltaTime;
 
             // if the magnitude is lower than a set number
-            if (m_v3CastingLine.magnitude <= 0.2f)
+            if (Vector3.Distance(m_v3CastingLine, transform.position) <= 0.2f)
             {
                 // start ascending
                 m_bIsAscending = true;

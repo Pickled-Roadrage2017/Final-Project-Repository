@@ -72,10 +72,6 @@ public class SoldierActor : MonoBehaviour
     [HideInInspector]
     public Rigidbody m_rbRigidBody;
 
-    // public cavnas for the displaying of the aimming arrow. to be changed.
-    [LabelOverride("Aiming Canvas")] [Tooltip("The Canvas that the Solider Aiming arrow is on.")]
-    public Canvas m_cSoldierCanvas;
-
     // public float for the radius of the movement circle.
     [LabelOverride("Movement Radius")] [Tooltip("The Radius of the movement circle, this is how far the soldier can move.")]
     public float m_fMovementRadius;
@@ -113,9 +109,6 @@ public class SoldierActor : MonoBehaviour
         // Set the Current position to the soldiers postion.
         m_v3CurrentPostion = transform.position;
 
-        // Set the SoliderCanvas setActive to false.
-        m_cSoldierCanvas.gameObject.SetActive(false);
-
         // Make the size of the MovementCircle the same as the MovementRadius.
         m_gMovementCircle.transform.localScale *= m_fMovementRadius;
     }
@@ -149,9 +142,6 @@ public class SoldierActor : MonoBehaviour
             // Set the movementcircle postion.
             m_gMovementCircle.transform.position = m_v3CurrentPostion;
 
-            // activate the soldier canvas.
-            m_cSoldierCanvas.gameObject.SetActive(true);
-
             // activate the movememntcircle.
             m_gMovementCircle.SetActive(true);
         }
@@ -160,7 +150,7 @@ public class SoldierActor : MonoBehaviour
         else if (!bActive)
         {
             // deactivate the solider canvas.
-            m_cSoldierCanvas.gameObject.SetActive(false);
+            m_gRocketLauncher.GetComponent<LineRenderer>().enabled = false;
 
             // deactivate the movementcircle.
             m_gMovementCircle.SetActive(false);

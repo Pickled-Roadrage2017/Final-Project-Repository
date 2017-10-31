@@ -125,9 +125,9 @@ public class Player : MonoBehaviour
             if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
             {
                 // Get the mouse input functions.
-                bool bMouseDown = MouseDown(sCurrentSoldier);
+                MouseDown(sCurrentSoldier);
                 bool bMouseHeld = MouseHeld(sCurrentSoldier);
-                bool bMouseUp = MouseUp(sCurrentSoldier);
+                MouseUp(sCurrentSoldier);
 
                 // if the mouse is not held.
                 if (!bMouseHeld)
