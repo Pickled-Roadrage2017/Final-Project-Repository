@@ -50,8 +50,13 @@ public class SpawnState : State
         // If the timer runs out or end turn is true.
         if (TurnManager.m_fTimer < 0)
         {
-            // Push to the endturn state.
-            m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_START);
+
+            if (GetCurrentPlayerScript().GetActiveSoldiers() != 0)
+                // Push to the endturn state.
+                m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_START);
+
+            else
+                m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_END); // Will have a massive dealy!
         }
     }
 

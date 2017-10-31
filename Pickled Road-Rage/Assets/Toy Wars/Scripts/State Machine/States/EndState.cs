@@ -45,19 +45,20 @@ public class EndState : State
             if (!bIsGameOver)
             {
                 // if a player has no soldiers dont swap to that player.
-                if (GetPlayerScript(1).GetActiveSoldiers() != 0 && GetPlayerScript(2).GetActiveSoldiers() != 0)
-                {
+                //if ((TurnManager.m_snCurrentTurn == 1 && GetPlayerScript(2).GetActiveSoldiers() != 0) || 
+                //    (TurnManager.m_snCurrentTurn == 2 && GetPlayerScript(1).GetActiveSoldiers() != 0))
+                //{
                     // set the turn to ended.
                     TurnManager.m_sbEndTurn = true;
 
                     // Switch players turn.
                     TurnManager.SwitchTurn();
-                }
-                else
-                {
-                    // set the end turn to true.
-                    TurnManager.m_sbEndTurn = false;
-                }
+                //}
+                //else
+                //{
+                //    // set the end turn to true.
+                //    TurnManager.m_sbEndTurn = false;
+                //}
 
                 // Push to the spawn state
                 m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_SPAWN);
