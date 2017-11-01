@@ -10,7 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Rocket : Weapon
+public class TestRocket : Weapon
 {
     public LayerMask layers = 1;
 

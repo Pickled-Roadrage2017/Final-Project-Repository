@@ -10,7 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class RocketLauncher : MonoBehaviour
+public class TestRocketLauncher : MonoBehaviour
 {
     [Header("Firing Variables")]
     // speed for the moving of the target line
