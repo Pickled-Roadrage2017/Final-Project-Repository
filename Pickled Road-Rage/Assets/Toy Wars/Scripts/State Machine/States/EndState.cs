@@ -44,21 +44,11 @@ public class EndState : State
             // if game over function is true.
             if (!bIsGameOver)
             {
-                // if a player has no soldiers dont swap to that player.
-                //if ((TurnManager.m_snCurrentTurn == 1 && GetPlayerScript(2).GetActiveSoldiers() != 0) || 
-                //    (TurnManager.m_snCurrentTurn == 2 && GetPlayerScript(1).GetActiveSoldiers() != 0))
-                //{
-                    // set the turn to ended.
-                    TurnManager.m_sbEndTurn = true;
+                // set the turn to ended.
+                TurnManager.m_sbEndTurn = true;
 
-                    // Switch players turn.
-                    TurnManager.SwitchTurn();
-                //}
-                //else
-                //{
-                //    // set the end turn to true.
-                //    TurnManager.m_sbEndTurn = false;
-                //}
+                // Switch players turn.
+                TurnManager.SwitchTurn();
 
                 // Push to the spawn state
                 m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_SPAWN);
@@ -108,14 +98,8 @@ public class EndState : State
     //--------------------------------------------------------------------------------------
     private bool GameOver()
     {
-        // Get player1 and Teddy.
-        float fTeddyHealth1 = GetPlayerScript(1).m_gTeddyBase.GetComponent<Teddy>().m_fCurrentHealth;
-
-        // Get player2 and Teddy.
-        float fTeddyHealth2 = GetPlayerScript(2).m_gTeddyBase.GetComponent<Teddy>().m_fCurrentHealth;
-
-        // Check Teddy current health for each player.
-        if (fTeddyHealth1 <= 0 || fTeddyHealth2 <= 0 )
+        // Check if a player has had a gameover.
+        if (GetPlayerScript(1).CheckGameOver() || GetPlayerScript(2).CheckGameOver())
         {
             // Push to the game over state.
             m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_GAMEOVER);
