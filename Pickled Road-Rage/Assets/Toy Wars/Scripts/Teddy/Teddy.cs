@@ -84,6 +84,10 @@ public class Teddy : MonoBehaviour
     // pool for projectiles
     private int m_nPoolSize = 1;
 
+    // Health bar slider on teddy canvas.
+    [LabelOverride("Health Bar Slider")] [Tooltip("Drag in a UI slider to be used as the Teddy health bar.")]
+    public Slider m_sHealthBar;
+
     //--------------------------------------------------------------------------------------
     // Initialization.
     //--------------------------------------------------------------------------------------
@@ -102,12 +106,15 @@ public class Teddy : MonoBehaviour
             
         }
         m_fCurrentHealth = m_fMaxHealth;
-       /* m_bIsAscending = true;
-        m_bFiring = false;
-        m_bChargingShot = false;
-        m_cTeddyCanvas.gameObject.SetActive(false);
-        m_fCharge = m_fMinCharge; */
-       // m_gPivot.transform.rotation = new Quaternion(0, 0, 0, 0);
+        /* m_bIsAscending = true;
+         m_bFiring = false;
+         m_bChargingShot = false;
+         m_cTeddyCanvas.gameObject.SetActive(false);
+         m_fCharge = m_fMinCharge; */
+        // m_gPivot.transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        // Set the health slider value to the current health.
+        m_sHealthBar.value = CalcHealth();
     }
 
     //--------------------------------------------------------------------------------------
@@ -128,8 +135,11 @@ public class Teddy : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-      //  m_gPivot.transform.rotation = new Quaternion(0, 0, 0, 0);
-      //  m_gPivot.transform.rotation = FaceMouse();
+        //  m_gPivot.transform.rotation = new Quaternion(0, 0, 0, 0);
+        //  m_gPivot.transform.rotation = FaceMouse();
+
+        // Apply damage to the health bar.
+        m_sHealthBar.value = CalcHealth();
     }
 
     //--------------------------------------------------------------------------------------
@@ -303,6 +313,18 @@ public class Teddy : MonoBehaviour
         {
             return true;
         }
+    }
+
+    //--------------------------------------------------------------------------------------
+    // CalcHealth: Calculate the health percentage to apply to the health bar.
+    //
+    // Return:
+    //      float: The teddy health in percentage.
+    //--------------------------------------------------------------------------------------
+    float CalcHealth()
+    {
+        // Get the percentage of health.
+        return m_fCurrentHealth / m_fMaxHealth;
     }
 }
 
