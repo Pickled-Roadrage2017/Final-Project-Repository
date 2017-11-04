@@ -142,6 +142,9 @@ public class Player : MonoBehaviour
             // Fire the soldier weapon. apply its state of fire to a bool.
             if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
             {
+                // Switch soldier weapon on key presses.
+                SwitchWeapon(sCurrentSoldier);
+
                 // Get the mouse input functions.
                 MouseDown(sCurrentSoldier);
                 bool bMouseHeld = MouseHeld(sCurrentSoldier);
@@ -350,7 +353,46 @@ public class Player : MonoBehaviour
         // Update the mpuse face function in soldier.
         sCurrentSoldier.FaceMouse();
     }
-    
+
+
+
+
+
+
+
+
+
+
+
+    // COMMENT!
+    void SwitchWeapon(SoldierActor sCurrentSoldier)
+    {
+        if (Input.GetKeyDown("1")) // ASK CALLAN ABOUT THIS!
+        {
+            sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_RPG;
+        }
+
+        else if (Input.GetKeyDown("2") && sCurrentSoldier.m_nGotGrenade > 0) // ASK CALLAN ABOUT THIS!
+        {
+            sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_GRENADE;
+        }
+
+        else if (Input.GetKeyDown("3") && sCurrentSoldier.m_nGotMinigun > 0) // ASK CALLAN ABOUT THIS!
+        {
+            sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_MINIGUN;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
     //--------------------------------------------------------------------------------------
     // MouseDown: Function for when the mouse is pressed down.
     //
