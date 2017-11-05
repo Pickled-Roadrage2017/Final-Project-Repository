@@ -174,6 +174,17 @@ public class Rocket : Weapon
                 // NOTE: May be replaced with a non-rigidbody knockback
                 rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
             }
+
+            // if an object in collision zone is a Soldier
+            if (aColliders[i].gameObject.tag == "Teddy")
+            {
+                // TODO: Explosion particle effect here
+
+                Teddy gtarget = rbTarget.GetComponent<Teddy>();
+
+                // Soldier will take damage based on position (See CalculateDamge function below)
+                gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+            }
         }
     }
 

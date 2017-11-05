@@ -367,17 +367,17 @@ public class Player : MonoBehaviour
     // COMMENT!
     void SwitchWeapon(SoldierActor sCurrentSoldier)
     {
-        if (Input.GetKeyDown("1")) // ASK CALLAN ABOUT THIS!
+        if (Input.GetButtonDown("SwapRocket")) // ASK CALLAN ABOUT THIS!
         {
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_RPG;
         }
 
-        else if (Input.GetKeyDown("2") && sCurrentSoldier.m_nGotGrenade > 0) // ASK CALLAN ABOUT THIS!
+        else if (Input.GetButtonDown("SwapGrenade") && sCurrentSoldier.m_nGotGrenade > 0) // ASK CALLAN ABOUT THIS!
         {
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_GRENADE;
         }
 
-        else if (Input.GetKeyDown("3") && sCurrentSoldier.m_nGotMinigun > 0) // ASK CALLAN ABOUT THIS!
+        else if (Input.GetButtonDown("SwapMini") && sCurrentSoldier.m_nGotMinigun > 0) // ASK CALLAN ABOUT THIS!
         {
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_MINIGUN;
         }
