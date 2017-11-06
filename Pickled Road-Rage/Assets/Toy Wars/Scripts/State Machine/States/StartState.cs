@@ -35,8 +35,8 @@ public class StartState : State
         // Update the timer by deltatime.
         TurnManager.m_fTimer -= Time.deltaTime;
 
-        // Once the timer ends.
-        if (TurnManager.m_fTimer < 0)
+        // Once the timer ends or any key is pressed
+        if (TurnManager.m_fTimer < 0 || Input.anyKeyDown)
         {
             // Push to the action state
             m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_ACTION);

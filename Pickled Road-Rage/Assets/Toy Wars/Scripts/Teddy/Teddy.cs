@@ -46,13 +46,17 @@ public class Teddy : MonoBehaviour
     [Tooltip("Speed that the charge increased by per update")]
     public float m_fChargeSpeed = 0.0f;
 
+    // public color to apply to teddy objects.
+    [LabelOverride("Teddy Color")] [Tooltip("The material color of this the Teddy bear object.")]
+    public Color m_cTeddyColor;
+
     // This will be null, unless the teddy is holding a soldier
-   //[LabelOverride("Held Soldier")]
+    //[LabelOverride("Held Soldier")]
     //public GameObject m_gSoldier;
 
     // An empty game object where a held soldier will appear
     //[LabelOverride("Hand Transform")][Tooltip("An empty game object where a held soldier will appear")]
-   // public GameObject m_gBearHand;
+    // public GameObject m_gBearHand;
 
     // The blueprint for the teddy projectile
     //[LabelOverride("Teddy Projectile Prefab")]
@@ -76,7 +80,7 @@ public class Teddy : MonoBehaviour
     //private bool m_bFiring;
 
     // boolean for if the soldier is currently charging up a shot
-   // private bool m_bChargingShot;
+    // private bool m_bChargingShot;
 
     // Pool of Projectile objects
     private GameObject[] m_agProjectileList;
@@ -115,6 +119,13 @@ public class Teddy : MonoBehaviour
 
         // Set the health slider value to the current health.
         m_sHealthBar.value = CalcHealth();
+
+        // loop through each material on the teddy.
+        for (int o = 0; o < GetComponent<Renderer>().materials.Length; ++o)
+        {
+            // Change the color of each material to the m_cTeddyColor.
+            GetComponent<Renderer>().materials[o].color = m_cTeddyColor;
+        }
     }
 
     //--------------------------------------------------------------------------------------

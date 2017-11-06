@@ -138,8 +138,8 @@ public class Player : MonoBehaviour
             // Get the soldier object and script.
             GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
             SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
-            
-            // Fire the soldier weapon. apply its state of fire to a bool.
+
+            // if in the turns action state.
             if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
             {
                 // Switch soldier weapon on key presses.
@@ -156,6 +156,20 @@ public class Player : MonoBehaviour
                     // Move the soldier.
                     SoldierMovement(sCurrentSoldier);
                 }
+
+                // if mouse held.
+                else if (bMouseHeld)
+                {
+                    // stop the current soldier from moving.
+                    sCurrentSoldier.Move(0, 0);
+                }
+            }
+
+            // if in the end turn state.
+            else if (StateMachine.GetState() == ETurnManagerStates.ETURN_END)
+            {
+                // stop the current soldier from moving.
+                sCurrentSoldier.Move(0, 0);
             }
         }
         
@@ -353,45 +367,36 @@ public class Player : MonoBehaviour
         // Update the mpuse face function in soldier.
         sCurrentSoldier.FaceMouse();
     }
-
-
-
-
-
-
-
-
-
-
-
-    // COMMENT!
+    
+    //--------------------------------------------------------------------------------------
+    // SwitchWeapon: Function for switching the current soldiers weapon.
+    //
+    // Param:
+    //		sCurrentSoldier: A SoldierActor object for which soldier wants to move.
+    //--------------------------------------------------------------------------------------
     void SwitchWeapon(SoldierActor sCurrentSoldier)
     {
-        if (Input.GetButtonDown("SwapRocket")) // ASK CALLAN ABOUT THIS!
+        // if the 1 key is pressed.
+        if (Input.GetButtonDown("SwapRocket"))
         {
+            // Switch the current soldiers weapon to RPG.
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_RPG;
         }
 
-        else if (Input.GetButtonDown("SwapGrenade") && sCurrentSoldier.m_nGotGrenade > 0) // ASK CALLAN ABOUT THIS!
+        // if the 2 key is pressed.
+        else if (Input.GetButtonDown("SwapGrenade") && sCurrentSoldier.m_nGotGrenade > 0)
         {
+            // Switch the current soldiers weapon to Grenade. 
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_GRENADE;
         }
 
-        else if (Input.GetButtonDown("SwapMini") && sCurrentSoldier.m_nGotMinigun > 0) // ASK CALLAN ABOUT THIS!
+        // if the 3 key is pressed.
+        else if (Input.GetButtonDown("SwapMini") && sCurrentSoldier.m_nGotMinigun > 0)
         {
+            // Switch the current soldiers weapon to MiniGun.
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_MINIGUN;
         }
     }
-
-
-
-
-
-
-
-
-
-
 
     //--------------------------------------------------------------------------------------
     // MouseDown: Function for when the mouse is pressed down.
