@@ -92,12 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e2d220f83d87b4e8346ea1455c90e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fMinCharge: 1
-  m_fMaxCharge: 1.5
-  m_fChargeSpeed: 0.02
+  m_fAimSpeed: 0
+  m_fMaxLength: 0
   m_gRocketBlueprint: {fileID: 1480935180070650, guid: af2676544f701ed4198b43f67985729c,
     type: 2}
-  m_fRocketXRot: -17.399998
-  m_sSlider: {fileID: 0}
+  m_fArcHeight: 0
+  m_nLineNodes: 1
   m_fCharge: 0
-  m_bRocketAlive: 0
