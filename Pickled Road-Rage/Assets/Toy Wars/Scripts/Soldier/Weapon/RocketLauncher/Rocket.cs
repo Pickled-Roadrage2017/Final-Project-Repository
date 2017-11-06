@@ -58,7 +58,8 @@ public class Rocket : Weapon
     public float m_fArcHeight;
 
     // its own rigidbody
-    private Rigidbody m_rbRocket;
+    [HideInInspector]
+    public Rigidbody m_rbRocket;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -73,6 +74,7 @@ public class Rocket : Weapon
     //--------------------------------------------------------------------------------------
     void Update()
     {
+        //m_rbRocket.velocity = m_gSpawnPoint.transform.forward * m_gSpawnPoint.GetComponent<RocketLauncher>().m_fVelocity;
         // ActivateTimer decreases by 1 each frame (Rocket can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
 
@@ -82,12 +84,14 @@ public class Rocket : Weapon
             m_fLerpTime = 1.0f;
         }
 
-        transform.position = BezierCurve.CalculateBezier(m_gSpawnPoint.transform.position, m_v3Target, m_fLerpTime, m_fArcHeight);
+        //transform.position = BezierCurve.CalculateBezier(m_gSpawnPoint.transform.position, m_v3Target, m_fLerpTime, m_fArcHeight);
         if (transform.position == m_v3Target)
         {
             RocketExplode();
             RocketDisable();
         }
+
+        
     }
 
     //--------------------------------------------------------------------------------------
@@ -112,6 +116,10 @@ public class Rocket : Weapon
                 // Directly knockback the Soldier, 
                 // NOTE: This soldier would of already taken damage from the RocketExplode() function
                 rbTarget.AddForce(m_rbRocket.velocity * m_fHitMultiplier, ForceMode.Impulse);
+            }
+            if (other.tag == "Teddy")
+            {
+                other.GetComponent<Teddy>().TakeDamage(m_fDamage);
             }
            
             // Disable Rocket after it has completed all damage dealing and knockbacks
