@@ -99,7 +99,7 @@ public class RocketLauncher : MonoBehaviour
         {
             // Increase the CastingLine forwards by AimSpeed
             m_v3CastingLine += transform.forward * m_fAimSpeed * Time.deltaTime;
-            m_fArcHeight += m_fAimSpeed * Time.deltaTime;
+            //m_fArcHeight += m_fAimSpeed * Time.deltaTime;
             // If the magnitude is higher or equal to MaxLength
             if (Vector3.Distance(m_v3CastingLine, transform.position) >= m_fMaxLength)
             {
@@ -114,7 +114,7 @@ public class RocketLauncher : MonoBehaviour
             m_bIsAscending = false;
             // Decrease the CastingLine forwards by AimSpeed
             m_v3CastingLine -= transform.forward * m_fAimSpeed * Time.deltaTime;
-            m_fArcHeight -= m_fAimSpeed * Time.deltaTime;
+            //m_fArcHeight -= m_fAimSpeed * Time.deltaTime;
             // if the magnitude is lower than a set number
             if (Vector3.Distance(m_v3CastingLine, transform.position) <= 0.2f)
             {
