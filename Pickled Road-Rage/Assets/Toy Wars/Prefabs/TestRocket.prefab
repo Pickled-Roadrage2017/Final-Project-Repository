@@ -154,7 +154,7 @@ MonoBehaviour:
   m_UnitMask:
     serializedVersion: 2
     m_Bits: 256
-  m_fDamage: 60
+  m_fDamage: 85
   m_fPower: 0
   m_fMaxActivateTimer: 2
   m_ExplosionForce: 10

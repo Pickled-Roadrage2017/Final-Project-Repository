@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a6f033a49af0ac54bafac98dc0b0f45a
-timeCreated: 1507001306
+guid: 653fa03b33bb6484b9550e59dd555cb0
+timeCreated: 1510121508
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Teddy:PRIMBLOCK_Teddy_mesh
-    4300002: PRIMBLOCK_Teddy_mesh
+    4300000: PRIMBLOCK_Teddy_mesh
     9500000: //RootNode
   materials:
     importMaterials: 1
