@@ -58,7 +58,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1094366388874892
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1359132891803798
 GameObject:
   m_ObjectHideFlags: 1
@@ -313,7 +313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1471183617595418
 GameObject:
   m_ObjectHideFlags: 1
@@ -476,6 +476,7 @@ GameObject:
   - component: {fileID: 224785447709555916}
   - component: {fileID: 222419804536238576}
   - component: {fileID: 114770336016813208}
+  - component: {fileID: 114326191625004280}
   m_Layer: 5
   m_Name: Bottom Left
   m_TagString: Untagged
@@ -544,6 +545,7 @@ GameObject:
   - component: {fileID: 224032501421493832}
   - component: {fileID: 222368760701860844}
   - component: {fileID: 114110609568453168}
+  - component: {fileID: 114141785418876668}
   m_Layer: 5
   m_Name: Bottom Right
   m_TagString: Untagged
@@ -672,7 +674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1771523130340518
 GameObject:
   m_ObjectHideFlags: 1
@@ -722,7 +724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1827716262245650
 GameObject:
   m_ObjectHideFlags: 1
@@ -1321,6 +1323,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114141785418876668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1624269981043632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f00268e858d23e469f45827ad0b41a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gSelectedRPG: {fileID: 1759046568942640}
+  m_gUnselectedRPG: {fileID: 1047936212565088}
+  m_gSelectedGrenade: {fileID: 1759046568942640}
+  m_gUnselectedGrenade: {fileID: 1054029110464268}
+  m_gPlayer: {fileID: 0}
 --- !u!114 &114216964816983140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1456,6 +1474,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114326191625004280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1554584597189752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f00268e858d23e469f45827ad0b41a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gSelectedRPG: {fileID: 1811544728211188}
+  m_gUnselectedRPG: {fileID: 1972716676350118}
+  m_gSelectedGrenade: {fileID: 1072123391751906}
+  m_gUnselectedGrenade: {fileID: 1530108285584708}
+  m_gPlayer: {fileID: 0}
 --- !u!114 &114335093479065064
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1480935180070650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.0867, y: 1.465, z: -9.159084}
+  m_LocalPosition: {x: 18.811579, y: 2.436, z: -13.138102}
   m_LocalScale: {x: 0.1, y: 0.05, z: 0.2}
   m_Children:
   - {fileID: 4803316057455852}
@@ -154,19 +154,20 @@ MonoBehaviour:
   m_UnitMask:
     serializedVersion: 2
     m_Bits: 256
-  m_fDamage: 50
+  m_fDamage: 60
   m_fPower: 0
   m_fMaxActivateTimer: 2
-  m_ExplosionForce: 25
+  m_ExplosionForce: 10
   m_fHitMultiplier: 2
   m_fExplosionRadius: 1
-  m_fSpeed: 2
+  m_fSpeed: 1
   m_gSpawnPoint: {fileID: 1566479626656110, guid: 8b66a0fd11024c842b97741cc2f8da22,
     type: 2}
   m_fLerpTime: 0
   m_v3Target: {x: 0, y: 0, z: 0}
   m_fCurrentActivateTimer: 0
   m_fArcHeight: 0
+  m_rbRocket: {fileID: 0}
 --- !u!119 &119918221389181220
 Projector:
   m_ObjectHideFlags: 1
@@ -176,11 +177,11 @@ Projector:
   m_Enabled: 1
   serializedVersion: 2
   m_NearClipPlane: 0.01
-  m_FarClipPlane: 2.96
-  m_FieldOfView: 10
+  m_FarClipPlane: 5
+  m_FieldOfView: 1
   m_AspectRatio: 1
-  m_Orthographic: 0
-  m_OrthographicSize: 2
+  m_Orthographic: 1
+  m_OrthographicSize: 0.4
   m_Material: {fileID: 2100000, guid: e30ff3588e719f34bbf0c66f22d97487, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2

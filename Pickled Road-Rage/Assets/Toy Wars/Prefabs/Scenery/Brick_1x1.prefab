@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4889444011985920}
   - component: {fileID: 33216128122833490}
   - component: {fileID: 23451834101212598}
-  - component: {fileID: 65859718131126662}
+  - component: {fileID: 136204190013550200}
   m_Layer: 0
   m_Name: Brick_1x1
   m_TagString: Untagged
@@ -35,8 +35,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706718982962242}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.35, y: 5.13, z: -14.75}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.834632, y: 3.5058408, z: -4.7058735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,8 +81,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706718982962242}
   m_Mesh: {fileID: 4300000, guid: bd7f0d52acb059a4fae98de44561aff6, type: 3}
---- !u!65 &65859718131126662
-BoxCollider:
+--- !u!136 &136204190013550200
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -90,6 +90,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.154, y: 0.2169037, z: 0.15999985}
+  m_Radius: 0.1
+  m_Height: 0.1
+  m_Direction: 1
   m_Center: {x: 0, y: 0.10845185, z: 0}
