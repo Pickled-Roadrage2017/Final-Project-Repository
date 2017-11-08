@@ -84,7 +84,7 @@ public class Rocket : Weapon
             m_fLerpTime = 1.0f;
         }
 
-        //transform.position = BezierCurve.CalculateBezier(m_gSpawnPoint.transform.position, m_v3Target, m_fLerpTime, m_fArcHeight);
+        transform.position = BezierCurve.CalculateBezier(m_gSpawnPoint.transform.position, m_v3Target, m_fLerpTime, m_fArcHeight);
         if (transform.position == m_v3Target)
         {
             RocketExplode();
