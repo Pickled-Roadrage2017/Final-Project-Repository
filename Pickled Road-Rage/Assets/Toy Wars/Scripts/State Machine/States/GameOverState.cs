@@ -40,10 +40,10 @@ public class GameOverState : State
     public override void OnEnter()
     {
         // Check if there is a valid GameOverCanvas
-        if (m_tTurnManager.GameOverCanvas != null)
+        if (m_tTurnManager.m_gGameOverCanvas != null)
         {
             // Set the gameover canvas to true.
-            m_tTurnManager.GameOverCanvas.SetActive(true);
+            m_tTurnManager.m_gGameOverCanvas.SetActive(true);
         }
     }
 

@@ -48,9 +48,24 @@ public class TurnManager : MonoBehaviour
     [LabelOverride("Player2 Object")][Tooltip("The Player2 object in the scene.")]
     public GameObject m_gPlayer2;
 
+    // Title for this section of public values.
+    [Header("Audio:")]
+
+    // public AudioClip for starting turn audio.
+    [LabelOverride("Turn Starting")] [Tooltip("The Audio file you would like to play for turn startings.")]
+    public AudioClip m_acTurnStartAudio;
+
+    // public AudioClip for time warning audio.
+    [LabelOverride("Time Warning")] [Tooltip("The Audio file you would like to play for when the player is running low on time.")]
+    public AudioClip m_acTimeWarningAudio;
+
+    // public AudioSource for playing audio clips through.
+    [HideInInspector]
+    public AudioSource m_asAudioSource;
+
     // The canvas for the gameover canvas.
     [HideInInspector]
-    public GameObject GameOverCanvas;
+    public GameObject m_gGameOverCanvas;
 
     // static int for the current players turn.
     public static int m_snCurrentTurn;
@@ -99,13 +114,16 @@ public class TurnManager : MonoBehaviour
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_SPAWN, new SpawnState(m_sStateMachine));
 
         // Get the canvas and set it to inactive.
-        GameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
+        m_gGameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
         
         // Check if there is a valid GameOverCanvas
-        if (GameOverCanvas != null)
+        if (m_gGameOverCanvas != null)
         {
-            GameOverCanvas.SetActive(false);
+            m_gGameOverCanvas.SetActive(false);
         }
+
+        // initialization audio source.
+        m_asAudioSource = GetComponent<AudioSource>();
     }
 
     //--------------------------------------------------------------------------------------

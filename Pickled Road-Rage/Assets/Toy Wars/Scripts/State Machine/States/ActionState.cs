@@ -35,6 +35,17 @@ public class ActionState : State
         // Update the timer by deltatime.
         TurnManager.m_fTimer -= Time.deltaTime;
 
+        // Once the timer goes below 6
+        if (TurnManager.m_fTimer < 6)
+        {
+            // make sure only the audio only plays once.
+            if (!m_tTurnManager.m_asAudioSource.isPlaying)
+            {
+                // Play start time wanring sound.
+                m_tTurnManager.m_asAudioSource.PlayOneShot(m_tTurnManager.m_acTimeWarningAudio);
+            }
+        }
+
         // If the timer runs out or end turn is true.
         if (TurnManager.m_fTimer < 0 || TurnManager.m_sbEndTurn == true)
         {
@@ -59,5 +70,8 @@ public class ActionState : State
     {
         // Set timer back to 0.
         TurnManager.m_fTimer = 0;
+
+        // make sure the time warning sound has stop.
+        m_tTurnManager.m_asAudioSource.Stop();
     }
 }

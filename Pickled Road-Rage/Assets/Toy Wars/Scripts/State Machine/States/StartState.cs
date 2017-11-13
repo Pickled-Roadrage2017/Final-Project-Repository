@@ -54,6 +54,9 @@ public class StartState : State
         // if it is no ones turn then dont run.
         if (TurnManager.m_snCurrentTurn != 0)
         {
+            // Play start turn sound.
+            m_tTurnManager.m_asAudioSource.PlayOneShot(m_tTurnManager.m_acTurnStartAudio);
+
             // Run the soldier manager script.
             GetCurrentPlayerScript().SoldierTurnManager();
 
@@ -88,5 +91,8 @@ public class StartState : State
     {
         // Set the delay back to 0
         TurnManager.m_fTimer = 0;
+
+        // make sure the start turn song has stop.
+        m_tTurnManager.m_asAudioSource.Stop();
     }
 }
