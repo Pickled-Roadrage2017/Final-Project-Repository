@@ -1,6 +1,10 @@
 ﻿<Properties StartupItem="Pickled Road-Rage.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Toy Wars\Materials\Shaders\Car_shader_Blue.shader">
+    <Files>
+      <File FileName="Assets\Toy Wars\Materials\Shaders\Car_shader_Blue.shader" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

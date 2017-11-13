@@ -4,11 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - SoldierWall
+  - Wall
+  - RocketLauncher
+  - Soldier
+  - CurrentSoldier
+  - Terrain
+  - AimingArrow
   - Teddy
   - EndMenu
-  - Soldier
-  - RocketLauncher
+  - Fire
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
@@ -19,10 +24,10 @@ TagManager:
   - 
   - 
   - Unit
-  - Projectile
-  - SoldierWall
-  - 
-  - 
+  - Terrain
+  - Bear
+  - Trigger
+  - No Shadow
   - 
   - 
   - 
