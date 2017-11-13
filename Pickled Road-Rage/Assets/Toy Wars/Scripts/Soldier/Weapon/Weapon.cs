@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour
     [Tooltip("Set this to the Unit layer, so the Grenade doesn't knockback objects that should be stationary")]
     public LayerMask m_UnitMask;
 
+    public LayerMask m_TeddyMask;
+
     [LabelOverride("Damage")][Tooltip("How many Health Points the projectile will subtract")]
     public float m_fDamage;
     // Power for the Rocket and Grenade, Minigun will not use this variable 

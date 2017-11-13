@@ -10,7 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class TestRocketLauncher : MonoBehaviour
+public class OldLauncher : MonoBehaviour
 {
     [Header("Firing Variables")]
     // speed for the moving of the target line
@@ -156,15 +156,15 @@ public class TestRocketLauncher : MonoBehaviour
             if (gRocket.activeInHierarchy)
             {
                 // Reset all of the Rockets variables
-                gRocket.GetComponent<Rocket>().m_gSpawnPoint = gameObject;
-                gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
-                gRocket.GetComponent<Rocket>().m_fArcHeight = m_fArcHeight;
-                gRocket.GetComponent<Rocket>().transform.position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
-                gRocket.GetComponent<Rocket>().m_fPower = m_fCharge;
+                gRocket.GetComponent<OldRocket>().m_gSpawnPoint = gameObject;
+                gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<OldRocket>().m_gSpawnPoint.transform.position;
+                gRocket.GetComponent<OldRocket>().m_fArcHeight = m_fArcHeight;
+                gRocket.GetComponent<OldRocket>().transform.position = gRocket.GetComponent<OldRocket>().m_gSpawnPoint.transform.position;
+                gRocket.GetComponent<OldRocket>().m_fPower = m_fCharge;
                 m_v3CastingLine.y = 0;
-                gRocket.GetComponent<Rocket>().m_v3Target = m_v3CastingLine;
-                gRocket.GetComponent<Rocket>().m_fCurrentActivateTimer = gRocket.GetComponent<Rocket>().m_fMaxActivateTimer;
-                gRocket.GetComponent<Rocket>().m_fLerpTime = 0.0f;
+                gRocket.GetComponent<OldRocket>().m_v3Target = m_v3CastingLine;
+                gRocket.GetComponent<OldRocket>().m_fCurrentActivateTimer = gRocket.GetComponent<OldRocket>().m_fMaxActivateTimer;
+                gRocket.GetComponent<OldRocket>().m_fLerpTime = 0.0f;
             }
             // Reset variables for the firing functions
             m_bChargingShot = false;

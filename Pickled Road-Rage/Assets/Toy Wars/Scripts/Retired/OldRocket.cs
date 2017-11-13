@@ -10,10 +10,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class TestRocket : Weapon
+public class OldRocket : Weapon
 {
-    public LayerMask layers = 1;
-
     //A timer to stop the rocket from colliding with its Launcher
     [LabelOverride("Activation Timer")]
     [Tooltip("Seconds it takes for the missle to not be within collision range of its Launcher")]
@@ -60,7 +58,8 @@ public class TestRocket : Weapon
     public float m_fArcHeight;
 
     // its own rigidbody
-    private Rigidbody m_rbRocket;
+    [HideInInspector]
+    public Rigidbody m_rbRocket;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -75,6 +74,7 @@ public class TestRocket : Weapon
     //--------------------------------------------------------------------------------------
     void Update()
     {
+        //m_rbRocket.velocity = m_gSpawnPoint.transform.forward * m_gSpawnPoint.GetComponent<RocketLauncher>().m_fVelocity;
         // ActivateTimer decreases by 1 each frame (Rocket can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
 
@@ -90,6 +90,8 @@ public class TestRocket : Weapon
             RocketExplode();
             RocketDisable();
         }
+
+        
     }
 
     //--------------------------------------------------------------------------------------
@@ -115,6 +117,10 @@ public class TestRocket : Weapon
                 // NOTE: This soldier would of already taken damage from the RocketExplode() function
                 rbTarget.AddForce(m_rbRocket.velocity * m_fHitMultiplier, ForceMode.Impulse);
             }
+            if (other.tag == "Teddy")
+            {
+                other.GetComponent<Teddy>().TakeDamage(m_fDamage);
+            }
            
             // Disable Rocket after it has completed all damage dealing and knockbacks
             RocketDisable();
@@ -128,7 +134,7 @@ public class TestRocket : Weapon
     //
     //--------------------------------------------------------------------------------------
     private float CalculateDamage(Vector3 v3TargetPosition)
-     {
+    {
         // create a vector from the shell to the target
         Vector3 v3ExplosionToTarget = v3TargetPosition - transform.position;
 
@@ -155,6 +161,7 @@ public class TestRocket : Weapon
         for (int i = 0; i < aColliders.Length; i++)
         {
             Rigidbody rbTarget = aColliders[i].GetComponent<Rigidbody>();
+
             //if it does not have a rigidbody
             if (!rbTarget)
             {
@@ -164,41 +171,29 @@ public class TestRocket : Weapon
             // if an object in collision zone is a Soldier
             if (aColliders[i].gameObject.tag == "Soldier")
             {
-                
                 // TODO: Explosion particle effect here
+
                 SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
 
-                bool bExposed = true;
-                RaycastHit rcHit;
+                // Soldier will take damage based on position (See CalculateDamge function below)
+                gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
 
-                // Physics.Linecast()
+                // add explosive force for knockback 
+                // NOTE: May be replaced with a non-rigidbody knockback
+                rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
+            }
 
-                Vector3 vecBetween = (transform.position - gtarget.transform.position);
-                Debug.DrawRay(transform.position, vecBetween, Color.red);
+            // if an object in collision zone is a Soldier
+            if (aColliders[i].gameObject.tag == "Teddy")
+            {
+                // TODO: Explosion particle effect here
 
-                if (Physics.Raycast(transform.position, vecBetween.normalized, out rcHit, vecBetween.magnitude, layers.value)) 
-                {
-                    
-                    if (rcHit.collider != gtarget.GetComponent<Collider>())
-                    {
-                        Debug.Log("In Cover");
-                        bExposed = false;
-                    }
-                }
-                
-                if (bExposed)
-                {
-                    // Soldier will take damage based on position (See CalculateDamge function below)
-                    gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+                Teddy gtarget = rbTarget.GetComponent<Teddy>();
 
-                    // add explosive force for knockback 
-                    // NOTE: May be replaced with a non-rigidbody knockback
-                    rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
-                }
+                // Soldier will take damage based on position (See CalculateDamge function below)
+                gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
             }
         }
-        Debug.DrawLine(transform.position, -Vector3.right);
-
     }
 
     //--------------------------------------------------------------------------------------

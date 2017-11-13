@@ -15,6 +15,15 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------------------
 public class Teddy : MonoBehaviour
 {
+    [Header("Sounds")]
+    [LabelOverride("Place Sound")]
+    [Tooltip("Will play when the teddy places a soldier")]
+    public AudioClip m_acPlaceSound;
+
+    [LabelOverride("Damage Sound")]
+    [Tooltip("Will play when Teddy takes damage")]
+    public AudioClip m_acDamageSound;
+
     [Header("Health Variables")]
     [LabelOverride("Teddy Max Health")][Tooltip("Teddy bear Maximum health.")]
     public float m_fMaxHealth;
@@ -91,6 +100,10 @@ public class Teddy : MonoBehaviour
     // Health bar slider on teddy canvas.
     [LabelOverride("Health Bar Slider")] [Tooltip("Drag in a UI slider to be used as the Teddy health bar.")]
     public Slider m_sHealthBar;
+
+
+    // this Teddys audioSource
+    private AudioSource m_asAudioSource;
 
     //--------------------------------------------------------------------------------------
     // Initialization.
