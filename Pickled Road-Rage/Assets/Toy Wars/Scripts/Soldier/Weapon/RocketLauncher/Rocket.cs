@@ -33,7 +33,7 @@ public class Rocket : Weapon
     [Header("Explosion Variables")]
     [LabelOverride("Force of Explosion")]
     [Tooltip("The force that hits back all Unit layered objects")]
-    public float m_ExplosionForce = 1000f;
+    public float m_ExplosionForce = 50;
 
     [LabelOverride("Direct Hit Modifier")]
     [Tooltip("The velocity is multiplied by this to reach an acceptable knockback")]

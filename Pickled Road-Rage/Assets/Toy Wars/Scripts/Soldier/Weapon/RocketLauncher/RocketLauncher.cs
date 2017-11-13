@@ -209,7 +209,6 @@ public class RocketLauncher : MonoBehaviour
 
     void RenderArc()
     {
-        Ray ray = new Ray(transform.position, Vector3.forward * 100.0f);
         Vector3 offset = new Vector3(0, 0.018f, 0);
         Debug.DrawRay(transform.position, (transform.forward + offset) * 100.0f, Color.red);
         m_lrLine.positionCount = m_nLineNodes + 1;
