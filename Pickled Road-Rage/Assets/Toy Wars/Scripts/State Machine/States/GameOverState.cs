@@ -44,7 +44,6 @@ public class GameOverState : State
         {
             // Set the gameover canvas to true.
             m_tTurnManager.GameOverCanvas.SetActive(true);
-
         }
     }
 

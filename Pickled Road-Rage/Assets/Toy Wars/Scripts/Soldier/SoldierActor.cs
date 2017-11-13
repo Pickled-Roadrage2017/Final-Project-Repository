@@ -65,9 +65,9 @@ public class SoldierActor : MonoBehaviour
 
     // Values for the inventory count of this Soldier
     [Tooltip("How many Grenades this Soldier has")]
-    public int m_nGrenadeCount = 0;
+    public int m_nGrenadeCount = 1;
     public int m_nGotMinigun = 0;
-    public int m_nGotGrenade = 0;
+    public int m_nGotGrenade = 1;
 
     // The GameObject RocketLauncher that the Soldier will be using
     [Space(10)]
