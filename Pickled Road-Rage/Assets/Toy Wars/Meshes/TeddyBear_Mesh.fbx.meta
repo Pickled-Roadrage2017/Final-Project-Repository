@@ -6,12 +6,63 @@ ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
+    100002: jnt_Ear_L
+    100004: jnt_Ear_R
+    100006: jnt_Elbow_L
+    100008: jnt_Elbow_R
+    100010: jnt_Finger_L
+    100012: jnt_Finger_R
+    100014: jnt_Foot_L
+    100016: jnt_Foot_R
+    100018: jnt_Hand_L
+    100020: jnt_Hand_R
+    100022: jnt_Head1
+    100024: jnt_Head2
+    100026: jnt_Hip_L
+    100028: jnt_Hip_R
+    100030: jnt_Knee_L
+    100032: jnt_Knee_R
+    100034: jnt_Root
+    100036: jnt_Shoulder_L
+    100038: jnt_Shoulder_R
+    100040: jnt_Spine1
+    100042: jnt_Spine2
+    100044: jnt_Thumb_L
+    100046: jnt_Thumb_R
+    100048: Teddy_MESH
+    100050: SkeletonGroup
     400000: //RootNode
+    400002: jnt_Ear_L
+    400004: jnt_Ear_R
+    400006: jnt_Elbow_L
+    400008: jnt_Elbow_R
+    400010: jnt_Finger_L
+    400012: jnt_Finger_R
+    400014: jnt_Foot_L
+    400016: jnt_Foot_R
+    400018: jnt_Hand_L
+    400020: jnt_Hand_R
+    400022: jnt_Head1
+    400024: jnt_Head2
+    400026: jnt_Hip_L
+    400028: jnt_Hip_R
+    400030: jnt_Knee_L
+    400032: jnt_Knee_R
+    400034: jnt_Root
+    400036: jnt_Shoulder_L
+    400038: jnt_Shoulder_R
+    400040: jnt_Spine1
+    400042: jnt_Spine2
+    400044: jnt_Thumb_L
+    400046: jnt_Thumb_R
+    400048: Teddy_MESH
+    400050: SkeletonGroup
     2300000: //RootNode
     3300000: //RootNode
     4300000: PRIMBLOCK_Teddy_mesh
     4300002: Teddy_MESH
     9500000: //RootNode
+    13700000: Teddy_MESH
   materials:
     importMaterials: 1
     materialName: 0
