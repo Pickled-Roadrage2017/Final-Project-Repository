@@ -12,6 +12,8 @@ TagManager:
   - AimingArrow
   - Teddy
   - EndMenu
+  - Fire
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

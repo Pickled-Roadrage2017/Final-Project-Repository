@@ -18,15 +18,28 @@ public class PauseManager : MonoBehaviour
 {
     // public static bool for if the game is paused.
     [HideInInspector]
-    public static bool isPaused;
+    public static bool m_bPaused;
+
+    // public gameobject for pause canvas.
+    [HideInInspector]
+    public GameObject m_gCanvas;
 
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
+        // Get the canvas and set it to inactive.
+        m_gCanvas = GameObject.FindGameObjectWithTag("PauseMenu");
+
+        // Check if there is a valid pause canvas.
+        if (m_gCanvas != null)
+        {
+            m_gCanvas.SetActive(false);
+        }
+
         // set the default for pause to false.
-        isPaused = false;
+        m_bPaused = false;
 	}
 
     //--------------------------------------------------------------------------------------
@@ -38,10 +51,37 @@ public class PauseManager : MonoBehaviour
         if (Input.GetButtonDown("Pause"))
         {
             // toggle pause bool.
-            isPaused = !isPaused;
+            m_bPaused = !m_bPaused;
         }
 
-        // DO PAUSE THINGS HERE!
+        // if paused.
+        if (m_bPaused)
+        {
+            // Check if there is a valid pause canvas
+            if (m_gCanvas != null)
+            {
+                // Set the pause canvas to true.
+                m_gCanvas.SetActive(true);
+
+            }
+
+            // stop game clock.
+            Time.timeScale = 0;
+        }
+
+        // if not paused.
+        else if (!m_bPaused)
+        {
+            // Check if there is a valid pause canvas.
+            if (m_gCanvas != null)
+            {
+                // Set the pause canvas to false.
+                m_gCanvas.SetActive(false);
+            }
+
+            // start game clock.
+            Time.timeScale = 1;
+        }
 	}
 
     //--------------------------------------------------------------------------------------
@@ -50,6 +90,7 @@ public class PauseManager : MonoBehaviour
     void OnApplicationFocus(bool hasFocus)
     {
         // toggle pause bool.
-        isPaused = !hasFocus;
+        if (!hasFocus)
+            m_bPaused = true;
     }
 }

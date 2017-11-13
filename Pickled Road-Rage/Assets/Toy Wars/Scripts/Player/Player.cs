@@ -142,26 +142,30 @@ public class Player : MonoBehaviour
             // if in the turns action state.
             if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
             {
-                // Switch soldier weapon on key presses.
-                SwitchWeapon(sCurrentSoldier);
-
-                // Get the mouse input functions.
-                MouseDown(sCurrentSoldier);
-                bool bMouseHeld = MouseHeld(sCurrentSoldier);
-                MouseUp(sCurrentSoldier);
-
-                // if the mouse is not held.
-                if (!bMouseHeld)
+                // If not paused then can move and shoot.
+                if (!PauseManager.m_bPaused)
                 {
-                    // Move the soldier.
-                    SoldierMovement(sCurrentSoldier);
-                }
+                    // Switch soldier weapon on key presses.
+                    SwitchWeapon(sCurrentSoldier);
 
-                // if mouse held.
-                else if (bMouseHeld)
-                {
-                    // stop the current soldier from moving.
-                    sCurrentSoldier.Move(0, 0);
+                    // Get the mouse input functions.
+                    MouseDown(sCurrentSoldier);
+                    bool bMouseHeld = MouseHeld(sCurrentSoldier);
+                    MouseUp(sCurrentSoldier);
+
+                    // if the mouse is not held.
+                    if (!bMouseHeld)
+                    {
+                        // Move the soldier.
+                        SoldierMovement(sCurrentSoldier);
+                    }
+
+                    // if mouse held.
+                    else if (bMouseHeld)
+                    {
+                        // stop the current soldier from moving.
+                        sCurrentSoldier.Move(0, 0);
+                    }
                 }
             }
 
