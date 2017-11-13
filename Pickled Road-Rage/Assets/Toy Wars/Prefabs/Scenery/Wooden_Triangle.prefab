@@ -37,7 +37,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4268763849645736}
-  - component: {fileID: 65547575470078850}
   m_Layer: 0
   m_Name: Wooden_Triangle
   m_TagString: Untagged
@@ -64,14 +63,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1613755410613698}
-  m_LocalRotation: {x: -0.69012195, y: 0.6899152, z: -0.125838, w: 0.17864364}
-  m_LocalPosition: {x: -5.301, y: 3.706, z: -5.804}
+  m_LocalRotation: {x: -0, y: 0.7365133, z: -0, w: 0.6764231}
+  m_LocalPosition: {x: 2.8436852, y: 3.9568408, z: -4.9268036}
   m_LocalScale: {x: 1.000001, y: 1, z: 1.000001}
   m_Children:
   - {fileID: 4200521058050640}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -4.183, y: 155.08301, z: -89.093}
+  m_LocalEulerAnglesHint: {x: -4.183, y: 94.87, z: -89.093}
 --- !u!23 &23568509005008214
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -125,15 +124,3 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 79e997d3ca5438e4e8ea86afe025ce31, type: 3}
---- !u!65 &65547575470078850
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1613755410613698}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.45, y: 0.45, z: 0.45}
-  m_Center: {x: 0, y: 0.22, z: 0}

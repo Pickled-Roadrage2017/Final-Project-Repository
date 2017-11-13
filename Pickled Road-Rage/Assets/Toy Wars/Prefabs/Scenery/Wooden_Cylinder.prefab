@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4558046391358684}
-  - component: {fileID: 64015631688016698}
+  - component: {fileID: 136055654360298874}
   m_Layer: 0
   m_Name: Wooden_Cylinder
   m_TagString: Untagged
@@ -50,14 +50,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1728589090110732}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.01, y: 6.344346, z: 7.53}
+  m_LocalRotation: {x: -0, y: 0.36221483, z: -0, w: 0.9320947}
+  m_LocalPosition: {x: -2.024, y: 3.5058408, z: -1.9606233}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4947453481343074}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 42.473003, z: 0}
 --- !u!4 &4947453481343074
 Transform:
   m_ObjectHideFlags: 1
@@ -110,8 +110,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1396793347070142}
   m_Mesh: {fileID: 4300000, guid: 73af9eb770187e24ea33a5ac9e7534db, type: 3}
---- !u!64 &64015631688016698
-MeshCollider:
+--- !u!136 &136055654360298874
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -119,8 +119,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
