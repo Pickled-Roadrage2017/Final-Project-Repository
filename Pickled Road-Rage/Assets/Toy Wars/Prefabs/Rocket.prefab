@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1480935180070650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.485304, y: 1.478, z: -14.356506}
+  m_LocalPosition: {x: 23.336737, y: 0.784, z: -9.667361}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4803316057455852}
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_TeddyMask:
     serializedVersion: 2
     m_Bits: 0
-  m_fDamage: 50
+  m_fDamage: 90
   m_fPower: 0
   m_gExplosion: {fileID: 1770641874940636, guid: 9b57595ad6662644e90908380de147ac,
     type: 2}

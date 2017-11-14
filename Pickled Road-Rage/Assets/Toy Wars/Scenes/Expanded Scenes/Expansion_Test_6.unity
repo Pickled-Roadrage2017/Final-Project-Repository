@@ -712,8 +712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08748984b756ce04b80a1dc216b24c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_acPlaceSound: {fileID: 0}
-  m_acDamageSound: {fileID: 0}
+  m_acPlaceSound: {fileID: 8300000, guid: 3bcc45dfb9d5fc54d84255d5ba350c8f, type: 3}
+  m_acDamageSound: {fileID: 8300000, guid: 0bbae5c78a7bd2c4f9c4acae1f035148, type: 3}
   m_fMaxHealth: 350
   m_fCurrentHealth: 350
   m_fRotSpeed: 0
@@ -1285,6 +1285,10 @@ Prefab:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: ac10b164979679c4fb46dd4e35a1eb24, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9aa869a170485724a83e2ebc62ebec1f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac10b164979679c4fb46dd4e35a1eb24, type: 3}
   m_IsPrefabParent: 0
@@ -3344,8 +3348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08748984b756ce04b80a1dc216b24c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_acPlaceSound: {fileID: 0}
-  m_acDamageSound: {fileID: 0}
+  m_acPlaceSound: {fileID: 8300000, guid: 3bcc45dfb9d5fc54d84255d5ba350c8f, type: 3}
+  m_acDamageSound: {fileID: 8300000, guid: 0bbae5c78a7bd2c4f9c4acae1f035148, type: 3}
   m_fMaxHealth: 350
   m_fCurrentHealth: 350
   m_fRotSpeed: 0
@@ -7885,7 +7889,7 @@ Prefab:
       objectReference: {fileID: 2018936182}
     - target: {fileID: 1583930058568532, guid: cd70ab1e999f0c44c8c9a62683251689, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114080331647059280, guid: cd70ab1e999f0c44c8c9a62683251689,
         type: 2}
@@ -8273,11 +8277,12 @@ MonoBehaviour:
   m_fTimerLength: 20
   m_fDelayLength: 2
   m_fEndLength: 1.5
-  m_fSpawnLength: 2
+  m_fSpawnLength: 1
   m_gPlayer1: {fileID: 2018936182}
   m_gPlayer2: {fileID: 1333348777}
-  m_acTurnStartAudio: {fileID: 0}
-  m_acTimeWarningAudio: {fileID: 0}
+  m_acTurnStartAudio: {fileID: 8300000, guid: b1d6e8727116bdc449fd3ec2267b1900, type: 3}
+  m_acTimeWarningAudio: {fileID: 8300000, guid: d656af857bf6d964589f89f8bb04e953,
+    type: 3}
   m_asAudioSource: {fileID: 0}
   m_gGameOverCanvas: {fileID: 0}
 --- !u!4 &1088746733
@@ -12578,7 +12583,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 192fa67e954492c4caa44604326b6bde, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 130e0b51c9cd9a144bdb4c3bbea3661c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.6
   m_Pitch: 1
@@ -14655,7 +14660,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2025705568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.68100005, y: 0.013400078, z: 0.10599995}
+  m_LocalPosition: {x: -0.651, y: 0.013400078, z: 0.105}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1944162695}

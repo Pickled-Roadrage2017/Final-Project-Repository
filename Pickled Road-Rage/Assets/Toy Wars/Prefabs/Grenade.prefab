@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1539263161013154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.53742, y: 2.89, z: -12.350313}
+  m_LocalPosition: {x: 22.387768, y: 1.076, z: -10.694782}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4255777003227958}
@@ -226,12 +226,12 @@ MonoBehaviour:
   m_TeddyMask:
     serializedVersion: 2
     m_Bits: 0
-  m_fDamage: 50
+  m_fDamage: 90
   m_fPower: 0
   m_gExplosion: {fileID: 1770641874940636, guid: 9b57595ad6662644e90908380de147ac,
     type: 2}
   m_acFuseSound: {fileID: 0}
-  m_acExplosionSound: {fileID: 0}
+  m_acExplosionSound: {fileID: 8300000, guid: fb4fd17d856e26747a435d3d3a89bdc4, type: 3}
   m_acAirtimeSound: {fileID: 0}
   m_acBounceSound: {fileID: 0}
   m_fMaxActivateTimer: 2

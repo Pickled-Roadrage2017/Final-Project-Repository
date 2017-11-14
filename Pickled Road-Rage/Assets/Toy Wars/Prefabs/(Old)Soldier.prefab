@@ -120,7 +120,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1087192944953356}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.333149, y: 0.00021599921, z: -13.808491}
+  m_LocalPosition: {x: 22.122086, y: 0.00021599921, z: -10.231167}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4320253007093584}
@@ -299,11 +299,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198b1d175209f6947b3e64e4bcb993cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_acFootstep1: {fileID: 0}
-  m_acFootstep2: {fileID: 0}
-  m_acGruntSound: {fileID: 0}
-  m_acDamageSound: {fileID: 0}
-  m_acDeathSound: {fileID: 0}
+  m_acFootstep1: {fileID: 8300000, guid: aa30ffc3d4894bc4a8939a14c5ae33e7, type: 3}
+  m_acFootstep2: {fileID: 8300000, guid: d34e9cb9d8fd724489adf38c4a677d73, type: 3}
+  m_acGruntSound: {fileID: 8300000, guid: 1259ac23f4330e94ca7fe979745844ae, type: 3}
+  m_acDamageSound: {fileID: 8300000, guid: e9001f01f9295c242a40cb4e367de16e, type: 3}
+  m_acDeathSound: {fileID: 8300000, guid: ffc3fdeef2406ed49b9a73fbcd7794d9, type: 3}
   m_fSpeed: 0.5
   m_fRotSpeed: 5
   m_fMaxHealth: 100
