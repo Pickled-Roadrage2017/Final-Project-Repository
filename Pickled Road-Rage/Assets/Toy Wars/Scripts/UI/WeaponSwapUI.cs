@@ -98,11 +98,11 @@ public class WeaponSwapUI : MonoBehaviour
         {
             // Set grenade unselected to active.
             m_gSelectedGrenade.SetActive(false);
-            m_gUnselectedGrenade.SetActive(false);
+            m_gUnselectedGrenade.SetActive(true);
 
             // Set RPG unselected to active.
             m_gSelectedRPG.SetActive(false);
-            m_gUnselectedRPG.SetActive(false);
+            m_gUnselectedRPG.SetActive(true);
         }
     }
 }

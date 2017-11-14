@@ -23,24 +23,6 @@ public enum EWeaponType
 //--------------------------------------------------------------------------------------
 public class SoldierActor : MonoBehaviour
 {
-    [Header("Sounds")]
-    [LabelOverride("Footstep 1")]
-    public AudioClip m_acFootstep1;
-
-    [LabelOverride("Footstep 2")]
-    public AudioClip m_acFootstep2;
-
-    [LabelOverride("Grunt Sound")]
-    public AudioClip m_acGruntSound;
-
-    [LabelOverride("Damage Sound")]
-    [Tooltip("Will play when soldier takes damage")]
-    public AudioClip m_acDamageSound;
-
-    [LabelOverride("Death Sound")]
-    [Tooltip("Will play as the Soldier dies")]
-    public AudioClip m_acDeathSound;
-
     [Header("Moving Variables")]
     // Speed at which the Soldier moves
     [Tooltip("The Speed at which the Soldier moves")]
@@ -114,8 +96,6 @@ public class SoldierActor : MonoBehaviour
     // The current position of the soldier.
     private Vector3 m_v3CurrentPostion;
 
-    // this Soldiers audioSource
-    private AudioSource m_asAudioSource;
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -269,6 +249,8 @@ public class SoldierActor : MonoBehaviour
         // Update the rigidbody velocity.
         m_rbRigidBody.velocity = m_v3Movement * m_fSpeed;
 
+        // Rotate the soldier towards mouse direction.
+        //FaceMouse();
     }
 
     //--------------------------------------------------------------------------------------
