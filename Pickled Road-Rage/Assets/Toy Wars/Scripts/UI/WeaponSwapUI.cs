@@ -63,7 +63,7 @@ public class WeaponSwapUI : MonoBehaviour
         if (m_gPlayer.GetComponent<Player>().m_nPlayerNumber == TurnManager.m_snCurrentTurn)
         {
             // if the RPG is selected.
-            if (Input.GetButtonDown("SwapRocket") || sCurrentSoldier.m_eCurrentWeapon == EWeaponType.EWEP_RPG)
+            if (sCurrentSoldier.m_eCurrentWeapon == EWeaponType.EWEP_RPG)
             {
                 // Set RPG selected to active.
                 m_gSelectedRPG.SetActive(true);
@@ -75,7 +75,7 @@ public class WeaponSwapUI : MonoBehaviour
             }
 
             // if the grenade is selected and is able to be selected.
-            if (Input.GetButtonDown("SwapGrenade") && sCurrentSoldier.m_nGotGrenade > 0)
+            if (sCurrentSoldier.m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
             {
                 // Set grenade selected to active.
                 m_gSelectedGrenade.SetActive(true);
@@ -84,12 +84,6 @@ public class WeaponSwapUI : MonoBehaviour
                 // Set RPG unselected to active.
                 m_gSelectedRPG.SetActive(false);
                 m_gUnselectedRPG.SetActive(true);
-            }
-
-            // if the Minigun is selected and is able to be selected.
-            else if (Input.GetButtonDown("SwapMini") && sCurrentSoldier.m_nGotMinigun > 0)
-            {
-                // Put the minigun when we have one in the game.
             }
         }
 

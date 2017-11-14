@@ -10,8 +10,7 @@ using UnityEngine.UI;
 // Description: Inheriting from MonoBehaviour, 
 // All of the funtionality of the Teddy is in here
 //
-// Author: Thomas Wiltshire
-// Edited: Callan Davies
+// Author: Callan Davies
 //--------------------------------------------------------------------------------------
 public class Teddy : MonoBehaviour
 {
