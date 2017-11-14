@@ -12,20 +12,45 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Grenade : Weapon
 {
+    public GameObject m_gExplosion;
+
+    [Header("Sounds")]
+    [LabelOverride("Fuse Sound")]
+    [Tooltip("will play when the grenade is counting down to explosion")]
+    public AudioClip m_acFuseSound;
+
+    [LabelOverride("Explosion Sound")]
+    [Tooltip("will play when the grenade explodes")]
+    public AudioClip m_acExplosionSound;
+
+    [LabelOverride("Airtime Sound")]
+    [Tooltip("Will play while the grenade is airborne")]
+    public AudioClip m_acAirtimeSound;
+
+    //may or may not be used
+    [LabelOverride("Bounce Sound")]
+    [Tooltip("will play when the grenade bounces")]
+    public AudioClip m_acBounceSound;
 
     //A timer to stop the grenade from colliding with its Launcher
+    [Space(10)]
     [LabelOverride("Activation Timer")]
     [Tooltip("Seconds it takes for the grenade to not be within collision range of its Launcher")]
     public float m_fMaxActivateTimer = 2;
 
     [Header("Grenade-specific Variables")]
-    [LabelOverride("Bounciness")]
-    [Tooltip("How bouncy the grenade is")]
-    public float m_fBounceFactor;
-
     [LabelOverride("Grenade Fuse")]
     [Tooltip("The grenade will explode when this reaches zero")]
     public float m_fMaxFuseTimer = 4;
+
+    [LabelOverride("Initial Bounce")]
+    [Tooltip("The grenade will go upwards by this value on initial bounce")]
+    public float m_fBounciness = 0;
+
+
+    [LabelOverride("After-Bounce Drag")]
+    [Tooltip("The grenades drag will be set to this after its first bounce")]
+    public float m_fBounceDrag;
 
     // The force that hits back all Unit layered objects
     [Header("Explosion Variables")]
@@ -42,30 +67,13 @@ public class Grenade : Weapon
     [Tooltip("The velocity is multiplied by this to reach an acceptable knockback")]
     public float m_fHitMultiplier = 0.5f;
 
-    // how fast the grenade will reach its target
-    [LabelOverride("Speed")]
-    [Tooltip("How quickly the grenade will reach its objective")]
-    public float m_fSpeed;
-
     // pointer to the GrenadeLauncher so it knows where to spawn
     [HideInInspector]
     public GameObject m_gSpawnPoint;
 
-    // time it will take for the grenade to reach its target position.
-    [HideInInspector]
-    public float m_fLerpTime = 0.0f;
-
-    // The direction the grenade should move
-    [HideInInspector]
-    public Vector3 m_v3Target;
-
     // Starts at m_fMaxActivateTimer and ticks down to zero, then resetting upon being set Inactive
     [HideInInspector]
     public float m_fCurrentActivateTimer;
-
-    // The height that the grenade will arc to, this is passed down from its Launcher
-    [HideInInspector]
-    public float m_fArcHeight;
 
     // its own rigidbody
     private Rigidbody m_rbGrenade;
@@ -76,12 +84,17 @@ public class Grenade : Weapon
     // When this is less than or equal to zero, the grenade will explode
     private float m_fFuseTimer;
 
+    // this Grenades audioSource
+    private AudioSource m_asAudioSource;
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
+        m_asAudioSource = GetComponent<AudioSource>();
         m_rbGrenade = GetComponent<Rigidbody>();
+        
         m_fFuseTimer = m_fMaxFuseTimer;
         m_bFuseTicking = false;
     }
@@ -98,31 +111,22 @@ public class Grenade : Weapon
         if (m_fFuseTimer <= 0)
         {
             //explode
+            GameObject gExplosion =  Instantiate(m_gExplosion);
+            gExplosion.transform.SetParent(null);
+            gExplosion.transform.position = transform.position;
+            
+
             GrenadeExplode();
             GrenadeDisable();
+            Destroy(gExplosion, 5f);
         } 
         // if the grenade has hit the ground
         if (m_bFuseTicking)
         {
             m_fFuseTimer -= 1 * Time.deltaTime;
+            
         }
 
-        if (m_fLerpTime < 1.0f)
-        {
-            m_rbGrenade.isKinematic = true;
-            Vector3 v3Pos = transform.position;
-            transform.position = BezierCurve.CalculateBezier(m_gSpawnPoint.transform.position, m_v3Target, m_fLerpTime, m_fArcHeight);
-
-            m_fLerpTime += Time.deltaTime * m_fSpeed;
-            if (m_fLerpTime > 1.0f)
-            {
-                m_fLerpTime = 1.0f;
-                m_rbGrenade.isKinematic = false;
-                m_rbGrenade.velocity = (transform.position - v3Pos).normalized * m_fBounceFactor;
-                Debug.Log(m_rbGrenade.velocity);
-                m_bFuseTicking = true;
-            }
-        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -150,12 +154,30 @@ public class Grenade : Weapon
         return fDamage;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (m_fCurrentActivateTimer <= 0)
+        {
+            if (!m_bFuseTicking)
+            {
+                m_rbGrenade.AddForce(new Vector3(0, m_fBounciness, 0), ForceMode.Impulse);
+            }
+            m_bFuseTicking = true;
+            m_rbGrenade.drag = m_fBounceDrag;
+        }
+        else
+        {
+            return;
+        }
+    }
+
     //--------------------------------------------------------------------------------------
     //  GrenadeExplode: Finds all colliders in the m_fExplosionRadius and calls damage functions
     //
     //--------------------------------------------------------------------------------------
     private void GrenadeExplode()
     {
+        
         // Collect all possible colliders 
         Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
 
@@ -183,6 +205,16 @@ public class Grenade : Weapon
                 // NOTE: May be replaced with a non-rigidbody knockback
                 rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
             }
+
+            if (aColliders[i].gameObject.tag == "Teddy")
+            {
+                // TODO: Explosion particle effect here
+
+                Teddy gtarget = rbTarget.GetComponent<Teddy>();
+
+                // Soldier will take damage based on position (See CalculateDamge function below)
+                gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+            }
         }
     }
 
@@ -191,9 +223,11 @@ public class Grenade : Weapon
     //--------------------------------------------------------------------------------------
     private void GrenadeDisable()
     {
-        m_fCurrentActivateTimer = m_fMaxActivateTimer;
-        m_fFuseTimer = m_fMaxFuseTimer;
-        m_bFuseTicking = false;
-        gameObject.SetActive(false);
+            
+            m_fCurrentActivateTimer = m_fMaxActivateTimer;
+            m_fFuseTimer = m_fMaxFuseTimer;
+            m_bFuseTicking = false;
+            gameObject.SetActive(false);
+        
     }
 }

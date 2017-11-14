@@ -12,7 +12,19 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Rocket : Weapon
 {
+    public GameObject m_gExplosion;
+
+    [Header("Sounds")]
+    [LabelOverride("Airtime Sound")]
+    [Tooltip("Will play while the rocket is airborne")]
+    public AudioClip m_acAirtimeSound;
+
+    [LabelOverride("Explosion Sound")]
+    [Tooltip("will play when the rocket explodes")]
+    public AudioClip m_acExplosionSound;
+
     //A timer to stop the rocket from colliding with its Launcher
+    [Space(10)]
     [LabelOverride("Activation Timer")]
     [Tooltip("Seconds it takes for the missle to not be within collision range of its Launcher")]
     public float m_fMaxActivateTimer = 2;
@@ -32,35 +44,20 @@ public class Rocket : Weapon
     [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
     public float m_fExplosionRadius = 5f;
 
-    // how fast the rocket will reach its target
-    [LabelOverride("Rocket Speed")]
-    [Tooltip("How quickly the rocket will reach its objective")]
-    public float m_fSpeed;
-
     // pointer to the RocketLauncher so it knows where to spawn
     [HideInInspector]
     public GameObject m_gSpawnPoint;
 
-    // time it will take for the rocket to reach its target position.
-    [HideInInspector]
-    public float m_fLerpTime = 0.0f;
-
-    // The direction the Rocket should move
-    [HideInInspector]
-    public Vector3 m_v3Target;
-
     // Starts at m_fMaxActivateTimer and ticks down to zero, then resetting upon being set Inactive
     [HideInInspector]
     public float m_fCurrentActivateTimer;
-    
-    // The height that the rocket will arc to, this is passed down from its Launcher
-    [HideInInspector]
-    public float m_fArcHeight;
 
     // its own rigidbody
     [HideInInspector]
     public Rigidbody m_rbRocket;
 
+    // this Rockets audioSource
+    private AudioSource m_asAudioSource;
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -74,24 +71,9 @@ public class Rocket : Weapon
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        //m_rbRocket.velocity = m_gSpawnPoint.transform.forward * m_gSpawnPoint.GetComponent<RocketLauncher>().m_fVelocity;
         // ActivateTimer decreases by 1 each frame (Rocket can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
 
-        m_fLerpTime += Time.deltaTime * m_fSpeed;
-        if (m_fLerpTime > 1.0f)
-        {
-            m_fLerpTime = 1.0f;
-        }
-
-        transform.position = BezierCurve.CalculateBezier(m_gSpawnPoint.transform.position, m_v3Target, m_fLerpTime, m_fArcHeight);
-        if (transform.position == m_v3Target)
-        {
-            RocketExplode();
-            RocketDisable();
-        }
-
-        
     }
 
     //--------------------------------------------------------------------------------------
@@ -102,28 +84,38 @@ public class Rocket : Weapon
     //--------------------------------------------------------------------------------------
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "SoldierWall")
+        {
+            Physics.IgnoreCollision(GetComponent<Collider>(), other);
+            return;
+        }
         // if the rocket can now activate
         if (m_fCurrentActivateTimer <= 0)
         {
+
             // Rocket Explodes, damaging anything within the radius
+            GameObject gExplosion = Instantiate(m_gExplosion);
+            gExplosion.transform.SetParent(null);
+            gExplosion.transform.position = transform.position;
             RocketExplode();
 
-            // if the rocket directly hits a Soldier, this will be called to apply knockback
-            if (other.tag == "Soldier")
-            {
-                Rigidbody rbTarget = other.GetComponent<Rigidbody>();
-                rbTarget = other.GetComponent<Rigidbody>();
-                // Directly knockback the Soldier, 
-                // NOTE: This soldier would of already taken damage from the RocketExplode() function
-                rbTarget.AddForce(m_rbRocket.velocity * m_fHitMultiplier, ForceMode.Impulse);
-            }
-            if (other.tag == "Teddy")
-            {
-                other.GetComponent<Teddy>().TakeDamage(m_fDamage);
-            }
-           
-            // Disable Rocket after it has completed all damage dealing and knockbacks
-            RocketDisable();
+                // if the rocket directly hits a Soldier, this will be called to apply knockback
+                if (other.tag == "Soldier")
+                {
+                    Rigidbody rbTarget = other.GetComponent<Rigidbody>();
+                    rbTarget = other.GetComponent<Rigidbody>();
+                    // Directly knockback the Soldier, 
+                    // NOTE: This soldier would of already taken damage from the RocketExplode() function
+                    rbTarget.AddForce(m_rbRocket.velocity * m_fHitMultiplier, ForceMode.Impulse);
+                }
+                if (other.tag == "Teddy")
+                {
+                    other.GetComponent<Teddy>().TakeDamage(m_fDamage);
+                }
+
+                // Disable Rocket after it has completed all damage dealing and knockbacks
+                RocketDisable();
+            
         }
     }
 
@@ -156,11 +148,11 @@ public class Rocket : Weapon
     private void RocketExplode()
     {
         // Collect all possible colliders 
-        Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
+        Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
 
-        for (int i = 0; i < aColliders.Length; i++)
+        for (int i = 0; i < aSoldierColliders.Length; i++)
         {
-            Rigidbody rbTarget = aColliders[i].GetComponent<Rigidbody>();
+            Rigidbody rbTarget = aSoldierColliders[i].GetComponent<Rigidbody>();
 
             //if it does not have a rigidbody
             if (!rbTarget)
@@ -169,30 +161,20 @@ public class Rocket : Weapon
             }
 
             // if an object in collision zone is a Soldier
-            if (aColliders[i].gameObject.tag == "Soldier")
+            if (aSoldierColliders[i].gameObject.tag == "Soldier")
             {
                 // TODO: Explosion particle effect here
 
                 SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
 
                 // Soldier will take damage based on position (See CalculateDamge function below)
-                gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
+                gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position));
 
                 // add explosive force for knockback 
                 // NOTE: May be replaced with a non-rigidbody knockback
                 rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
             }
-
-            // if an object in collision zone is a Soldier
-            if (aColliders[i].gameObject.tag == "Teddy")
-            {
-                // TODO: Explosion particle effect here
-
-                Teddy gtarget = rbTarget.GetComponent<Teddy>();
-
-                // Soldier will take damage based on position (See CalculateDamge function below)
-                gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
-            }
+           
         }
     }
 

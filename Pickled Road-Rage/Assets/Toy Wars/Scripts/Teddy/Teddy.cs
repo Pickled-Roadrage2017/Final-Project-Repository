@@ -15,6 +15,15 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------------------
 public class Teddy : MonoBehaviour
 {
+    [Header("Sounds")]
+    [LabelOverride("Place Sound")]
+    [Tooltip("Will play when the teddy places a soldier")]
+    public AudioClip m_acPlaceSound;
+
+    [LabelOverride("Damage Sound")]
+    [Tooltip("Will play when Teddy takes damage")]
+    public AudioClip m_acDamageSound;
+
     [Header("Health Variables")]
     [LabelOverride("Teddy Max Health")][Tooltip("Teddy bear Maximum health.")]
     public float m_fMaxHealth;
@@ -92,11 +101,19 @@ public class Teddy : MonoBehaviour
     [LabelOverride("Health Bar Slider")] [Tooltip("Drag in a UI slider to be used as the Teddy health bar.")]
     public Slider m_sHealthBar;
 
+    // boolean for an animation of the Teddy taking damage
+    [HideInInspector]
+    public bool m_bDamageAnimation;
+
+    // this Teddys audioSource
+    private AudioSource m_asAudioSource;
+
     //--------------------------------------------------------------------------------------
     // Initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
+        m_bDamageAnimation = false;
         // initilize rocket list with size
         m_agProjectileList = new GameObject[m_nPoolSize];
      //   m_gBearHand.transform.Rotate(0, 0, 30);
@@ -151,6 +168,11 @@ public class Teddy : MonoBehaviour
 
         // Apply damage to the health bar.
         m_sHealthBar.value = CalcHealth();
+
+        if (m_bDamageAnimation == true)
+        {
+            m_bDamageAnimation = false;
+        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -279,6 +301,7 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void TakeDamage(float fDamage)
     {
+        m_bDamageAnimation = true;
         // Minus the Teddys currentHealth by the fDamage argument
         m_fCurrentHealth -= fDamage;
     }

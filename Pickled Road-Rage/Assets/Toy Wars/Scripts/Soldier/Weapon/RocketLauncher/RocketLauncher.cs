@@ -98,7 +98,6 @@ public class RocketLauncher : MonoBehaviour
 
     void Update()
     {
-
     }
 
     //--------------------------------------------------------------------------------------
@@ -172,6 +171,7 @@ public class RocketLauncher : MonoBehaviour
                 // Reset all of the Rockets variables
                 gRocket.GetComponent<Rocket>().m_gSpawnPoint = gameObject;
                 gRocket.GetComponent<Rigidbody>().position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
+                gRocket.transform.forward = transform.forward;
                 gRocket.GetComponent<Rocket>().transform.position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
                 gRocket.GetComponent<Rocket>().m_fCurrentActivateTimer = gRocket.GetComponent<Rocket>().m_fMaxActivateTimer;
             }

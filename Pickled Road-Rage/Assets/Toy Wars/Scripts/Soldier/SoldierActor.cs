@@ -23,6 +23,24 @@ public enum EWeaponType
 //--------------------------------------------------------------------------------------
 public class SoldierActor : MonoBehaviour
 {
+    [Header("Sounds")]
+    [LabelOverride("Footstep 1")]
+    public AudioClip m_acFootstep1;
+
+    [LabelOverride("Footstep 2")]
+    public AudioClip m_acFootstep2;
+
+    [LabelOverride("Grunt Sound")]
+    public AudioClip m_acGruntSound;
+
+    [LabelOverride("Damage Sound")]
+    [Tooltip("Will play when soldier takes damage")]
+    public AudioClip m_acDamageSound;
+
+    [LabelOverride("Death Sound")]
+    [Tooltip("Will play as the Soldier dies")]
+    public AudioClip m_acDeathSound;
+
     [Header("Moving Variables")]
     // Speed at which the Soldier moves
     [Tooltip("The Speed at which the Soldier moves")]
@@ -80,6 +98,22 @@ public class SoldierActor : MonoBehaviour
     [HideInInspector]
     public Rigidbody m_rbRigidBody;
 
+    // boolean for an animation of the soldier taking damage
+    [HideInInspector]
+    public bool m_bDamageAnimation;
+
+    // a boolean for an animation to play whilst the soldier is moving
+    [HideInInspector]
+    public bool m_bMovingAnimation;
+
+    // a boolean for an animation at the start of the firing function
+    [HideInInspector]
+    public bool m_bStartFireAnimation;
+
+    // a boolean for an animation at the end of the firing function
+    [HideInInspector]
+    public bool m_bFinalFireAnimation;
+
     // public float for the radius of the movement circle.
     [LabelOverride("Movement Radius")]
     [Tooltip("The Radius of the movement circle, this is how far the soldier can move.")]
@@ -96,11 +130,19 @@ public class SoldierActor : MonoBehaviour
     // The current position of the soldier.
     private Vector3 m_v3CurrentPostion;
 
+    // this Soldiers audioSource
+    private AudioSource m_asAudioSource;
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
+        // initilising animation booleans to false
+        m_bStartFireAnimation = false;
+        m_bFinalFireAnimation = false;
+        m_bDamageAnimation = false;
+        // set boolean for moving to false
+        m_bMovingAnimation = false;
         // get the soldiers rigidbody
         m_rbRigidBody = GetComponent<Rigidbody>();
         // get the rocketlaunchers script
@@ -130,15 +172,46 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
+        // animation boolean resets
+        if (m_bStartFireAnimation == true)
+        {
+            m_bStartFireAnimation = false;
+        }
+
+        if (m_bFinalFireAnimation == true)
+        {
+            m_bFinalFireAnimation = false;
+        }
+
+        if (m_bDamageAnimation == true)
+        {
+            m_bDamageAnimation = false;
+        }
         // As health is a float, anything below one will be displayed as 0 to the player
         if (m_fCurrentHealth < 1)
         {
             Die();
         }
+
+        // if the soldier is not moving
+        if (m_rbRigidBody.velocity == Vector3.zero)
+        {
+            m_bMovingAnimation = false;
+        }
+        // soldier is moving
+        else
+        {
+            m_bMovingAnimation = true;
+        }
+
+        if (m_bDamageAnimation == true)
+        {
+            m_bDamageAnimation = false;
+        }
     }
 
     //--------------------------------------------------------------------------------------
-    // CurrentTurn: A function for resting soldier values for turn starts or turn ends.
+    // CurrentTurn: A function for reseting soldier values for turn starts or turn ends.
     //
     // Param:
     //      bActive: a bool for if this soldiers is currently having a turn or not.
@@ -148,6 +221,7 @@ public class SoldierActor : MonoBehaviour
         // if true is passed in.
         if (bActive)
         {
+
             // Set the current soldier postion.
             m_v3CurrentPostion = transform.position;
 
@@ -179,6 +253,7 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void MouseDown()
     {
+        m_bStartFireAnimation = true;
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
             m_gLauncherScript.MouseDown();
@@ -219,6 +294,7 @@ public class SoldierActor : MonoBehaviour
 
     public void MouseUp()
     {
+        m_bFinalFireAnimation = true;
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
             m_gLauncherScript.MouseUp();
@@ -248,9 +324,7 @@ public class SoldierActor : MonoBehaviour
 
         // Update the rigidbody velocity.
         m_rbRigidBody.velocity = m_v3Movement * m_fSpeed;
-
-        // Rotate the soldier towards mouse direction.
-        //FaceMouse();
+       
     }
 
     //--------------------------------------------------------------------------------------
@@ -293,6 +367,9 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void TakeDamage(float fDamage)
     {
+        // TODO: 
+        m_bDamageAnimation = true;
+
         // Minus the soldiers currentHealth by the fDamage argument
         m_fCurrentHealth -= fDamage;
     }

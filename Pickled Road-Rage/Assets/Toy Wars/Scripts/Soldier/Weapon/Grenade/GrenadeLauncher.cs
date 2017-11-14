@@ -69,7 +69,6 @@ public class GrenadeLauncher : MonoBehaviour
     // velocity that the grenade will be fired with
     private float m_fVelocity;
 
-
     // this GrenadeLaunchers audioSource
     private AudioSource m_asAudioSource;
 
@@ -97,6 +96,11 @@ public class GrenadeLauncher : MonoBehaviour
         m_lrLine.useWorldSpace = false;
     }
 
+    void Update()
+    {
+    
+    }
+
     //--------------------------------------------------------------------------------------
     // MouseDown: Restes variables of the Launcher when the mouse button is pressed.
     //--------------------------------------------------------------------------------------
@@ -109,7 +113,7 @@ public class GrenadeLauncher : MonoBehaviour
     // MouseHeld: Charges the shot until it is no longer called.
     //--------------------------------------------------------------------------------------
     public void MouseHeld()
-    {
+    {;
         // It is charging a shot
         m_bChargingShot = true;
         RenderArc();
@@ -168,8 +172,10 @@ public class GrenadeLauncher : MonoBehaviour
                 // Reset all of the Rockets variables
                 gGrenade.GetComponent<Grenade>().m_gSpawnPoint = gameObject;
                 gGrenade.GetComponent<Rigidbody>().position = gGrenade.GetComponent<Grenade>().m_gSpawnPoint.transform.position;
+                gGrenade.GetComponent<Rigidbody>().drag = 0;
                 gGrenade.GetComponent<Grenade>().transform.position = gGrenade.GetComponent<Grenade>().m_gSpawnPoint.transform.position;
                 gGrenade.GetComponent<Grenade>().m_fCurrentActivateTimer = gGrenade.GetComponent<Grenade>().m_fMaxActivateTimer;
+               
             }
             // Reset variables for the firing functions
             m_bChargingShot = false;
