@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
     // int for keeping track of the respawns.
     [HideInInspector]
     public int m_nMaxRespawnCounter;
-    
+
     // private int for current soldiers turn.
     [HideInInspector]
     public int m_nSoldierTurn;
@@ -86,6 +86,34 @@ public class Player : MonoBehaviour
     {
         return m_nActiveSoldiers;
     }
+
+
+
+
+
+
+    //
+    //[LabelOverride("Grenade Mesh")] [Tooltip("")]
+    //public MeshFilter m_mfGrenadeSoldierMesh;
+
+    ////
+    //[LabelOverride("")] [Tooltip("")]
+    //public Material[] m_amGrenadeMaterials;
+
+
+
+    ////
+    //[LabelOverride("RPG Mesh")] [Tooltip("")]
+    //public MeshFilter m_mfRPGSoldierMesh;
+
+    ////
+    //[LabelOverride("")] [Tooltip("")]
+    //public Material[] m_amRPGMaterials;
+
+
+
+
+
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -112,7 +140,7 @@ public class Player : MonoBehaviour
             for (int o = 0; o < m_agSoldierList[i].GetComponent<Renderer>().materials.Length; ++o)
             {
                 // Change the color of each material to the m_cSoldierColor.
-                m_agSoldierList[i].GetComponent<Renderer>().materials[o].color = m_cSoldierColor;
+                m_agSoldierList[i].GetComponent<Renderer>().materials[o].SetColor("_PlasticColor", m_cSoldierColor);
             }
         }
 
@@ -125,6 +153,17 @@ public class Player : MonoBehaviour
             // Set the postion of the soldiers to the postion of the spawn point.
             o.transform.position = m_agSoldierSpawn[i].transform.position;
         }
+
+
+
+
+
+        
+
+
+
+
+
     }
 
     //--------------------------------------------------------------------------------------
@@ -145,9 +184,6 @@ public class Player : MonoBehaviour
                 // If not paused then can move and shoot.
                 if (!PauseManager.m_bPaused)
                 {
-                    // Switch soldier weapon on key presses.
-                    SwitchWeapon(sCurrentSoldier);
-
                     // Get the mouse input functions.
                     MouseDown(sCurrentSoldier);
                     bool bMouseHeld = MouseHeld(sCurrentSoldier);
@@ -156,6 +192,9 @@ public class Player : MonoBehaviour
                     // if the mouse is not held.
                     if (!bMouseHeld)
                     {
+                        // Switch soldier weapon on key presses.
+                        SwitchWeapon(sCurrentSoldier);
+
                         // Move the soldier.
                         SoldierMovement(sCurrentSoldier);
                     }
@@ -372,6 +411,16 @@ public class Player : MonoBehaviour
         sCurrentSoldier.FaceMouse();
     }
     
+
+
+
+
+
+
+
+
+
+
     //--------------------------------------------------------------------------------------
     // SwitchWeapon: Function for switching the current soldiers weapon.
     //
@@ -385,6 +434,17 @@ public class Player : MonoBehaviour
         {
             // Switch the current soldiers weapon to RPG.
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_RPG;
+
+
+
+            // 
+            //sCurrentSoldier.GetComponent<MeshFilter>().sharedMesh = m_mfRPGSoldierMesh.sharedMesh;
+
+            // Change the color of each material to the m_cSoldierColor.
+            //sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amRPGMaterials;
+
+            // set the color of the material.
+            //sCurrentSoldier.GetComponent<Renderer>().material.SetColor("_PlasticColor", m_cSoldierColor);
         }
 
         // if the 2 key is pressed.
@@ -392,6 +452,17 @@ public class Player : MonoBehaviour
         {
             // Switch the current soldiers weapon to Grenade. 
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_GRENADE;
+
+
+
+            // 
+            //sCurrentSoldier.GetComponent<MeshFilter>().sharedMesh = m_mfGrenadeSoldierMesh.sharedMesh;
+
+            // Change the color of each material to the m_cSoldierColor.
+            //sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amGrenadeMaterials;
+
+            // set the color of the material.
+            //sCurrentSoldier.GetComponent<Renderer>().material.SetColor("_PlasticColor", m_cSoldierColor);
         }
 
         // if the 3 key is pressed.
@@ -401,6 +472,22 @@ public class Player : MonoBehaviour
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_MINIGUN;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //--------------------------------------------------------------------------------------
     // MouseDown: Function for when the mouse is pressed down.

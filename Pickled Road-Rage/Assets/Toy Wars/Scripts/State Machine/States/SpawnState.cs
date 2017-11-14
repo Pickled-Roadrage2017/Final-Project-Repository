@@ -38,7 +38,7 @@ public class SpawnState : State
         bool bIsRespawn = GetCurrentPlayerScript().CheckRespawn();
 
         // if a soilder can not respawn.
-        if (!bIsRespawn)
+        if (!bIsRespawn && TurnManager.m_fTimer == TurnManager.m_sfStaticSpawnLength)
         {
             // set timer to zero
             TurnManager.m_fTimer = 0;

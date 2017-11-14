@@ -24,6 +24,10 @@ public class PauseManager : MonoBehaviour
     [HideInInspector]
     public GameObject m_gCanvas;
 
+    // public gameobject for gameover canvas.
+    [HideInInspector]
+    public GameObject m_gGameOver;
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -31,6 +35,8 @@ public class PauseManager : MonoBehaviour
     {
         // Get the canvas and set it to inactive.
         m_gCanvas = GameObject.FindGameObjectWithTag("PauseMenu");
+
+        m_gGameOver = GameObject.FindGameObjectWithTag("EndMenu");
 
         // Check if there is a valid pause canvas.
         if (m_gCanvas != null)
@@ -48,7 +54,7 @@ public class PauseManager : MonoBehaviour
     void Update()
     {
         // Check if the pause button was pressed.
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause") && !m_gGameOver.activeSelf)
         {
             // toggle pause bool.
             m_bPaused = !m_bPaused;
@@ -89,8 +95,13 @@ public class PauseManager : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void OnApplicationFocus(bool hasFocus)
     {
-        // toggle pause bool.
-        if (!hasFocus)
-            m_bPaused = true;
+        // make sure that gameover is not on screen.
+        if (!m_gGameOver.activeSelf)
+        {
+            // toggle pause bool.
+            if (!hasFocus)
+                m_bPaused = true;
+
+        }
     }
 }

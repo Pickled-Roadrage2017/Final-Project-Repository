@@ -36,7 +36,7 @@ public class StartState : State
         TurnManager.m_fTimer -= Time.deltaTime;
 
         // Once the timer ends or any key is pressed
-        if (TurnManager.m_fTimer < 0 || Input.anyKeyDown)
+        if (TurnManager.m_fTimer < 0 || Input.anyKeyDown && !Input.GetMouseButtonDown(0))
         {
             // Push to the action state
             m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_ACTION);
