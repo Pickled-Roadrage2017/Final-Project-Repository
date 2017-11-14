@@ -109,8 +109,8 @@ GameObject:
   - component: {fileID: 33953479925302298}
   - component: {fileID: 23922567568099836}
   - component: {fileID: 120452622571503708}
-  - component: {fileID: 114418239559411138}
   - component: {fileID: 114647353822735556}
+  - component: {fileID: 114006919276320894}
   m_Layer: 0
   m_Name: LaunchLocation
   m_TagString: RocketLauncher
@@ -319,6 +319,24 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190335
+--- !u!114 &114006919276320894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1757745506353262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c236fdaf5b80e10418901fcf3694f645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gRocketBlueprint: {fileID: 1480935180070650, guid: af2676544f701ed4198b43f67985729c,
+    type: 2}
+  m_acShotSound: {fileID: 8300000, guid: 6c9ddf7153fd89245a6d2bbdde71cc7d, type: 3}
+  m_fMinVelocity: 1
+  m_fMaxVelocity: 10
+  m_fAimSpeed: 10
+  m_fLineAngle: -20
 --- !u!114 &114072480633714656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -347,6 +365,10 @@ MonoBehaviour:
   m_fCurrentHealth: 100
   m_v3Movement: {x: 0, y: 0, z: 0}
   m_rbRigidBody: {fileID: 0}
+  m_bDamageAnimation: 0
+  m_bMovingAnimation: 0
+  m_bStartFireAnimation: 0
+  m_bFinalFireAnimation: 0
   m_fMovementRadius: 8
   m_gMovementCirlceBluePrint: {fileID: 1471151944024382, guid: 202ec0867f5c2e544a205eb636f6cf92,
     type: 2}
@@ -364,24 +386,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &114418239559411138
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1757745506353262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd95b46842b293743a004159b7d364d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_gRocketBlueprint: {fileID: 1480935180070650, guid: af2676544f701ed4198b43f67985729c,
-    type: 2}
-  m_acShotSound: {fileID: 8300000, guid: 6c9ddf7153fd89245a6d2bbdde71cc7d, type: 3}
-  m_fMinVelocity: 1
-  m_fMaxVelocity: 10
-  m_fAimSpeed: 10
-  m_fLineAngle: -20
 --- !u!114 &114647353822735556
 MonoBehaviour:
   m_ObjectHideFlags: 1
