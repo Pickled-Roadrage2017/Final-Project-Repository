@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ee7e8e2d3c9fc4a4dbd1727dc1cce0b2
-timeCreated: 1507507828
+guid: 385618345f0b61246a81442451c683fc
+timeCreated: 1510618080
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Soldier_pose_RPG
+    4300000: Grenade_Mesh
   materials:
     importMaterials: 1
     materialName: 0

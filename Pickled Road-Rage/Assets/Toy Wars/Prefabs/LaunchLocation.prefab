@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33678693391512856}
   - component: {fileID: 23983064171140370}
   - component: {fileID: 114517117272660112}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LaunchLocation
   m_TagString: RocketLauncher
   m_Icon: {fileID: 0}
