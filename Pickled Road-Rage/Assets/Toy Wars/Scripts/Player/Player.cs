@@ -93,22 +93,22 @@ public class Player : MonoBehaviour
 
 
     //
-    //[LabelOverride("Grenade Mesh")] [Tooltip("")]
-    //public MeshFilter m_mfGrenadeSoldierMesh;
+    [LabelOverride("Grenade Mesh")] [Tooltip("")]
+    public Mesh m_mfGrenadeSoldierMesh;
 
     ////
     //[LabelOverride("")] [Tooltip("")]
-    //public Material[] m_amGrenadeMaterials;
+    public Material[] m_amGrenadeMaterials;
 
 
 
     ////
-    //[LabelOverride("RPG Mesh")] [Tooltip("")]
-    //public MeshFilter m_mfRPGSoldierMesh;
+    [LabelOverride("RPG Mesh")] [Tooltip("")]
+    public Mesh m_mfRPGSoldierMesh;
 
     ////
     //[LabelOverride("")] [Tooltip("")]
-    //public Material[] m_amRPGMaterials;
+    public Material[] m_amRPGMaterials;
 
 
 
@@ -438,13 +438,13 @@ public class Player : MonoBehaviour
 
 
             // 
-            //sCurrentSoldier.GetComponent<MeshFilter>().sharedMesh = m_mfRPGSoldierMesh.sharedMesh;
+            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().sharedMesh = m_mfRPGSoldierMesh;
 
             // Change the color of each material to the m_cSoldierColor.
-            //sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amRPGMaterials;
+            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amRPGMaterials;
 
             // set the color of the material.
-            //sCurrentSoldier.GetComponent<Renderer>().material.SetColor("_PlasticColor", m_cSoldierColor);
+            sCurrentSoldier.GetComponent<Renderer>().material.SetColor("_PlasticColor", m_cSoldierColor);
         }
 
         // if the 2 key is pressed.
@@ -456,13 +456,13 @@ public class Player : MonoBehaviour
 
 
             // 
-            //sCurrentSoldier.GetComponent<MeshFilter>().sharedMesh = m_mfGrenadeSoldierMesh.sharedMesh;
+            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().sharedMesh = m_mfGrenadeSoldierMesh;
 
             // Change the color of each material to the m_cSoldierColor.
-            //sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amGrenadeMaterials;
+            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amGrenadeMaterials;
 
             // set the color of the material.
-            //sCurrentSoldier.GetComponent<Renderer>().material.SetColor("_PlasticColor", m_cSoldierColor);
+            sCurrentSoldier.GetComponent<Renderer>().material.SetColor("_PlasticColor", m_cSoldierColor);
         }
 
         // if the 3 key is pressed.
