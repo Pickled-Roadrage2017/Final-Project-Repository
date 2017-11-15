@@ -157,12 +157,12 @@ MonoBehaviour:
   m_TeddyMask:
     serializedVersion: 2
     m_Bits: 0
-  m_fDamage: 90
+  m_fDamage: 100
   m_fPower: 0
   m_gExplosion: {fileID: 1770641874940636, guid: 9b57595ad6662644e90908380de147ac,
     type: 2}
   m_acAirtimeSound: {fileID: 0}
-  m_acExplosionSound: {fileID: 0}
+  m_acExplosionSound: {fileID: 8300000, guid: fb4fd17d856e26747a435d3d3a89bdc4, type: 3}
   m_fMaxActivateTimer: 2
   m_ExplosionForce: 60
   m_fHitMultiplier: 0.5

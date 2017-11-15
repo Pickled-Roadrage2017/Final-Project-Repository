@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 23922567568099836}
   - component: {fileID: 120452622571503708}
   - component: {fileID: 114647353822735556}
-  - component: {fileID: 114006919276320894}
+  - component: {fileID: 114056655180334188}
   m_Layer: 0
   m_Name: LaunchLocation
   m_TagString: RocketLauncher
@@ -319,7 +319,7 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190335
---- !u!114 &114006919276320894
+--- !u!114 &114056655180334188
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1757745506353262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c236fdaf5b80e10418901fcf3694f645, type: 3}
+  m_Script: {fileID: 11500000, guid: 56987847b1cb11145ab8e05a265102fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_gRocketBlueprint: {fileID: 1480935180070650, guid: af2676544f701ed4198b43f67985729c,
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gGrenadePrefab: {fileID: 1539263161013154, guid: f5983dae513dd594ba7ca0bcfc81603a,
     type: 2}
-  m_acShotSound: {fileID: 8300000, guid: 6c9ddf7153fd89245a6d2bbdde71cc7d, type: 3}
+  m_acShotSound: {fileID: 8300000, guid: 7590d09272c505340a8bbbbb0020e0ef, type: 3}
   m_fMinVelocity: 1
   m_fMaxVelocity: 10
   m_fAimSpeed: 10

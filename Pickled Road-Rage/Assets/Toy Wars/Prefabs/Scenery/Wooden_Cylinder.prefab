@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4947453481343074}
   - component: {fileID: 33007631508848928}
   - component: {fileID: 23487267837204214}
+  - component: {fileID: 136253821749826086}
   m_Layer: 0
   m_Name: WoodenCylinder_Mesh
   m_TagString: Untagged
@@ -36,7 +37,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4558046391358684}
-  - component: {fileID: 136055654360298874}
   m_Layer: 0
   m_Name: Wooden_Cylinder
   m_TagString: Untagged
@@ -110,16 +110,16 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1396793347070142}
   m_Mesh: {fileID: 4300000, guid: 73af9eb770187e24ea33a5ac9e7534db, type: 3}
---- !u!136 &136055654360298874
+--- !u!136 &136253821749826086
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1728589090110732}
+  m_GameObject: {fileID: 1396793347070142}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.019996883
+  m_Height: 0.07337047
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.0000000037252907, y: 0.036685225, z: -0.0000001527369}
