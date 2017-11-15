@@ -101,7 +101,7 @@ public class SoldierActor : MonoBehaviour
     public bool m_bDamageAnimation;
 
     // a boolean for an animation to play whilst the soldier is moving
-    [HideInInspector]
+    //[HideInInspector]
     public bool m_bMovingAnimation;
 
     // a boolean for an animation at the start of the firing function
@@ -132,7 +132,7 @@ public class SoldierActor : MonoBehaviour
     private AudioSource m_asAudioSource;
 
     // the soldiers animator
-    private Animator m_aAnimator;
+    public Animator m_aAnimator;
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -152,7 +152,7 @@ public class SoldierActor : MonoBehaviour
         m_aAnimator.SetBool("m_bDamageAnimation", m_bDamageAnimation);
         m_aAnimator.SetBool("m_bStartFireAnimation", m_bStartFireAnimation);
         m_aAnimator.SetBool("m_bFinalFireAnimation", m_bFinalFireAnimation);
-        m_aAnimator.SetBool("m_bMovingAnimation", m_bMovingAnimation);
+        m_aAnimator.SetBool("IsMoving", m_bMovingAnimation);
 
         // get the soldiers rigidbody
         m_rbRigidBody = GetComponent<Rigidbody>();
@@ -183,6 +183,12 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
+        // animator boolean setup
+        m_aAnimator.SetBool("Damage", m_bDamageAnimation);
+        m_aAnimator.SetBool("StartFire", m_bStartFireAnimation);
+        m_aAnimator.SetBool("FinalFire", m_bFinalFireAnimation);
+        m_aAnimator.SetBool("IsMoving", m_bMovingAnimation);
+
         // animation boolean resets
         if (m_bStartFireAnimation == true)
         {
