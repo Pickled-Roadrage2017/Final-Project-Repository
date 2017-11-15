@@ -184,6 +184,9 @@ public class Player : MonoBehaviour
                 // If not paused then can move and shoot.
                 if (!PauseManager.m_bPaused)
                 {
+                    // Update the mouse face function in soldier.
+                    sCurrentSoldier.FaceMouse();
+
                     // Get the mouse input functions.
                     MouseDown(sCurrentSoldier);
                     bool bMouseHeld = MouseHeld(sCurrentSoldier);
@@ -406,9 +409,6 @@ public class Player : MonoBehaviour
 
         // Apply Axis to the current soldier.
         sCurrentSoldier.Move(fMoveHorizontal, fMoveVertical);
-
-        // Update the mpuse face function in soldier.
-        sCurrentSoldier.FaceMouse();
     }
     
 
@@ -443,8 +443,12 @@ public class Player : MonoBehaviour
             // Change the color of each material to the m_cSoldierColor.
             sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amRPGMaterials;
 
-            // set the color of the material.
-            sCurrentSoldier.GetComponent<Renderer>().material.SetColor("_PlasticColor", m_cSoldierColor);
+            // loop through each material on the soliders.
+            for (int o = 0; o < sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials.Length; ++o)
+            {
+                // Change the color of each material to the m_cSoldierColor.
+                sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials[o].SetColor("_PlasticColor", m_cSoldierColor);
+            }
         }
 
         // if the 2 key is pressed.
@@ -461,8 +465,12 @@ public class Player : MonoBehaviour
             // Change the color of each material to the m_cSoldierColor.
             sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amGrenadeMaterials;
 
-            // set the color of the material.
-            sCurrentSoldier.GetComponent<Renderer>().material.SetColor("_PlasticColor", m_cSoldierColor);
+            // loop through each material on the soliders.
+            for (int o = 0; o < sCurrentSoldier.GetComponent<Renderer>().materials.Length; ++o)
+            {
+                // Change the color of each material to the m_cSoldierColor.
+                sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials[o].SetColor("_PlasticColor", m_cSoldierColor);
+            }
         }
 
         // if the 3 key is pressed.
