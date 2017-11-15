@@ -11,6 +11,7 @@ ModelImporter:
     3300000: //RootNode
     4300000: Rocket_Mesh
     4300002: Soldier_Pose_RPG
+    4300004: Soldier_Pose_RPG1
   materials:
     importMaterials: 1
     materialName: 0

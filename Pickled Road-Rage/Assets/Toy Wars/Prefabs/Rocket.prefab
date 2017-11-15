@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 23082496437012516}
   - component: {fileID: 54508881412687604}
   - component: {fileID: 114742582683046882}
+  - component: {fileID: 82167897698565078}
   m_Layer: 22
   m_Name: Rocket
   m_TagString: Untagged
@@ -112,7 +113,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1480935180070650}
-  m_Mesh: {fileID: 4300002, guid: b0527d3f86146d8498b4d4744bb1bddd, type: 3}
+  m_Mesh: {fileID: 4300004, guid: b0527d3f86146d8498b4d4744bb1bddd, type: 3}
 --- !u!54 &54508881412687604
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -140,6 +141,86 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.01, y: 0.01, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82167897698565078
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1480935180070650}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114742582683046882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,7 +245,7 @@ MonoBehaviour:
   m_acAirtimeSound: {fileID: 0}
   m_acExplosionSound: {fileID: 8300000, guid: fb4fd17d856e26747a435d3d3a89bdc4, type: 3}
   m_fMaxActivateTimer: 2
-  m_ExplosionForce: 60
+  m_ExplosionForce: 20
   m_fHitMultiplier: 0.5
   m_fExplosionRadius: 1
   m_gSpawnPoint: {fileID: 0}
