@@ -125,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362723199391126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.11696, y: 0.00021599921, z: -10.397018}
+  m_LocalPosition: {x: 21.558144, y: 11.949831, z: -44.919197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4428677557891060}
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1757745506353262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56987847b1cb11145ab8e05a265102fa, type: 3}
+  m_Script: {fileID: 11500000, guid: dd95b46842b293743a004159b7d364d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_gRocketBlueprint: {fileID: 1480935180070650, guid: af2676544f701ed4198b43f67985729c,

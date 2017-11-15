@@ -728,6 +728,8 @@ MonoBehaviour:
   m_cTeddyColor: {r: 0.9490196, g: 0, b: 0.7657603, a: 1}
   m_sHealthBar: {fileID: 176990566}
   m_bDamageAnimation: 0
+  m_bSpawnSoldier: 0
+  m_bPlaceSoldier: 0
 --- !u!23 &68564403
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2565,7 +2567,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4277840205266666, guid: 7f6fb861622efaf4ab4931fe27f5065c, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.8649926
+      value: 0.8649927
       objectReference: {fileID: 0}
     - target: {fileID: 4277840205266666, guid: 7f6fb861622efaf4ab4931fe27f5065c, type: 2}
       propertyPath: m_LocalRotation.z
@@ -2573,7 +2575,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4277840205266666, guid: 7f6fb861622efaf4ab4931fe27f5065c, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.5017845
+      value: 0.50178456
       objectReference: {fileID: 0}
     - target: {fileID: 4277840205266666, guid: 7f6fb861622efaf4ab4931fe27f5065c, type: 2}
       propertyPath: m_RootOrder
@@ -3648,6 +3650,8 @@ MonoBehaviour:
   m_cTeddyColor: {r: 0.9490196, g: 0, b: 0.7657603, a: 1}
   m_sHealthBar: {fileID: 1678593803}
   m_bDamageAnimation: 0
+  m_bSpawnSoldier: 0
+  m_bPlaceSoldier: 0
 --- !u!4 &439725016 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400054, guid: ac10b164979679c4fb46dd4e35a1eb24, type: 3}
@@ -11734,6 +11738,11 @@ MonoBehaviour:
   m_nMaxRespawns: 2
   m_nMaxRespawnCounter: 0
   m_nSoldierTurn: 0
+  m_mfGrenadeSoldierMesh: {fileID: 4300000, guid: dfe8ce3de05fc8946901e6690394a7e9,
+    type: 3}
+  m_amGrenadeMaterials: []
+  m_mfRPGSoldierMesh: {fileID: 4300002, guid: ac10b164979679c4fb46dd4e35a1eb24, type: 3}
+  m_amRPGMaterials: []
 --- !u!1001 &1334360296
 Prefab:
   m_ObjectHideFlags: 0
@@ -16997,6 +17006,11 @@ MonoBehaviour:
   m_nMaxRespawns: 2
   m_nMaxRespawnCounter: 0
   m_nSoldierTurn: 0
+  m_mfGrenadeSoldierMesh: {fileID: 4300000, guid: dfe8ce3de05fc8946901e6690394a7e9,
+    type: 3}
+  m_amGrenadeMaterials: []
+  m_mfRPGSoldierMesh: {fileID: 4300002, guid: ac10b164979679c4fb46dd4e35a1eb24, type: 3}
+  m_amRPGMaterials: []
 --- !u!4 &2023093479 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4086634501040760, guid: e8331ccf223e7d3449c330d9e710931c,
