@@ -58,12 +58,6 @@ public class Teddy : MonoBehaviour
     [LabelOverride("Teddy Color")] [Tooltip("The material color of this the Teddy bear object.")]
     public Color m_cTeddyColor;
 
-    // Pool of Projectile objects
-    private GameObject[] m_agProjectileList;
-
-    // pool for projectiles
-    private int m_nPoolSize = 1;
-
     // Health bar slider on teddy canvas.
     [LabelOverride("Health Bar Slider")] [Tooltip("Drag in a UI slider to be used as the Teddy health bar.")]
     public Slider m_sHealthBar;
@@ -95,9 +89,7 @@ public class Teddy : MonoBehaviour
         m_bPlaceSoldier = false;
 
         m_aAnimator = GetComponent<Animator>();
-        m_aAnimator.SetBool("m_bDamageAnimation", m_bDamageAnimation);
-        m_aAnimator.SetBool("m_bSpawnSoldier", m_bSpawnSoldier);
-        m_aAnimator.SetBool("m_bPlaceSoldier", m_bPlaceSoldier);
+        
         // Set the health slider value to the current health.
         m_sHealthBar.value = CalcHealth();
 
@@ -114,7 +106,11 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        if(!IsAlive())
+        m_aAnimator.SetBool("m_bDamageAnimation", m_bDamageAnimation);
+        m_aAnimator.SetBool("m_bSpawnSoldier", m_bSpawnSoldier);
+        m_aAnimator.SetBool("m_bPlaceSoldier", m_bPlaceSoldier);
+
+        if (!IsAlive())
         {
             gameObject.SetActive(false);
         }
@@ -125,6 +121,17 @@ public class Teddy : MonoBehaviour
         if (m_bDamageAnimation == true)
         {
             m_bDamageAnimation = false;
+        }
+
+
+        if (m_bSpawnSoldier == true)
+        {
+            m_bSpawnSoldier = false;
+        }
+
+        if (m_bPlaceSoldier == true)
+        {
+            m_bPlaceSoldier = false;
         }
     }
 
