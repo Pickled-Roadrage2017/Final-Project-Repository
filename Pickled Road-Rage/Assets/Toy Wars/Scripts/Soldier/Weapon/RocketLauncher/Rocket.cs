@@ -58,12 +58,17 @@ public class Rocket : Weapon
 
     // this Rockets audioSource
     private AudioSource m_asAudioSource;
+
+    private bool m_bDestroy = false;
+
+    private bool m_bHit = false;
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
         m_rbRocket = GetComponent<Rigidbody>();
+        m_asAudioSource = GetComponent<AudioSource>();
     }
 
     //--------------------------------------------------------------------------------------
@@ -74,6 +79,23 @@ public class Rocket : Weapon
         // ActivateTimer decreases by 1 each frame (Rocket can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
 
+        if(m_asAudioSource.isPlaying)
+        {
+            m_bDestroy = false;
+        }
+        else
+        {
+            m_bDestroy = true;
+        }
+
+        if (m_bHit)
+        {
+            if (m_bDestroy)
+            {
+                RocketDisable();
+                m_bHit = false;
+            }
+        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -93,10 +115,7 @@ public class Rocket : Weapon
         if (m_fCurrentActivateTimer <= 0)
         {
 
-            // Rocket Explodes, damaging anything within the radius
-            GameObject gExplosion = Instantiate(m_gExplosion);
-            gExplosion.transform.SetParent(null);
-            gExplosion.transform.position = transform.position;
+           
             RocketExplode();
 
                 // if the rocket directly hits a Soldier, this will be called to apply knockback
@@ -114,8 +133,9 @@ public class Rocket : Weapon
                 }
 
                 // Disable Rocket after it has completed all damage dealing and knockbacks
+                if(!m_asAudioSource.isPlaying)
                 RocketDisable();
-            
+           
         }
     }
 
@@ -147,6 +167,13 @@ public class Rocket : Weapon
 
     private void RocketExplode()
     {
+        // Rocket Explodes, damaging anything within the radius
+        GameObject gExplosion = Instantiate(m_gExplosion);
+        gExplosion.transform.SetParent(null);
+        gExplosion.transform.position = transform.position;
+        Destroy(gExplosion, 5f);
+        m_asAudioSource.PlayOneShot(m_acExplosionSound);
+        m_bHit = true;
         // Collect all possible colliders 
         Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
 
@@ -184,6 +211,8 @@ public class Rocket : Weapon
     //--------------------------------------------------------------------------------------
     private void RocketDisable()
     {
-        gameObject.SetActive(false);
+
+            gameObject.SetActive(false);
+        
     }
 }
