@@ -1,7 +1,8 @@
 ﻿//--------------------------------------------------------------------------------------
-// Purpose:
+// Purpose: Used to control the Soldier
 //
-// Description:
+// Description:  Inheriting from MonoBehaviour, allows Player.cs to control all Soldier 
+//               related functions.
 //
 // Author: Callan Davies
 //--------------------------------------------------------------------------------------
@@ -18,9 +19,6 @@ public enum EWeaponType
     EWEP_GRENADE
 }
 
-//--------------------------------------------------------------------------------------
-// SoldierActor: Inheriting from MonoBehaviour. Used to be controlled by Player
-//--------------------------------------------------------------------------------------
 public class SoldierActor : MonoBehaviour
 {
     [Header("Sounds")]
@@ -132,17 +130,30 @@ public class SoldierActor : MonoBehaviour
 
     // this Soldiers audioSource
     private AudioSource m_asAudioSource;
+
+    // the soldiers animator
+    private Animator m_aAnimator;
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
+        m_aAnimator = GetComponent<Animator>();
+
         // initilising animation booleans to false
         m_bStartFireAnimation = false;
         m_bFinalFireAnimation = false;
         m_bDamageAnimation = false;
+
         // set boolean for moving to false
         m_bMovingAnimation = false;
+
+        // animator boolean setup
+        m_aAnimator.SetBool("m_bDamageAnimation", m_bDamageAnimation);
+        m_aAnimator.SetBool("m_bStartFireAnimation", m_bStartFireAnimation);
+        m_aAnimator.SetBool("m_bFinalFireAnimation", m_bFinalFireAnimation);
+        m_aAnimator.SetBool("m_bMovingAnimation", m_bMovingAnimation);
+
         // get the soldiers rigidbody
         m_rbRigidBody = GetComponent<Rigidbody>();
         // get the rocketlaunchers script
