@@ -14712,6 +14712,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tTurnTimerText: {fileID: 1260078903}
+  m_acColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0.36764705, b: 0.36764705, a: 1}
+  m_fFlashTimeStart: 6
+  m_fIncrement: 0.4
+  m_fSwitchTime: 5
 --- !u!114 &1260078903
 MonoBehaviour:
   m_ObjectHideFlags: 0
