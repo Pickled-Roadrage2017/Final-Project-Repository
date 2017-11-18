@@ -1,7 +1,8 @@
 ﻿//--------------------------------------------------------------------------------------
-// Purpose: 
+// Purpose: Change the color of the UI.
 //
-// Description: 
+// Description: This script is used for changing the color of the timer UI depending on
+// the player with the current turn. Attach to the timer UI image.
 //
 // Author: Thomas Wiltshire.
 //--------------------------------------------------------------------------------------
@@ -17,13 +18,13 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------------------
 public class TimerColorUI : MonoBehaviour
 {
-    // 
-    //[LabelOverride("")] [Tooltip("")]
-    //public Image m_mImage;
+    // public color for the player one color.
+    [LabelOverride("Player 1 UI Color")] [Tooltip("What color do you want the timer UI to be while this player is taking a turn?")]
+    public Color m_cPlayer1Color;
 
-    public Color PlayerOneColor;
-
-    public Color PlayerTwoColor;
+    // public color for the player two color.
+    [LabelOverride("Player 2 UI Color")] [Tooltip("What color do you want the timer UI to be while this player is taking a turn?")]
+    public Color m_cPlayer2Color;
 
     //--------------------------------------------------------------------------------------
     // Initialization.
@@ -38,20 +39,30 @@ public class TimerColorUI : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        // 
+        // Check if it is player1s turn.
         if (TurnManager.m_snCurrentTurn == 1)
         {
+            // Get the image.
             Image healthImage = GetComponent<Image>();
-            Color newColor = PlayerOneColor;
+
+            // New color for the player1 color.
+            Color newColor = m_cPlayer1Color;
+
+            // Set alpha to 1 and color to the newColor.
             newColor.a = 1;
             healthImage.color = newColor;
         }
 
-        // 
+        // Check if it is player2s turn. 
         else if (TurnManager.m_snCurrentTurn == 2)
         {
+            // Get the image.
             Image healthImage = GetComponent<Image>();
-            Color newColor = PlayerTwoColor;
+
+            // New color for the player2 color.
+            Color newColor = m_cPlayer2Color;
+
+            // Set alpha to 1 and color to the newColor.
             newColor.a = 1;
             healthImage.color = newColor;
         }

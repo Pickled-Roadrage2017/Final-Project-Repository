@@ -33,15 +33,15 @@ public class EndState : State
     public override void OnUpdate()
     {
         // Update the timer by deltatime.
-        TurnManager.m_fTimer -= Time.deltaTime;
-
+        TurnManager.m_sfTimer -= Time.deltaTime;
+        
         // Once the timer ends.
-        if (TurnManager.m_fTimer < 0)
+        if (TurnManager.m_sfTimer < 0)
         {
             // Check if gameover.
             bool bIsGameOver = GameOver();
 
-            // if game over function is true.
+            // if the game over function is not true.
             if (!bIsGameOver)
             {
                 // set the turn to ended.
@@ -62,10 +62,17 @@ public class EndState : State
     public override void OnEnter()
     {
         // Reset the timer.
-        TurnManager.m_fTimer = TurnManager.m_sfStaticEndLength;
+        TurnManager.m_sfTimer = TurnManager.m_sfStaticEndLength;
+
+        // If the solider was using the grenade weapon.
+        if (GetCurrentSoldierScript().m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
+        {
+            // add 5 more seconds to the timer.
+            TurnManager.m_sfTimer += 3.5f;
+        }
 
         // Set the soldier turn to false
-        GetCurrentSoldierScript().CurrentTurn(false); // MAYBE GOING TO CHANGE!
+        GetCurrentSoldierScript().CurrentTurn(false);
 
         // Get active soldiers for each player.
         int nActiveSoldiersP1 = GetPlayerScript(1).GetActiveSoldiers();
@@ -90,7 +97,7 @@ public class EndState : State
     public override void OnExit()
     {
         // Set the delay back to 0
-        TurnManager.m_fTimer = 0;
+        TurnManager.m_sfTimer = 0;
     }
 
     //--------------------------------------------------------------------------------------

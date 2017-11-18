@@ -38,17 +38,17 @@ public class SpawnState : State
         bool bIsRespawn = GetCurrentPlayerScript().CheckRespawn();
 
         // if a soilder can not respawn.
-        if (!bIsRespawn && TurnManager.m_fTimer == TurnManager.m_sfStaticSpawnLength)
+        if (!bIsRespawn && TurnManager.m_sfTimer == TurnManager.m_sfStaticSpawnLength)
         {
             // set timer to zero
-            TurnManager.m_fTimer = 0;
+            TurnManager.m_sfTimer = 0;
         }
 
         // Update the timer by deltatime.
-        TurnManager.m_fTimer -= Time.deltaTime;
+        TurnManager.m_sfTimer -= Time.deltaTime;
 
         // If the timer runs out or end turn is true.
-        if (TurnManager.m_fTimer < 0)
+        if (TurnManager.m_sfTimer < 0)
         {
             // if the current player still has soldiers.
             if (GetCurrentPlayerScript().GetActiveSoldiers() != 0)
@@ -71,7 +71,7 @@ public class SpawnState : State
     public override void OnEnter()
     {
         // Reset the timer.
-        TurnManager.m_fTimer = TurnManager.m_sfStaticSpawnLength;
+        TurnManager.m_sfTimer = TurnManager.m_sfStaticSpawnLength;
     }
 
     //--------------------------------------------------------------------------------------
@@ -80,6 +80,6 @@ public class SpawnState : State
     public override void OnExit()
     {
         // Set timer back to 0.
-        TurnManager.m_fTimer = 0;
+        TurnManager.m_sfTimer = 0;
     }
 }

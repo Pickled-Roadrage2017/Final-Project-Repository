@@ -33,10 +33,10 @@ public class ActionState : State
     public override void OnUpdate()
     {
         // Update the timer by deltatime.
-        TurnManager.m_fTimer -= Time.deltaTime;
+        TurnManager.m_sfTimer -= Time.deltaTime;
 
         // Once the timer goes below 6
-        if (TurnManager.m_fTimer < 6)
+        if (TurnManager.m_sfTimer < 6)
         {
             // make sure only the audio only plays once.
             if (!m_tTurnManager.m_asAudioSource.isPlaying)
@@ -47,7 +47,7 @@ public class ActionState : State
         }
 
         // If the timer runs out or end turn is true.
-        if (TurnManager.m_fTimer < 0 || TurnManager.m_sbEndTurn == true)
+        if (TurnManager.m_sfTimer < 0 || TurnManager.m_sbEndTurn == true)
         {
             // Push to the endturn state.
             m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_END);
@@ -60,7 +60,7 @@ public class ActionState : State
     public override void OnEnter()
     {
         // Reset the timer.
-        TurnManager.m_fTimer = TurnManager.m_sfStaticTimerLength;
+        TurnManager.m_sfTimer = TurnManager.m_sfStaticTimerLength;
     }
 
     //--------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ public class ActionState : State
     public override void OnExit()
     {
         // Set timer back to 0.
-        TurnManager.m_fTimer = 0;
+        TurnManager.m_sfTimer = 0;
 
         // make sure the time warning sound has stop.
         m_tTurnManager.m_asAudioSource.Stop();

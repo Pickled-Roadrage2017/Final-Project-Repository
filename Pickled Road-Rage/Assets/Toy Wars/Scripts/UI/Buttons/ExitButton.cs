@@ -1,7 +1,7 @@
 ﻿//--------------------------------------------------------------------------------------
 // Purpose: Exit the game.
 //
-// Description: The UnitNumberUI script is gonna be used for closing the application on 
+// Description: The ExitButton script is gonna be used for closing the application on 
 // a button press. This script is to be attached to a button, after attaching to a button
 // drag this script again onto the onClick event (You'll have to create a new onClick) 
 // for that button. Once the onClick event is created and script is assigned select the

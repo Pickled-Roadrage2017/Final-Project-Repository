@@ -1,32 +1,60 @@
-﻿using System.Collections;
+﻿//--------------------------------------------------------------------------------------
+// Purpose: Change the title text of the gameover canvas.
+//
+// Description: This script is used to change the title text for the gameover screen
+// depending on which player wins the game. Attach to the gameover text object.
+//
+// Author: Thomas Wiltshire.
+//--------------------------------------------------------------------------------------
+
+// Using, etc
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//--------------------------------------------------------------------------------------
+// TimerColorUI object. Inheriting from MonoBehaviour. 
+//--------------------------------------------------------------------------------------
 public class GameOverUI : MonoBehaviour
 {
-    public Text text;
-    public Player pPlayer1; // do this better.
-    public Player pPlayer2; // do this better.
+    // public text object for text that is gonna change.
+    [LabelOverride("Title Text")] [Tooltip("The text object this is attached to.")]
+    public Text m_tTitleText;
 
-	// Use this for initialization
-	void Start ()
+    // public player object.
+    [LabelOverride("Player1 Object")] [Tooltip("The Player1 object.")]
+    public Player m_pPlayer1; // DO THIS BETTER!
+
+    // public player object.
+    [LabelOverride("Player2 Object")] [Tooltip("The Player2 object.")]
+    public Player m_pPlayer2; // DO THIS BETTER!
+
+    //--------------------------------------------------------------------------------------
+    // Initialization.
+    //--------------------------------------------------------------------------------------
+    void Awake()
     {
 		
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    //--------------------------------------------------------------------------------------
+    // Update: Function that calls each frame to update game objects.
+    //--------------------------------------------------------------------------------------
+    void Update()
     {
-       
-        if (pPlayer1.CheckGameOver())
+        // Check if player1 has gameover.
+        if (m_pPlayer1.CheckGameOver())
         {
-            text.text = "Player 2 Wins!";
+            // Change gameover canvas text to display this player won.
+            m_tTitleText.text = "Red Wins!";
         }
 
-        if (pPlayer2.CheckGameOver())
+        // Check if player2 has gameover.
+        if (m_pPlayer2.CheckGameOver())
         {
-            text.text = "Player 1 Wins!";
+            // Change gameover canvas text to display this player won.
+            m_tTitleText.text = "Blue Wins!";
         }
     }
 }

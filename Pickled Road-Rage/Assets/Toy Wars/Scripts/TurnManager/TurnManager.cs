@@ -17,6 +17,8 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class TurnManager : MonoBehaviour
 {
+    // TIMER //
+    //--------------------------------------------------------------------------------------
     // Title for this section of public values.
     [Header("Timer:")]
 
@@ -36,7 +38,13 @@ public class TurnManager : MonoBehaviour
     [LabelOverride("Respawn Timer Length")]
     [Tooltip("The time in seconds for how long the soldier respawning state should be. This spawning state is just a delay for the spawning animation.")]
     public float m_fSpawnLength;
+    
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
 
+    // PLAYER //
+    //--------------------------------------------------------------------------------------
     // Title for this section of public values.
     [Header("Player Objects:")]
 
@@ -48,11 +56,17 @@ public class TurnManager : MonoBehaviour
     [LabelOverride("Player2 Object")][Tooltip("The Player2 object in the scene.")]
     public GameObject m_gPlayer2;
 
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+
+    // AUDIO //
+    //--------------------------------------------------------------------------------------
     // Title for this section of public values.
     [Header("Audio:")]
 
     // public AudioClip for starting turn audio.
-    [LabelOverride("Turn Starting")] [Tooltip("The Audio file you would like to play for turn startings.")]
+    [LabelOverride("Turn Starting")] [Tooltip("The Audio file you would like to play for the turn startings.")]
     public AudioClip m_acTurnStartAudio;
 
     // public AudioClip for time warning audio.
@@ -63,6 +77,12 @@ public class TurnManager : MonoBehaviour
     [HideInInspector]
     public AudioSource m_asAudioSource;
 
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+
+    // PUBLIC HIDDEN //
+    //--------------------------------------------------------------------------------------
     // The canvas for the gameover canvas.
     [HideInInspector]
     public GameObject m_gGameOverCanvas;
@@ -73,17 +93,21 @@ public class TurnManager : MonoBehaviour
     // static bool for ending player turns.
     public static bool m_sbEndTurn;
 
+    // float for timer.
+    public static float m_sfTimer;
+
     // Static values for timers.
     public static float m_sfStaticTimerLength;
     public static float m_sfStaticDelayLength;
     public static float m_sfStaticEndLength;
     public static float m_sfStaticSpawnLength;
+    //--------------------------------------------------------------------------------------
 
-    // float for timer.
-    public static float m_fTimer;
-
+    // PRIVATE VALUES //
+    //--------------------------------------------------------------------------------------
     // New instance of the state machine.
     private StateMachine m_sStateMachine;
+    //--------------------------------------------------------------------------------------
 
     //--------------------------------------------------------------------------------------
     // initialization. Awake.
@@ -113,12 +137,13 @@ public class TurnManager : MonoBehaviour
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_GAMEOVER, new GameOverState(m_sStateMachine));
         m_sStateMachine.AddState(ETurnManagerStates.ETURN_SPAWN, new SpawnState(m_sStateMachine));
 
-        // Get the canvas and set it to inactive.
+        // Get the canvas.
         m_gGameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
         
         // Check if there is a valid GameOverCanvas
         if (m_gGameOverCanvas != null)
         {
+            // set gamover canvas to false.
             m_gGameOverCanvas.SetActive(false);
         }
 
@@ -177,7 +202,7 @@ public class TurnManager : MonoBehaviour
         if (m_snCurrentTurn == 0)
         {
             // then select a random player.
-            m_snCurrentTurn = Random.Range(1, 2);
+            m_snCurrentTurn = Random.Range(1, 2); // FIX THIS // FIX THIS // FIX THIS!
         }
     }
 

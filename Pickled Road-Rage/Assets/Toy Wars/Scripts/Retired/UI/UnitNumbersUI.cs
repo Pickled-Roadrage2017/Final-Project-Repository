@@ -19,19 +19,25 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------------------
 public class UnitNumbersUI : MonoBehaviour
 {
+    // TEXT //
+    //--------------------------------------------------------------------------------------
     // Title for this section of public values.
     [Header("Text Object:")]
 
     // public text object for displaying player1s total active units.
     [LabelOverride("Unit Number Text")][Tooltip("The text object in the canvas that this script is attached to.")]
     public Text m_tUnitNumber1Text;
+    //--------------------------------------------------------------------------------------
 
+    // PLAYER //
+    //--------------------------------------------------------------------------------------
     // Title for this section of public values.
     [Header("Game Object:")]
 
     // public object for the player object to tie this object to.
     [LabelOverride("Player Object")][Tooltip("The Player object you wish to see the total active units of.")]
     public GameObject m_gPlayerObject;
+    //--------------------------------------------------------------------------------------
 
     //--------------------------------------------------------------------------------------
     // initialization.

@@ -4398,8 +4398,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_gSelectedRPG: {fileID: 733587508}
-  m_gUnselectedRPG: {fileID: 854552913}
   m_gSelectedGrenade: {fileID: 4636516}
+  m_gUnselectedRPG: {fileID: 854552913}
   m_gUnselectedGrenade: {fileID: 1215217346}
   m_gPlayer: {fileID: 1333348777}
 --- !u!114 &378683300
@@ -9519,8 +9519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafc689d01a46d64ba7b9b9f99c6a165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerOneColor: {r: 0.22616611, g: 0.19852942, b: 1, a: 0.434}
-  PlayerTwoColor: {r: 1, g: 0.25, b: 0.25, a: 0.403}
+  m_cPlayer1Color: {r: 0.22745098, g: 0.2, b: 1, a: 0.43529412}
+  m_cPlayer2Color: {r: 1, g: 0.2509804, b: 0.2509804, a: 0.40392157}
 --- !u!4 &837153149 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4086634501040760, guid: e8331ccf223e7d3449c330d9e710931c,
@@ -15400,10 +15400,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nPlayerNumber: 2
+  m_gTeddyBase: {fileID: 439725011}
   m_gSoldierBlueprint: {fileID: 1362723199391126, guid: 36fbc472b58131545a2678c096133ecf,
     type: 2}
   m_cSoldierColor: {r: 0.8602941, g: 0.5437034, b: 0.18344508, a: 1}
-  m_gTeddyBase: {fileID: 439725011}
+  m_mRPGSoldierMesh: {fileID: 4300000, guid: c97c16e581bd37a4c8697f4006ffaaf2, type: 3}
+  m_mGrenadeSoldierMesh: {fileID: 4300000, guid: dfe8ce3de05fc8946901e6690394a7e9,
+    type: 3}
+  m_amRPGMaterials:
+  - {fileID: 2100000, guid: 28ad97ee43de1b941bef3e9bae5e18d6, type: 2}
+  - {fileID: 2100000, guid: dfe4656d5a4aad545a2775655037e5a7, type: 2}
+  - {fileID: 2100000, guid: 0d8a0d45c711d994a9d2619859356a84, type: 2}
+  m_amGrenadeMaterials:
+  - {fileID: 2100000, guid: 28ad97ee43de1b941bef3e9bae5e18d6, type: 2}
+  - {fileID: 2100000, guid: 0d8a0d45c711d994a9d2619859356a84, type: 2}
+  - {fileID: 2100000, guid: 45739081ae72bdc499da327ff622f323, type: 2}
   m_agSoldierSpawn:
   - {fileID: 179811821}
   - {fileID: 22598572}
@@ -15412,17 +15423,6 @@ MonoBehaviour:
   m_nMaxRespawns: 2
   m_nMaxRespawnCounter: 0
   m_nSoldierTurn: 0
-  m_mfGrenadeSoldierMesh: {fileID: 4300000, guid: dfe8ce3de05fc8946901e6690394a7e9,
-    type: 3}
-  m_amGrenadeMaterials:
-  - {fileID: 2100000, guid: 28ad97ee43de1b941bef3e9bae5e18d6, type: 2}
-  - {fileID: 2100000, guid: 0d8a0d45c711d994a9d2619859356a84, type: 2}
-  - {fileID: 2100000, guid: 45739081ae72bdc499da327ff622f323, type: 2}
-  m_mfRPGSoldierMesh: {fileID: 4300002, guid: ac10b164979679c4fb46dd4e35a1eb24, type: 3}
-  m_amRPGMaterials:
-  - {fileID: 2100000, guid: 28ad97ee43de1b941bef3e9bae5e18d6, type: 2}
-  - {fileID: 2100000, guid: dfe4656d5a4aad545a2775655037e5a7, type: 2}
-  - {fileID: 2100000, guid: 0d8a0d45c711d994a9d2619859356a84, type: 2}
 --- !u!1001 &1334360296
 Prefab:
   m_ObjectHideFlags: 0
@@ -17295,9 +17295,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74fba3b00a89b144ea4db3f407b1ba2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1541951009}
-  pPlayer1: {fileID: 2018936184}
-  pPlayer2: {fileID: 1333348779}
+  m_tTitleText: {fileID: 1541951009}
+  m_pPlayer1: {fileID: 2018936184}
+  m_pPlayer2: {fileID: 1333348779}
 --- !u!1 &1550130796
 GameObject:
   m_ObjectHideFlags: 0
@@ -22680,10 +22680,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nPlayerNumber: 1
+  m_gTeddyBase: {fileID: 68564397}
   m_gSoldierBlueprint: {fileID: 1362723199391126, guid: 36fbc472b58131545a2678c096133ecf,
     type: 2}
   m_cSoldierColor: {r: 0.57535946, g: 0.6691177, b: 0.17219941, a: 1}
-  m_gTeddyBase: {fileID: 68564397}
+  m_mRPGSoldierMesh: {fileID: 4300000, guid: c97c16e581bd37a4c8697f4006ffaaf2, type: 3}
+  m_mGrenadeSoldierMesh: {fileID: 4300000, guid: dfe8ce3de05fc8946901e6690394a7e9,
+    type: 3}
+  m_amRPGMaterials:
+  - {fileID: 2100000, guid: 28ad97ee43de1b941bef3e9bae5e18d6, type: 2}
+  - {fileID: 2100000, guid: dfe4656d5a4aad545a2775655037e5a7, type: 2}
+  - {fileID: 2100000, guid: 0d8a0d45c711d994a9d2619859356a84, type: 2}
+  m_amGrenadeMaterials:
+  - {fileID: 2100000, guid: 28ad97ee43de1b941bef3e9bae5e18d6, type: 2}
+  - {fileID: 2100000, guid: 0d8a0d45c711d994a9d2619859356a84, type: 2}
+  - {fileID: 2100000, guid: 45739081ae72bdc499da327ff622f323, type: 2}
   m_agSoldierSpawn:
   - {fileID: 142290617}
   - {fileID: 2011819107}
@@ -22692,17 +22703,6 @@ MonoBehaviour:
   m_nMaxRespawns: 2
   m_nMaxRespawnCounter: 0
   m_nSoldierTurn: 0
-  m_mfGrenadeSoldierMesh: {fileID: 4300000, guid: dfe8ce3de05fc8946901e6690394a7e9,
-    type: 3}
-  m_amGrenadeMaterials:
-  - {fileID: 2100000, guid: 28ad97ee43de1b941bef3e9bae5e18d6, type: 2}
-  - {fileID: 2100000, guid: 0d8a0d45c711d994a9d2619859356a84, type: 2}
-  - {fileID: 2100000, guid: 45739081ae72bdc499da327ff622f323, type: 2}
-  m_mfRPGSoldierMesh: {fileID: 4300002, guid: ac10b164979679c4fb46dd4e35a1eb24, type: 3}
-  m_amRPGMaterials:
-  - {fileID: 2100000, guid: 28ad97ee43de1b941bef3e9bae5e18d6, type: 2}
-  - {fileID: 2100000, guid: dfe4656d5a4aad545a2775655037e5a7, type: 2}
-  - {fileID: 2100000, guid: 0d8a0d45c711d994a9d2619859356a84, type: 2}
 --- !u!4 &2023093479 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4086634501040760, guid: e8331ccf223e7d3449c330d9e710931c,
@@ -23716,8 +23716,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_gSelectedRPG: {fileID: 1623229609}
-  m_gUnselectedRPG: {fileID: 1879795980}
   m_gSelectedGrenade: {fileID: 134772594}
+  m_gUnselectedRPG: {fileID: 1879795980}
   m_gUnselectedGrenade: {fileID: 971544006}
   m_gPlayer: {fileID: 2018936182}
 --- !u!114 &2122638076

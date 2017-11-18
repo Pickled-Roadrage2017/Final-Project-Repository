@@ -1,7 +1,8 @@
 ﻿//--------------------------------------------------------------------------------------
-// Purpose: 
+// Purpose: Manages the pausing of the game.
 //
-// Description: 
+// Description: This script will manage the state of game pause throughout the game.
+// Attach to an gameobject.
 //
 // Author: Thomas Wiltshire.
 //--------------------------------------------------------------------------------------
@@ -18,7 +19,7 @@ public class PauseManager : MonoBehaviour
 {
     // public static bool for if the game is paused.
     [HideInInspector]
-    public static bool m_bPaused;
+    public static bool m_sbPaused;
 
     // public gameobject for pause canvas.
     [HideInInspector]
@@ -33,19 +34,16 @@ public class PauseManager : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        // Get the canvas and set it to inactive.
+        // Get the Pause and Gameover canvas.
         m_gCanvas = GameObject.FindGameObjectWithTag("PauseMenu");
-
         m_gGameOver = GameObject.FindGameObjectWithTag("EndMenu");
 
         // Check if there is a valid pause canvas.
         if (m_gCanvas != null)
-        {
             m_gCanvas.SetActive(false);
-        }
 
         // set the default for pause to false.
-        m_bPaused = false;
+        m_sbPaused = false;
 	}
 
     //--------------------------------------------------------------------------------------
@@ -57,11 +55,11 @@ public class PauseManager : MonoBehaviour
         if (Input.GetButtonDown("Pause") && !m_gGameOver.activeSelf)
         {
             // toggle pause bool.
-            m_bPaused = !m_bPaused;
+            m_sbPaused = !m_sbPaused;
         }
 
         // if paused.
-        if (m_bPaused)
+        if (m_sbPaused)
         {
             // Check if there is a valid pause canvas
             if (m_gCanvas != null)
@@ -76,7 +74,7 @@ public class PauseManager : MonoBehaviour
         }
 
         // if not paused.
-        else if (!m_bPaused)
+        else if (!m_sbPaused)
         {
             // Check if there is a valid pause canvas.
             if (m_gCanvas != null)
@@ -100,8 +98,7 @@ public class PauseManager : MonoBehaviour
         {
             // toggle pause bool.
             if (!hasFocus)
-                m_bPaused = true;
-
+                m_sbPaused = true;
         }
     }
 }

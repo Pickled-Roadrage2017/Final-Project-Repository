@@ -21,6 +21,8 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------------------
 public class SwapTurnUI : MonoBehaviour
 {
+    // TEXT //
+    //--------------------------------------------------------------------------------------
     // Title for this section of public values.
     [Header("Text Object:")]
 
@@ -28,6 +30,12 @@ public class SwapTurnUI : MonoBehaviour
     [LabelOverride("Player Turn Text")][Tooltip("The text object in the canvas that this script is attached to.")]
     public Text m_tPlayerTurnText;
 
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+
+    // LERP //
+    //--------------------------------------------------------------------------------------
     // Title for this section of public values.
     [Header("Lerp Settings:")]
 
@@ -43,8 +51,15 @@ public class SwapTurnUI : MonoBehaviour
     [LabelOverride("End Position")][Tooltip("The ending position of the Lerp.")]
     public Vector3 m_v3EndPos;
 
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+
+    // PRIVATE VALUES //
+    //--------------------------------------------------------------------------------------
     // private float for the current lerp timer.
     private float m_fCurrentLerpTime;
+    //--------------------------------------------------------------------------------------
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -79,8 +94,19 @@ public class SwapTurnUI : MonoBehaviour
             // Set the PlayerTurn text element to enabled.
             m_tPlayerTurnText.enabled = true;
 
-            // Display which players it currently is.
-            m_tPlayerTurnText.text = "Player " + TurnManager.m_snCurrentTurn + "'s turn!";
+            // if player ones turn.
+            if (TurnManager.m_snCurrentTurn == 1)
+            {
+                // Display which players it currently is.
+                m_tPlayerTurnText.text = "Blue's Turn!";
+            }
+
+            // if player twos turn.
+            if (TurnManager.m_snCurrentTurn == 2)
+            {
+                // Display which players it currently is.
+                m_tPlayerTurnText.text = "Red's Turn!";
+            }
 
             // Slide the text into the screen
             TextLerp(m_tPlayerTurnText);

@@ -38,8 +38,8 @@ public class TimerUI : MonoBehaviour
     void Update()
     {
         // Format the timer as a timer with seconds and minutes.
-        int nMinutes = Mathf.FloorToInt(TurnManager.m_fTimer / 60F);
-        int nSeconds = Mathf.FloorToInt(TurnManager.m_fTimer - nMinutes * 60);
+        int nMinutes = Mathf.FloorToInt(TurnManager.m_sfTimer / 60F);
+        int nSeconds = Mathf.FloorToInt(TurnManager.m_sfTimer - nMinutes * 60);
         string nTimer = string.Format("{0:0}:{1:00}", nMinutes, nSeconds);
 
         // If in the action state display the ticking timer.

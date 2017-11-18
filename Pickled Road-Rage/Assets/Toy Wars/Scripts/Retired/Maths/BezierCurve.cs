@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿//--------------------------------------------------------------------------------------
+// Purpose: 
+//
+// Description: 
+//
+// Author: Callan Davies
+//--------------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

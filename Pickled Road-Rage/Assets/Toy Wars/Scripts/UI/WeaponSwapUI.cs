@@ -1,7 +1,8 @@
 ﻿//--------------------------------------------------------------------------------------
-// Purpose: 
+// Purpose: Swap the weapon UI for each player.
 //
-// Description: 
+// Description: This script will swap the current weapon UI when a weapon is changed or
+// player is changed. Attach to the parent of the Unselected and selected UI objects.
 //
 // Author: Thomas Wiltshire.
 //--------------------------------------------------------------------------------------
@@ -16,26 +17,50 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class WeaponSwapUI : MonoBehaviour
 {
+    // SELECTED //
+    //--------------------------------------------------------------------------------------
+    // Title for this section of public values.
+    [Header("Selected:")]
+
     // public gameobject for the selected RPG object.
     [LabelOverride("Selected RPG Object")] [Tooltip("The gameobject to use for the selected state for the RPG.")]
     public GameObject m_gSelectedRPG;
-
-    // public gameobject for the unselected RPG object. 
-    [LabelOverride("Unselected RPG Object")] [Tooltip("The gameobject to use for the unselected state for the RPG.")]
-    public GameObject m_gUnselectedRPG;
 
     // public gameobject for the selected Grenade object. 
     [LabelOverride("Selected Grenade Object")] [Tooltip("The gameobject to use for the selected state for the Grenade.")]
     public GameObject m_gSelectedGrenade;
 
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+
+    // UNSELECTED //
+    //--------------------------------------------------------------------------------------
+    // Title for this section of public values.
+    [Header("Unselected:")]
+
+    // public gameobject for the unselected RPG object. 
+    [LabelOverride("Unselected RPG Object")] [Tooltip("The gameobject to use for the unselected state for the RPG.")]
+    public GameObject m_gUnselectedRPG;
+
     // public gameobject for the unselected Grenade object.
     [LabelOverride("Unselected Grenade Object")] [Tooltip("The gameobject to use for the unselected state for the Grenade.")]
     public GameObject m_gUnselectedGrenade;
 
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+
+    // PLAYER //
+    //--------------------------------------------------------------------------------------
+    // Title for this section of public values.
+    [Header("Player:")]
+
     // public gameobject for the player object.
     [LabelOverride("Player Object")] [Tooltip("The Player object for this UI.")]
     public GameObject m_gPlayer;
-
+    //--------------------------------------------------------------------------------------
+    
     //--------------------------------------------------------------------------------------
     // Initialization.
     //--------------------------------------------------------------------------------------
@@ -90,11 +115,11 @@ public class WeaponSwapUI : MonoBehaviour
         // if it isnt the players current turn
         else
         {
-            // Set grenade unselected to active.
+            // Set grenade unselected
             m_gSelectedGrenade.SetActive(false);
             m_gUnselectedGrenade.SetActive(false);
 
-            // Set RPG unselected to active.
+            // Set RPG unselected
             m_gSelectedRPG.SetActive(false);
             m_gUnselectedRPG.SetActive(false);
         }

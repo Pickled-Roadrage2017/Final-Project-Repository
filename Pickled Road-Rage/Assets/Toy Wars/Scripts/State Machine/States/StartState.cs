@@ -33,10 +33,10 @@ public class StartState : State
     public override void OnUpdate()
     {
         // Update the timer by deltatime.
-        TurnManager.m_fTimer -= Time.deltaTime;
+        TurnManager.m_sfTimer -= Time.deltaTime;
 
         // Once the timer ends or any key is pressed
-        if (TurnManager.m_fTimer < 0 || Input.anyKeyDown && !Input.GetMouseButtonDown(0))
+        if (TurnManager.m_sfTimer < 0 || Input.anyKeyDown && !Input.GetMouseButtonDown(0))
         {
             // Push to the action state
             m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_ACTION);
@@ -49,7 +49,7 @@ public class StartState : State
     public override void OnEnter()
     {
         // Reset the timer.
-        TurnManager.m_fTimer = TurnManager.m_sfStaticDelayLength;
+        TurnManager.m_sfTimer = TurnManager.m_sfStaticDelayLength;
 
         // if it is no ones turn then dont run.
         if (TurnManager.m_snCurrentTurn != 0)
@@ -57,11 +57,11 @@ public class StartState : State
             // Play start turn sound.
             m_tTurnManager.m_asAudioSource.PlayOneShot(m_tTurnManager.m_acTurnStartAudio);
 
-            // Run the soldier manager script.
+            // Run the soldier manager function.
             GetCurrentPlayerScript().SoldierTurnManager();
 
             // Set the soldier turn to true.
-            GetCurrentSoldierScript().CurrentTurn(true); // MAYBE GOING TO CHANGE!
+            GetCurrentSoldierScript().CurrentTurn(true);
 
             // Get active soldiers for each player.
             int nActiveSoldiersP1 = GetPlayerScript(1).GetActiveSoldiers();
@@ -90,7 +90,7 @@ public class StartState : State
     public override void OnExit()
     {
         // Set the delay back to 0
-        TurnManager.m_fTimer = 0;
+        TurnManager.m_sfTimer = 0;
 
         // make sure the start turn song has stop.
         m_tTurnManager.m_asAudioSource.Stop();

@@ -17,6 +17,8 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class Player : MonoBehaviour
 {
+    // PLAYER //
+    //--------------------------------------------------------------------------------------
     // Title for this section of public values.
     [Header("Player:")]
 
@@ -24,6 +26,26 @@ public class Player : MonoBehaviour
     [LabelOverride("Player Number")] [Range(1, 2)] [Tooltip("Which Player is this between 1 and 2. eg. Player1 or Player2.")]
     public int m_nPlayerNumber;
 
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+
+    // TEDDY//
+    //--------------------------------------------------------------------------------------
+    // Title for this section of public values.
+    [Header("Teddy:")]
+
+    // public gameobject for the Teddy base of this player.
+    [LabelOverride("Teddy Object")]
+    [Tooltip("The Teddy Object for this player.")]
+    public GameObject m_gTeddyBase;
+
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+
+    // SOLDIER //
+    //--------------------------------------------------------------------------------------
     // Title for this section of public values.
     [Header("Soldier:")]
 
@@ -35,18 +57,34 @@ public class Player : MonoBehaviour
     [LabelOverride("Soldier Color")] [Tooltip("The material color of this players soldiers.")]
     public Color m_cSoldierColor;
 
-    // Title for this section of public values.
-    [Header("Teddy:")]
+    // public mesh for when the rpg is selected.
+    [LabelOverride("RPG Mesh")] [Tooltip("The mesh to use while the player is using the RPG.")]
+    public Mesh m_mRPGSoldierMesh;
 
-    // public gameobject for the Teddy base of this player.
-    [LabelOverride("Teddy Object")] [Tooltip("The Teddy Object for this player.")]
-    public GameObject m_gTeddyBase;
+    // public mesh for when the grenade is selected.
+    [LabelOverride("Grenade Mesh")]
+    [Tooltip("The mesh to use while the player is using the Grenade.")]
+    public Mesh m_mGrenadeSoldierMesh;
 
+    // public array of materials for when the rpg is selected.
+    [LabelOverride("Material")] [Tooltip("The materials to use while the player is using the RPG.")]
+    public Material[] m_amRPGMaterials;
+    
+    // public array of materials for when the grenade is selected.
+    [LabelOverride("Material")] [Tooltip("The materials to use while the player is using the RPG.")]
+    public Material[] m_amGrenadeMaterials;
+
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+
+    // SPAWNING //
+    //--------------------------------------------------------------------------------------
     // Title for this section of public values.
-    [Header("Spawn Points:")]
+    [Header("Soldier Spawn Points:")]
 
     // public array for the spawn postion for the players soldiers.
-    [LabelOverride("Soldier Spawn Point")] [Tooltip("Spawn postion for the soldier spawn, pass in an empty gameobject.")]
+    [LabelOverride("Spawn Point")] [Tooltip("Spawn postion for the soldier spawn, pass in an empty gameobject.")]
     public GameObject[] m_agSoldierSpawn;
 
     // public empty gameobject for respawn point.
@@ -61,6 +99,12 @@ public class Player : MonoBehaviour
     [LabelOverride("Max Respawns")] [Tooltip("The max amount of times this player can respawn soldiers.")]
     public int m_nMaxRespawns;
 
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+
+    // PUBLIC HIDDEN //
+    //--------------------------------------------------------------------------------------
     // int for keeping track of the respawns.
     [HideInInspector]
     public int m_nMaxRespawnCounter;
@@ -68,7 +112,10 @@ public class Player : MonoBehaviour
     // private int for current soldiers turn.
     [HideInInspector]
     public int m_nSoldierTurn;
+    //--------------------------------------------------------------------------------------
 
+    // PRIVATE VALUES //
+    //--------------------------------------------------------------------------------------
     // public array of gameobjects for player soldiers.
     private GameObject[] m_agSoldierList;
 
@@ -80,40 +127,16 @@ public class Player : MonoBehaviour
 
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;
+    //--------------------------------------------------------------------------------------
 
+    // GETTERS & SETTERS //
+    //--------------------------------------------------------------------------------------
     // Active Soldiers getter.
     public int GetActiveSoldiers()
     {
         return m_nActiveSoldiers;
     }
-
-
-
-
-
-
-    //
-    [LabelOverride("Grenade Mesh")] [Tooltip("")]
-    public Mesh m_mfGrenadeSoldierMesh;
-
-    ////
-    //[LabelOverride("")] [Tooltip("")]
-    public Material[] m_amGrenadeMaterials;
-
-
-
-    ////
-    [LabelOverride("RPG Mesh")] [Tooltip("")]
-    public Mesh m_mfRPGSoldierMesh;
-
-    ////
-    //[LabelOverride("")] [Tooltip("")]
-    public Material[] m_amRPGMaterials;
-
-
-
-
-
+    //--------------------------------------------------------------------------------------
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -153,17 +176,6 @@ public class Player : MonoBehaviour
             // Set the postion of the soldiers to the postion of the spawn point.
             o.transform.position = m_agSoldierSpawn[i].transform.position;
         }
-
-
-
-
-
-        
-
-
-
-
-
     }
 
     //--------------------------------------------------------------------------------------
@@ -182,7 +194,7 @@ public class Player : MonoBehaviour
             if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
             {
                 // If not paused then can move and shoot.
-                if (!PauseManager.m_bPaused)
+                if (!PauseManager.m_sbPaused)
                 {
                     // Update the mouse face function in soldier.
                     sCurrentSoldier.FaceMouse();
@@ -229,10 +241,10 @@ public class Player : MonoBehaviour
             if (m_agSoldierList[i].activeInHierarchy)
             {
                 // Get soldier script.
-                SoldierActor soldier = m_agSoldierList[i].GetComponent<SoldierActor>();
+                SoldierActor s = m_agSoldierList[i].GetComponent<SoldierActor>();
 
                 // soldier is alive.
-                if (soldier.m_fCurrentHealth > 0)
+                if (s.m_fCurrentHealth > 0)
                 {
                     // increment the active soldier number by 1.
                     m_nActiveSoldiers += 1;
@@ -258,9 +270,10 @@ public class Player : MonoBehaviour
                 // Set active state.
                 m_agSoldierList[i].SetActive(true);
 
+                // increment the active solider int.
                 ++m_nActiveSoldiers;
 
-                // return the bullet.
+                // return the soldier.
                 return m_agSoldierList[i];
             }
         }
@@ -286,13 +299,13 @@ public class Player : MonoBehaviour
             // reset the spawn counter.
             m_nRespawnCounter = 0;
 
-            // incriment the mac soldier respawn count.
+            // increment the max soldier respawn counter.
             m_nMaxRespawnCounter++;
         }
     }
 
     //--------------------------------------------------------------------------------------
-    // RespawnSoldier: Check if the player can respawn a solider.
+    // CheckRespawn: Check if the player can respawn a solider.
     //
     // Return:
     //      bool: Return if the solider can spawn or not.
@@ -305,7 +318,7 @@ public class Player : MonoBehaviour
             // if there is dead soliders.
             if (m_nActiveSoldiers < m_agSoldierSpawn.Length)
             {
-                // Incriment respawn counter each turn.
+                // Increment respawn counter each turn.
                 m_nRespawnCounter++;
             }
 
@@ -320,7 +333,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        // if no respawn return false.
+        // if no respawn can be done then return false.
         return false;
     }
 
@@ -344,7 +357,7 @@ public class Player : MonoBehaviour
             return true;
         }
 
-        // return true if max respawns has not been hit.
+        // else no gamover and exit function.
         else
         {
             return false;
@@ -357,7 +370,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void SoldierTurnManager()
     {
-        // Check if there is active soldier so the while loop doesnt go forever.
+        // Check if there is active soldiers so the while loop doesnt go forever.
         if (GetActiveSoldiers() <= 0)
             return;
 
@@ -371,6 +384,8 @@ public class Player : MonoBehaviour
             if (m_nSoldierTurn >= m_agSoldierList.Length)
                 m_nSoldierTurn = 0;
         }
+
+        // while the soldier turn is less than the amount of soldier and current soldier is not active.
         while (m_nSoldierTurn < m_agSoldierList.Length && !m_agSoldierList[m_nSoldierTurn].activeInHierarchy);
     }
 
@@ -411,16 +426,6 @@ public class Player : MonoBehaviour
         sCurrentSoldier.Move(fMoveHorizontal, fMoveVertical);
     }
     
-
-
-
-
-
-
-
-
-
-
     //--------------------------------------------------------------------------------------
     // SwitchWeapon: Function for switching the current soldiers weapon.
     //
@@ -435,10 +440,9 @@ public class Player : MonoBehaviour
             // Switch the current soldiers weapon to RPG.
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_RPG;
 
-
-
-            // 
-            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().sharedMesh = m_mfRPGSoldierMesh;
+            // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS
+            // Change soldier mesh to the RPG mesh.
+            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().sharedMesh = m_mRPGSoldierMesh;
 
             // Change the color of each material to the m_cSoldierColor.
             sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amRPGMaterials;
@@ -457,10 +461,9 @@ public class Player : MonoBehaviour
             // Switch the current soldiers weapon to Grenade. 
             sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_GRENADE;
 
-
-
-            // 
-            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().sharedMesh = m_mfGrenadeSoldierMesh;
+            // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS
+            // Change the soldier mesh to the Grenade mesh.
+            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().sharedMesh = m_mGrenadeSoldierMesh;
 
             // Change the color of each material to the m_cSoldierColor.
             sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amGrenadeMaterials;
@@ -472,30 +475,7 @@ public class Player : MonoBehaviour
                 sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials[o].SetColor("_PlasticColor", m_cSoldierColor);
             }
         }
-
-        // if the 3 key is pressed.
-        else if (Input.GetButtonDown("SwapMini") && sCurrentSoldier.m_nGotMinigun > 0)
-        {
-            // Switch the current soldiers weapon to MiniGun.
-            sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_MINIGUN;
-        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //--------------------------------------------------------------------------------------
     // MouseDown: Function for when the mouse is pressed down.
@@ -508,7 +488,7 @@ public class Player : MonoBehaviour
     private bool MouseDown(SoldierActor sCurrentSoldier)
     {
         // if the left mouse button is pressed and the timer is greater than 1.
-        if (Input.GetButtonDown("Fire1") && TurnManager.m_fTimer > 1)
+        if (Input.GetButtonDown("Fire1") && TurnManager.m_sfTimer > 1)
         {
             // Run the soldier MouseDown fucntion.
             sCurrentSoldier.MouseDown();
@@ -532,7 +512,7 @@ public class Player : MonoBehaviour
     private bool MouseHeld(SoldierActor sCurrentSoldier)
     {
         // if the left mouse button is held down and timer is greater than 1.
-        if (Input.GetButton("Fire1") && TurnManager.m_fTimer > 1)
+        if (Input.GetButton("Fire1") && TurnManager.m_sfTimer > 1)
         {
             // Run the soldier MouseHeld function.
             sCurrentSoldier.MouseHeld();
@@ -556,7 +536,7 @@ public class Player : MonoBehaviour
     private bool MouseUp(SoldierActor sCurrentSoldier)
     {
         // if the mouse is released or the timer is less than 1.
-        if (Input.GetButtonUp("Fire1") || TurnManager.m_fTimer < 1)
+        if (Input.GetButtonUp("Fire1") || TurnManager.m_sfTimer < 1)
         {
             // Set to end turn.
             TurnManager.m_sbEndTurn = true;

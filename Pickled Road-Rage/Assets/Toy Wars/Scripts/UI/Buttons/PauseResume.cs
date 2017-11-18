@@ -1,7 +1,11 @@
 ﻿//--------------------------------------------------------------------------------------
-// Purpose:
+// Purpose: Resume the game from pause.
 //
-// Description:
+// Description: The PauseResume script is gonna be used for closing the pausing the game 
+// on a button press. This script is to be attached to a button, after attaching to a
+// button drag this script again onto the onClick event (You'll have to create a new 
+// onClick) for that button. Once the onClick event is created and script is assigned
+// select the Resume function.
 //
 // Author: Thomas Wiltshire.
 //--------------------------------------------------------------------------------------
@@ -37,7 +41,7 @@ public class PauseResume : MonoBehaviour
         if (m_bMouseUp)
         {
             // toggle pause bool.
-            PauseManager.m_bPaused = false;
+            PauseManager.m_sbPaused = false;
 
             // reset mouse up.
             m_bMouseUp = false;
