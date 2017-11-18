@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e54506a7d75228c45acb5fdbe69bd51f
+timeCreated: 1510995144
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Pakenham
+  fontNames:
+  - Pakenham
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
