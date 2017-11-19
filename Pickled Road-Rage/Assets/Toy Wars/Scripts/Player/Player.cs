@@ -112,6 +112,10 @@ public class Player : MonoBehaviour
     // private int for current soldiers turn.
     [HideInInspector]
     public int m_nSoldierTurn;
+
+    // public bool for if the grenade has shot or not.
+    [HideInInspector]
+    public bool m_bGrenadeShot = false;
     //--------------------------------------------------------------------------------------
 
     // PRIVATE VALUES //
@@ -517,6 +521,10 @@ public class Player : MonoBehaviour
             // Run the soldier MouseHeld function.
             sCurrentSoldier.MouseHeld();
 
+            // if the grenade was equipped set grenade to shot.
+            if (sCurrentSoldier.m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
+                m_bGrenadeShot = true;
+
             // if mouse is held return true. 
             return true;
         }
@@ -543,7 +551,7 @@ public class Player : MonoBehaviour
 
             // Run the soldier MouseUp function.
             sCurrentSoldier.MouseUp();
-
+            
             // if the mouse is released return true.
             return true;
         }

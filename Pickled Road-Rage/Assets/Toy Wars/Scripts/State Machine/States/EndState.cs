@@ -64,11 +64,14 @@ public class EndState : State
         // Reset the timer.
         TurnManager.m_sfTimer = TurnManager.m_sfStaticEndLength;
 
-        // If the solider was using the grenade weapon.
-        if (GetCurrentSoldierScript().m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
+        // If the solider has shot the grenade.
+        if (GetCurrentPlayerScript().m_bGrenadeShot == true)
         {
             // add 5 more seconds to the timer.
             TurnManager.m_sfTimer += 3.5f;
+
+            // set the shot bool back to false
+            GetCurrentPlayerScript().m_bGrenadeShot = false;
         }
 
         // Set the soldier turn to false
