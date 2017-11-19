@@ -353,7 +353,7 @@ MonoBehaviour:
   m_acGruntSound: {fileID: 8300000, guid: 1259ac23f4330e94ca7fe979745844ae, type: 3}
   m_acDamageSound: {fileID: 8300000, guid: e9001f01f9295c242a40cb4e367de16e, type: 3}
   m_acDeathSound: {fileID: 8300000, guid: ffc3fdeef2406ed49b9a73fbcd7794d9, type: 3}
-  m_fSpeed: 0.5
+  m_fSpeed: 1.25
   m_fRotSpeed: 5
   m_fMaxHealth: 100
   m_eCurrentWeapon: 0
@@ -372,6 +372,7 @@ MonoBehaviour:
   m_fMovementRadius: 8
   m_gMovementCirlceBluePrint: {fileID: 1471151944024382, guid: 202ec0867f5c2e544a205eb636f6cf92,
     type: 2}
+  m_aAnimator: {fileID: 0}
 --- !u!114 &114157454613259830
 MonoBehaviour:
   m_ObjectHideFlags: 1
