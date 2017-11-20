@@ -59,6 +59,11 @@ public class Grenade : Weapon
     [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
     public float m_fExplosionRadius = 5f;
 
+    //Radius for the Area of Effect Explosion that will find only Teddys
+    [LabelOverride("Teddy Explosion Radius")]
+    [Tooltip("Radius for the Area of Effect Explosion that will find only Teddys")]
+    public float m_fTeddyExplosionRadius = 10f;
+
     [LabelOverride("Direct Hit Modifier")]
     [Tooltip("The velocity is multiplied by this to reach an acceptable knockback")]
     public float m_fHitMultiplier = 0.5f;
@@ -176,8 +181,8 @@ public class Grenade : Weapon
     private void GrenadeExplode()
     {
         // Collect all possible colliders 
-        Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
-        Collider[] aTeddyColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_TeddyMask);
+        Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_lmUnitMask);
+        Collider[] aTeddyColliders = Physics.OverlapSphere(transform.position, m_fTeddyExplosionRadius, m_lmTeddyMask);
 
         for (int i = 0; i < aSoldierColliders.Length; i++)
         {
@@ -188,16 +193,17 @@ public class Grenade : Weapon
             {
                 continue;
             }
+            if (!Physics.Linecast(transform.position, rbTarget.position, m_lmEnvironmentMask))
+            {
+                SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
 
-            SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
+                // Soldier will take damage based on position (See CalculateDamge function below)
+                gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position));
 
-            // Soldier will take damage based on position (See CalculateDamge function below)
-            gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position));
-
-            // add explosive force for knockback 
-            // NOTE: May be replaced with a non-rigidbody knockback
-            rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
-
+                // add explosive force for knockback 
+                // NOTE: May be replaced with a non-rigidbody knockback
+                rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
+            }
         }
 
         for (int i = 0; i < aTeddyColliders.Length; i++)

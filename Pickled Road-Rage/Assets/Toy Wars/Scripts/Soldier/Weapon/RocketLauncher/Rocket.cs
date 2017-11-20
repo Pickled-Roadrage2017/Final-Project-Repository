@@ -32,9 +32,16 @@ public class Rocket : Weapon
     public float m_fHitMultiplier = 0.5f;
 
     // Radius for the Area of Effect Explosion that should follow any Collision
-    [LabelOverride("Radius of Explosion")]
+    [LabelOverride("Explosion Radius")]
     [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
     public float m_fExplosionRadius = 5f;
+
+
+    //Radius for the Area of Effect Explosion that will find only Teddys
+    [LabelOverride("Teddy Explosion Radius")]
+    [Tooltip("Radius for the Area of Effect Explosion that will find only Teddys")]
+    public float m_fTeddyExplosionRadius = 10f;
+
 
     // pointer to the RocketLauncher so it knows where to spawn
     [HideInInspector]
@@ -89,18 +96,20 @@ public class Rocket : Weapon
             }
 
             // if the rocket directly hits a Soldier, this will be called to apply knockback
-            if (other.tag == "Soldier")
-                {
-                    Rigidbody rbTarget = other.GetComponent<Rigidbody>();
-                    rbTarget = other.GetComponent<Rigidbody>();
-                    // Directly knockback the Soldier, 
-                    // NOTE: This soldier would of already taken damage from the RocketExplode() function
-                    rbTarget.AddForce(m_rbRocket.velocity * m_fHitMultiplier, ForceMode.Impulse);
-                }
-                if (other.tag == "Teddy")
-                {
-                    other.GetComponent<Teddy>().TakeDamage(m_fDamage);
-                }
+            else if (other.tag == "Soldier")
+            {
+               Rigidbody rbTarget = other.GetComponent<Rigidbody>();
+               rbTarget = other.GetComponent<Rigidbody>();
+               // Directly knockback the Soldier, 
+               // NOTE: This soldier will take damage from the RocketExplode() function
+                rbTarget.AddForce(m_rbRocket.velocity * m_fHitMultiplier, ForceMode.Impulse);
+                RocketExplode();
+            }
+            else if (other.tag == "Teddy")
+            {
+                other.GetComponent<Teddy>().TakeDamage(m_fDamage);
+                RocketExplode();
+           }
 
             // Disable Rocket after it has completed all damage dealing and knockbacks
             //if (!m_asAudioSource.isPlaying)
@@ -145,8 +154,8 @@ public class Rocket : Weapon
         Destroy(gExplosion, 5f);
 
         // Collect all possible colliders 
-        Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
-
+        Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_lmUnitMask);
+        Collider[] aTeddyColliders = Physics.OverlapSphere(transform.position, m_fTeddyExplosionRadius, m_lmTeddyMask);
         for (int i = 0; i < aSoldierColliders.Length; i++)
         {
             Rigidbody rbTarget = aSoldierColliders[i].GetComponent<Rigidbody>();
@@ -161,19 +170,46 @@ public class Rocket : Weapon
             if (aSoldierColliders[i].gameObject.tag == "Soldier")
             {
                 // TODO: Explosion particle effect here
+                if (!Physics.Linecast(transform.position, rbTarget.position, m_lmEnvironmentMask))
+                {
+                    SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
 
-                SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
+                    // Soldier will take damage based on position (See CalculateDamge function below)
+                    gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position));
 
-                // Soldier will take damage based on position (See CalculateDamge function below)
-                gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position));
-
-                // add explosive force for knockback 
-                // NOTE: May be replaced with a non-rigidbody knockback
-                rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
+                    // add explosive force for knockback 
+                    // NOTE: May be replaced with a non-rigidbody knockback
+                    rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
+                }
             }
            
         }
-       
+
+        for (int i = 0; i < aTeddyColliders.Length; i++)
+        {
+            Rigidbody rbTarget = aTeddyColliders[i].GetComponent<Rigidbody>();
+
+            //if it does not have a rigidbody
+            if (!rbTarget)
+            {
+                continue;
+            }
+
+            // if an object in collision zone is a Soldier
+            if (aSoldierColliders[i].gameObject.tag == "Teddy")
+            {
+                // TODO: Explosion particle effect here
+                if (!Physics.Linecast(transform.position, rbTarget.position, m_lmEnvironmentMask))
+                {
+                    Teddy gtarget = rbTarget.GetComponent<Teddy>();
+
+                    // Teddy will take damage based on position (See CalculateDamge function below)
+                    gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position));
+                }
+            }
+
+        }
+
     }
 
     //--------------------------------------------------------------------------------------
