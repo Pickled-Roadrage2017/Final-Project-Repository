@@ -174,6 +174,7 @@ public class RocketLauncher : MonoBehaviour
                 gRocket.transform.forward = transform.forward;
                 gRocket.GetComponent<Rocket>().transform.position = gRocket.GetComponent<Rocket>().m_gSpawnPoint.transform.position;
                 gRocket.GetComponent<Rocket>().m_fCurrentActivateTimer = gRocket.GetComponent<Rocket>().m_fMaxActivateTimer;
+                gRocket.GetComponent<Rocket>().m_bDisable = false;
             }
             // Reset variables for the firing functions
             m_bChargingShot = false;

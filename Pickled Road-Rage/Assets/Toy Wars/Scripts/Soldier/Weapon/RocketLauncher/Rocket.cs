@@ -55,21 +55,43 @@ public class Rocket : Weapon
     [HideInInspector]
     public Rigidbody m_rbRocket;
 
+    // boolean to tell the camera to activate a shake animation
+    [HideInInspector]
+    public bool m_bCameraShakeAni;
+
+    // boolean to tell the grenade to disable itself.
+    [HideInInspector]
+    public bool m_bDisable = false;
+
+    // gets the animator of the camera for the shake animation
+    private Animator m_aCameraAnimator;
+
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
         m_rbRocket = GetComponent<Rigidbody>();
+        m_aCameraAnimator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
     }
 
     //--------------------------------------------------------------------------------------
     // Update: Function that calls each frame to update game objects.
     //--------------------------------------------------------------------------------------
     void FixedUpdate()
-    {
+    {     
         // ActivateTimer decreases by 1 each frame (Rocket can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
+        m_aCameraAnimator.SetBool("CameraShake", m_bCameraShakeAni);
+        if (m_bCameraShakeAni == true)
+        {
+            m_bCameraShakeAni = false;
+        }
+        if (m_bDisable)
+        {
+            RocketDisable();
+        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -88,7 +110,7 @@ public class Rocket : Weapon
         // if the rocket can now activate
         if (m_fCurrentActivateTimer <= 0)
         {
-           
+            m_bCameraShakeAni = true;
             if(other.tag != "Soldier" || other.tag != "Teddy")
             {
                 RocketExplode();
@@ -110,11 +132,7 @@ public class Rocket : Weapon
                 other.GetComponent<Teddy>().TakeDamage(m_fDamage);
                 RocketExplode();
            }
-
-            // Disable Rocket after it has completed all damage dealing and knockbacks
-            //if (!m_asAudioSource.isPlaying)
-                RocketDisable();
-
+            m_bDisable = true;
         }
     }
 
@@ -157,7 +175,10 @@ public class Rocket : Weapon
 
                     // add explosive force for knockback 
                     // NOTE: May be replaced with a non-rigidbody knockback
-                    rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fSoldierExplosionRadius, 0.0f, ForceMode.Impulse);
+                    if (CalculateDamage(aSoldierColliders[i].transform.position, m_fSoldierExplosionRadius) > 1)
+                    {
+                        rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fSoldierExplosionRadius, 0.0f, ForceMode.Impulse);
+                    }
                 }
             }
            
@@ -196,8 +217,8 @@ public class Rocket : Weapon
     //--------------------------------------------------------------------------------------
     private void RocketDisable()
     {
-
-            gameObject.SetActive(false);
+        Debug.Log(m_bCameraShakeAni);
+        gameObject.SetActive(false);
         
     }
 }

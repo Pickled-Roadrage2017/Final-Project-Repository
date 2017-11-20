@@ -175,7 +175,7 @@ public class GrenadeLauncher : MonoBehaviour
                 gGrenade.GetComponent<Rigidbody>().drag = 0;
                 gGrenade.GetComponent<Grenade>().transform.position = gGrenade.GetComponent<Grenade>().m_gSpawnPoint.transform.position;
                 gGrenade.GetComponent<Grenade>().m_fCurrentActivateTimer = gGrenade.GetComponent<Grenade>().m_fMaxActivateTimer;
-               
+                gGrenade.GetComponent<Grenade>().m_bDisable = false;
             }
             // Reset variables for the firing functions
             m_bChargingShot = false;

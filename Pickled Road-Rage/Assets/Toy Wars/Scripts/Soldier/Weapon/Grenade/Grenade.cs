@@ -76,6 +76,14 @@ public class Grenade : Weapon
     [HideInInspector]
     public float m_fCurrentActivateTimer;
 
+    // boolean to tell the camera to activate a shake animation
+    [HideInInspector]
+    public bool m_bCameraShakeAni;
+
+    // boolean to tell the grenade to disable itself.
+    [HideInInspector]
+    public bool m_bDisable = false;
+
     // its own rigidbody
     private Rigidbody m_rbGrenade;
 
@@ -88,6 +96,10 @@ public class Grenade : Weapon
     // this Grenades audioSource
     private AudioSource m_asAudioSource;
 
+    // gets the animator of the camera for the shake animation
+    private Animator m_aCameraAnimator;
+
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -95,7 +107,7 @@ public class Grenade : Weapon
     {
         m_asAudioSource = GetComponent<AudioSource>();
         m_rbGrenade = GetComponent<Rigidbody>();
-        
+        m_aCameraAnimator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
         m_fFuseTimer = m_fMaxFuseTimer;
         m_bFuseTicking = false;
     }
@@ -105,20 +117,24 @@ public class Grenade : Weapon
     //--------------------------------------------------------------------------------------
     void Update()
     {
+        m_aCameraAnimator.SetBool("ShakeCamera", m_bCameraShakeAni);
         // ActivateTimer decreases by 1 each frame (Grenade can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
-
+       
         // if the timer has set off
         if (m_fFuseTimer <= 0)
         {
+            m_bCameraShakeAni = true;
             //explode
             GameObject gExplosion =  Instantiate(m_gExplosion);
             gExplosion.transform.SetParent(null);
             gExplosion.transform.position = transform.position;
             
-
             GrenadeExplode();
-            GrenadeDisable();
+            if (m_bDisable)
+            {
+                GrenadeDisable();
+            }
             Destroy(gExplosion, 5f);
         } 
         // if the grenade has hit the ground
@@ -128,6 +144,11 @@ public class Grenade : Weapon
             
         }
 
+        if (m_bCameraShakeAni)
+        {
+            m_bCameraShakeAni = false;
+            m_bDisable = true;
+        }
     }
 
 
@@ -186,7 +207,10 @@ public class Grenade : Weapon
 
                 // add explosive force for knockback 
                 // NOTE: May be replaced with a non-rigidbody knockback
-                rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fSoldierExplosionRadius, 0.0f, ForceMode.Impulse);
+                if (CalculateDamage(aSoldierColliders[i].transform.position, m_fSoldierExplosionRadius) > 0)
+                {
+                    rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fSoldierExplosionRadius, 0.0f, ForceMode.Impulse);
+                }
             }
         }
 
