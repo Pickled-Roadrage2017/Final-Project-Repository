@@ -57,7 +57,7 @@ public class Grenade : Weapon
     // Radius for the Area of Effect Explosion that should follow any Collision
     [LabelOverride("Explosion Radius")]
     [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
-    public float m_fExplosionRadius = 5f;
+    public float m_fSoldierExplosionRadius = 5f;
 
     //Radius for the Area of Effect Explosion that will find only Teddys
     [LabelOverride("Teddy Explosion Radius")]
@@ -130,32 +130,14 @@ public class Grenade : Weapon
 
     }
 
+
     //--------------------------------------------------------------------------------------
-    //  CalculateDamage: Calculates the damage so being further from the explosion results in less damage
-    //
-    //  Returns: the damage for the Soldiers within range to take
+    // OnCollisionEnter: Called when a grenade bounces, applying bonus force on the intial bounce 
+    //                   Sets m_bFuseTicking to true on initial bounce, 
+    //                   which means the grenade is counting down to explosion.             
     //
     //--------------------------------------------------------------------------------------
-    private float CalculateDamage(Vector3 v3TargetPosition)
-    {
-        // create a vector from the shell to the target
-        Vector3 v3ExplosionToTarget = v3TargetPosition - transform.position;
-
-        // Calculated the distance from the shell to the target
-        float fExplosionDistance = v3ExplosionToTarget.magnitude;
-
-        // calculate the proportion of the Maximum distance the target is away
-        float fRelativeDistance = (m_fExplosionRadius - fExplosionDistance) / m_fExplosionRadius;
-
-        // Calculate damage as this proportion of the maximum possible damage
-        float fDamage = fRelativeDistance * m_fDamage;
-
-        fDamage = Mathf.Max(0f, fDamage);
-
-        return fDamage;
-    }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter()
     {
        
         if (m_fCurrentActivateTimer <= 0)
@@ -163,10 +145,11 @@ public class Grenade : Weapon
             if (!m_bFuseTicking)
             {
                 m_asAudioSource.PlayOneShot(m_acBounceSound);
-                m_rbGrenade.AddForce(new Vector3(0, m_fBounciness, 0), ForceMode.Impulse);    
+                m_rbGrenade.AddForce(new Vector3(0, m_fBounciness, 0), ForceMode.Impulse);
+                m_bFuseTicking = true;
+                m_rbGrenade.drag = m_fBounceDrag;
             }
-            m_bFuseTicking = true;
-            m_rbGrenade.drag = m_fBounceDrag;
+          
         }
         else
         {
@@ -175,13 +158,14 @@ public class Grenade : Weapon
     }
 
     //--------------------------------------------------------------------------------------
-    //  GrenadeExplode: Finds all colliders in the m_fExplosionRadius and calls damage functions
+    //  GrenadeExplode: Finds all colliders in the m_fExplosionRadius and calls damage functions,
+    //                  and knockback in the Soldiers case.
     //
     //--------------------------------------------------------------------------------------
     private void GrenadeExplode()
     {
         // Collect all possible colliders 
-        Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_lmUnitMask);
+        Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fSoldierExplosionRadius, m_lmUnitMask);
         Collider[] aTeddyColliders = Physics.OverlapSphere(transform.position, m_fTeddyExplosionRadius, m_lmTeddyMask);
 
         for (int i = 0; i < aSoldierColliders.Length; i++)
@@ -198,11 +182,11 @@ public class Grenade : Weapon
                 SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
 
                 // Soldier will take damage based on position (See CalculateDamge function below)
-                gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position));
+                gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position,m_fSoldierExplosionRadius));
 
                 // add explosive force for knockback 
                 // NOTE: May be replaced with a non-rigidbody knockback
-                rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
+                rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fSoldierExplosionRadius, 0.0f, ForceMode.Impulse);
             }
         }
 
@@ -221,11 +205,11 @@ public class Grenade : Weapon
             Teddy gtarget = rbTarget.GetComponent<Teddy>();
 
             // Soldier will take damage based on position (See CalculateDamge function below)
-            gtarget.TakeDamage(CalculateDamage(aTeddyColliders[i].transform.position));
+            gtarget.TakeDamage(CalculateDamage(aTeddyColliders[i].transform.position,m_fTeddyExplosionRadius));
 
             // add explosive force for knockback 
             // NOTE: May be replaced with a non-rigidbody knockback
-            rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
+            rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fSoldierExplosionRadius, 0.0f, ForceMode.Impulse);
         }
     }
 

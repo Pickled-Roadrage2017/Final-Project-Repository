@@ -34,7 +34,7 @@ public class Rocket : Weapon
     // Radius for the Area of Effect Explosion that should follow any Collision
     [LabelOverride("Explosion Radius")]
     [Tooltip("Radius for the Area of Effect Explosion that should follow any Collision")]
-    public float m_fExplosionRadius = 5f;
+    public float m_fSoldierExplosionRadius = 5f;
 
 
     //Radius for the Area of Effect Explosion that will find only Teddys
@@ -119,31 +119,9 @@ public class Rocket : Weapon
     }
 
     //--------------------------------------------------------------------------------------
-    //  CalculateDamage: Calculates the damage so being further from the explosion results in less damage
-    //
-    //  Returns: the damage for the Soldiers within range to take
-    //
+    // RocketExplode: This function is called when the Rocket should explode.
+    //                Calls CalculateDamage after it finds target in the sphere.
     //--------------------------------------------------------------------------------------
-    private float CalculateDamage(Vector3 v3TargetPosition)
-    {
-        // create a vector from the shell to the target
-        Vector3 v3ExplosionToTarget = v3TargetPosition - transform.position;
-
-        // Calculated the distance from the shell to the target
-        float fExplosionDistance = v3ExplosionToTarget.magnitude;
-
-        // calculate the proportion of the Maximum distance the target is away
-        float fRelativeDistance = (m_fExplosionRadius - fExplosionDistance) / m_fExplosionRadius;
-
-        // Calculate damage as this proportion of the maximum possible damage
-        float fDamage = fRelativeDistance * m_fDamage;
-
-        fDamage = Mathf.Max(0f, fDamage);
-
-        return fDamage;
-    }
-
-
     private void RocketExplode()
     {
         //m_asAudioSource.PlayOneShot(m_acExplosionSound);
@@ -154,7 +132,7 @@ public class Rocket : Weapon
         Destroy(gExplosion, 5f);
 
         // Collect all possible colliders 
-        Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_lmUnitMask);
+        Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fSoldierExplosionRadius, m_lmUnitMask);
         Collider[] aTeddyColliders = Physics.OverlapSphere(transform.position, m_fTeddyExplosionRadius, m_lmTeddyMask);
         for (int i = 0; i < aSoldierColliders.Length; i++)
         {
@@ -175,11 +153,11 @@ public class Rocket : Weapon
                     SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
 
                     // Soldier will take damage based on position (See CalculateDamge function below)
-                    gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position));
+                    gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position,m_fSoldierExplosionRadius));
 
                     // add explosive force for knockback 
                     // NOTE: May be replaced with a non-rigidbody knockback
-                    rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
+                    rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fSoldierExplosionRadius, 0.0f, ForceMode.Impulse);
                 }
             }
            
@@ -196,7 +174,7 @@ public class Rocket : Weapon
             }
 
             // if an object in collision zone is a Soldier
-            if (aSoldierColliders[i].gameObject.tag == "Teddy")
+            if (aTeddyColliders[i].gameObject.tag == "Teddy")
             {
                 // TODO: Explosion particle effect here
                 if (!Physics.Linecast(transform.position, rbTarget.position, m_lmEnvironmentMask))
@@ -204,7 +182,7 @@ public class Rocket : Weapon
                     Teddy gtarget = rbTarget.GetComponent<Teddy>();
 
                     // Teddy will take damage based on position (See CalculateDamge function below)
-                    gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position));
+                    gtarget.TakeDamage(CalculateDamage(aTeddyColliders[i].transform.position,m_fTeddyExplosionRadius));
                 }
             }
 

@@ -27,4 +27,30 @@ public class Weapon : MonoBehaviour
     {
 
     }
+
+
+    //--------------------------------------------------------------------------------------
+    //  CalculateDamage: Calculates the damage so being further from the explosion results in less damage
+    //
+    //  Returns: the damage for the Soldiers/Teddy within range to take
+    //
+    //--------------------------------------------------------------------------------------
+    public float CalculateDamage(Vector3 v3TargetPosition, float fExplosionRadius)
+    {
+        // create a vector from the shell to the target
+        Vector3 v3ExplosionToTarget = v3TargetPosition - transform.position;
+
+        // Calculated the distance from the shell to the target
+        float fExplosionDistance = v3ExplosionToTarget.magnitude;
+
+        // calculate the proportion of the Maximum distance the target is away
+        float fRelativeDistance = (fExplosionRadius - fExplosionDistance) / fExplosionRadius;
+
+        // Calculate damage as this proportion of the maximum possible damage
+        float fDamage = fRelativeDistance * m_fDamage;
+
+        fDamage = Mathf.Max(0f, fDamage);
+
+        return fDamage;
+    }
 }
