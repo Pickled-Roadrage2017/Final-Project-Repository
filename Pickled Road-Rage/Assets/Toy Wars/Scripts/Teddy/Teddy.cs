@@ -41,11 +41,11 @@ public class Teddy : MonoBehaviour
 
     // boolean for an animation of the Teddy taking damage
     [HideInInspector]
-    public bool m_bDamageAnimation;
+    public bool m_bDamageAni;
 
     // boolean for an animation of the Teddy placing a soldier
     [HideInInspector]
-    public bool m_bPlaceSoldier;
+    public bool m_bPlaceSoldierAni;
 
     // this Teddys audioSource
     private AudioSource m_asAudioSource;
@@ -57,8 +57,8 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        m_bDamageAnimation = false;
-        m_bPlaceSoldier = false;
+        m_bDamageAni = false;
+        m_bPlaceSoldierAni = false;
 
         m_aAnimator = GetComponent<Animator>();
         
@@ -78,9 +78,9 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        m_aAnimator.SetBool("m_bDamageAnimation", m_bDamageAnimation);
-        m_aAnimator.SetBool("m_bPlaceSoldier", m_bPlaceSoldier);
-
+        m_aAnimator.SetBool("TakeDamage", m_bDamageAni);
+        m_aAnimator.SetBool("PlaceSoldier", m_bPlaceSoldierAni);
+        m_aAnimator.SetFloat("Health", m_fCurrentHealth);
         if (!IsAlive())
         {
             gameObject.SetActive(false);
@@ -89,14 +89,14 @@ public class Teddy : MonoBehaviour
         // Apply damage to the health bar.
         m_sHealthBar.value = CalcHealth();
 
-        if (m_bDamageAnimation == true)
+        if (m_bDamageAni == true)
         {
-            m_bDamageAnimation = false;
+            m_bDamageAni = false;
         }
 
-        if (m_bPlaceSoldier == true)
+        if (m_bPlaceSoldierAni == true)
         {
-            m_bPlaceSoldier = false;
+            m_bPlaceSoldierAni = false;
         }
     }
 
@@ -108,7 +108,7 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void TakeDamage(float fDamage)
     {
-        m_bDamageAnimation = true;
+        m_bDamageAni = true;
         // Minus the Teddys currentHealth by the fDamage argument
         m_fCurrentHealth -= fDamage;
     }

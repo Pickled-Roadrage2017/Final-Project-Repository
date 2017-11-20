@@ -98,15 +98,15 @@ public class SoldierActor : MonoBehaviour
 
     // boolean for an animation of the soldier taking damage
     [HideInInspector]
-    public bool m_bDamageAnimation;
+    public bool m_bDamageAni;
 
     // a boolean for an animation to play whilst the soldier is moving
     //[HideInInspector]
-    public bool m_bMovingAnimation;
+    public bool m_bMovingAni;
 
-    // a boolean for an animation at the start of the firing function
+    // a boolean for an animation of the firing, true means the shot has been fired, false means that the animation should be the start firing
     [HideInInspector]
-    public bool m_bStartFireAnimation;
+    public bool m_bFireAni;
 
     // public float for the radius of the movement circle.
     [LabelOverride("Movement Radius")]
@@ -137,11 +137,11 @@ public class SoldierActor : MonoBehaviour
         m_aAnimator = GetComponent<Animator>();
 
         // initilising animation booleans to false
-        m_bStartFireAnimation = false;
-        m_bDamageAnimation = false;
+        m_bFireAni = false;
+        m_bDamageAni = false;
 
         // set boolean for moving to false
-        m_bMovingAnimation = false;
+        m_bMovingAni = false;
 
         // get the soldiers rigidbody
         m_rbRigidBody = GetComponent<Rigidbody>();
@@ -173,13 +173,13 @@ public class SoldierActor : MonoBehaviour
     void Update()
     {
         // animator boolean setup
-        m_aAnimator.SetBool("Damage", m_bDamageAnimation);
-        m_aAnimator.SetBool("StartFire", m_bStartFireAnimation);
-        m_aAnimator.SetBool("IsMoving", m_bMovingAnimation);
+        m_aAnimator.SetBool("Damage", m_bDamageAni);
+        m_aAnimator.SetBool("StartFire", m_bFireAni);
+        m_aAnimator.SetBool("IsMoving", m_bMovingAni);
 
-        if (m_bDamageAnimation == true)
+        if (m_bDamageAni == true)
         {
-            m_bDamageAnimation = false;
+            m_bDamageAni = false;
         }
         // As health is a float, anything below one will be displayed as 0 to the player
         if (m_fCurrentHealth < 1)
@@ -190,12 +190,12 @@ public class SoldierActor : MonoBehaviour
         // if the soldier is not moving
         if (m_rbRigidBody.velocity == Vector3.zero)
         {
-            m_bMovingAnimation = false;
+            m_bMovingAni = false;
         }
         // soldier is moving
         else
         {
-            m_bMovingAnimation = true;
+            m_bMovingAni = true;
         }
     }
 
@@ -242,7 +242,7 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void MouseDown()
     {
-        m_bStartFireAnimation = true;
+        m_bFireAni = true;
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
             m_gLauncherScript.MouseDown();
@@ -283,7 +283,7 @@ public class SoldierActor : MonoBehaviour
 
     public void MouseUp()
     {
-        m_bStartFireAnimation = false;
+        m_bFireAni = false;
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
             m_gLauncherScript.MouseUp();
@@ -357,7 +357,7 @@ public class SoldierActor : MonoBehaviour
     public void TakeDamage(float fDamage)
     {
         // TODO: 
-        m_bDamageAnimation = true;
+        m_bDamageAni = true;
 
         // Minus the soldiers currentHealth by the fDamage argument
         m_fCurrentHealth -= fDamage;
