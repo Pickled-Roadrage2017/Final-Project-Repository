@@ -173,7 +173,7 @@ public class Rocket : Weapon
                 continue;
             }
 
-            // if an object in collision zone is a Soldier
+            // if an object in collision zone is a Teddy
             if (aTeddyColliders[i].gameObject.tag == "Teddy")
             {
                 // TODO: Explosion particle effect here

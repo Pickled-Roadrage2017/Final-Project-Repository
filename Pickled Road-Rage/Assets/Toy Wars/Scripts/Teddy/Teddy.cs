@@ -27,6 +27,9 @@ public class Teddy : MonoBehaviour
     [LabelOverride("Teddy Max Health")][Tooltip("Teddy bear Maximum health.")]
     public float m_fMaxHealth;
 
+    [LabelOverride("Minimum Damage")][Tooltip("The minimum amount of damage required to damage the teddy")]
+    public float m_fMinDamage = 10;
+
     // health that will be set to MaxHealth in Awake
     [HideInInspector]
     public float m_fCurrentHealth;
@@ -108,9 +111,12 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void TakeDamage(float fDamage)
     {
-        m_bDamageAni = true;
-        // Minus the Teddys currentHealth by the fDamage argument
-        m_fCurrentHealth -= fDamage;
+        if (fDamage > 0 && fDamage > m_fMinDamage)
+       {
+            m_bDamageAni = true;
+            // Minus the Teddys currentHealth by the fDamage argument
+            m_fCurrentHealth -= fDamage;
+        }
     }
 
     public bool IsAlive()

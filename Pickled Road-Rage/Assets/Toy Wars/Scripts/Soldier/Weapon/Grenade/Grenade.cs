@@ -204,7 +204,7 @@ public class Grenade : Weapon
 
             Teddy gtarget = rbTarget.GetComponent<Teddy>();
 
-            // Soldier will take damage based on position (See CalculateDamge function below)
+            // Teddy will take damage based on position (See CalculateDamge function below)
             gtarget.TakeDamage(CalculateDamage(aTeddyColliders[i].transform.position,m_fTeddyExplosionRadius));
 
             // add explosive force for knockback 
