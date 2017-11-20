@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4334729438270838}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Wooden_Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,8 @@ GameObject:
   - component: {fileID: 33585941998192462}
   - component: {fileID: 23275061146164864}
   - component: {fileID: 65966522908220684}
-  m_Layer: 0
+  - component: {fileID: 65071006703566626}
+  m_Layer: 23
   m_Name: WoodenBlock_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,14 +51,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1144846979224554}
-  m_LocalRotation: {x: -0, y: 0.27933186, z: -0, w: 0.96019465}
-  m_LocalPosition: {x: -0.9989414, y: 3.5058408, z: -8.680618}
+  m_LocalRotation: {x: -0, y: 0.47703484, z: -0, w: 0.87888443}
+  m_LocalPosition: {x: -4.971281, y: 3.526, z: -5.70004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4604889163186076}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 32.441, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 56.984, z: 0}
 --- !u!4 &4604889163186076
 Transform:
   m_ObjectHideFlags: 1
@@ -110,6 +111,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1529146197798172}
   m_Mesh: {fileID: 4300000, guid: 782688a068ad26a4ba93675e7031fcdd, type: 3}
+--- !u!65 &65071006703566626
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1529146197798172}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04, y: 0.04, z: 0.04}
+  m_Center: {x: 0, y: 0.022249999, z: 0.00000011920929}
 --- !u!65 &65966522908220684
 BoxCollider:
   m_ObjectHideFlags: 1
