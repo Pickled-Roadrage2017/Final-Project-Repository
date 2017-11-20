@@ -330,7 +330,7 @@ public class Player : MonoBehaviour
             if (m_nRespawnCounter == m_nRespawnRate)
             {
                 // Respawn a solider at the teddy base.
-                RespawnSoldier();
+                //RespawnSoldier();
 
                 // Return true if the solider respawns.
                 return true;

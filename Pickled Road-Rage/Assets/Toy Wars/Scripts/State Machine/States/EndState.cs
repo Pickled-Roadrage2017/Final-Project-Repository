@@ -67,8 +67,8 @@ public class EndState : State
         // If the solider has shot the grenade.
         if (GetCurrentPlayerScript().m_bGrenadeShot == true)
         {
-            // add 5 more seconds to the timer.
-            TurnManager.m_sfTimer += 3.5f;
+            // add seconds to the timer.
+            TurnManager.m_sfTimer += 2.5f;
 
             // set the shot bool back to false
             GetCurrentPlayerScript().m_bGrenadeShot = false;

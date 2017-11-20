@@ -18,6 +18,15 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class SpawnState : State
 {
+
+
+
+    float fTimer = 0;
+    bool bCanRespawn = false;
+    bool bIsRespawn = false;
+
+
+
     //--------------------------------------------------------------------------------------
     // Initialization: Constructor for the State.
     //
@@ -34,34 +43,84 @@ public class SpawnState : State
     //--------------------------------------------------------------------------------------
     public override void OnUpdate()
     {
-        // Check if a soldier can respawn.
-        bool bIsRespawn = GetCurrentPlayerScript().CheckRespawn();
+
+
+
+
+
+
+        // if the timer is above 0
+        if (TurnManager.m_sfTimer > 0)
+        {
+            // Check if a soldier can respawn.
+            bCanRespawn = GetCurrentPlayerScript().CheckRespawn();
+        }
 
         // if a soilder can not respawn.
-        if (!bIsRespawn || TurnManager.m_sfTimer == TurnManager.m_sfStaticSpawnLength)
+        if (!bCanRespawn)
         {
             // set timer to zero
             TurnManager.m_sfTimer = 0;
         }
 
+        // if a soilder can respawn.
+        if (bCanRespawn)
+        { 
+            // Set respawn to true
+            bIsRespawn = true;
+        }
+
         // Update the timer by deltatime.
         TurnManager.m_sfTimer -= Time.deltaTime;
+
+        // start the timer for when to spawn the solider.
+        fTimer -= Time.deltaTime;
 
         // If the timer runs out or end turn is true.
         if (TurnManager.m_sfTimer < 0)
         {
-            // if the current player still has soldiers.
-            if (GetCurrentPlayerScript().GetActiveSoldiers() != 0)
-            {
-                // Push to the start turn state.
-                m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_START);
-            }
-            else
-            {
-                // Push to the endturn state.
-                m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_END); // Will have a massive dealy!
 
+
+
+
+
+
+            
+
+            if (bIsRespawn)
+            {
+                // Play the teddy spawn animation.
+                GetCurrentPlayerScript().m_gTeddyBase.GetComponent<Teddy>().m_bPlaceSoldier = true;
+
+                //
+                if (fTimer < 0)
+                {
+                    GetCurrentPlayerScript().RespawnSoldier();
+                    bIsRespawn = false;
+                }
             }
+            
+            if (!bIsRespawn)
+            {
+                // if the current player still has soldiers.
+                if (GetCurrentPlayerScript().GetActiveSoldiers() != 0)
+                {
+                    // Push to the start turn state.
+                    m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_START);
+                }
+                else
+                {
+                    // Push to the endturn state.
+                    m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_END); // Will have a massive dealy!
+                }
+            }
+
+
+
+
+
+
+
         }
     }
 
@@ -72,6 +131,14 @@ public class SpawnState : State
     {
         // Reset the timer.
         TurnManager.m_sfTimer = TurnManager.m_sfStaticSpawnLength;
+
+
+
+
+
+        fTimer = TurnManager.m_sfStaticSpawnLength;
+        bCanRespawn = false;
+        bIsRespawn = false;
     }
 
     //--------------------------------------------------------------------------------------
