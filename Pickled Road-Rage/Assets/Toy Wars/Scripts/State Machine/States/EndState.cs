@@ -74,8 +74,35 @@ public class EndState : State
             GetCurrentPlayerScript().m_bGrenadeShot = false;
         }
 
+
+
+
+
+
+        // FIND A BETTER WAY!
+        // loop through each material on the current solider.
+        for (int o = 0; o < GetCurrentSoldierScript().GetComponent<SkinnedMeshRenderer>().materials.Length; ++o)
+        {
+            // Change the color of each material to the m_cSoldierColor.
+            GetCurrentSoldierScript().GetComponent<SkinnedMeshRenderer>().materials[o].SetFloat("_Outline_Width", 0.0f);
+        }
+
+
+
+
+
+
         // Set the soldier turn to false
         GetCurrentSoldierScript().CurrentTurn(false);
+
+
+
+
+        
+
+
+
+
 
         // Get active soldiers for each player.
         int nActiveSoldiersP1 = GetPlayerScript(1).GetActiveSoldiers();

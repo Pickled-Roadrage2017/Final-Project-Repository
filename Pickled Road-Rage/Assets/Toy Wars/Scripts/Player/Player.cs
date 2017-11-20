@@ -442,45 +442,62 @@ public class Player : MonoBehaviour
         // if the 1 key is pressed.
         if (Input.GetButtonDown("SwapRocket"))
         {
-            // Switch the current soldiers weapon to RPG.
-            sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_RPG;
-
-            // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS
-            // Change soldier mesh to the RPG mesh.
-            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().sharedMesh = m_mRPGSoldierMesh;
-
-            // Change the color of each material to the m_cSoldierColor.
-            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amRPGMaterials;
-
-            // loop through each material on the soliders.
-            for (int o = 0; o < sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials.Length; ++o)
-            {
-                // Change the color of each material to the m_cSoldierColor.
-                sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials[o].SetColor("_PlasticColor", m_cSoldierColor);
-            }
+            // Switch mesh, materials, etc to the RPG
+            SwitchMesh(sCurrentSoldier, EWeaponType.EWEP_RPG, m_mRPGSoldierMesh, m_amRPGMaterials);
         }
 
         // if the 2 key is pressed.
         else if (Input.GetButtonDown("SwapGrenade") && sCurrentSoldier.m_nGotGrenade > 0)
         {
-            // Switch the current soldiers weapon to Grenade. 
-            sCurrentSoldier.m_eCurrentWeapon = EWeaponType.EWEP_GRENADE;
-
-            // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS // // ASK ABOUT THIS
-            // Change the soldier mesh to the Grenade mesh.
-            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().sharedMesh = m_mGrenadeSoldierMesh;
-
-            // Change the color of each material to the m_cSoldierColor.
-            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = m_amGrenadeMaterials;
-
-            // loop through each material on the soliders.
-            for (int o = 0; o < sCurrentSoldier.GetComponent<Renderer>().materials.Length; ++o)
-            {
-                // Change the color of each material to the m_cSoldierColor.
-                sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials[o].SetColor("_PlasticColor", m_cSoldierColor);
-            }
+            // Switch mesh, materials, etc to the grenade
+            SwitchMesh(sCurrentSoldier, EWeaponType.EWEP_GRENADE, m_mGrenadeSoldierMesh, m_amGrenadeMaterials);
         }
     }
+
+
+
+
+
+
+    //--------------------------------------------------------------------------------------
+    // SwitchMesh: 
+    //
+    // Param:
+    //		sCurrentSoldier:
+    //      eWeapon:
+    //      mMesh:
+    //      mMaterials:
+    //--------------------------------------------------------------------------------------
+    void SwitchMesh(SoldierActor sCurrentSoldier, EWeaponType eWeapon, Mesh mMesh, Material[] mMaterials)
+    {
+        // Switch the current soldiers weapon
+        sCurrentSoldier.m_eCurrentWeapon = eWeapon;
+
+        // Change soldier mesh
+        sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().sharedMesh = mMesh;
+
+        // Change the color of each material to the m_cSoldierColor.
+        sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials = mMaterials;
+
+        // loop through each material on the soliders.
+        for (int o = 0; o < sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials.Length; ++o)
+        {
+            // Change the color of each material to the m_cSoldierColor.
+            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials[o].SetColor("_PlasticColor", m_cSoldierColor);
+
+
+            // FIND A BETTER WAY!
+            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials[o].SetFloat("_Outline_Width", 0.02f);
+        }
+    }
+
+
+
+
+
+
+
+
 
     //--------------------------------------------------------------------------------------
     // MouseDown: Function for when the mouse is pressed down.

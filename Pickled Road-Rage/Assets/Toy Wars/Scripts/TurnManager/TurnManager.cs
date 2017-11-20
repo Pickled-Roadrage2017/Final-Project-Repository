@@ -202,7 +202,7 @@ public class TurnManager : MonoBehaviour
         if (m_snCurrentTurn == 0)
         {
             // then select a random player.
-            m_snCurrentTurn = Random.Range(1, 2); // FIX THIS // FIX THIS // FIX THIS!
+            m_snCurrentTurn = Random.Range(1, 3);
         }
     }
 

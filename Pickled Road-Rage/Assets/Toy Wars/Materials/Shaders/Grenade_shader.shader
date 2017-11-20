@@ -1,7 +1,7 @@
 // Shader created with Shader Forge v1.38 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-3376-OUT,spec-7229-R,gloss-7229-A,normal-8066-OUT,difocc-1213-R,olwid-1647-OUT,olcol-3582-RGB;n:type:ShaderForge.SFN_Tex2d,id:608,x:32081,y:32966,ptovrint:False,ptlb:node_608,ptin:_node_608,varname:node_608,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:e22c7b79e085ab14587a72893770a2c1,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:1213,x:32386,y:32852,ptovrint:False,ptlb:node_1213,ptin:_node_1213,varname:node_1213,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:1c2282ddef207144ba0043e9c5d984f3,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Vector3,id:3376,x:32101,y:32597,varname:node_3376,prsc:2,v1:0,v2:0.4852941,v3:0.1840771;n:type:ShaderForge.SFN_Tex2d,id:775,x:32148,y:33165,ptovrint:False,ptlb:node_775,ptin:_node_775,varname:node_775,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:0569f7b2db630ff41a3c9a978f41bccb,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:7229,x:32163,y:32699,ptovrint:False,ptlb:node_7229,ptin:_node_7229,varname:node_7229,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:d3f3dad258305794899760a2597a2ec5,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:8066,x:32386,y:33048,varname:node_8066,prsc:2|A-608-RGB,B-775-RGB,T-7229-R;n:type:ShaderForge.SFN_ValueProperty,id:1647,x:32453,y:33355,ptovrint:False,ptlb:Outline_Width,ptin:_Outline_Width,varname:node_1647,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:0;n:type:ShaderForge.SFN_Color,id:3582,x:32491,y:33166,ptovrint:False,ptlb:Outline_Color,ptin:_Outline_Color,varname:node_3582,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;proporder:7229-1213-608-775-1647-3582;pass:END;sub:END;*/
+/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-29-RGB,spec-7229-R,gloss-7229-A,normal-8066-OUT,difocc-1213-R,olwid-1647-OUT,olcol-3582-RGB;n:type:ShaderForge.SFN_Tex2d,id:608,x:32081,y:32966,ptovrint:False,ptlb:node_608,ptin:_node_608,varname:node_608,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:e22c7b79e085ab14587a72893770a2c1,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:1213,x:32386,y:32852,ptovrint:False,ptlb:node_1213,ptin:_node_1213,varname:node_1213,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:1c2282ddef207144ba0043e9c5d984f3,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:775,x:32148,y:33165,ptovrint:False,ptlb:node_775,ptin:_node_775,varname:node_775,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:0569f7b2db630ff41a3c9a978f41bccb,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:7229,x:32163,y:32699,ptovrint:False,ptlb:node_7229,ptin:_node_7229,varname:node_7229,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:d3f3dad258305794899760a2597a2ec5,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:8066,x:32386,y:33048,varname:node_8066,prsc:2|A-608-RGB,B-775-RGB,T-7229-R;n:type:ShaderForge.SFN_ValueProperty,id:1647,x:32453,y:33355,ptovrint:False,ptlb:Outline_Width,ptin:_Outline_Width,varname:node_1647,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:0;n:type:ShaderForge.SFN_Color,id:3582,x:32491,y:33166,ptovrint:False,ptlb:Outline_Color,ptin:_Outline_Color,varname:node_3582,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;n:type:ShaderForge.SFN_Color,id:29,x:32458,y:32593,ptovrint:False,ptlb:PlasticColor,ptin:_PlasticColor,varname:node_29,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0.5,c2:0.5,c3:0.5,c4:1;proporder:7229-1213-608-775-1647-3582-29;pass:END;sub:END;*/
 
 Shader "Shader Forge/Grenade_shader" {
     Properties {
@@ -11,6 +11,7 @@ Shader "Shader Forge/Grenade_shader" {
         _node_775 ("node_775", 2D) = "bump" {}
         _Outline_Width ("Outline_Width", Float ) = 0
         _Outline_Color ("Outline_Color", Color) = (1,1,1,1)
+        _PlasticColor ("PlasticColor", Color) = (0.5,0.5,0.5,1)
     }
     SubShader {
         Tags {
@@ -98,6 +99,7 @@ Shader "Shader Forge/Grenade_shader" {
             uniform sampler2D _node_1213; uniform float4 _node_1213_ST;
             uniform sampler2D _node_775; uniform float4 _node_775_ST;
             uniform sampler2D _node_7229; uniform float4 _node_7229_ST;
+            uniform float4 _PlasticColor;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -212,7 +214,7 @@ Shader "Shader Forge/Grenade_shader" {
                 float LdotH = saturate(dot(lightDirection, halfDirection));
                 float3 specularColor = _node_7229_var.r;
                 float specularMonochrome;
-                float3 diffuseColor = float3(0,0.4852941,0.1840771); // Need this for specular when using metallic
+                float3 diffuseColor = _PlasticColor.rgb; // Need this for specular when using metallic
                 diffuseColor = DiffuseAndSpecularFromMetallic( diffuseColor, specularColor, specularColor, specularMonochrome );
                 specularMonochrome = 1.0-specularMonochrome;
                 float NdotV = abs(dot( normalDirection, viewDirection ));
@@ -289,6 +291,7 @@ Shader "Shader Forge/Grenade_shader" {
             uniform sampler2D _node_608; uniform float4 _node_608_ST;
             uniform sampler2D _node_775; uniform float4 _node_775_ST;
             uniform sampler2D _node_7229; uniform float4 _node_7229_ST;
+            uniform float4 _PlasticColor;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -351,7 +354,7 @@ Shader "Shader Forge/Grenade_shader" {
                 float LdotH = saturate(dot(lightDirection, halfDirection));
                 float3 specularColor = _node_7229_var.r;
                 float specularMonochrome;
-                float3 diffuseColor = float3(0,0.4852941,0.1840771); // Need this for specular when using metallic
+                float3 diffuseColor = _PlasticColor.rgb; // Need this for specular when using metallic
                 diffuseColor = DiffuseAndSpecularFromMetallic( diffuseColor, specularColor, specularColor, specularMonochrome );
                 specularMonochrome = 1.0-specularMonochrome;
                 float NdotV = abs(dot( normalDirection, viewDirection ));
@@ -412,6 +415,7 @@ Shader "Shader Forge/Grenade_shader" {
             #pragma only_renderers d3d9 d3d11 glcore gles 
             #pragma target 3.0
             uniform sampler2D _node_7229; uniform float4 _node_7229_ST;
+            uniform float4 _PlasticColor;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float2 texcoord0 : TEXCOORD0;
@@ -441,7 +445,7 @@ Shader "Shader Forge/Grenade_shader" {
                 
                 o.Emission = 0;
                 
-                float3 diffColor = float3(0,0.4852941,0.1840771);
+                float3 diffColor = _PlasticColor.rgb;
                 float specularMonochrome;
                 float3 specColor;
                 float4 _node_7229_var = tex2D(_node_7229,TRANSFORM_TEX(i.uv0, _node_7229));

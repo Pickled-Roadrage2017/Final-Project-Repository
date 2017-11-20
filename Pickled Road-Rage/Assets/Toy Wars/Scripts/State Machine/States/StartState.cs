@@ -63,6 +63,20 @@ public class StartState : State
             // Set the soldier turn to true.
             GetCurrentSoldierScript().CurrentTurn(true);
 
+
+
+
+            // FIND A BETTER WAY!
+            // loop through each material on the current solider.
+            for (int o = 0; o < GetCurrentSoldierScript().GetComponent<SkinnedMeshRenderer>().materials.Length; ++o)
+            {
+                // Change the color of each material to the m_cSoldierColor.
+                GetCurrentSoldierScript().GetComponent<SkinnedMeshRenderer>().materials[o].SetFloat("_Outline_Width", 0.02f);
+            }
+
+
+
+
             // Get active soldiers for each player.
             int nActiveSoldiersP1 = GetPlayerScript(1).GetActiveSoldiers();
             int nActiveSoldiersP2 = GetPlayerScript(2).GetActiveSoldiers();
