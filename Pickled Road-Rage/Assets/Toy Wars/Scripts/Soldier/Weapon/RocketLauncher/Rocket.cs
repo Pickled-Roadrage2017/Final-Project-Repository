@@ -12,16 +12,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Rocket : Weapon
 {
+    [LabelOverride("Explosion Effect")]
     public GameObject m_gExplosion;
-
-    [Header("Sounds")]
-    [LabelOverride("Airtime Sound")]
-    [Tooltip("Will play while the rocket is airborne")]
-    public AudioClip m_acAirtimeSound;
-
-    [LabelOverride("Explosion Sound")]
-    [Tooltip("will play when the rocket explodes")]
-    public AudioClip m_acExplosionSound;
 
     //A timer to stop the rocket from colliding with its Launcher
     [Space(10)]
@@ -56,19 +48,12 @@ public class Rocket : Weapon
     [HideInInspector]
     public Rigidbody m_rbRocket;
 
-    // this Rockets audioSource
-    private AudioSource m_asAudioSource;
-
-    private bool m_bDestroy = false;
-
-    private bool m_bHit = false;
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
         m_rbRocket = GetComponent<Rigidbody>();
-        m_asAudioSource = GetComponent<AudioSource>();
     }
 
     //--------------------------------------------------------------------------------------
@@ -78,24 +63,6 @@ public class Rocket : Weapon
     {
         // ActivateTimer decreases by 1 each frame (Rocket can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
-
-        if(m_asAudioSource.isPlaying)
-        {
-            m_bDestroy = false;
-        }
-        else
-        {
-            m_bDestroy = true;
-        }
-
-        if (m_bHit)
-        {
-            if (m_bDestroy)
-            {
-                RocketDisable();
-                m_bHit = false;
-            }
-        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -114,12 +81,15 @@ public class Rocket : Weapon
         // if the rocket can now activate
         if (m_fCurrentActivateTimer <= 0)
         {
-
            
-            RocketExplode();
+            if(other.tag != "Soldier" || other.tag != "Teddy")
+            {
+                RocketExplode();
 
-                // if the rocket directly hits a Soldier, this will be called to apply knockback
-                if (other.tag == "Soldier")
+            }
+
+            // if the rocket directly hits a Soldier, this will be called to apply knockback
+            if (other.tag == "Soldier")
                 {
                     Rigidbody rbTarget = other.GetComponent<Rigidbody>();
                     rbTarget = other.GetComponent<Rigidbody>();
@@ -132,10 +102,10 @@ public class Rocket : Weapon
                     other.GetComponent<Teddy>().TakeDamage(m_fDamage);
                 }
 
-                // Disable Rocket after it has completed all damage dealing and knockbacks
-                if(!m_asAudioSource.isPlaying)
+            // Disable Rocket after it has completed all damage dealing and knockbacks
+            //if (!m_asAudioSource.isPlaying)
                 RocketDisable();
-           
+
         }
     }
 
@@ -167,13 +137,13 @@ public class Rocket : Weapon
 
     private void RocketExplode()
     {
+        //m_asAudioSource.PlayOneShot(m_acExplosionSound);
         // Rocket Explodes, damaging anything within the radius
         GameObject gExplosion = Instantiate(m_gExplosion);
         gExplosion.transform.SetParent(null);
         gExplosion.transform.position = transform.position;
         Destroy(gExplosion, 5f);
-        m_asAudioSource.PlayOneShot(m_acExplosionSound);
-        m_bHit = true;
+
         // Collect all possible colliders 
         Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
 
@@ -203,6 +173,7 @@ public class Rocket : Weapon
             }
            
         }
+       
     }
 
     //--------------------------------------------------------------------------------------

@@ -28,34 +28,11 @@ public class Teddy : MonoBehaviour
     public float m_fMaxHealth;
 
     // health that will be set to MaxHealth in Awake
-    [LabelOverride("Current Teddy Health")]
-    [Tooltip("For displaying the current health, will be made private when we have a diplay for it somewhere on-screen")]
+    [HideInInspector]
     public float m_fCurrentHealth;
 
-    [Header("Throwing Variables")]
-    // Speed for the rotation of the aiming arrow
-    [LabelOverride("Facing Speed")]
-    public float m_fRotSpeed;
-
-    // public float for the teddy throwing charge.
-    [LabelOverride("Current Charge")][Tooltip("The charge of the Teddy throwing mechanic.")]
-    public float m_fCharge;
-
-    // Minimum power for a shot
-    [LabelOverride("Charge Minimum")][Tooltip("Minimum charge for the Charge, be sure that this matches the 'min value' variable in the Sliders inspector")]
-    public float m_fMinCharge = 1f;
-
-    // Float for Max Charge
-    [LabelOverride("Charge Maximum")][Tooltip("Maximum charge for the Charge, be sure that this matches the 'max value' variable in the Sliders inspector")]
-    public float m_fMaxCharge = 2f;
-
-    // Speed for the slider
-    [LabelOverride("Charge Speed")]
-    [Tooltip("Speed that the charge increased by per update")]
-    public float m_fChargeSpeed = 0.0f;
-
     // public color to apply to teddy objects.
-    [LabelOverride("Teddy Color")] [Tooltip("The material color of this the Teddy bear object.")]
+    [LabelOverride("Teddy Color")] [Tooltip("The material color of this the Teddy bear object.")][Space(10)]
     public Color m_cTeddyColor;
 
     // Health bar slider on teddy canvas.
@@ -66,11 +43,7 @@ public class Teddy : MonoBehaviour
     [HideInInspector]
     public bool m_bDamageAnimation;
 
-    // boolean for an animation of the Teddy taking damage
-    [HideInInspector]
-    public bool m_bSpawnSoldier;
-
-    // boolean for an animation of the Teddy taking damage
+    // boolean for an animation of the Teddy placing a soldier
     [HideInInspector]
     public bool m_bPlaceSoldier;
 
@@ -85,7 +58,6 @@ public class Teddy : MonoBehaviour
     void Awake()
     {
         m_bDamageAnimation = false;
-        m_bSpawnSoldier = false;
         m_bPlaceSoldier = false;
 
         m_aAnimator = GetComponent<Animator>();
@@ -107,7 +79,6 @@ public class Teddy : MonoBehaviour
     void Update()
     {
         m_aAnimator.SetBool("m_bDamageAnimation", m_bDamageAnimation);
-        m_aAnimator.SetBool("m_bSpawnSoldier", m_bSpawnSoldier);
         m_aAnimator.SetBool("m_bPlaceSoldier", m_bPlaceSoldier);
 
         if (!IsAlive())
@@ -121,12 +92,6 @@ public class Teddy : MonoBehaviour
         if (m_bDamageAnimation == true)
         {
             m_bDamageAnimation = false;
-        }
-
-
-        if (m_bSpawnSoldier == true)
-        {
-            m_bSpawnSoldier = false;
         }
 
         if (m_bPlaceSoldier == true)

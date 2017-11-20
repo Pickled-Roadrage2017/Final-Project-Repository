@@ -108,10 +108,6 @@ public class SoldierActor : MonoBehaviour
     [HideInInspector]
     public bool m_bStartFireAnimation;
 
-    // a boolean for an animation at the end of the firing function
-    [HideInInspector]
-    public bool m_bFinalFireAnimation;
-
     // public float for the radius of the movement circle.
     [LabelOverride("Movement Radius")]
     [Tooltip("The Radius of the movement circle, this is how far the soldier can move.")]
@@ -142,17 +138,10 @@ public class SoldierActor : MonoBehaviour
 
         // initilising animation booleans to false
         m_bStartFireAnimation = false;
-        m_bFinalFireAnimation = false;
         m_bDamageAnimation = false;
 
         // set boolean for moving to false
         m_bMovingAnimation = false;
-
-        // animator boolean setup
-        m_aAnimator.SetBool("m_bDamageAnimation", m_bDamageAnimation);
-        m_aAnimator.SetBool("m_bStartFireAnimation", m_bStartFireAnimation);
-        m_aAnimator.SetBool("m_bFinalFireAnimation", m_bFinalFireAnimation);
-        m_aAnimator.SetBool("IsMoving", m_bMovingAnimation);
 
         // get the soldiers rigidbody
         m_rbRigidBody = GetComponent<Rigidbody>();
@@ -186,19 +175,7 @@ public class SoldierActor : MonoBehaviour
         // animator boolean setup
         m_aAnimator.SetBool("Damage", m_bDamageAnimation);
         m_aAnimator.SetBool("StartFire", m_bStartFireAnimation);
-        m_aAnimator.SetBool("FinalFire", m_bFinalFireAnimation);
         m_aAnimator.SetBool("IsMoving", m_bMovingAnimation);
-
-        // animation boolean resets
-        if (m_bStartFireAnimation == true)
-        {
-            m_bStartFireAnimation = false;
-        }
-
-        if (m_bFinalFireAnimation == true)
-        {
-            m_bFinalFireAnimation = false;
-        }
 
         if (m_bDamageAnimation == true)
         {
@@ -219,11 +196,6 @@ public class SoldierActor : MonoBehaviour
         else
         {
             m_bMovingAnimation = true;
-        }
-
-        if (m_bDamageAnimation == true)
-        {
-            m_bDamageAnimation = false;
         }
     }
 
@@ -311,7 +283,7 @@ public class SoldierActor : MonoBehaviour
 
     public void MouseUp()
     {
-        m_bFinalFireAnimation = true;
+        m_bStartFireAnimation = false;
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
             m_gLauncherScript.MouseUp();

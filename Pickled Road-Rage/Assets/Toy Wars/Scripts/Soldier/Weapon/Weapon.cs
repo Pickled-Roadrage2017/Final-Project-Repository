@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [LabelOverride("Mask for Knockback")]
-    [Tooltip("Set this to the Unit layer, so the Grenade doesn't knockback objects that should be stationary")]
+    [LabelOverride("Soldier Layer")]
+    [Tooltip("Set this to the Unit layer, so the weapons know they can knockback these objects")]
     public LayerMask m_UnitMask;
 
+    [LabelOverride("Teddy Layer")]
+    [Tooltip("Set this to the Bear layer, so the weapons know that this cannot be knocked back")]
     public LayerMask m_TeddyMask;
 
     [LabelOverride("Damage")][Tooltip("How many Health Points the projectile will subtract")]

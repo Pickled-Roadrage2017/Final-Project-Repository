@@ -19,10 +19,6 @@ public class Grenade : Weapon
     [Tooltip("will play when the grenade is counting down to explosion")]
     public AudioClip m_acFuseSound;
 
-    [LabelOverride("Explosion Sound")]
-    [Tooltip("will play when the grenade explodes")]
-    public AudioClip m_acExplosionSound;
-
     [LabelOverride("Airtime Sound")]
     [Tooltip("Will play while the grenade is airborne")]
     public AudioClip m_acAirtimeSound;
@@ -156,11 +152,13 @@ public class Grenade : Weapon
 
     private void OnCollisionEnter(Collision collision)
     {
+       
         if (m_fCurrentActivateTimer <= 0)
         {
             if (!m_bFuseTicking)
             {
-                m_rbGrenade.AddForce(new Vector3(0, m_fBounciness, 0), ForceMode.Impulse);
+                m_asAudioSource.PlayOneShot(m_acBounceSound);
+                m_rbGrenade.AddForce(new Vector3(0, m_fBounciness, 0), ForceMode.Impulse);    
             }
             m_bFuseTicking = true;
             m_rbGrenade.drag = m_fBounceDrag;
@@ -177,13 +175,13 @@ public class Grenade : Weapon
     //--------------------------------------------------------------------------------------
     private void GrenadeExplode()
     {
-        
         // Collect all possible colliders 
-        Collider[] aColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
+        Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_UnitMask);
+        Collider[] aTeddyColliders = Physics.OverlapSphere(transform.position, m_fExplosionRadius, m_TeddyMask);
 
-        for (int i = 0; i < aColliders.Length; i++)
+        for (int i = 0; i < aSoldierColliders.Length; i++)
         {
-            Rigidbody rbTarget = aColliders[i].GetComponent<Rigidbody>();
+            Rigidbody rbTarget = aSoldierColliders[i].GetComponent<Rigidbody>();
 
             //if it does not have a rigidbody
             if (!rbTarget)
@@ -191,30 +189,37 @@ public class Grenade : Weapon
                 continue;
             }
 
-            // if an object in collision zone is a Soldier
-            if (aColliders[i].gameObject.tag == "Soldier")
+            SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
+
+            // Soldier will take damage based on position (See CalculateDamge function below)
+            gtarget.TakeDamage(CalculateDamage(aSoldierColliders[i].transform.position));
+
+            // add explosive force for knockback 
+            // NOTE: May be replaced with a non-rigidbody knockback
+            rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
+
+        }
+
+        for (int i = 0; i < aTeddyColliders.Length; i++)
+        {
+            Rigidbody rbTarget = aTeddyColliders[i].GetComponent<Rigidbody>();
+
+            //if it does not have a rigidbody
+            if (!rbTarget)
             {
-                // TODO: Explosion particle effect here
-
-                SoldierActor gtarget = rbTarget.GetComponent<SoldierActor>();
-
-                // Soldier will take damage based on position (See CalculateDamge function below)
-                gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
-
-                // add explosive force for knockback 
-                // NOTE: May be replaced with a non-rigidbody knockback
-                rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
+                continue;
             }
 
-            if (aColliders[i].gameObject.tag == "Teddy")
-            {
-                // TODO: Explosion particle effect here
+            // TODO: Explosion particle effect here
 
-                Teddy gtarget = rbTarget.GetComponent<Teddy>();
+            Teddy gtarget = rbTarget.GetComponent<Teddy>();
 
-                // Soldier will take damage based on position (See CalculateDamge function below)
-                gtarget.TakeDamage(CalculateDamage(aColliders[i].transform.position));
-            }
+            // Soldier will take damage based on position (See CalculateDamge function below)
+            gtarget.TakeDamage(CalculateDamage(aTeddyColliders[i].transform.position));
+
+            // add explosive force for knockback 
+            // NOTE: May be replaced with a non-rigidbody knockback
+            rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fExplosionRadius, 0.0f, ForceMode.Impulse);
         }
     }
 
@@ -223,7 +228,6 @@ public class Grenade : Weapon
     //--------------------------------------------------------------------------------------
     private void GrenadeDisable()
     {
-            
             m_fCurrentActivateTimer = m_fMaxActivateTimer;
             m_fFuseTimer = m_fMaxFuseTimer;
             m_bFuseTicking = false;
