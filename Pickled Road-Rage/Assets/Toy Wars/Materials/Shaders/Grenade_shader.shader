@@ -1,7 +1,7 @@
 // Shader created with Shader Forge v1.38 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-3376-OUT,spec-7229-R,gloss-7229-A,normal-8066-OUT,difocc-1213-R;n:type:ShaderForge.SFN_Tex2d,id:608,x:32081,y:32966,ptovrint:False,ptlb:node_608,ptin:_node_608,varname:node_608,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:e22c7b79e085ab14587a72893770a2c1,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:1213,x:32386,y:32852,ptovrint:False,ptlb:node_1213,ptin:_node_1213,varname:node_1213,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:1c2282ddef207144ba0043e9c5d984f3,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Vector3,id:3376,x:32101,y:32597,varname:node_3376,prsc:2,v1:0,v2:0.4852941,v3:0.1840771;n:type:ShaderForge.SFN_Tex2d,id:775,x:32148,y:33165,ptovrint:False,ptlb:node_775,ptin:_node_775,varname:node_775,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:0569f7b2db630ff41a3c9a978f41bccb,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:7229,x:32163,y:32699,ptovrint:False,ptlb:node_7229,ptin:_node_7229,varname:node_7229,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:d3f3dad258305794899760a2597a2ec5,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:8066,x:32386,y:33048,varname:node_8066,prsc:2|A-608-RGB,B-775-RGB,T-7229-R;proporder:7229-1213-608-775;pass:END;sub:END;*/
+/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-3376-OUT,spec-7229-R,gloss-7229-A,normal-8066-OUT,difocc-1213-R,olwid-1647-OUT,olcol-3582-RGB;n:type:ShaderForge.SFN_Tex2d,id:608,x:32081,y:32966,ptovrint:False,ptlb:node_608,ptin:_node_608,varname:node_608,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:e22c7b79e085ab14587a72893770a2c1,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:1213,x:32386,y:32852,ptovrint:False,ptlb:node_1213,ptin:_node_1213,varname:node_1213,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:1c2282ddef207144ba0043e9c5d984f3,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Vector3,id:3376,x:32101,y:32597,varname:node_3376,prsc:2,v1:0,v2:0.4852941,v3:0.1840771;n:type:ShaderForge.SFN_Tex2d,id:775,x:32148,y:33165,ptovrint:False,ptlb:node_775,ptin:_node_775,varname:node_775,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:0569f7b2db630ff41a3c9a978f41bccb,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:7229,x:32163,y:32699,ptovrint:False,ptlb:node_7229,ptin:_node_7229,varname:node_7229,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:d3f3dad258305794899760a2597a2ec5,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:8066,x:32386,y:33048,varname:node_8066,prsc:2|A-608-RGB,B-775-RGB,T-7229-R;n:type:ShaderForge.SFN_ValueProperty,id:1647,x:32453,y:33355,ptovrint:False,ptlb:Outline_Width,ptin:_Outline_Width,varname:node_1647,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:0;n:type:ShaderForge.SFN_Color,id:3582,x:32491,y:33166,ptovrint:False,ptlb:Outline_Color,ptin:_Outline_Color,varname:node_3582,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;proporder:7229-1213-608-775-1647-3582;pass:END;sub:END;*/
 
 Shader "Shader Forge/Grenade_shader" {
     Properties {
@@ -9,10 +9,65 @@ Shader "Shader Forge/Grenade_shader" {
         _node_1213 ("node_1213", 2D) = "white" {}
         _node_608 ("node_608", 2D) = "bump" {}
         _node_775 ("node_775", 2D) = "bump" {}
+        _Outline_Width ("Outline_Width", Float ) = 0
+        _Outline_Color ("Outline_Color", Color) = (1,1,1,1)
     }
     SubShader {
         Tags {
             "RenderType"="Opaque"
+        }
+        Pass {
+            Name "Outline"
+            Tags {
+            }
+            Cull Front
+            
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #define SHOULD_SAMPLE_SH ( defined (LIGHTMAP_OFF) && defined(DYNAMICLIGHTMAP_OFF) )
+            #define _GLOSSYENV 1
+            #include "UnityCG.cginc"
+            #include "Lighting.cginc"
+            #include "UnityPBSLighting.cginc"
+            #include "UnityStandardBRDF.cginc"
+            #pragma fragmentoption ARB_precision_hint_fastest
+            #pragma multi_compile_shadowcaster
+            #pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
+            #pragma multi_compile DIRLIGHTMAP_OFF DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
+            #pragma multi_compile DYNAMICLIGHTMAP_OFF DYNAMICLIGHTMAP_ON
+            #pragma multi_compile_fog
+            #pragma only_renderers d3d9 d3d11 glcore gles 
+            #pragma target 3.0
+            uniform float _Outline_Width;
+            uniform float4 _Outline_Color;
+            struct VertexInput {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float2 texcoord1 : TEXCOORD1;
+                float2 texcoord2 : TEXCOORD2;
+            };
+            struct VertexOutput {
+                float4 pos : SV_POSITION;
+                float2 uv1 : TEXCOORD0;
+                float2 uv2 : TEXCOORD1;
+                float4 posWorld : TEXCOORD2;
+                UNITY_FOG_COORDS(3)
+            };
+            VertexOutput vert (VertexInput v) {
+                VertexOutput o = (VertexOutput)0;
+                o.uv1 = v.texcoord1;
+                o.uv2 = v.texcoord2;
+                o.posWorld = mul(unity_ObjectToWorld, v.vertex);
+                o.pos = UnityObjectToClipPos( float4(v.vertex.xyz + v.normal*_Outline_Width,1) );
+                UNITY_TRANSFER_FOG(o,o.pos);
+                return o;
+            }
+            float4 frag(VertexOutput i) : COLOR {
+                float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
+                return fixed4(_Outline_Color.rgb,0);
+            }
+            ENDCG
         }
         Pass {
             Name "FORWARD"

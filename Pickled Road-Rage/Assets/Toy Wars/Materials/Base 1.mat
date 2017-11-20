@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Soldier 1
-  m_Shader: {fileID: 4800000, guid: 7aff12a4d79043445889242158c7dbe2, type: 3}
+  m_Name: Base 1
+  m_Shader: {fileID: 4800000, guid: 7e68676075f86734da41ba0e3d90032b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -54,20 +54,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _node_1616:
-        m_Texture: {fileID: 2800000, guid: cda8a10d3c764044093e78aede64715d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _node_1655:
-        m_Texture: {fileID: 2800000, guid: ec944ea67984d7d4dac9544e403a3b90, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _node_2025:
-        m_Texture: {fileID: 2800000, guid: 0569f7b2db630ff41a3c9a978f41bccb, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _node_8907:
+    - _node_1880:
         m_Texture: {fileID: 2800000, guid: d3f3dad258305794899760a2597a2ec5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_9014:
+        m_Texture: {fileID: 2800000, guid: d5548c077411ca44aa15a6f954378649, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_9939:
+        m_Texture: {fileID: 2800000, guid: 0569f7b2db630ff41a3c9a978f41bccb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -89,7 +85,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.1414, g: 0.1191, b: 0.0748, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Outline_Color: {r: 1, g: 0, b: 0, a: 1}
-    - _PlasticColor: {r: 0, g: 0.4852941, b: 0.1840771, a: 1}
+    - _PlasticColor: {r: 0.85882354, g: 0.54509807, b: 0.18431373, a: 1}
+    - _node_5393: {r: 1, g: 0, b: 0, a: 1}

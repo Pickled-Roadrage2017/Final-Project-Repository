@@ -368,7 +368,6 @@ MonoBehaviour:
   m_bDamageAnimation: 0
   m_bMovingAnimation: 0
   m_bStartFireAnimation: 0
-  m_bFinalFireAnimation: 0
   m_fMovementRadius: 8
   m_gMovementCirlceBluePrint: {fileID: 1471151944024382, guid: 202ec0867f5c2e544a205eb636f6cf92,
     type: 2}

@@ -236,7 +236,7 @@ MonoBehaviour:
   m_acAirtimeSound: {fileID: 0}
   m_acBounceSound: {fileID: 0}
   m_fMaxActivateTimer: 2
-  m_fMaxFuseTimer: 2.5
+  m_fMaxFuseTimer: 1.5
   m_fBounciness: 10
   m_fBounceDrag: 2
   m_ExplosionForce: 20
