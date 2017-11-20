@@ -299,6 +299,7 @@ public class Player : MonoBehaviour
 
             // Set the postion of the soldiers to the postion of the spawn point.
             o.transform.position = m_gRespawnPoint.transform.position;
+            o.transform.rotation = m_gRespawnPoint.transform.rotation;
 
             // reset the spawn counter.
             m_nRespawnCounter = 0;

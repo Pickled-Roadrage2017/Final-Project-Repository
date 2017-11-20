@@ -90,7 +90,7 @@ public class SpawnState : State
             if (bIsRespawn)
             {
                 // Play the teddy spawn animation.
-                GetCurrentPlayerScript().m_gTeddyBase.GetComponent<Teddy>().m_bPlaceSoldier = true;
+                GetCurrentPlayerScript().m_gTeddyBase.GetComponent<Teddy>().m_bPlaceSoldierAni = true;
 
                 //
                 if (fTimer < 0)
