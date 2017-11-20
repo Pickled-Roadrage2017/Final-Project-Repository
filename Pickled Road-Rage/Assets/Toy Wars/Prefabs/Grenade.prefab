@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33796032944592536}
   - component: {fileID: 23948013662661576}
   - component: {fileID: 54703821210679116}
-  - component: {fileID: 82432893074446292}
   - component: {fileID: 114585756651989048}
+  - component: {fileID: 82432893074446292}
   - component: {fileID: 136972993510052782}
   m_Layer: 22
   m_Name: Grenade
@@ -140,7 +140,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -221,18 +221,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa5980bb9ddefc4689121fb92c4f991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UnitMask:
+  m_lmUnitMask:
     serializedVersion: 2
     m_Bits: 256
-  m_TeddyMask:
+  m_lmTeddyMask:
     serializedVersion: 2
-    m_Bits: 0
-  m_fDamage: 90
+    m_Bits: 1024
+  m_lmEnvironmentMask:
+    serializedVersion: 2
+    m_Bits: 8388608
+  m_fDamage: 70
   m_fPower: 0
   m_gExplosion: {fileID: 1770641874940636, guid: 9b57595ad6662644e90908380de147ac,
     type: 2}
   m_acFuseSound: {fileID: 0}
-  m_acExplosionSound: {fileID: 8300000, guid: fb4fd17d856e26747a435d3d3a89bdc4, type: 3}
   m_acAirtimeSound: {fileID: 0}
   m_acBounceSound: {fileID: 0}
   m_fMaxActivateTimer: 2
@@ -240,7 +242,8 @@ MonoBehaviour:
   m_fBounciness: 10
   m_fBounceDrag: 2
   m_ExplosionForce: 20
-  m_fExplosionRadius: 2
+  m_fSoldierExplosionRadius: 1.5
+  m_fTeddyExplosionRadius: 2
   m_fHitMultiplier: 0.5
   m_gSpawnPoint: {fileID: 0}
   m_fCurrentActivateTimer: 0

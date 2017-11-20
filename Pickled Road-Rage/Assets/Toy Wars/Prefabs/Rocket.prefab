@@ -36,10 +36,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4398011424822858}
   - component: {fileID: 33317699143925522}
-  - component: {fileID: 65185210722851466}
   - component: {fileID: 23082496437012516}
   - component: {fileID: 54508881412687604}
   - component: {fileID: 114742582683046882}
+  - component: {fileID: 65185210722851466}
   - component: {fileID: 82167897698565078}
   m_Layer: 22
   m_Name: Rocket
@@ -232,22 +232,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932ab1ce902ef904eadae9ab904962cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UnitMask:
+  m_lmUnitMask:
     serializedVersion: 2
     m_Bits: 256
-  m_TeddyMask:
+  m_lmTeddyMask:
     serializedVersion: 2
-    m_Bits: 0
-  m_fDamage: 100
+    m_Bits: 1024
+  m_lmEnvironmentMask:
+    serializedVersion: 2
+    m_Bits: 8388608
+  m_fDamage: 110
   m_fPower: 0
   m_gExplosion: {fileID: 1770641874940636, guid: 9b57595ad6662644e90908380de147ac,
     type: 2}
-  m_acAirtimeSound: {fileID: 0}
-  m_acExplosionSound: {fileID: 8300000, guid: fb4fd17d856e26747a435d3d3a89bdc4, type: 3}
   m_fMaxActivateTimer: 2
   m_ExplosionForce: 20
   m_fHitMultiplier: 0.5
-  m_fExplosionRadius: 1
+  m_fSoldierExplosionRadius: 1
+  m_fTeddyExplosionRadius: 2
   m_gSpawnPoint: {fileID: 0}
   m_fCurrentActivateTimer: 0
   m_rbRocket: {fileID: 0}
