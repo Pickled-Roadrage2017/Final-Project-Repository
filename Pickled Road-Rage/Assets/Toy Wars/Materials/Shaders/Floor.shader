@@ -1,13 +1,16 @@
 // Shader created with Shader Forge v1.38 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-274-OUT,spec-2369-R,gloss-2369-A,normal-600-RGB;n:type:ShaderForge.SFN_Tex2d,id:600,x:32149,y:32828,ptovrint:False,ptlb:node_600,ptin:_node_600,varname:node_600,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:637db34d4404c8f4296a890e5e99107f,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:5652,x:32149,y:32623,ptovrint:False,ptlb:node_5652,ptin:_node_5652,varname:node_5652,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:5b473c62b428c5049a7f39075c29297e,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:2369,x:32297,y:32986,ptovrint:False,ptlb:node_2369,ptin:_node_2369,varname:node_2369,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:aeb25e4bd8b7a9046aad01ec16dce82c,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:6237,x:32451,y:32522,varname:node_6237,prsc:2|A-9807-OUT,B-5652-RGB,T-248-OUT;n:type:ShaderForge.SFN_Vector3,id:9807,x:32089,y:32410,varname:node_9807,prsc:2,v1:0.7058823,v2:0.7058823,v3:0.7058823;n:type:ShaderForge.SFN_Vector1,id:248,x:32343,y:32647,varname:node_248,prsc:2,v1:1;n:type:ShaderForge.SFN_Multiply,id:274,x:32493,y:32379,varname:node_274,prsc:2|A-9807-OUT,B-5652-RGB;proporder:600-5652-2369;pass:END;sub:END;*/
+/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32995,y:32605,varname:node_2865,prsc:2|diff-274-OUT,spec-8611-R,gloss-6158-OUT,normal-2101-RGB;n:type:ShaderForge.SFN_Tex2d,id:5652,x:32089,y:32596,ptovrint:False,ptlb:node_5652,ptin:_node_5652,varname:node_5652,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:5b473c62b428c5049a7f39075c29297e,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:6237,x:32493,y:32592,varname:node_6237,prsc:2|A-1227-RGB,B-5652-RGB,T-248-OUT;n:type:ShaderForge.SFN_Vector3,id:9807,x:32065,y:32405,varname:node_9807,prsc:2,v1:0.1102941,v2:0.1102941,v3:0.1102941;n:type:ShaderForge.SFN_Vector1,id:248,x:32343,y:32647,varname:node_248,prsc:2,v1:1;n:type:ShaderForge.SFN_Multiply,id:274,x:32437,y:32398,varname:node_274,prsc:2|A-1227-RGB,B-5652-RGB;n:type:ShaderForge.SFN_OneMinus,id:7025,x:32275,y:33205,varname:node_7025,prsc:2;n:type:ShaderForge.SFN_Tex2d,id:2101,x:32113,y:32824,ptovrint:False,ptlb:node_2101,ptin:_node_2101,varname:node_2101,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:637db34d4404c8f4296a890e5e99107f,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:8611,x:32261,y:32824,ptovrint:False,ptlb:node_8611,ptin:_node_8611,varname:node_8611,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:dba2135993f9ef340b2f860f702ba21b,ntxv:0,isnm:False;n:type:ShaderForge.SFN_OneMinus,id:5813,x:32345,y:33047,varname:node_5813,prsc:2|IN-8611-A;n:type:ShaderForge.SFN_Vector1,id:9729,x:31968,y:32992,varname:node_9729,prsc:2,v1:1;n:type:ShaderForge.SFN_Color,id:8841,x:32444,y:32857,ptovrint:False,ptlb:node_8841,ptin:_node_8841,varname:node_8841,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0.007352948,c2:0.007352948,c3:0.007352948,c4:1;n:type:ShaderForge.SFN_Lerp,id:6158,x:32710,y:32984,varname:node_6158,prsc:2|A-8841-R,B-5813-OUT,T-9898-R;n:type:ShaderForge.SFN_Color,id:9898,x:32485,y:33185,ptovrint:False,ptlb:node_9898,ptin:_node_9898,varname:node_9898,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;n:type:ShaderForge.SFN_Color,id:1227,x:32175,y:32229,ptovrint:False,ptlb:Floor_color,ptin:_Floor_color,varname:node_1227,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0.2720588,c2:0.2720588,c3:0.2720588,c4:1;proporder:5652-2101-8611-8841-9898-1227;pass:END;sub:END;*/
 
 Shader "Shader Forge/Floor" {
     Properties {
-        _node_600 ("node_600", 2D) = "bump" {}
         _node_5652 ("node_5652", 2D) = "white" {}
-        _node_2369 ("node_2369", 2D) = "white" {}
+        _node_2101 ("node_2101", 2D) = "bump" {}
+        _node_8611 ("node_8611", 2D) = "white" {}
+        _node_8841 ("node_8841", Color) = (0.007352948,0.007352948,0.007352948,1)
+        _node_9898 ("node_9898", Color) = (1,1,1,1)
+        _Floor_color ("Floor_color", Color) = (0.2720588,0.2720588,0.2720588,1)
     }
     SubShader {
         Tags {
@@ -38,9 +41,12 @@ Shader "Shader Forge/Floor" {
             #pragma multi_compile_fog
             #pragma only_renderers d3d9 d3d11 glcore gles 
             #pragma target 3.0
-            uniform sampler2D _node_600; uniform float4 _node_600_ST;
             uniform sampler2D _node_5652; uniform float4 _node_5652_ST;
-            uniform sampler2D _node_2369; uniform float4 _node_2369_ST;
+            uniform sampler2D _node_2101; uniform float4 _node_2101_ST;
+            uniform sampler2D _node_8611; uniform float4 _node_8611_ST;
+            uniform float4 _node_8841;
+            uniform float4 _node_9898;
+            uniform float4 _Floor_color;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -91,8 +97,8 @@ Shader "Shader Forge/Floor" {
                 i.normalDir = normalize(i.normalDir);
                 float3x3 tangentTransform = float3x3( i.tangentDir, i.bitangentDir, i.normalDir);
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
-                float3 _node_600_var = UnpackNormal(tex2D(_node_600,TRANSFORM_TEX(i.uv0, _node_600)));
-                float3 normalLocal = _node_600_var.rgb;
+                float3 _node_2101_var = UnpackNormal(tex2D(_node_2101,TRANSFORM_TEX(i.uv0, _node_2101)));
+                float3 normalLocal = _node_2101_var.rgb;
                 float3 normalDirection = normalize(mul( normalLocal, tangentTransform )); // Perturbed normals
                 float3 viewReflectDirection = reflect( -viewDirection, normalDirection );
                 float3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);
@@ -104,9 +110,9 @@ Shader "Shader Forge/Floor" {
                 float Pi = 3.141592654;
                 float InvPi = 0.31830988618;
 ///////// Gloss:
-                float4 _node_2369_var = tex2D(_node_2369,TRANSFORM_TEX(i.uv0, _node_2369));
-                float gloss = _node_2369_var.a;
-                float perceptualRoughness = 1.0 - _node_2369_var.a;
+                float4 _node_8611_var = tex2D(_node_8611,TRANSFORM_TEX(i.uv0, _node_8611));
+                float gloss = lerp(_node_8841.r,(1.0 - _node_8611_var.a),_node_9898.r);
+                float perceptualRoughness = 1.0 - lerp(_node_8841.r,(1.0 - _node_8611_var.a),_node_9898.r);
                 float roughness = perceptualRoughness * perceptualRoughness;
                 float specPow = exp2( gloss * 10.0 + 1.0 );
 /////// GI Data:
@@ -152,11 +158,10 @@ Shader "Shader Forge/Floor" {
 ////// Specular:
                 float NdotL = saturate(dot( normalDirection, lightDirection ));
                 float LdotH = saturate(dot(lightDirection, halfDirection));
-                float3 specularColor = _node_2369_var.r;
+                float3 specularColor = _node_8611_var.r;
                 float specularMonochrome;
-                float3 node_9807 = float3(0.7058823,0.7058823,0.7058823);
                 float4 _node_5652_var = tex2D(_node_5652,TRANSFORM_TEX(i.uv0, _node_5652));
-                float3 diffuseColor = (node_9807*_node_5652_var.rgb); // Need this for specular when using metallic
+                float3 diffuseColor = (_Floor_color.rgb*_node_5652_var.rgb); // Need this for specular when using metallic
                 diffuseColor = DiffuseAndSpecularFromMetallic( diffuseColor, specularColor, specularColor, specularMonochrome );
                 specularMonochrome = 1.0-specularMonochrome;
                 float NdotV = abs(dot( normalDirection, viewDirection ));
@@ -228,9 +233,12 @@ Shader "Shader Forge/Floor" {
             #pragma multi_compile_fog
             #pragma only_renderers d3d9 d3d11 glcore gles 
             #pragma target 3.0
-            uniform sampler2D _node_600; uniform float4 _node_600_ST;
             uniform sampler2D _node_5652; uniform float4 _node_5652_ST;
-            uniform sampler2D _node_2369; uniform float4 _node_2369_ST;
+            uniform sampler2D _node_2101; uniform float4 _node_2101_ST;
+            uniform sampler2D _node_8611; uniform float4 _node_8611_ST;
+            uniform float4 _node_8841;
+            uniform float4 _node_9898;
+            uniform float4 _Floor_color;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -270,8 +278,8 @@ Shader "Shader Forge/Floor" {
                 i.normalDir = normalize(i.normalDir);
                 float3x3 tangentTransform = float3x3( i.tangentDir, i.bitangentDir, i.normalDir);
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
-                float3 _node_600_var = UnpackNormal(tex2D(_node_600,TRANSFORM_TEX(i.uv0, _node_600)));
-                float3 normalLocal = _node_600_var.rgb;
+                float3 _node_2101_var = UnpackNormal(tex2D(_node_2101,TRANSFORM_TEX(i.uv0, _node_2101)));
+                float3 normalLocal = _node_2101_var.rgb;
                 float3 normalDirection = normalize(mul( normalLocal, tangentTransform )); // Perturbed normals
                 float3 lightDirection = normalize(lerp(_WorldSpaceLightPos0.xyz, _WorldSpaceLightPos0.xyz - i.posWorld.xyz,_WorldSpaceLightPos0.w));
                 float3 lightColor = _LightColor0.rgb;
@@ -282,19 +290,18 @@ Shader "Shader Forge/Floor" {
                 float Pi = 3.141592654;
                 float InvPi = 0.31830988618;
 ///////// Gloss:
-                float4 _node_2369_var = tex2D(_node_2369,TRANSFORM_TEX(i.uv0, _node_2369));
-                float gloss = _node_2369_var.a;
-                float perceptualRoughness = 1.0 - _node_2369_var.a;
+                float4 _node_8611_var = tex2D(_node_8611,TRANSFORM_TEX(i.uv0, _node_8611));
+                float gloss = lerp(_node_8841.r,(1.0 - _node_8611_var.a),_node_9898.r);
+                float perceptualRoughness = 1.0 - lerp(_node_8841.r,(1.0 - _node_8611_var.a),_node_9898.r);
                 float roughness = perceptualRoughness * perceptualRoughness;
                 float specPow = exp2( gloss * 10.0 + 1.0 );
 ////// Specular:
                 float NdotL = saturate(dot( normalDirection, lightDirection ));
                 float LdotH = saturate(dot(lightDirection, halfDirection));
-                float3 specularColor = _node_2369_var.r;
+                float3 specularColor = _node_8611_var.r;
                 float specularMonochrome;
-                float3 node_9807 = float3(0.7058823,0.7058823,0.7058823);
                 float4 _node_5652_var = tex2D(_node_5652,TRANSFORM_TEX(i.uv0, _node_5652));
-                float3 diffuseColor = (node_9807*_node_5652_var.rgb); // Need this for specular when using metallic
+                float3 diffuseColor = (_Floor_color.rgb*_node_5652_var.rgb); // Need this for specular when using metallic
                 diffuseColor = DiffuseAndSpecularFromMetallic( diffuseColor, specularColor, specularColor, specularMonochrome );
                 specularMonochrome = 1.0-specularMonochrome;
                 float NdotV = abs(dot( normalDirection, viewDirection ));
@@ -355,7 +362,10 @@ Shader "Shader Forge/Floor" {
             #pragma only_renderers d3d9 d3d11 glcore gles 
             #pragma target 3.0
             uniform sampler2D _node_5652; uniform float4 _node_5652_ST;
-            uniform sampler2D _node_2369; uniform float4 _node_2369_ST;
+            uniform sampler2D _node_8611; uniform float4 _node_8611_ST;
+            uniform float4 _node_8841;
+            uniform float4 _node_9898;
+            uniform float4 _Floor_color;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float2 texcoord0 : TEXCOORD0;
@@ -385,14 +395,13 @@ Shader "Shader Forge/Floor" {
                 
                 o.Emission = 0;
                 
-                float3 node_9807 = float3(0.7058823,0.7058823,0.7058823);
                 float4 _node_5652_var = tex2D(_node_5652,TRANSFORM_TEX(i.uv0, _node_5652));
-                float3 diffColor = (node_9807*_node_5652_var.rgb);
+                float3 diffColor = (_Floor_color.rgb*_node_5652_var.rgb);
                 float specularMonochrome;
                 float3 specColor;
-                float4 _node_2369_var = tex2D(_node_2369,TRANSFORM_TEX(i.uv0, _node_2369));
-                diffColor = DiffuseAndSpecularFromMetallic( diffColor, _node_2369_var.r, specColor, specularMonochrome );
-                float roughness = 1.0 - _node_2369_var.a;
+                float4 _node_8611_var = tex2D(_node_8611,TRANSFORM_TEX(i.uv0, _node_8611));
+                diffColor = DiffuseAndSpecularFromMetallic( diffColor, _node_8611_var.r, specColor, specularMonochrome );
+                float roughness = 1.0 - lerp(_node_8841.r,(1.0 - _node_8611_var.a),_node_9898.r);
                 o.Albedo = diffColor + specColor * roughness * roughness * 0.5;
                 
                 return UnityMetaFragment( o );

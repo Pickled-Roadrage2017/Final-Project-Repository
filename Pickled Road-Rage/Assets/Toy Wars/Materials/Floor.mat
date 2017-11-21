@@ -7,8 +7,8 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Floor
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 62c0ed07414461f4d9541ae6f07b6a57, type: 3}
+  m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 637db34d4404c8f4296a890e5e99107f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -43,7 +43,7 @@ Material:
         m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: dba2135993f9ef340b2f860f702ba21b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -53,6 +53,10 @@ Material:
     - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_2101:
+        m_Texture: {fileID: 2800000, guid: 637db34d4404c8f4296a890e5e99107f, type: 3}
+        m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _node_2369:
         m_Texture: {fileID: 2800000, guid: aeb25e4bd8b7a9046aad01ec16dce82c, type: 3}
@@ -66,6 +70,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 637db34d4404c8f4296a890e5e99107f, type: 3}
         m_Scale: {x: 1.5, y: 1.5}
         m_Offset: {x: 0.5, y: 0.5}
+    - _node_8611:
+        m_Texture: {fileID: 2800000, guid: dba2135993f9ef340b2f860f702ba21b, type: 3}
+        m_Scale: {x: 10, y: 10}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -86,3 +94,6 @@ Material:
     m_Colors:
     - _Color: {r: 0.44852942, g: 0.42214534, b: 0.42214534, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Floor_color: {r: 0.42647058, g: 0.42647058, b: 0.42647058, a: 1}
+    - _node_8841: {r: 0.99264705, g: 0.99264705, b: 0.99264705, a: 1}
+    - _node_9898: {r: 0.5, g: 0.5, b: 0.5, a: 1}

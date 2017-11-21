@@ -1,7 +1,7 @@
 // Shader created with Shader Forge v1.38 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-6867-OUT,spec-1506-R,gloss-1506-A,normal-4080-OUT,difocc-5894-R;n:type:ShaderForge.SFN_Tex2d,id:1506,x:32160,y:32695,ptovrint:False,ptlb:node_1506,ptin:_node_1506,varname:node_1506,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:d3f3dad258305794899760a2597a2ec5,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:1411,x:32222,y:32882,ptovrint:False,ptlb:node_1411,ptin:_node_1411,varname:node_1411,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:0569f7b2db630ff41a3c9a978f41bccb,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:4682,x:32185,y:33108,ptovrint:False,ptlb:node_4682,ptin:_node_4682,varname:node_4682,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:d045509f24182dd45a20bfeaf212e722,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:5894,x:32424,y:33064,ptovrint:False,ptlb:node_5894,ptin:_node_5894,varname:node_5894,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:9371a8b5ad20ac445bf051aeb1aa4de4,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:4080,x:32516,y:32861,varname:node_4080,prsc:2|A-4682-RGB,B-1411-RGB,T-1506-R;n:type:ShaderForge.SFN_Vector3,id:6867,x:32379,y:32548,varname:node_6867,prsc:2,v1:0.2207451,v2:0.1724697,v3:0.8088235;proporder:1506-1411-4682-5894;pass:END;sub:END;*/
+/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-2432-RGB,spec-1506-R,gloss-1506-A,normal-4080-OUT,difocc-5894-R;n:type:ShaderForge.SFN_Tex2d,id:1506,x:32160,y:32695,ptovrint:False,ptlb:node_1506,ptin:_node_1506,varname:node_1506,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:d3f3dad258305794899760a2597a2ec5,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:1411,x:32222,y:32882,ptovrint:False,ptlb:node_1411,ptin:_node_1411,varname:node_1411,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:0569f7b2db630ff41a3c9a978f41bccb,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:4682,x:32185,y:33108,ptovrint:False,ptlb:node_4682,ptin:_node_4682,varname:node_4682,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:d045509f24182dd45a20bfeaf212e722,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Tex2d,id:5894,x:32424,y:33064,ptovrint:False,ptlb:node_5894,ptin:_node_5894,varname:node_5894,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:9371a8b5ad20ac445bf051aeb1aa4de4,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:4080,x:32516,y:32861,varname:node_4080,prsc:2|A-4682-RGB,B-1411-RGB,T-1506-R;n:type:ShaderForge.SFN_Vector3,id:6867,x:32243,y:32492,varname:node_6867,prsc:2,v1:0,v2:0.02271798,v3:0.4705882;n:type:ShaderForge.SFN_Color,id:2432,x:32430,y:32581,ptovrint:False,ptlb:node_2432,ptin:_node_2432,varname:node_2432,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0.5,c2:0.5,c3:0.5,c4:1;proporder:1506-1411-4682-5894-2432;pass:END;sub:END;*/
 
 Shader "Shader Forge/Plastic_Chair_02" {
     Properties {
@@ -9,6 +9,7 @@ Shader "Shader Forge/Plastic_Chair_02" {
         _node_1411 ("node_1411", 2D) = "bump" {}
         _node_4682 ("node_4682", 2D) = "bump" {}
         _node_5894 ("node_5894", 2D) = "white" {}
+        _node_2432 ("node_2432", Color) = (0.5,0.5,0.5,1)
     }
     SubShader {
         Tags {
@@ -43,6 +44,7 @@ Shader "Shader Forge/Plastic_Chair_02" {
             uniform sampler2D _node_1411; uniform float4 _node_1411_ST;
             uniform sampler2D _node_4682; uniform float4 _node_4682_ST;
             uniform sampler2D _node_5894; uniform float4 _node_5894_ST;
+            uniform float4 _node_2432;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -157,7 +159,7 @@ Shader "Shader Forge/Plastic_Chair_02" {
                 float LdotH = saturate(dot(lightDirection, halfDirection));
                 float3 specularColor = _node_1506_var.r;
                 float specularMonochrome;
-                float3 diffuseColor = float3(0.2207451,0.1724697,0.8088235); // Need this for specular when using metallic
+                float3 diffuseColor = _node_2432.rgb; // Need this for specular when using metallic
                 diffuseColor = DiffuseAndSpecularFromMetallic( diffuseColor, specularColor, specularColor, specularMonochrome );
                 specularMonochrome = 1.0-specularMonochrome;
                 float NdotV = abs(dot( normalDirection, viewDirection ));
@@ -234,6 +236,7 @@ Shader "Shader Forge/Plastic_Chair_02" {
             uniform sampler2D _node_1506; uniform float4 _node_1506_ST;
             uniform sampler2D _node_1411; uniform float4 _node_1411_ST;
             uniform sampler2D _node_4682; uniform float4 _node_4682_ST;
+            uniform float4 _node_2432;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -296,7 +299,7 @@ Shader "Shader Forge/Plastic_Chair_02" {
                 float LdotH = saturate(dot(lightDirection, halfDirection));
                 float3 specularColor = _node_1506_var.r;
                 float specularMonochrome;
-                float3 diffuseColor = float3(0.2207451,0.1724697,0.8088235); // Need this for specular when using metallic
+                float3 diffuseColor = _node_2432.rgb; // Need this for specular when using metallic
                 diffuseColor = DiffuseAndSpecularFromMetallic( diffuseColor, specularColor, specularColor, specularMonochrome );
                 specularMonochrome = 1.0-specularMonochrome;
                 float NdotV = abs(dot( normalDirection, viewDirection ));
@@ -357,6 +360,7 @@ Shader "Shader Forge/Plastic_Chair_02" {
             #pragma only_renderers d3d9 d3d11 glcore gles 
             #pragma target 3.0
             uniform sampler2D _node_1506; uniform float4 _node_1506_ST;
+            uniform float4 _node_2432;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float2 texcoord0 : TEXCOORD0;
@@ -386,7 +390,7 @@ Shader "Shader Forge/Plastic_Chair_02" {
                 
                 o.Emission = 0;
                 
-                float3 diffColor = float3(0.2207451,0.1724697,0.8088235);
+                float3 diffColor = _node_2432.rgb;
                 float specularMonochrome;
                 float3 specColor;
                 float4 _node_1506_var = tex2D(_node_1506,TRANSFORM_TEX(i.uv0, _node_1506));
