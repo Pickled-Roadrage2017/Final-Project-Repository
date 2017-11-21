@@ -63,9 +63,6 @@ public class Rocket : Weapon
     [HideInInspector]
     public bool m_bDisable = false;
 
-    // gets the animator of the camera for the shake animation
-    private Animator m_aCameraAnimator;
-
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -73,7 +70,6 @@ public class Rocket : Weapon
     void Awake()
     {
         m_rbRocket = GetComponent<Rigidbody>();
-        m_aCameraAnimator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
     }
 
     //--------------------------------------------------------------------------------------
@@ -83,9 +79,9 @@ public class Rocket : Weapon
     {     
         // ActivateTimer decreases by 1 each frame (Rocket can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
-        m_aCameraAnimator.SetBool("CameraShake", m_bCameraShakeAni);
         if (m_bCameraShakeAni == true)
         {
+            Camera.main.GetComponent<ShakingCamera>().m_bIsShaking = true;
             m_bCameraShakeAni = false;
         }
         if (m_bDisable)
@@ -144,10 +140,7 @@ public class Rocket : Weapon
     {
         //m_asAudioSource.PlayOneShot(m_acExplosionSound);
         // Rocket Explodes, damaging anything within the radius
-        GameObject gExplosion = Instantiate(m_gExplosion);
-        gExplosion.transform.SetParent(null);
-        gExplosion.transform.position = transform.position;
-        Destroy(gExplosion, 5f);
+        
 
         // Collect all possible colliders 
         Collider[] aSoldierColliders = Physics.OverlapSphere(transform.position, m_fSoldierExplosionRadius, m_lmUnitMask);
@@ -217,7 +210,12 @@ public class Rocket : Weapon
     //--------------------------------------------------------------------------------------
     private void RocketDisable()
     {
-        Debug.Log(m_bCameraShakeAni);
+        // set off explosion effect.
+        GameObject gExplosion = Instantiate(m_gExplosion);
+        gExplosion.transform.SetParent(null);
+        gExplosion.transform.position = transform.position;
+        Destroy(gExplosion, 5f);
+
         gameObject.SetActive(false);
         
     }

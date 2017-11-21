@@ -19,6 +19,10 @@ public class GrenadeLauncher : MonoBehaviour
     [Tooltip("Prefab for instantiating the Grenades")]
     public GameObject m_gGrenadePrefab;
 
+    [LabelOverride("Aiming Shadow")]
+    [Tooltip("The gameobject that shall act as a faux shadow of the aiming line")]
+    public GameObject m_gAimingShadow;
+
     [LabelOverride("Shot Sound")]
     [Tooltip("Sound to play as a Grenade is spawned")]
     public AudioClip m_acShotSound;
@@ -72,6 +76,9 @@ public class GrenadeLauncher : MonoBehaviour
     // this GrenadeLaunchers audioSource
     private AudioSource m_asAudioSource;
 
+    // this is the value that the AimingShadow will be reset to on release
+    private Vector3 m_v3AimingShadowReset;
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -94,11 +101,12 @@ public class GrenadeLauncher : MonoBehaviour
 
         m_fGravity = Mathf.Abs(Physics.gravity.y);
         m_lrLine.useWorldSpace = false;
+        m_v3AimingShadowReset = m_gAimingShadow.transform.localScale;
     }
 
     void Update()
     {
-    
+        
     }
 
     //--------------------------------------------------------------------------------------
@@ -121,6 +129,7 @@ public class GrenadeLauncher : MonoBehaviour
         if (m_bIsAscending && m_fVelocity <= m_fMaxVelocity)
         {
             m_fVelocity += m_fAimSpeed * Time.deltaTime;
+            m_gAimingShadow.transform.localScale += new Vector3(0,0,m_fAimSpeed * Time.deltaTime);
             // If the magnitude is higher or equal to MaxLength
             if (m_fVelocity >= m_fMaxVelocity)
             {
@@ -135,6 +144,7 @@ public class GrenadeLauncher : MonoBehaviour
             m_bIsAscending = false;
             // Decrease the CastingLine forwards by AimSpeed
             m_fVelocity -= m_fAimSpeed * Time.deltaTime;
+            m_gAimingShadow.transform.localScale -= new Vector3(0, 0, m_fAimSpeed * Time.deltaTime);
             // if the magnitude is lower than a set number
             if (m_fVelocity <= m_fMinVelocity)
             {
@@ -180,6 +190,7 @@ public class GrenadeLauncher : MonoBehaviour
             // Reset variables for the firing functions
             m_bChargingShot = false;
             m_fVelocity = m_fMinVelocity;
+            m_gAimingShadow.transform.localScale = m_v3AimingShadowReset;
         }
 
     }

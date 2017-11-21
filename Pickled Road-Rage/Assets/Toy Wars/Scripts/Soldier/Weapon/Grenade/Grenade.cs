@@ -96,10 +96,6 @@ public class Grenade : Weapon
     // this Grenades audioSource
     private AudioSource m_asAudioSource;
 
-    // gets the animator of the camera for the shake animation
-    private Animator m_aCameraAnimator;
-
-
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -107,7 +103,6 @@ public class Grenade : Weapon
     {
         m_asAudioSource = GetComponent<AudioSource>();
         m_rbGrenade = GetComponent<Rigidbody>();
-        m_aCameraAnimator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
         m_fFuseTimer = m_fMaxFuseTimer;
         m_bFuseTicking = false;
     }
@@ -117,25 +112,20 @@ public class Grenade : Weapon
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        m_aCameraAnimator.SetBool("ShakeCamera", m_bCameraShakeAni);
+      
         // ActivateTimer decreases by 1 each frame (Grenade can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
-       
         // if the timer has set off
         if (m_fFuseTimer <= 0)
         {
             m_bCameraShakeAni = true;
-            //explode
-            GameObject gExplosion =  Instantiate(m_gExplosion);
-            gExplosion.transform.SetParent(null);
-            gExplosion.transform.position = transform.position;
-            
+            //explode            
             GrenadeExplode();
             if (m_bDisable)
             {
                 GrenadeDisable();
             }
-            Destroy(gExplosion, 5f);
+           
         } 
         // if the grenade has hit the ground
         if (m_bFuseTicking)
@@ -143,12 +133,16 @@ public class Grenade : Weapon
             m_fFuseTimer -= 1 * Time.deltaTime;
             
         }
-
+        // if the camera should shake
         if (m_bCameraShakeAni)
         {
+            Camera.main.GetComponent<ShakingCamera>().m_bIsShaking = true;
             m_bCameraShakeAni = false;
             m_bDisable = true;
         }
+
+       
+
     }
 
 
@@ -242,10 +236,21 @@ public class Grenade : Weapon
     //--------------------------------------------------------------------------------------
     private void GrenadeDisable()
     {
-            m_fCurrentActivateTimer = m_fMaxActivateTimer;
+        m_bCameraShakeAni = false;
+        // set off explosion effect.
+        GameObject gExplosion = Instantiate(m_gExplosion);
+        gExplosion.transform.SetParent(null);
+        gExplosion.transform.position = transform.position;
+        Destroy(gExplosion, 5f);
+        m_fCurrentActivateTimer = m_fMaxActivateTimer;
             m_fFuseTimer = m_fMaxFuseTimer;
             m_bFuseTicking = false;
             gameObject.SetActive(false);
         
     }
+
+
+
+        
+    
 }
