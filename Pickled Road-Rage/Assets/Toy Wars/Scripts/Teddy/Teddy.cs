@@ -32,7 +32,7 @@ public class Teddy : MonoBehaviour
     public float m_fMinDamage = 10;
 
     // health that will be set to MaxHealth in Awake
-    [HideInInspector]
+    //[HideInInspector]
     public float m_fCurrentHealth;
 
     // Health bar slider on teddy canvas.
