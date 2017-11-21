@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class SoldierHealthText : MonoBehaviour
 {
-    private TextMesh m_tmHealthText;
+    [HideInInspector]
+    public TextMesh m_tmHealthText;
     // the soldier which is having its health represented
     public SoldierActor m_gSoldier;
     // health of the soldier converted to a string

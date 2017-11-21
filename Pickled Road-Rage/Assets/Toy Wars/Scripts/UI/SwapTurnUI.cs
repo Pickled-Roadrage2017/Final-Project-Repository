@@ -26,14 +26,35 @@ public class SwapTurnUI : MonoBehaviour
     // Title for this section of public values.
     [Header("Text Object:")]
 
-    // public text object for displaying the current player turn.
-    [LabelOverride("Player Turn Text")][Tooltip("The text object in the canvas that this script is attached to.")]
-    public Text m_tPlayerTurnText;
+    // Text value to store text component.
+    [LabelOverride("Text Object")] [Tooltip("The text object to be lerped across screen.")]
+    public Text m_tText;
 
     // Leave a space in the inspector
     [Space]
     //--------------------------------------------------------------------------------------
 
+    // BACKGROUND //
+    //--------------------------------------------------------------------------------------
+    // Title for this section of public values.
+    [Header("Background Object:")]
+
+    // public gamobject for the background object.
+    [LabelOverride("Background Object")] [Tooltip("The background object to be colored for each player when it is their turn.")]
+    public GameObject m_gBackground;
+
+    // public color for the player one color.
+    [LabelOverride("Player 1 UI Color")] [Tooltip("What color do you want the swap turn UI to be when the turn switches?")]
+    public Color m_cPlayer1Color;
+
+    // public color for the player two color.
+    [LabelOverride("Player 2 UI Color")] [Tooltip("What color do you want the swap turn UI to be when the turn switches?")]
+    public Color m_cPlayer2Color;
+    
+    // Leave a space in the inspector
+    [Space]
+    //--------------------------------------------------------------------------------------
+    
     // LERP //
     //--------------------------------------------------------------------------------------
     // Title for this section of public values.
@@ -60,17 +81,12 @@ public class SwapTurnUI : MonoBehaviour
     // private float for the current lerp timer.
     private float m_fCurrentLerpTime;
     //--------------------------------------------------------------------------------------
-
+    
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        // Start the PlayerTurn UI text as disabled.
-        m_tPlayerTurnText.enabled = false;
-
-        // Set text object to support richtext.
-        m_tPlayerTurnText.supportRichText = true;
     }
 
     //--------------------------------------------------------------------------------------
@@ -81,8 +97,11 @@ public class SwapTurnUI : MonoBehaviour
         // If in the action state display the ticking timer.
         if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
         {
-            // Set the PlayerTurn text element to disabled.
-            m_tPlayerTurnText.enabled = false;
+            // Set the gameobject children to disabled.
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
 
             // Reset the lerp.
             m_fCurrentLerpTime = 0f;
@@ -91,25 +110,48 @@ public class SwapTurnUI : MonoBehaviour
         // If it is currently the start state.
         if (StateMachine.GetState() == ETurnManagerStates.ETURN_START)
         {
-            // Set the PlayerTurn text element to enabled.
-            m_tPlayerTurnText.enabled = true;
+            // Set the gameobject children to enabled.
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
 
-            // if player ones turn.
+            // Check if it is player1s turn.
             if (TurnManager.m_snCurrentTurn == 1)
             {
                 // Display which players it currently is.
-                m_tPlayerTurnText.text = "Blue's Turn!";
+                m_tText.text = "Blue's Turn!";
+
+                // Get the image.
+                Image healthImage = m_gBackground.GetComponent<Image>();
+
+                // New color for the player1 color.
+                Color newColor = m_cPlayer1Color;
+
+                // Set alpha to 1 and color to the newColor.
+                newColor.a = 1;
+                healthImage.color = newColor;
             }
 
-            // if player twos turn.
-            if (TurnManager.m_snCurrentTurn == 2)
+            // Check if it is player2s turn. 
+            else if (TurnManager.m_snCurrentTurn == 2)
             {
                 // Display which players it currently is.
-                m_tPlayerTurnText.text = "Red's Turn!";
+                m_tText.text = "Red's Turn!";
+
+                // Get the image.
+                Image healthImage = m_gBackground.GetComponent<Image>();
+
+                // New color for the player2 color.
+                Color newColor = m_cPlayer2Color;
+
+                // Set alpha to 1 and color to the newColor.
+                newColor.a = 1;
+                healthImage.color = newColor;
             }
 
-            // Slide the text into the screen
-            TextLerp(m_tPlayerTurnText);
+            // Slide the object into the screen
+            Lerp();
         }
     }
 
@@ -119,7 +161,7 @@ public class SwapTurnUI : MonoBehaviour
     // Param:
     //		tTextObject: The text object you want to lerp.
     //--------------------------------------------------------------------------------------
-    void TextLerp(Text tTextObject)
+    void Lerp()
     {
         // update lerp timer by delta time.
         m_fCurrentLerpTime += Time.deltaTime;
@@ -134,7 +176,7 @@ public class SwapTurnUI : MonoBehaviour
         // New float for the progress through the lerp.
         float fProgress = m_fCurrentLerpTime / m_fLerpTime;
 
-        // Lerp the text object.
-        m_tPlayerTurnText.transform.position = Vector3.Lerp(m_v3StartPos, m_v3EndPos, fProgress);
+        // Lerp the text object and background
+        transform.position = Vector3.Lerp(m_v3StartPos, m_v3EndPos, fProgress);
     }
 }

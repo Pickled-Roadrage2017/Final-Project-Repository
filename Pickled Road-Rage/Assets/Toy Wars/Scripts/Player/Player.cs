@@ -26,6 +26,11 @@ public class Player : MonoBehaviour
     [LabelOverride("Player Number")] [Range(1, 2)] [Tooltip("Which Player is this between 1 and 2. eg. Player1 or Player2.")]
     public int m_nPlayerNumber;
 
+
+    // public color for the player color.
+    [LabelOverride("Player Color")] [Tooltip("What color is this player, red or blue?")]
+    public Color m_cPlayerColor;
+
     // Leave a space in the inspector
     [Space]
     //--------------------------------------------------------------------------------------
@@ -162,7 +167,7 @@ public class Player : MonoBehaviour
             // Instantiate and set active state.
             m_agSoldierList[i] = Instantiate(m_gSoldierBlueprint);
             m_agSoldierList[i].SetActive(false);
-
+            
             // loop through each material on the soliders.
             for (int o = 0; o < m_agSoldierList[i].GetComponent<Renderer>().materials.Length; ++o)
             {
@@ -277,6 +282,9 @@ public class Player : MonoBehaviour
                 // increment the active solider int.
                 ++m_nActiveSoldiers;
 
+                // Set health text color.
+                m_agSoldierList[i].GetComponentInChildren<SoldierHealthText>().GetComponent<TextMesh>().color = m_cPlayerColor;
+
                 // return the soldier.
                 return m_agSoldierList[i];
             }
@@ -330,9 +338,6 @@ public class Player : MonoBehaviour
             // if respawn counter is the same as respawn rate.
             if (m_nRespawnCounter == m_nRespawnRate)
             {
-                // Respawn a solider at the teddy base.
-                //RespawnSoldier();
-
                 // Return true if the solider respawns.
                 return true;
             }
@@ -453,20 +458,15 @@ public class Player : MonoBehaviour
             SwitchMesh(sCurrentSoldier, EWeaponType.EWEP_GRENADE, m_mGrenadeSoldierMesh, m_amGrenadeMaterials);
         }
     }
-
-
-
-
-
-
+    
     //--------------------------------------------------------------------------------------
-    // SwitchMesh: 
+    // SwitchMesh: Function to switch the mesh, materials, weapon of the current solider.
     //
     // Param:
-    //		sCurrentSoldier:
-    //      eWeapon:
-    //      mMesh:
-    //      mMaterials:
+    //		sCurrentSoldier: SoldierActor for the current soldier being used.
+    //      eWeapon: EWeaponType for the weapon to swap the current soldier to.
+    //      mMesh: Mesh to switch the current soldier to.
+    //      mMaterials: Materials array for all the current soldier materials to switch.
     //--------------------------------------------------------------------------------------
     void SwitchMesh(SoldierActor sCurrentSoldier, EWeaponType eWeapon, Mesh mMesh, Material[] mMaterials)
     {
@@ -485,20 +485,14 @@ public class Player : MonoBehaviour
             // Change the color of each material to the m_cSoldierColor.
             sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials[o].SetColor("_PlasticColor", m_cSoldierColor);
 
-
-            // FIND A BETTER WAY!
+            // Apply red glow around the current soldier.
             sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials[o].SetFloat("_Outline_Width", 0.02f);
+
+            // Set the color of the outline.
+            sCurrentSoldier.GetComponent<SkinnedMeshRenderer>().materials[o].SetColor("_Outline_Color", m_cPlayerColor);
         }
     }
-
-
-
-
-
-
-
-
-
+    
     //--------------------------------------------------------------------------------------
     // MouseDown: Function for when the mouse is pressed down.
     //

@@ -18,14 +18,14 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class SpawnState : State
 {
+    // float for the animation timer.
+    float m_fAnimationTimer = 0;
 
+    // bool for if a respawn can happen.
+    bool m_bCanRespawn = false;
 
-
-    float fTimer = 0;
-    bool bCanRespawn = false;
-    bool bIsRespawn = false;
-
-
+    // bool of if a respawn will happen.
+    bool m_bIsRespawn = false;
 
     //--------------------------------------------------------------------------------------
     // Initialization: Constructor for the State.
@@ -43,67 +43,55 @@ public class SpawnState : State
     //--------------------------------------------------------------------------------------
     public override void OnUpdate()
     {
-
-
-
-        
-
-
-
-
-
         // if the timer is above 0
         if (TurnManager.m_sfTimer > 0)
         {
             // Check if a soldier can respawn.
-            bCanRespawn = GetCurrentPlayerScript().CheckRespawn();
+            m_bCanRespawn = GetCurrentPlayerScript().CheckRespawn();
         }
 
         // if a soilder can not respawn.
-        if (!bCanRespawn)
+        if (!m_bCanRespawn)
         {
             // set timer to zero
             TurnManager.m_sfTimer = 0;
         }
 
         // if a soilder can respawn.
-        if (bCanRespawn)
-        { 
+        if (m_bCanRespawn)
+        {
             // Set respawn to true
-            bIsRespawn = true;
+            m_bIsRespawn = true;
         }
 
-        // Update the timer by deltatime.
+        // Update the spawn timer by deltatime.
         TurnManager.m_sfTimer -= Time.deltaTime;
 
-        // start the timer for when to spawn the solider.
-        fTimer -= Time.deltaTime;
+        // start the animation timer for when to spawn the solider.
+        m_fAnimationTimer -= Time.deltaTime;
 
-        // If the timer runs out or end turn is true.
+        // If the spawm timer runs out.
         if (TurnManager.m_sfTimer < 0)
         {
-
-
-
-
-
-
-            
-
-            if (bIsRespawn)
+            // If respawn
+            if (m_bIsRespawn)
             {
                 // Play the teddy spawn animation.
                 GetCurrentPlayerScript().m_gTeddyBase.GetComponent<Teddy>().m_bPlaceSoldierAni = true;
 
-                //
-                if (fTimer < 0)
+                // spawn the soldier once the animation finishes.
+                if (m_fAnimationTimer < 0)
                 {
+                    // Respawn soldier.
                     GetCurrentPlayerScript().RespawnSoldier();
-                    bIsRespawn = false;
+
+                    // respawn is now fasle.
+                    m_bIsRespawn = false;
                 }
             }
             
-            if (!bIsRespawn)
+            // If no respawn
+            if (!m_bIsRespawn)
             {
                 // if the current player still has soldiers.
                 if (GetCurrentPlayerScript().GetActiveSoldiers() != 0)
@@ -117,13 +105,6 @@ public class SpawnState : State
                     m_sStateMachine.ChangeState(ETurnManagerStates.ETURN_END); // Will have a massive dealy!
                 }
             }
-
-
-
-
-
-
-
         }
     }
 
@@ -134,14 +115,13 @@ public class SpawnState : State
     {
         // Reset the timer.
         TurnManager.m_sfTimer = TurnManager.m_sfStaticSpawnLength;
+        
+        // Reset animation timer.
+        m_fAnimationTimer = TurnManager.m_sfStaticSpawnLength;
 
-
-
-
-
-        fTimer = TurnManager.m_sfStaticSpawnLength;
-        bCanRespawn = false;
-        bIsRespawn = false;
+        // Reset spawn bools.
+        m_bCanRespawn = false;
+        m_bIsRespawn = false;
     }
 
     //--------------------------------------------------------------------------------------
