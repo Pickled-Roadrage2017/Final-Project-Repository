@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: RPG
-  m_Shader: {fileID: 4800000, guid: e3f9ae54586c014459e0509f7c177e2d, type: 3}
+  m_Name: Default_Material
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -54,18 +54,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _node_252:
-        m_Texture: {fileID: 2800000, guid: d3f3dad258305794899760a2597a2ec5, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _node_5:
-        m_Texture: {fileID: 2800000, guid: ddcf623e940193341b3642df04ac02c3, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _node_6096:
-        m_Texture: {fileID: 2800000, guid: 0569f7b2db630ff41a3c9a978f41bccb, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -77,19 +65,12 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Outline_Width: 0.02
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _node_2892: 0
-    - _node_4927: 0
-    - _node_8328: 0
     m_Colors:
-    - _Color: {r: 0.0523, g: 0.0174, b: 0.0174, a: 1}
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Outline_Color: {r: 1, g: 0, b: 0, a: 1}
-    - _PlasticColor: {r: 0, g: 0.4852941, b: 0.1840771, a: 1}
-    - _node_5574: {r: 0.5, g: 0.5, b: 0.5, a: 1}

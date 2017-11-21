@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4506740579491340}
   - component: {fileID: 33796032944592536}
   - component: {fileID: 23948013662661576}
-  - component: {fileID: 54703821210679116}
   - component: {fileID: 114585756651989048}
+  - component: {fileID: 54703821210679116}
   - component: {fileID: 82432893074446292}
   - component: {fileID: 136972993510052782}
   m_Layer: 22
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_lmEnvironmentMask:
     serializedVersion: 2
     m_Bits: 8388608
-  m_fDamage: 70
+  m_fDamage: 50
   m_fPower: 0
   m_gExplosion: {fileID: 1770641874940636, guid: 9b57595ad6662644e90908380de147ac,
     type: 2}
@@ -247,6 +247,8 @@ MonoBehaviour:
   m_fHitMultiplier: 0.5
   m_gSpawnPoint: {fileID: 0}
   m_fCurrentActivateTimer: 0
+  m_bCameraShakeAni: 0
+  m_bDisable: 0
 --- !u!114 &114958302709345894
 MonoBehaviour:
   m_ObjectHideFlags: 1
