@@ -16,6 +16,7 @@ TagManager:
   - PauseMenu
   - ProjectileWall
   - SoldierWall
+  - Fireworks
   layers:
   - Default
   - TransparentFX

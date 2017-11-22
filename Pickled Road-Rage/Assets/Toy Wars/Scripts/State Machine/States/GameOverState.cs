@@ -76,6 +76,13 @@ public class GameOverState : State
             // Set the gameover canvas to true.
             m_tTurnManager.m_gGameOverCanvas.SetActive(true);
         }
+
+        // Check if there is a valid fireworks
+        if (m_tTurnManager.m_gFireworks != null)
+        {
+            // Set the firworks to true.
+            m_tTurnManager.m_gFireworks.SetActive(true);
+        }
     }
 
     //--------------------------------------------------------------------------------------

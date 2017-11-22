@@ -87,6 +87,10 @@ public class TurnManager : MonoBehaviour
     [HideInInspector]
     public GameObject m_gGameOverCanvas;
 
+    // The gameobject for the fireworks.
+    [HideInInspector]
+    public GameObject m_gFireworks;
+
     // static int for the current players turn.
     public static int m_snCurrentTurn;
 
@@ -139,12 +143,22 @@ public class TurnManager : MonoBehaviour
 
         // Get the canvas.
         m_gGameOverCanvas = GameObject.FindGameObjectWithTag("EndMenu");
-        
+
+        // Get the fireworks.
+        m_gFireworks = GameObject.FindGameObjectWithTag("Fireworks");
+
         // Check if there is a valid GameOverCanvas
         if (m_gGameOverCanvas != null)
         {
             // set gamover canvas to false.
             m_gGameOverCanvas.SetActive(false);
+        }
+
+        // Check if there is a valid Fireworks
+        if (m_gFireworks != null)
+        {
+            // set gamover canvas to false.
+            m_gFireworks.SetActive(false);
         }
 
         // initialization audio source.
