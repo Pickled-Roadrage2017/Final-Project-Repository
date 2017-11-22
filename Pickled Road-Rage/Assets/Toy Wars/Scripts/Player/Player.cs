@@ -424,7 +424,7 @@ public class Player : MonoBehaviour
         if (nSoldierNumber < m_agSoldierList.Length)
         {
              // return the soldier.
-                return m_agSoldierList[nSoldierNumber];
+            return m_agSoldierList[nSoldierNumber];
         }
 
         // else return null.

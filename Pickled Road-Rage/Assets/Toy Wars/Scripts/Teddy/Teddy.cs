@@ -55,9 +55,9 @@ public class Teddy : MonoBehaviour
     [HideInInspector]
     public bool m_bDeathAni;
 
-
     // this Teddys audioSource
-    private AudioSource m_asAudioSource;
+    [HideInInspector]
+    public AudioSource m_asAudioSource;
 
     // the bears animator
     private Animator m_aAnimator;

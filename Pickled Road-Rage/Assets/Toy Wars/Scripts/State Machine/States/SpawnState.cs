@@ -27,6 +27,9 @@ public class SpawnState : State
     // bool of if a respawn will happen.
     bool m_bIsRespawn = false;
 
+    // bool for playing the spawning audio.
+    bool m_bCanPlayAudio = true;
+
     //--------------------------------------------------------------------------------------
     // Initialization: Constructor for the State.
     //
@@ -79,12 +82,32 @@ public class SpawnState : State
                 // Play the teddy spawn animation.
                 GetCurrentPlayerScript().m_gTeddyBase.GetComponent<Teddy>().m_bPlaceSoldierAni = true;
 
+
+
+                
+
+
+                if (m_fAnimationTimer < 1 && m_bCanPlayAudio)
+                {
+                    // make sure only the audio only plays once.
+                    if (!GetCurrentPlayerScript().m_gTeddyBase.GetComponent<Teddy>().m_asAudioSource.isPlaying)
+                    {
+                        // Play palce sound.
+                        GetCurrentPlayerScript().m_gTeddyBase.GetComponent<Teddy>().m_asAudioSource.PlayOneShot(GetCurrentPlayerScript().m_gTeddyBase.GetComponent<Teddy>().m_acPlaceSound);
+                        m_bCanPlayAudio = false;
+                    }
+                }
+
+
+
+
+
                 // spawn the soldier once the animation finishes.
                 if (m_fAnimationTimer < 0)
                 {
                     // Respawn soldier.
                     GetCurrentPlayerScript().RespawnSoldier();
-
+                    
                     // respawn is now fasle.
                     m_bIsRespawn = false;
                 }
@@ -131,5 +154,11 @@ public class SpawnState : State
     {
         // Set timer back to 0.
         TurnManager.m_sfTimer = 0;
+
+        // make sure the spawn sound has stop.
+        m_tTurnManager.m_asAudioSource.Stop();
+
+        // Set can play back to true.
+        m_bCanPlayAudio = true;
     }
 }
