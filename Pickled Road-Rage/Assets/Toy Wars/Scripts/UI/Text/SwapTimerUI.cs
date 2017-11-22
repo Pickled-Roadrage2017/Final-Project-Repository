@@ -63,7 +63,7 @@ public class SwapTimerUI : MonoBehaviour
     {
         // Format the timer as a timer with seconds.
         int nSeconds = Mathf.FloorToInt(TurnManager.m_sfTimer);
-        string nTimer = string.Format("{0}", nSeconds);
+        string nTimer = string.Format("{0}", nSeconds + 1);
 
         // If in the start state display the ticking timer.
         if (StateMachine.GetState() == ETurnManagerStates.ETURN_START)

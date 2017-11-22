@@ -126,7 +126,16 @@ public class Player : MonoBehaviour
     // PRIVATE VALUES //
     //--------------------------------------------------------------------------------------
     // public array of gameobjects for player soldiers.
-    private GameObject[] m_agSoldierList;
+
+
+
+
+    [HideInInspector]
+    public GameObject[] m_agSoldierList;
+
+
+
+
 
     // pool size. how many soldiers allowed on screen at once.
     private int m_nPoolSize;
@@ -358,11 +367,13 @@ public class Player : MonoBehaviour
         // has max respawns been hit? has the player got soldiers?
         if (m_nMaxRespawnCounter >= m_nMaxRespawns && GetActiveSoldiers() <= 0)
         {
+            m_gTeddyBase.GetComponent<Teddy>().m_fCurrentHealth = 0;
+
             return true;
         }
 
         // Check Teddy current health for the player.
-        else if (m_gTeddyBase.GetComponent<Teddy>().m_fCurrentHealth <= 0)
+        else if (!m_gTeddyBase.GetComponent<Teddy>().IsAlive())
         {
             return true;
         }
