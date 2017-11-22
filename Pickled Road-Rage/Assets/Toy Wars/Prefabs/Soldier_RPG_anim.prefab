@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 102993579667599736}
   - component: {fileID: 114865555804714824}
   - component: {fileID: 114157454613259830}
+  - component: {fileID: 114092360159890970}
   m_Layer: 0
   m_Name: HealthText
   m_TagString: Untagged
@@ -144,7 +145,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362723199391126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.558144, y: 11.949831, z: -44.919197}
+  m_LocalPosition: {x: 13.126398, y: 0, z: -14.647549}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4428677557891060}
@@ -187,7 +188,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1757745506353262}
   m_LocalRotation: {x: -0.17364825, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0.10599899, y: 0.345, z: 0.24520016}
+  m_LocalPosition: {x: 0.10599899, y: 0.3655, z: 0.24520016}
   m_LocalScale: {x: 0.049999997, y: 0.049999997, z: 0.049999997}
   m_Children:
   - {fileID: 4356444908333646}
@@ -475,7 +476,7 @@ TextMesh:
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
-  m_Anchor: 1
+  m_Anchor: 4
   m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 30
@@ -501,7 +502,7 @@ MonoBehaviour:
   m_acShotSound: {fileID: 8300000, guid: 6c9ddf7153fd89245a6d2bbdde71cc7d, type: 3}
   m_fMinVelocity: 1
   m_fMaxVelocity: 10
-  m_fAimSpeed: 10
+  m_fAimSpeed: 12
   m_fLineAngle: -20
 --- !u!114 &114072480633714656
 MonoBehaviour:
@@ -538,6 +539,20 @@ MonoBehaviour:
   m_gMovementCirlceBluePrint: {fileID: 1471151944024382, guid: 202ec0867f5c2e544a205eb636f6cf92,
     type: 2}
   m_aAnimator: {fileID: 0}
+--- !u!114 &114092360159890970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1200397455976988}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.697}
+  m_EffectDistance: {x: 0, y: 0}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114157454613259830
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -549,8 +564,8 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 0.1, y: -0.1}
   m_UseGraphicAlpha: 1
 --- !u!114 &114647353822735556
 MonoBehaviour:
@@ -569,7 +584,7 @@ MonoBehaviour:
   m_acShotSound: {fileID: 8300000, guid: 7590d09272c505340a8bbbbb0020e0ef, type: 3}
   m_fMinVelocity: 1
   m_fMaxVelocity: 10
-  m_fAimSpeed: 10
+  m_fAimSpeed: 12
   m_fLineAngle: -20
 --- !u!114 &114865555804714824
 MonoBehaviour:
@@ -619,7 +634,7 @@ LineRenderer:
   m_Positions: []
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.2
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -788,7 +803,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200397455976988}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.161}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4773043233129098}

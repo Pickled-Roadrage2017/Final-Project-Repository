@@ -230,7 +230,7 @@ MonoBehaviour:
   m_lmEnvironmentMask:
     serializedVersion: 2
     m_Bits: 8388608
-  m_fDamage: 50
+  m_fDamage: 60
   m_fPower: 0
   m_gExplosion: {fileID: 1770641874940636, guid: 9b57595ad6662644e90908380de147ac,
     type: 2}
@@ -242,8 +242,8 @@ MonoBehaviour:
   m_fBounciness: 10
   m_fBounceDrag: 2
   m_ExplosionForce: 20
-  m_fSoldierExplosionRadius: 1.5
-  m_fTeddyExplosionRadius: 2
+  m_fSoldierExplosionRadius: 2.25
+  m_fTeddyExplosionRadius: 2.8
   m_fHitMultiplier: 0.5
   m_gSpawnPoint: {fileID: 0}
   m_fCurrentActivateTimer: 0
