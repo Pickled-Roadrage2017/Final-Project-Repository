@@ -118,9 +118,16 @@ public class Grenade : Weapon
         // if the timer has set off
         if (m_fFuseTimer <= 0)
         {
-            m_bCameraShakeAni = true;
-            //explode            
-            GrenadeExplode();
+            
+            // if the grenade is not supposed to be disabled yet
+            if (!m_bDisable)
+            {
+                // the camera should shake
+                m_bCameraShakeAni = true;
+                // and the grenade should explode
+                GrenadeExplode();
+            }
+            // if the grenade should be disbabled this update.
             if (m_bDisable)
             {
                 GrenadeDisable();
@@ -218,16 +225,11 @@ public class Grenade : Weapon
                 continue;
             }
 
-            // TODO: Explosion particle effect here
-
             Teddy gtarget = rbTarget.GetComponent<Teddy>();
 
             // Teddy will take damage based on position (See CalculateDamge function below)
             gtarget.TakeDamage(CalculateDamage(aTeddyColliders[i].transform.position,m_fTeddyExplosionRadius));
-
-            // add explosive force for knockback 
-            // NOTE: May be replaced with a non-rigidbody knockback
-            rbTarget.AddExplosionForce(m_ExplosionForce, transform.position, m_fSoldierExplosionRadius, 0.0f, ForceMode.Impulse);
+            Debug.Log(CalculateDamage(aTeddyColliders[i].transform.position, m_fTeddyExplosionRadius));
         }
     }
 

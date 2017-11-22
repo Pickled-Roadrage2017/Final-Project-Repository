@@ -370,9 +370,10 @@ public class SoldierActor : MonoBehaviour
     {
         // TODO: Animation and such
         // Set the Soldier to inactive
-        gameObject.SetActive(false);
         // Reset the Soldiers values to initial
         m_fCurrentHealth = m_fMaxHealth;
         m_rbRigidBody.isKinematic = false;
+        m_eCurrentWeapon = EWeaponType.EWEP_RPG;
+        gameObject.SetActive(false);
     }
 }

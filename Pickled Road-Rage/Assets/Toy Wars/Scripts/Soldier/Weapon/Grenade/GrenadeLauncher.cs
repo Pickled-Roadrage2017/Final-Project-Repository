@@ -90,6 +90,7 @@ public class GrenadeLauncher : MonoBehaviour
         // initilize rocket list with size
         m_agGrenadeList = new GameObject[m_nPoolsize];
         m_lrLine = GetComponent<LineRenderer>();
+        m_asAudioSource = GetComponent<AudioSource>();
 
         // go through each rocket
         for (int i = 0; i < m_nPoolsize; ++i)
@@ -102,6 +103,7 @@ public class GrenadeLauncher : MonoBehaviour
         m_fGravity = Mathf.Abs(Physics.gravity.y);
         m_lrLine.useWorldSpace = false;
         m_v3AimingShadowReset = m_gAimingShadow.transform.localScale;
+        
     }
 
     void Update()
@@ -161,6 +163,7 @@ public class GrenadeLauncher : MonoBehaviour
     {
         if (m_bChargingShot)
         {
+            m_asAudioSource.PlayOneShot(m_acShotSound);
             SpawnBullet();
         }
     }

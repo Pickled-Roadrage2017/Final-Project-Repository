@@ -47,6 +47,15 @@ public class Teddy : MonoBehaviour
     [HideInInspector]
     public bool m_bPlaceSoldierAni;
 
+    // boolean for an animation of the Teddy winning
+    [HideInInspector]
+    public bool m_bWinAni;
+
+    // boolean for an animation of the Teddy taking damage
+    [HideInInspector]
+    public bool m_bDeathAni;
+
+
     // this Teddys audioSource
     private AudioSource m_asAudioSource;
 
@@ -59,9 +68,12 @@ public class Teddy : MonoBehaviour
     {
         m_bDamageAni = false;
         m_bPlaceSoldierAni = false;
+        m_bWinAni = false;
+        m_bDeathAni = false;
 
         m_aAnimator = GetComponent<Animator>();
         m_asAudioSource = GetComponent<AudioSource>();
+        m_fCurrentHealth = m_fMaxHealth;
         // Set the health slider value to the current health.
         m_sHealthBar.value = CalcHealth();
     }
@@ -73,12 +85,9 @@ public class Teddy : MonoBehaviour
     {
         m_aAnimator.SetBool("TakeDamage", m_bDamageAni);
         m_aAnimator.SetBool("PlaceSoldier", m_bPlaceSoldierAni);
-        m_aAnimator.SetFloat("Health", m_fCurrentHealth);
-        if (!IsAlive())
-        {
-            gameObject.SetActive(false);
-        }
-       
+        m_aAnimator.SetBool("Win", m_bWinAni);
+        m_aAnimator.SetBool("Death", m_bDeathAni);
+
         // Apply damage to the health bar.
         m_sHealthBar.value = CalcHealth();
 
@@ -91,6 +100,16 @@ public class Teddy : MonoBehaviour
         {
             m_bPlaceSoldierAni = false;
         }
+
+        if (m_bWinAni == true)
+        {
+            m_bWinAni = false;
+        }
+        
+        if(m_bDeathAni == true)
+        {
+            m_bDeathAni = false;
+        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -101,12 +120,13 @@ public class Teddy : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void TakeDamage(float fDamage)
     {
-        if (fDamage > 0 && fDamage > m_fMinDamage)
+        if (fDamage > m_fMinDamage)
        {
             m_asAudioSource.PlayOneShot(m_acDamageSound);
             m_bDamageAni = true;
             // Minus the Teddys currentHealth by the fDamage argument
             m_fCurrentHealth -= fDamage;
+            //Debug.Log(m_fCurrentHealth);
         }
     }
 

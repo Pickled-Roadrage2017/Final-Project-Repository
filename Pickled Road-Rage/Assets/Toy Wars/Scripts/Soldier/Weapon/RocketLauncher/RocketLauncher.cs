@@ -13,7 +13,6 @@ using UnityEngine;
 
 public class RocketLauncher : MonoBehaviour
 {
-
     // Prefab for the Rocket object.
     [LabelOverride("Rocket Prefab")]
     [Tooltip("Prefab for instantiating the rockets")]
@@ -82,6 +81,7 @@ public class RocketLauncher : MonoBehaviour
         m_bIsAscending = true;
         // initilize rocket list with size
         m_agRocketList = new GameObject[m_nPoolsize];
+        m_asAudioSource = GetComponent<AudioSource>();
         m_lrLine = GetComponent<LineRenderer>();
         
         // go through each rocket
@@ -150,6 +150,7 @@ public class RocketLauncher : MonoBehaviour
     {
         if (m_bChargingShot)
         {
+            m_asAudioSource.PlayOneShot(m_acShotSound);
             SpawnBullet();
         }
     }
