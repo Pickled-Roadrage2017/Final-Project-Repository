@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4375823115687616}
   - component: {fileID: 33338692767525212}
   - component: {fileID: 23587484599604796}
-  m_Layer: 21
+  m_Layer: 20
   m_Name: MovementCircle
-  m_TagString: Untagged
+  m_TagString: SoldierWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23946993377495036}
   - component: {fileID: 64308840390210206}
   - component: {fileID: 114877402882793942}
-  m_Layer: 21
+  m_Layer: 20
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
