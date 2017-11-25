@@ -93,7 +93,7 @@ public class Teddy : MonoBehaviour
 
         if (m_bDamageAni == true)
         {
-            m_bDamageAni = false;
+            //m_bDamageAni = false;
         }
 
         if (m_bPlaceSoldierAni == true)
@@ -123,10 +123,13 @@ public class Teddy : MonoBehaviour
         if (fDamage > m_fMinDamage)
        {
             m_asAudioSource.PlayOneShot(m_acDamageSound);
-            m_bDamageAni = true;
+
             // Minus the Teddys currentHealth by the fDamage argument
             m_fCurrentHealth -= fDamage;
             //Debug.Log(m_fCurrentHealth);
+
+            if (m_fCurrentHealth > 0)
+                m_bDamageAni = true;
         }
     }
 

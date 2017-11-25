@@ -32,6 +32,17 @@ public class EndState : State
     //--------------------------------------------------------------------------------------
     public override void OnUpdate()
     {
+        // If a bear for either team has taken damage.
+        if (GetPlayerScript(1).m_gTeddyBase.GetComponent<Teddy>().m_bDamageAni || GetPlayerScript(2).m_gTeddyBase.GetComponent<Teddy>().m_bDamageAni)
+        {
+            // add seconds to the timer.
+            TurnManager.m_sfTimer += 2.5f;
+
+            // stop the animation from playing again.
+            GetPlayerScript(1).m_gTeddyBase.GetComponent<Teddy>().m_bDamageAni = false;
+            GetPlayerScript(2).m_gTeddyBase.GetComponent<Teddy>().m_bDamageAni = false;
+        }
+        
         // Update the timer by deltatime.
         TurnManager.m_sfTimer -= Time.deltaTime;
         

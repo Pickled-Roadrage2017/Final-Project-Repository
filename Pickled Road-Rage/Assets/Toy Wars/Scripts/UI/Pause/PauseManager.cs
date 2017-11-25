@@ -72,8 +72,15 @@ public class PauseManager : MonoBehaviour
             // stop game clock.
             Time.timeScale = 0;
 
+
+
+
+
+
+
+
             // Pause all the audio in the game.
-            AudioListener.pause = true;
+            //AudioListener.pause = true;
         }
 
         // if not paused.
@@ -88,6 +95,12 @@ public class PauseManager : MonoBehaviour
 
             // start game clock.
             Time.timeScale = 1;
+
+
+
+
+
+
 
             // Unpause all the audio in the game.
             AudioListener.pause = false;
