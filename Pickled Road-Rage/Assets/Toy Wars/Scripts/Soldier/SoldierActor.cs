@@ -373,7 +373,7 @@ public class SoldierActor : MonoBehaviour
         // Reset the Soldiers values to initial
         m_fCurrentHealth = m_fMaxHealth;
         m_rbRigidBody.isKinematic = false;
-        m_eCurrentWeapon = EWeaponType.EWEP_RPG;
+        //m_eCurrentWeapon = EWeaponType.EWEP_RPG;
         gameObject.SetActive(false);
     }
 }

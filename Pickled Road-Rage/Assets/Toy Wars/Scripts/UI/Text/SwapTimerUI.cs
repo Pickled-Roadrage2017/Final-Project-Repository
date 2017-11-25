@@ -1,7 +1,9 @@
 ﻿//--------------------------------------------------------------------------------------
-// Purpose: 
+// Purpose: Show the time left until the turn start.
 //
-// Description: 
+// Description: The SwapTimerUI script is gonna be used for displaying the ammount of 
+// time until the current players turn starts. This script is to be attached to a 
+// textobject.
 //
 // Author: Thomas Wiltshire.
 //--------------------------------------------------------------------------------------
@@ -71,16 +73,17 @@ public class SwapTimerUI : MonoBehaviour
             // display the ui timer.
             m_tTurnTimerText.text = nTimer;
 
+            // Switch the color to white when the timer is higher than 3.
+            if (TurnManager.m_sfTimer > 3)
+            {
+                m_tTurnTimerText.color = Color.LerpUnclamped(m_acColors[1], m_acColors[0], 1);
+            }
+
+            // Switch the color to red when the timer is lower than 3.
             if (TurnManager.m_sfTimer < 3)
             {
                 m_tTurnTimerText.color = Color.LerpUnclamped(m_acColors[1], m_acColors[0], 0);
             }
-        }
-        
-        // If it is currently the start state.
-        if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
-        {
-            m_tTurnTimerText.color = Color.LerpUnclamped(m_acColors[1], m_acColors[0], 1);
         }
     }
 }

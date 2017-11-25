@@ -110,9 +110,17 @@ public class Player : MonoBehaviour
 
     // PUBLIC HIDDEN //
     //--------------------------------------------------------------------------------------
+    // public array of gameobjects for player soldiers.
+    [HideInInspector]
+    public GameObject[] m_agSoldierList;
+
     // int for keeping track of the respawns.
     [HideInInspector]
     public int m_nMaxRespawnCounter;
+
+    // int for how many turns until respawn.
+    [HideInInspector]
+    public int m_nRespawnCounter;
 
     // private int for current soldiers turn.
     [HideInInspector]
@@ -125,24 +133,9 @@ public class Player : MonoBehaviour
 
     // PRIVATE VALUES //
     //--------------------------------------------------------------------------------------
-    // public array of gameobjects for player soldiers.
-
-
-
-
-    [HideInInspector]
-    public GameObject[] m_agSoldierList;
-
-
-
-
-
     // pool size. how many soldiers allowed on screen at once.
     private int m_nPoolSize;
-
-    // int for how many turns until respawn.
-    private int m_nRespawnCounter;
-
+    
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;
     //--------------------------------------------------------------------------------------
@@ -317,6 +310,9 @@ public class Player : MonoBehaviour
             // Set the postion of the soldiers to the postion of the spawn point.
             o.transform.position = m_gRespawnPoint.transform.position;
             o.transform.rotation = m_gRespawnPoint.transform.rotation;
+
+            // Switch mesh, materials, etc to the RPG
+            SwitchMesh(o.GetComponent<SoldierActor>(), EWeaponType.EWEP_RPG, m_mRPGSoldierMesh, m_amRPGMaterials);
 
             // reset the spawn counter.
             m_nRespawnCounter = 0;

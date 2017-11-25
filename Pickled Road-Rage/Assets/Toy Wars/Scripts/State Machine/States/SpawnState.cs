@@ -82,11 +82,7 @@ public class SpawnState : State
                 // Play the teddy spawn animation.
                 GetCurrentPlayerScript().m_gTeddyBase.GetComponent<Teddy>().m_bPlaceSoldierAni = true;
 
-
-
-                
-
-
+                // if the animation timer is less than 1 and audio can be played.
                 if (m_fAnimationTimer < 1 && m_bCanPlayAudio)
                 {
                     // make sure only the audio only plays once.
@@ -97,10 +93,6 @@ public class SpawnState : State
                         m_bCanPlayAudio = false;
                     }
                 }
-
-
-
-
 
                 // spawn the soldier once the animation finishes.
                 if (m_fAnimationTimer < 0)

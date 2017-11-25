@@ -113,7 +113,7 @@ public class TimerUI : MonoBehaviour
             m_tTurnTimerText.color = m_acColors[0];
 
             // display the ui timer at 0.
-            m_tTurnTimerText.text = "0:00";
+            m_tTurnTimerText.text = string.Format("{0:0}:{1:00}", 0, Mathf.FloorToInt(TurnManager.m_sfStaticTimerLength - nMinutes * 60));
         }
     }
 

@@ -32,6 +32,7 @@ public class GameOverState : State
     //--------------------------------------------------------------------------------------
     public override void OnUpdate()
     {
+        // If player 1 has a gameover.
         if (GetPlayerScript(1).CheckGameOver()) // Possibly fix if the death animation takes to long to play
         {
             // Play the teddy winning animation for the winning teddy.
@@ -40,14 +41,15 @@ public class GameOverState : State
             // Play the teddy death animation for the losing teddy.
             GetPlayerScript(1).m_gTeddyBase.GetComponent<Teddy>().m_bDeathAni = true;
 
-            //
+            // Go through each soldier for player 1
             for (int i = 0; i < GetPlayerScript(1).m_agSoldierList.Length; ++i)
             {
                 // Set the soldier winning animation.
-                GetPlayerScript(2).m_agSoldierList[i].GetComponent<SoldierActor>().m_bMovingAni = true;
+                GetPlayerScript(2).m_agSoldierList[i].GetComponent<SoldierActor>().m_bMovingAni = true; // Change this to be the winning animation! // CHANGE!
             }
         }
 
+        // If player 2 has a gameover.
         if (GetPlayerScript(2).CheckGameOver()) // Possibly fix if the death animation takes to long to play
         {
             // Play the teddy winning animation for the winning teddy.
@@ -56,11 +58,11 @@ public class GameOverState : State
             // Play the teddy death animation for the losing teddy.
             GetPlayerScript(2).m_gTeddyBase.GetComponent<Teddy>().m_bDeathAni = true;
 
-            // 
+            // Go through each soldier for player 2 
             for (int i = 0; i < GetPlayerScript(1).m_agSoldierList.Length; ++i)
             {
                 // Set the soldier winning animation.
-                GetPlayerScript(1).m_agSoldierList[i].GetComponent<SoldierActor>().m_bMovingAni = true;
+                GetPlayerScript(1).m_agSoldierList[i].GetComponent<SoldierActor>().m_bMovingAni = true; // Change this to be the winning animation! // CHANGE!
             }
         }
     }
