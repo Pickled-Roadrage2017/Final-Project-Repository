@@ -63,7 +63,8 @@ public class Rocket : Weapon
     [HideInInspector]
     public bool m_bDisable = false;
 
-
+    [HideInInspector]
+    public float m_fLifespan = 50;
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -79,6 +80,7 @@ public class Rocket : Weapon
     {     
         // ActivateTimer decreases by 1 each frame (Rocket can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
+        m_fLifespan -= 1;
         if (m_bCameraShakeAni == true)
         {
             Camera.main.GetComponent<ShakingCamera>().m_bIsShaking = true;
@@ -87,6 +89,12 @@ public class Rocket : Weapon
         if (m_bDisable)
         {
             RocketDisable();
+        }
+
+        if(m_fLifespan <= 0)
+        {
+            RocketDisable();
+            m_fLifespan = 10;
         }
     }
 

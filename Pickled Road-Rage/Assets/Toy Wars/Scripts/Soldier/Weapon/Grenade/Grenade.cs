@@ -96,6 +96,8 @@ public class Grenade : Weapon
     // this Grenades audioSource
     private AudioSource m_asAudioSource;
 
+    [HideInInspector]
+    public float m_fLifespan = 50;
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -115,6 +117,7 @@ public class Grenade : Weapon
       
         // ActivateTimer decreases by 1 each frame (Grenade can only collide when this is lower than 1)
         m_fCurrentActivateTimer -= 1;
+        m_fLifespan -= 1;
         // if the timer has set off
         if (m_fFuseTimer <= 0)
         {
@@ -148,7 +151,10 @@ public class Grenade : Weapon
             m_bDisable = true;
         }
 
-       
+       if (m_fLifespan <= 0)
+        {
+            GrenadeDisable();
+        }
 
     }
 
@@ -229,7 +235,6 @@ public class Grenade : Weapon
 
             // Teddy will take damage based on position (See CalculateDamge function below)
             gtarget.TakeDamage(CalculateDamage(aTeddyColliders[i].transform.position,m_fTeddyExplosionRadius));
-            Debug.Log(CalculateDamage(aTeddyColliders[i].transform.position, m_fTeddyExplosionRadius));
         }
     }
 

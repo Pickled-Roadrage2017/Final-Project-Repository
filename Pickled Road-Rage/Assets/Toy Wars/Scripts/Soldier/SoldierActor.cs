@@ -188,15 +188,17 @@ public class SoldierActor : MonoBehaviour
         }
 
         // if the soldier is not moving
-        if (m_rbRigidBody.velocity == Vector3.zero)
+        if (m_v3Movement == Vector3.zero)
         {
             m_bMovingAni = false;
         }
+
         // soldier is moving
         else
         {
             m_bMovingAni = true;
         }
+
     }
 
     //--------------------------------------------------------------------------------------
@@ -267,6 +269,7 @@ public class SoldierActor : MonoBehaviour
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
             m_gLauncherScript.MouseHeld();
+          
         }
         else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
         {
@@ -287,6 +290,7 @@ public class SoldierActor : MonoBehaviour
         if (m_eCurrentWeapon == EWeaponType.EWEP_RPG)
         {
             m_gLauncherScript.MouseUp();
+           
         }
         else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
         {
@@ -314,6 +318,7 @@ public class SoldierActor : MonoBehaviour
         // Update the rigidbody velocity.
         m_rbRigidBody.velocity = m_v3Movement * m_fSpeed;
        
+
     }
 
     //--------------------------------------------------------------------------------------
