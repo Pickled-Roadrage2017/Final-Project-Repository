@@ -246,9 +246,9 @@ MonoBehaviour:
   m_gExplosion: {fileID: 1770641874940636, guid: 9b57595ad6662644e90908380de147ac,
     type: 2}
   m_fMaxActivateTimer: 2
-  m_ExplosionForce: 15
+  m_ExplosionForce: 17.5
   m_fHitMultiplier: 0.5
-  m_fSoldierExplosionRadius: 1.5
+  m_fSoldierExplosionRadius: 1.75
   m_fTeddyExplosionRadius: 2.25
   m_gSpawnPoint: {fileID: 0}
   m_fCurrentActivateTimer: 0
