@@ -38,15 +38,8 @@ public class SwapTimerUI : MonoBehaviour
     //--------------------------------------------------------------------------------------
     // text object for displaying the current player timer.
     private Text m_tTurnTimerText;
+    //--------------------------------------------------------------------------------------
 
-    // private bool for when to change color.
-    private bool m_bChangeColor = false;
-
-    // private float for lerping.
-    private float m_fLerpTimer = 0;
-
-    // float for the flash starting time.
-    private float m_fFlashTimeStart = 5;
     //--------------------------------------------------------------------------------------
 
     //--------------------------------------------------------------------------------------
