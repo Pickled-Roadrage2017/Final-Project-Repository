@@ -78,9 +78,18 @@ public class PauseManager : MonoBehaviour
 
 
 
+            //foreach (AudioSource audio in allAudioSources)
+            //{
+            //    audio.Pause();
+            //}
+
+
+
+
+
 
             // Pause all the audio in the game.
-            //AudioListener.pause = true;
+            AudioListener.pause = true;
         }
 
         // if not paused.

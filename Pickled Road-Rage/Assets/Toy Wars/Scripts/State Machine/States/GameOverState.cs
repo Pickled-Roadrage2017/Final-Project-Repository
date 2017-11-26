@@ -65,6 +65,14 @@ public class GameOverState : State
                 GetPlayerScript(1).m_agSoldierList[i].GetComponent<SoldierActor>().m_bMovingAni = true; // Change this to be the winning animation! // CHANGE!
             }
         }
+
+        // If both players have gameover.
+        if (GetPlayerScript(1).CheckGameOver() && GetPlayerScript(2).CheckGameOver())
+        {
+            // Play the teddy death animation for both teddys.
+            GetPlayerScript(1).m_gTeddyBase.GetComponent<Teddy>().m_bDeathAni = true;
+            GetPlayerScript(2).m_gTeddyBase.GetComponent<Teddy>().m_bDeathAni = true;
+        }
     }
 
     //--------------------------------------------------------------------------------------

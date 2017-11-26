@@ -56,5 +56,12 @@ public class GameOverUI : MonoBehaviour
             // Change gameover canvas text to display this player won.
             m_tTitleText.text = "Blue Wins!";
         }
+
+        // Check if both players have gameover
+        if (m_pPlayer1.CheckGameOver() && m_pPlayer2.CheckGameOver())
+        {
+            // Change gameover canvas text to display that it is a draw.
+            m_tTitleText.text = "Draw!";
+        }
     }
 }
