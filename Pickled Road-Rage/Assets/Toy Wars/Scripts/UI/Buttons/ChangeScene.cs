@@ -25,6 +25,15 @@ public class ChangeScene : MonoBehaviour
     [LabelOverride("Destination Scene")][Tooltip("The Scene to be changed to when pushing this button.")]
     public string m_sDestinationScene;
 
+
+
+    public bool transtionAnimation;
+
+    public bool m_bFancyAni = true;
+
+    float fTimer = 0.0f;
+
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -38,7 +47,7 @@ public class ChangeScene : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-
+        
     }
 
     //--------------------------------------------------------------------------------------
@@ -46,6 +55,14 @@ public class ChangeScene : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void LoadLevel()
     {
+        fTimer += Time.deltaTime;
+
+        if (transtionAnimation)
+        {
+            if (fTimer > 1)
+                GetComponent<Animator>().SetBool("FancyAni", m_bFancyAni);
+        }
+
         // load scene by destination string.
         SceneManager.LoadScene(m_sDestinationScene);
     }
