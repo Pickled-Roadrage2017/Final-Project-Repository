@@ -21,6 +21,10 @@ public enum EWeaponType
 
 public class SoldierActor : MonoBehaviour
 {
+    //[LabelOverride("Death Animation")]
+    //[Tooltip("The Soldier will display this object on death")]
+    //public GameObject m_gSoldierDeath;
+
     [Header("Sounds")]
     [LabelOverride("Footstep 1")]
     public AudioClip m_acFootstep1;
@@ -105,9 +109,12 @@ public class SoldierActor : MonoBehaviour
     [HideInInspector]
     public bool m_bFireAni;
 
-    //[HideInInspector]
+    // a boolean for an animation of the Death
+    [HideInInspector]
     public bool m_bDeathAni;
 
+    // a boolean for an animation for the winning.
+    [HideInInspector]
     public bool m_bWinAni;
 
     // public float for the radius of the movement circle.
@@ -119,10 +126,6 @@ public class SoldierActor : MonoBehaviour
     [LabelOverride("Radius Object")]
     [Tooltip("The Prefab for the Radius object.")]
     public GameObject m_gMovementCirlceBluePrint;
-
-    [LabelOverride("Death Timer")]
-    [Tooltip("How long the death animation will play for before the soldier disables")]
-    public float m_fDeathTimer;
 
     // The gameobject for the soldier moevement circle.
     private GameObject m_gMovementCircle;
@@ -196,7 +199,6 @@ public class SoldierActor : MonoBehaviour
         // As health is a float, anything below one will be displayed as 0 to the player
         if (m_fCurrentHealth < 1)      
         {
-            //if (m_aAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
             Die();
         }
 
@@ -398,25 +400,22 @@ public class SoldierActor : MonoBehaviour
     {
         m_bDeathAni = true;
         m_asAudioSource.PlayOneShot(m_acDeathSound);
-        if (m_fDeathTimer <= 0.0f)
-        {
-            //GetComponent<Renderer>().enabled = false;
-            // TODO: Animation and such
+
             m_bDamageAni = false;
             m_bFireAni = false;
             m_bMovingAni = false;
             m_bDeathAni = false;
             // Set the Soldier to inactive
+
             // Reset the Soldiers values to initial
             m_fCurrentHealth = m_fMaxHealth;
+        //GameObject gDeadSoldier = Instantiate(m_gSoldierDeath);
+        //gDeadSoldier.transform.SetParent(null);
+        //gDeadSoldier.transform.position = transform.position;
+        //gDeadSoldier.transform.rotation = transform.rotation;
+        //Destroy(gDeadSoldier, 5f);
+
             m_rbRigidBody.isKinematic = false;
-            //m_eCurrentWeapon = EWeaponType.EWEP_RPG;
             gameObject.SetActive(false);
-            m_fDeathTimer = 1;
-        }
-        else
-        {
-            m_fDeathTimer -= Time.deltaTime;
-        }
     }
 }

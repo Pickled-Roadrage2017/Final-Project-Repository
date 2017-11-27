@@ -19,10 +19,6 @@ public class Grenade : Weapon
     [Tooltip("will play when the grenade is counting down to explosion")]
     public AudioClip m_acFuseSound;
 
-    [LabelOverride("Airtime Sound")]
-    [Tooltip("Will play while the grenade is airborne")]
-    public AudioClip m_acAirtimeSound;
-
     //may or may not be used
     [LabelOverride("Bounce Sound")]
     [Tooltip("will play when the grenade bounces")]
