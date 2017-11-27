@@ -943,7 +943,7 @@ GameObject:
   - component: {fileID: 34362583}
   m_Layer: 5
   m_Name: Resume
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1146,7 +1146,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -7599,7 +7599,7 @@ GameObject:
   - component: {fileID: 466443887}
   m_Layer: 5
   m_Name: Exit Game
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7802,7 +7802,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -9365,6 +9365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sDestinationScene: GameScene
+  transtionAnimation: 0
+  m_bFancyAni: 1
 --- !u!1 &585887369
 GameObject:
   m_ObjectHideFlags: 0
@@ -9381,7 +9383,7 @@ GameObject:
   - component: {fileID: 585887375}
   m_Layer: 5
   m_Name: Restart
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9572,7 +9574,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -11392,7 +11394,7 @@ GameObject:
   - component: {fileID: 773962100}
   m_Layer: 5
   m_Name: Main Menu
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11430,6 +11432,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sDestinationScene: Main Menu
+  transtionAnimation: 0
+  m_bFancyAni: 1
 --- !u!114 &773962096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11596,7 +11600,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -16966,7 +16970,7 @@ GameObject:
   - component: {fileID: 1059047436}
   m_Layer: 5
   m_Name: Main Menu
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17102,6 +17106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sDestinationScene: Main Menu
+  transtionAnimation: 0
+  m_bFancyAni: 1
 --- !u!82 &1059047436
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17169,7 +17175,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -19333,7 +19339,7 @@ GameObject:
   - component: {fileID: 1243100629}
   m_Layer: 5
   m_Name: Restart
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19469,6 +19475,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sDestinationScene: GameScene
+  transtionAnimation: 0
+  m_bFancyAni: 1
 --- !u!82 &1243100629
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19536,7 +19544,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -25213,7 +25221,7 @@ GameObject:
   - component: {fileID: 1670219945}
   m_Layer: 0
   m_Name: BackgroundMusic
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32875,7 +32883,7 @@ GameObject:
   - component: {fileID: 2102832184}
   m_Layer: 5
   m_Name: Exit Game
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33077,7 +33085,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
