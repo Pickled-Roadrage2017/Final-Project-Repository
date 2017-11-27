@@ -22,16 +22,22 @@ using UnityEngine.SceneManagement;
 public class ChangeScene : MonoBehaviour
 {
     // public string for the scene to chnage to.
-    [LabelOverride("Destination Scene")][Tooltip("The Scene to be changed to when pushing this button.")]
+    [LabelOverride("Destination Scene")] [Tooltip("The Scene to be changed to when pushing this button.")]
     public string m_sDestinationScene;
 
 
 
-    public bool transtionAnimation;
+    public bool m_bIsAnimated;
 
-    public bool m_bFancyAni = true;
+    [HideInInspector]
+    public bool m_bFancyAni;
 
-    float fTimer = 0.0f;
+    float m_fTimer;
+
+    public float m_fTranstionTime;
+
+    public Animator m_aAnimator;
+
 
 
     //--------------------------------------------------------------------------------------
@@ -39,7 +45,8 @@ public class ChangeScene : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-
+        m_bFancyAni = false;
+        m_fTimer = 0.0f;
     }
 
     //--------------------------------------------------------------------------------------
@@ -47,7 +54,18 @@ public class ChangeScene : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        
+        if (m_bFancyAni)
+        {
+            m_fTimer += Time.deltaTime;
+
+            if (m_fTimer > m_fTranstionTime) // make 2 a public float.
+            {
+                SceneManager.LoadScene(m_sDestinationScene);
+                //m_bFancyAni = false;
+                //m_aAnimator.SetBool("FancyAni", m_bFancyAni);
+            }
+
+        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -55,19 +73,15 @@ public class ChangeScene : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void LoadLevel()
     {
-        fTimer += Time.deltaTime;
-
-        if (transtionAnimation)
+        if (m_bIsAnimated)
         {
-            GetComponent<Animator>().SetBool("FancyAni", m_bFancyAni);
-
-            if (fTimer > 2)
-                SceneManager.LoadScene(m_sDestinationScene);
+            m_bFancyAni = true;
+            m_aAnimator.SetBool("FancyAni", m_bFancyAni);
         }
 
-
-        // load scene by destination string.
-        //SceneManager.LoadScene(m_sDestinationScene);
-
+        else if (!m_bIsAnimated)
+        {
+            SceneManager.LoadScene(m_sDestinationScene);
+        }
     }
 }
