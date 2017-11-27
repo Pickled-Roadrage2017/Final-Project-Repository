@@ -618,9 +618,8 @@ MonoBehaviour:
   m_bDeathAni: 0
   m_bWinAni: 0
   m_fMovementRadius: 1
-  m_gMovementCirlceBluePrint: {fileID: 1574940389449444, guid: 1269110b8537c4c4081faf040aaf88a9,
+  m_gMovementCirlceBluePrint: {fileID: 1675744469278078, guid: 1269110b8537c4c4081faf040aaf88a9,
     type: 2}
-  m_fDeathTimer: 0
   m_aAnimator: {fileID: 0}
 --- !u!114 &114092360159890970
 MonoBehaviour:

@@ -572,7 +572,7 @@ SpriteRenderer:
   m_Size: {x: 1.09, y: 1.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!1 &17366966 stripped
 GameObject:
@@ -29336,7 +29336,7 @@ SpriteRenderer:
   m_Size: {x: 1.09, y: 1.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!1001 &1894944346
 Prefab:
