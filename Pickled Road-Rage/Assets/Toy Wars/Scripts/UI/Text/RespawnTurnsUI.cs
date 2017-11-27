@@ -20,10 +20,19 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------------------
 public class RespawnTurnsUI : MonoBehaviour
 {
+    // PUBLIC //
+    //--------------------------------------------------------------------------------------
     // public player object.
     [LabelOverride("Player Object")] [Tooltip("The player object for which this respawn counter belongs to?")]
     public Player m_pPlayer;
 
+    // 
+    [LabelOverride("Helmet UI Object")] [Tooltip("")]
+    public GameObject m_iRespawnImage;
+    //--------------------------------------------------------------------------------------
+
+    // PRIVATE //
+    //--------------------------------------------------------------------------------------
     // private text object for the text component.
     private Text m_tRespawnTurns;
 
@@ -32,6 +41,7 @@ public class RespawnTurnsUI : MonoBehaviour
 
     // int to be used for displaying the counter as text.
     private int m_nCountText = 0;
+    //--------------------------------------------------------------------------------------
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -40,6 +50,10 @@ public class RespawnTurnsUI : MonoBehaviour
     {
         // Get text component.
         m_tRespawnTurns = GetComponent<Text>();
+
+        // Default the UI disabled.
+        m_tRespawnTurns.enabled = false;
+        m_iRespawnImage.SetActive(false);
     }
 
     //--------------------------------------------------------------------------------------
@@ -52,18 +66,27 @@ public class RespawnTurnsUI : MonoBehaviour
 
         // Count equals the RespawnCounter.
         m_nCount = pPlayer.m_nRespawnCounter;
-        
+
         // If the count is 0 and there is dead soldier than the text counter is 2.
         if (m_nCount == 0 && pPlayer.GetActiveSoldiers() < pPlayer.m_agSoldierSpawn.Length)
+        {
             m_nCountText = 2;
+
+            // Enable the UI
+            m_tRespawnTurns.enabled = true;
+            m_iRespawnImage.SetActive(true);
+        }
 
         // If the count is 1 then the text counter is 1.
         if (m_nCount == 1)
             m_nCountText = 1;
 
-        // If the count is 3, max respawns has been met or there are no dead soliders than the text counter is 0.
+        // If the count is 3, max respawns has been met or there are no dead soliders than disabled UI.
         if (m_nCount == 3 || pPlayer.m_nMaxRespawnCounter == pPlayer.m_nMaxRespawns || pPlayer.GetActiveSoldiers() > pPlayer.m_agSoldierSpawn.Length)
-            m_nCountText = 0;
+        {
+            m_tRespawnTurns.enabled = false;
+            m_iRespawnImage.SetActive(false);
+        }
 
         // Display the respawn turn timer.
         m_tRespawnTurns.text = string.Format("{0}", m_nCountText);

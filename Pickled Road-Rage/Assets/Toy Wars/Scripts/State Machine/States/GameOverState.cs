@@ -45,7 +45,7 @@ public class GameOverState : State
             for (int i = 0; i < GetPlayerScript(1).m_agSoldierList.Length; ++i)
             {
                 // Set the soldier winning animation.
-                GetPlayerScript(2).m_agSoldierList[i].GetComponent<SoldierActor>().m_bMovingAni = true; // Change this to be the winning animation! // CHANGE!
+                GetPlayerScript(2).m_agSoldierList[i].GetComponent<SoldierActor>().m_bWinAni = true;
             }
         }
 
@@ -62,7 +62,7 @@ public class GameOverState : State
             for (int i = 0; i < GetPlayerScript(1).m_agSoldierList.Length; ++i)
             {
                 // Set the soldier winning animation.
-                GetPlayerScript(1).m_agSoldierList[i].GetComponent<SoldierActor>().m_bMovingAni = true; // Change this to be the winning animation! // CHANGE!
+                GetPlayerScript(1).m_agSoldierList[i].GetComponent<SoldierActor>().m_bWinAni = true;
             }
         }
 

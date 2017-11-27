@@ -64,14 +64,36 @@ public class SwapTurnUI : MonoBehaviour
     [LabelOverride("Lerp Time")][Tooltip("The length of time in seconds that the lerp should run for.")]
     public float m_fLerpTime;
 
+    // Leave a space in the inspector
+    [Space]
+
     // public vector 3 for the starting postion of the lerp.
     [LabelOverride("Start Position")][Tooltip("The starting position of the Lerp.")]
     public Vector3 m_v3StartPos;
+
+    // bool to center the Y of the start postion of the lerp.
+    [LabelOverride("Center Start Y")] [Tooltip("Center the Y starting postion to the screen.")]
+    public bool m_bCenterStartY;
+
+    // bool to center the X of the start postion of the lerp. 
+    [LabelOverride("Center Start X")] [Tooltip("Center the X starting postion to the screen.")]
+    public bool m_bCenterStartX;
+
+    // Leave a space in the inspector
+    [Space]
 
     // public vector 3 for the ending postion of the lerp.
     [LabelOverride("End Position")][Tooltip("The ending position of the Lerp.")]
     public Vector3 m_v3EndPos;
 
+    // bool to center the Y of the end postion of the lerp.
+    [LabelOverride("Center End Y")] [Tooltip("Center the Y ending postion to the screen.")]
+    public bool m_bCenterEndY;
+
+    // bool to center the X of the end postion of the lerp.
+    [LabelOverride("Center End X")] [Tooltip("Center the Y ending postion to the screen.")]
+    public bool m_bCenterEndX;
+    
     // Leave a space in the inspector
     [Space]
     //--------------------------------------------------------------------------------------
@@ -87,6 +109,21 @@ public class SwapTurnUI : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Awake()
     {
+        // Check center y for start bool and center the y if ticked.
+        if (m_bCenterStartY)
+            m_v3StartPos = new Vector3(m_v3StartPos.x, Screen.height / 2, 0);
+
+        // Check center x for start bool and center the x if ticked.
+        if (m_bCenterStartX)
+            m_v3StartPos = new Vector3(Screen.width / 2, m_v3StartPos.y, 0);
+
+        // Check center y for end bool and center the y if ticked.
+        if (m_bCenterEndY)
+            m_v3EndPos = new Vector3(m_v3EndPos.x, Screen.height / 2, 0);
+
+        // Check center x for end bool and center the x if ticked.
+        if (m_bCenterEndX)
+            m_v3EndPos = new Vector3(Screen.width / 2, m_v3EndPos.y, 0);
     }
 
     //--------------------------------------------------------------------------------------
