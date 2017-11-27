@@ -29,6 +29,14 @@ public class PauseManager : MonoBehaviour
     [HideInInspector]
     public GameObject m_gGameOver;
 
+
+
+
+    AudioSource[] allAudioSources;
+
+
+
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -44,7 +52,20 @@ public class PauseManager : MonoBehaviour
 
         // set the default for pause to false.
         m_sbPaused = false;
-	}
+
+
+
+
+
+
+        
+
+
+
+
+
+
+    }
 
     //--------------------------------------------------------------------------------------
     // Update: Function that calls each frame to update game objects.
@@ -77,11 +98,12 @@ public class PauseManager : MonoBehaviour
 
 
 
-
-            //foreach (AudioSource audio in allAudioSources)
-            //{
-            //    audio.Pause();
-            //}
+            allAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
+            foreach (AudioSource audio in allAudioSources)
+            {
+                if (audio.tag != "UI")
+                    audio.Pause();
+            }
 
 
 
@@ -89,7 +111,7 @@ public class PauseManager : MonoBehaviour
 
 
             // Pause all the audio in the game.
-            AudioListener.pause = true;
+            //AudioListener.pause = true;
         }
 
         // if not paused.
@@ -109,10 +131,20 @@ public class PauseManager : MonoBehaviour
 
 
 
+            allAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
+            foreach (AudioSource audio in allAudioSources)
+            {
+                if (audio.tag != "UI")
+                    audio.UnPause();
+            }
+
+
+
+
 
 
             // Unpause all the audio in the game.
-            AudioListener.pause = false;
+            //AudioListener.pause = false;
         }
 	}
 

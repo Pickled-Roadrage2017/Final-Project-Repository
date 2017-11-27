@@ -39,7 +39,7 @@ public class ActionState : State
         if (TurnManager.m_sfTimer < 6)
         {
             // make sure only the audio only plays once.
-            if (!m_tTurnManager.m_asAudioSource.isPlaying)
+            if (!m_tTurnManager.m_asAudioSource.isPlaying && !PauseManager.m_sbPaused)
             {
                 // Play start time wanring sound.
                 m_tTurnManager.m_asAudioSource.PlayOneShot(m_tTurnManager.m_acTimeWarningAudio);

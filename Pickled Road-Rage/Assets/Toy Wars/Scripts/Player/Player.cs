@@ -11,6 +11,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 //--------------------------------------------------------------------------------------
 // Player object. Inheriting from MonoBehaviour. Used for controling turns and soldiers.
@@ -138,6 +139,18 @@ public class Player : MonoBehaviour
     
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;
+
+
+
+
+
+    bool bMouseHeld = false;
+
+
+
+
+
+
     //--------------------------------------------------------------------------------------
 
     // GETTERS & SETTERS //
@@ -210,10 +223,27 @@ public class Player : MonoBehaviour
                     // Update the mouse face function in soldier.
                     sCurrentSoldier.FaceMouse();
 
-                    // Get the mouse input functions.
-                    MouseDown(sCurrentSoldier);
-                    bool bMouseHeld = MouseHeld(sCurrentSoldier);
-                    MouseUp(sCurrentSoldier);
+
+
+
+
+
+
+                    
+
+                    if (!EventSystem.current.IsPointerOverGameObject() || bMouseHeld)
+                    {
+                        // Get the mouse input functions.
+                        MouseDown(sCurrentSoldier);
+                        bMouseHeld = MouseHeld(sCurrentSoldier);
+                        MouseUp(sCurrentSoldier);
+                    }
+
+                    
+
+
+
+
 
                     // if the mouse is not held.
                     if (!bMouseHeld)
@@ -449,7 +479,7 @@ public class Player : MonoBehaviour
     // Param:
     //		sCurrentSoldier: A SoldierActor object for which soldier wants to move.
     //--------------------------------------------------------------------------------------
-    void SwitchWeapon(SoldierActor sCurrentSoldier)
+    private void SwitchWeapon(SoldierActor sCurrentSoldier)
     {
         // if the 1 key is pressed.
         if (Input.GetButtonDown("SwapRocket"))
@@ -465,7 +495,61 @@ public class Player : MonoBehaviour
             SwitchMesh(sCurrentSoldier, EWeaponType.EWEP_GRENADE, m_mGrenadeSoldierMesh, m_amGrenadeMaterials);
         }
     }
-    
+
+
+
+
+
+
+
+
+
+
+
+
+    //--------------------------------------------------------------------------------------
+    // SwitchWeapon: Function for switching the current soldiers weapon.
+    //--------------------------------------------------------------------------------------
+    public void SwitchRPGMouse()
+    {
+        if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
+        {
+            // Get the soldier object and script.
+            GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
+            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
+
+            // Switch mesh, materials, etc to the RPG
+            SwitchMesh(sCurrentSoldier, EWeaponType.EWEP_RPG, m_mRPGSoldierMesh, m_amRPGMaterials);
+        }
+    }
+
+    //--------------------------------------------------------------------------------------
+    // SwitchWeapon: Function for switching the current soldiers weapon.
+    //--------------------------------------------------------------------------------------
+    public void SwitchGrenadeMouse()
+    {
+        if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
+        {
+            // Get the soldier object and script.
+            GameObject gCurrentSoldier = GetSoldier(m_nSoldierTurn);
+            SoldierActor sCurrentSoldier = gCurrentSoldier.GetComponent<SoldierActor>();
+
+            // Switch mesh, materials, etc to the grenade
+            SwitchMesh(sCurrentSoldier, EWeaponType.EWEP_GRENADE, m_mGrenadeSoldierMesh, m_amGrenadeMaterials);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     //--------------------------------------------------------------------------------------
     // SwitchMesh: Function to switch the mesh, materials, weapon of the current solider.
     //
