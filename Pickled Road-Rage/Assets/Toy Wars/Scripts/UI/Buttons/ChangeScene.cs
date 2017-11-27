@@ -59,11 +59,15 @@ public class ChangeScene : MonoBehaviour
 
         if (transtionAnimation)
         {
-            if (fTimer > 1)
-                GetComponent<Animator>().SetBool("FancyAni", m_bFancyAni);
+            GetComponent<Animator>().SetBool("FancyAni", m_bFancyAni);
+
+            if (fTimer > 2)
+                SceneManager.LoadScene(m_sDestinationScene);
         }
 
+
         // load scene by destination string.
-        SceneManager.LoadScene(m_sDestinationScene);
+        //SceneManager.LoadScene(m_sDestinationScene);
+
     }
 }

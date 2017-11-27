@@ -93,7 +93,7 @@ public class Grenade : Weapon
     private AudioSource m_asAudioSource;
 
     [HideInInspector]
-    public float m_fLifespan = 200;
+    public float m_fLifespan = 600;
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------

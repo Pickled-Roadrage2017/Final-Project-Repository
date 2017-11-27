@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 64937415795233596}
   m_Layer: 20
   m_Name: MovementCircle(N)
-  m_TagString: Untagged
+  m_TagString: SoldierWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 1574940389449444}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.68, y: 0.05, z: -12.59}
-  m_LocalScale: {x: 4.5, y: 0.1, z: 4.5}
+  m_LocalScale: {x: 4.5, y: 1, z: 4.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 60aecd39f50ac6e42805f6e82d19eb53, type: 2}
+  - {fileID: 2100000, guid: 2e566cf031716cb48b235c4b0c251a7d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,7 +80,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1574940389449444}
-  m_Mesh: {fileID: 4300000, guid: b66823addf26d6846969945021f3ce17, type: 3}
+  m_Mesh: {fileID: 4300002, guid: b66823addf26d6846969945021f3ce17, type: 3}
 --- !u!64 &64937415795233596
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -94,4 +94,4 @@ MeshCollider:
   m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: b66823addf26d6846969945021f3ce17, type: 3}
+  m_Mesh: {fileID: 4300002, guid: b66823addf26d6846969945021f3ce17, type: 3}

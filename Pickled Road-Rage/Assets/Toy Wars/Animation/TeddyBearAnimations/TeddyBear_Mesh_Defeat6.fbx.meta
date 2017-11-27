@@ -1,0 +1,173 @@
+fileFormatVersion: 2
+guid: f1257bf0a957ecd479412233bb0e39ae
+timeCreated: 1511759641
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: group1
+    100002: jnt_Ear_L
+    100004: jnt_Ear_R
+    100006: jnt_Elbow_L
+    100008: jnt_Elbow_R
+    100010: jnt_Finger_L
+    100012: jnt_Finger_R
+    100014: jnt_Foot_L
+    100016: jnt_Foot_R
+    100018: jnt_Hand_L
+    100020: jnt_Hand_R
+    100022: jnt_Head1
+    100024: jnt_Head2
+    100026: jnt_Hip_L
+    100028: jnt_Hip_R
+    100030: jnt_Knee_L
+    100032: jnt_Knee_R
+    100034: jnt_Root
+    100036: jnt_Shoulder_L
+    100038: jnt_Shoulder_R
+    100040: jnt_Spine1
+    100042: jnt_Spine2
+    100044: jnt_Thumb_L
+    100046: jnt_Thumb_R
+    100048: SkeletonGroup
+    100050: Soldier_Pose_RPG
+    100052: Teddy_MESH
+    100054: //RootNode
+    400000: group1
+    400002: jnt_Ear_L
+    400004: jnt_Ear_R
+    400006: jnt_Elbow_L
+    400008: jnt_Elbow_R
+    400010: jnt_Finger_L
+    400012: jnt_Finger_R
+    400014: jnt_Foot_L
+    400016: jnt_Foot_R
+    400018: jnt_Hand_L
+    400020: jnt_Hand_R
+    400022: jnt_Head1
+    400024: jnt_Head2
+    400026: jnt_Hip_L
+    400028: jnt_Hip_R
+    400030: jnt_Knee_L
+    400032: jnt_Knee_R
+    400034: jnt_Root
+    400036: jnt_Shoulder_L
+    400038: jnt_Shoulder_R
+    400040: jnt_Spine1
+    400042: jnt_Spine2
+    400044: jnt_Thumb_L
+    400046: jnt_Thumb_R
+    400048: SkeletonGroup
+    400050: Soldier_Pose_RPG
+    400052: Teddy_MESH
+    400054: //RootNode
+    2300000: Soldier_Pose_RPG
+    3300000: Soldier_Pose_RPG
+    4300000: Teddy_MESH
+    4300002: Soldier_Pose_RPG
+    7400000: Defeat6
+    9500000: //RootNode
+    13700000: Teddy_MESH
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Defeat6
+      takeName: Defeat
+      firstFrame: 400
+      lastFrame: 493
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
