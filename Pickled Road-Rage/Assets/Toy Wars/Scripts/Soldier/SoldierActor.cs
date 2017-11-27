@@ -28,9 +28,6 @@ public class SoldierActor : MonoBehaviour
     [LabelOverride("Footstep 2")]
     public AudioClip m_acFootstep2;
 
-    [LabelOverride("Grunt Sound")]
-    public AudioClip m_acGruntSound;
-
     [LabelOverride("Damage Sound")]
     [Tooltip("Will play when soldier takes damage")]
     public AudioClip m_acDamageSound;
@@ -101,12 +98,17 @@ public class SoldierActor : MonoBehaviour
     public bool m_bDamageAni;
 
     // a boolean for an animation to play whilst the soldier is moving
-    //[HideInInspector]
+    [HideInInspector]
     public bool m_bMovingAni;
 
     // a boolean for an animation of the firing, true means the shot has been fired, false means that the animation should be the start firing
     [HideInInspector]
     public bool m_bFireAni;
+
+    //[HideInInspector]
+    public bool m_bDeathAni;
+
+    public bool m_bWinAni;
 
     // public float for the radius of the movement circle.
     [LabelOverride("Movement Radius")]
@@ -117,6 +119,10 @@ public class SoldierActor : MonoBehaviour
     [LabelOverride("Radius Object")]
     [Tooltip("The Prefab for the Radius object.")]
     public GameObject m_gMovementCirlceBluePrint;
+
+    [LabelOverride("Death Timer")]
+    [Tooltip("How long the death animation will play for before the soldier disables")]
+    public float m_fDeathTimer;
 
     // The gameobject for the soldier moevement circle.
     private GameObject m_gMovementCircle;
@@ -129,13 +135,17 @@ public class SoldierActor : MonoBehaviour
 
     // the soldiers animator
     public Animator m_aAnimator;
+
+    // boolean for alternating footstep sounds
+    //private bool m_bFirstStep;
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
     void Awake()
     {
         m_aAnimator = GetComponent<Animator>();
-
+        m_asAudioSource = GetComponent<AudioSource>();
         // initilising animation booleans to false
         m_bFireAni = false;
         m_bDamageAni = false;
@@ -176,14 +186,17 @@ public class SoldierActor : MonoBehaviour
         m_aAnimator.SetBool("Damage", m_bDamageAni);
         m_aAnimator.SetBool("StartFire", m_bFireAni);
         m_aAnimator.SetBool("IsMoving", m_bMovingAni);
-
+        m_aAnimator.SetBool("DeadSoldier", m_bDeathAni);
+        m_aAnimator.SetBool("HasWon", m_bWinAni);
         if (m_bDamageAni == true)
         {
             m_bDamageAni = false;
         }
+
         // As health is a float, anything below one will be displayed as 0 to the player
-        if (m_fCurrentHealth < 1)
+        if (m_fCurrentHealth < 1)      
         {
+            if (m_aAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
             Die();
         }
 
@@ -197,6 +210,16 @@ public class SoldierActor : MonoBehaviour
         else
         {
             m_bMovingAni = true;
+            //if (m_bFirstStep)
+            //{
+            //    m_asAudioSource.PlayOneShot(m_acFootstep1);
+            //    m_bFirstStep = false;
+            //}
+            //else
+            //{
+            //    m_asAudioSource.PlayOneShot(m_acFootstep2);
+            //    m_bFirstStep = true;
+            //}
         }
 
     }
@@ -363,7 +386,7 @@ public class SoldierActor : MonoBehaviour
     {
         // TODO: 
         m_bDamageAni = true;
-
+        m_asAudioSource.PlayOneShot(m_acDamageSound);
         // Minus the soldiers currentHealth by the fDamage argument
         m_fCurrentHealth -= fDamage;
     }
@@ -373,12 +396,27 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void Die()
     {
-        // TODO: Animation and such
-        // Set the Soldier to inactive
-        // Reset the Soldiers values to initial
-        m_fCurrentHealth = m_fMaxHealth;
-        m_rbRigidBody.isKinematic = false;
-        //m_eCurrentWeapon = EWeaponType.EWEP_RPG;
-        gameObject.SetActive(false);
+        m_bDeathAni = true;
+        m_asAudioSource.PlayOneShot(m_acDeathSound);
+        if (m_fDeathTimer <= 0.0f)
+        {
+            //GetComponent<Renderer>().enabled = false;
+            // TODO: Animation and such
+            m_bDamageAni = false;
+            m_bFireAni = false;
+            m_bMovingAni = false;
+            m_bDeathAni = false;
+            // Set the Soldier to inactive
+            // Reset the Soldiers values to initial
+            m_fCurrentHealth = m_fMaxHealth;
+            m_rbRigidBody.isKinematic = false;
+            //m_eCurrentWeapon = EWeaponType.EWEP_RPG;
+            gameObject.SetActive(false);
+            m_fDeathTimer = 1;
+        }
+        else
+        {
+            m_fDeathTimer -= Time.deltaTime;
+        }
     }
 }
