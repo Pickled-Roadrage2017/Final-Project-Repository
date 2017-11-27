@@ -110,6 +110,11 @@ public class Teddy : MonoBehaviour
         {
             m_bDeathAni = false;
         }
+
+        if(!IsAlive())
+        {
+            m_bDeathAni = true;
+        }
     }
 
     //--------------------------------------------------------------------------------------
