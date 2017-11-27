@@ -1675,7 +1675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_acPlaceSound: {fileID: 8300000, guid: 3bcc45dfb9d5fc54d84255d5ba350c8f, type: 3}
   m_acDamageSound: {fileID: 8300000, guid: 0bbae5c78a7bd2c4f9c4acae1f035148, type: 3}
-  m_fMaxHealth: 150
+  m_fMaxHealth: 10
   m_fMinDamage: 5
   m_fCurrentHealth: 150
   m_sHealthBar: {fileID: 176990566}
@@ -6795,7 +6795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_acPlaceSound: {fileID: 8300000, guid: 3bcc45dfb9d5fc54d84255d5ba350c8f, type: 3}
   m_acDamageSound: {fileID: 8300000, guid: 0bbae5c78a7bd2c4f9c4acae1f035148, type: 3}
-  m_fMaxHealth: 150
+  m_fMaxHealth: 10
   m_fMinDamage: 5
   m_fCurrentHealth: 150
   m_sHealthBar: {fileID: 1678593803}
@@ -9471,8 +9471,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sDestinationScene: GameScene
-  transtionAnimation: 0
+  m_bIsAnimated: 0
   m_bFancyAni: 1
+  m_fTranstionTime: 0
+  m_aAnimator: {fileID: 0}
 --- !u!1 &585887369
 GameObject:
   m_ObjectHideFlags: 0
@@ -11601,8 +11603,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sDestinationScene: Main Menu
-  transtionAnimation: 0
+  m_bIsAnimated: 0
   m_bFancyAni: 1
+  m_fTranstionTime: 0
+  m_aAnimator: {fileID: 0}
 --- !u!114 &773962096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15453,7 +15457,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 960936870}
   m_LocalRotation: {x: -0.0043253372, y: 0.6385098, z: -0.0035875796, w: -0.7695931}
-  m_LocalPosition: {x: 9.530158, y: 0.09912372, z: 4.2137613}
+  m_LocalPosition: {x: 9.530158, y: 0.1432092, z: 4.2137613}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1944162695}
@@ -17381,8 +17385,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sDestinationScene: Main Menu
-  transtionAnimation: 0
+  m_bIsAnimated: 0
   m_bFancyAni: 1
+  m_fTranstionTime: 0
+  m_aAnimator: {fileID: 0}
 --- !u!82 &1059047436
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19803,8 +19809,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sDestinationScene: GameScene
-  transtionAnimation: 0
+  m_bIsAnimated: 0
   m_bFancyAni: 1
+  m_fTranstionTime: 0
+  m_aAnimator: {fileID: 0}
 --- !u!82 &1243100629
 AudioSource:
   m_ObjectHideFlags: 0
