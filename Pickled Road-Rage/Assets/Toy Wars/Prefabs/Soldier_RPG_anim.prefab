@@ -145,7 +145,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362723199391126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.69, y: 0.00021599921, z: -13.89}
+  m_LocalPosition: {x: 9.746222, y: 0.04994609, z: -13.17447}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4428677557891060}
@@ -472,7 +472,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200397455976988}
-  m_Text: 100
+  m_Text: 90
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
@@ -482,7 +482,7 @@ TextMesh:
   m_FontSize: 42
   m_FontStyle: 1
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: f79c0638c9ad24986acd8d34c0e20256, type: 3}
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
     rgba: 4278190335
@@ -517,7 +517,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_acFootstep1: {fileID: 8300000, guid: aa30ffc3d4894bc4a8939a14c5ae33e7, type: 3}
   m_acFootstep2: {fileID: 8300000, guid: d34e9cb9d8fd724489adf38c4a677d73, type: 3}
-  m_acGruntSound: {fileID: 8300000, guid: 1259ac23f4330e94ca7fe979745844ae, type: 3}
   m_acDamageSound: {fileID: 8300000, guid: e9001f01f9295c242a40cb4e367de16e, type: 3}
   m_acDeathSound: {fileID: 8300000, guid: ffc3fdeef2406ed49b9a73fbcd7794d9, type: 3}
   m_fSpeed: 1.25
@@ -535,9 +534,12 @@ MonoBehaviour:
   m_bDamageAni: 0
   m_bMovingAni: 0
   m_bFireAni: 0
-  m_fMovementRadius: 8
-  m_gMovementCirlceBluePrint: {fileID: 1471151944024382, guid: 202ec0867f5c2e544a205eb636f6cf92,
+  m_bDeathAni: 0
+  m_bWinAni: 0
+  m_fMovementRadius: 1
+  m_gMovementCirlceBluePrint: {fileID: 1574940389449444, guid: 1269110b8537c4c4081faf040aaf88a9,
     type: 2}
+  m_fDeathTimer: 0
   m_aAnimator: {fileID: 0}
 --- !u!114 &114092360159890970
 MonoBehaviour:

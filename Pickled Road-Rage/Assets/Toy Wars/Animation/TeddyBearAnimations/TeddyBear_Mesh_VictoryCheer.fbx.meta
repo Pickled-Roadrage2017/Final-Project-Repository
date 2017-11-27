@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1cc155859e74afe489a09c79aad63cbd
-timeCreated: 1511315312
+guid: 90fdfce649fba7c4799fbe2860bdd43e
+timeCreated: 1511747303
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -65,7 +65,7 @@ ModelImporter:
     3300000: Soldier_Pose_RPG
     4300000: Teddy_MESH
     4300002: Soldier_Pose_RPG
-    7400000: Idle2
+    7400000: VictoryCheer
     9500000: //RootNode
     13700000: Teddy_MESH
   materials:
@@ -91,35 +91,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Idle2
-      takeName: Idle
-      firstFrame: 157
-      lastFrame: 400
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []

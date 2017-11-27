@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1cc155859e74afe489a09c79aad63cbd
-timeCreated: 1511315312
+guid: cc78039f28da8eb4e8c38a90f5a936b0
+timeCreated: 1511735138
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -65,7 +65,7 @@ ModelImporter:
     3300000: Soldier_Pose_RPG
     4300000: Teddy_MESH
     4300002: Soldier_Pose_RPG
-    7400000: Idle2
+    7400000: Spawn3
     9500000: //RootNode
     13700000: Teddy_MESH
   materials:
@@ -93,17 +93,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle2
-      takeName: Idle
-      firstFrame: 157
-      lastFrame: 400
+      name: Spawn3
+      takeName: Spawn
+      firstFrame: 79
+      lastFrame: 157
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

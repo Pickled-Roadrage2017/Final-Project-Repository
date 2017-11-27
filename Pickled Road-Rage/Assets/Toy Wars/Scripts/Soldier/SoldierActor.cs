@@ -196,7 +196,7 @@ public class SoldierActor : MonoBehaviour
         // As health is a float, anything below one will be displayed as 0 to the player
         if (m_fCurrentHealth < 1)      
         {
-            if (m_aAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            //if (m_aAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
             Die();
         }
 
