@@ -15,7 +15,6 @@ using UnityEngine.UI;
 public enum EWeaponType
 {
     EWEP_RPG,
-    EWEP_MINIGUN,
     EWEP_GRENADE
 }
 
@@ -25,20 +24,16 @@ public class SoldierActor : MonoBehaviour
     //[Tooltip("The Soldier will display this object on death")]
     //public GameObject m_gSoldierDeath;
 
-    [Header("Sounds")]
-    [LabelOverride("Footstep 1")]
-    public AudioClip m_acFootstep1;
+    //[Header("Sounds")]
+    //[LabelOverride("Footstep 1")]
+    //public AudioClip m_acFootstep1;
 
-    [LabelOverride("Footstep 2")]
-    public AudioClip m_acFootstep2;
+    //[LabelOverride("Footstep 2")]
+    //public AudioClip m_acFootstep2;
 
     [LabelOverride("Damage Sound")]
     [Tooltip("Will play when soldier takes damage")]
     public AudioClip m_acDamageSound;
-
-    [LabelOverride("Death Sound")]
-    [Tooltip("Will play as the Soldier dies")]
-    public AudioClip m_acDeathSound;
 
     [Header("Moving Variables")]
     // Speed at which the Soldier moves
@@ -53,19 +48,13 @@ public class SoldierActor : MonoBehaviour
     [Tooltip("The Soldiers health when initilizied")]
     public float m_fMaxHealth = 100;
 
-    // Intiger value for the Soldiers current weapon
-    // 0 = RocketLauncher
-    // 1 = Minigun
-    // 2 = Grenade
+    // Enum value for the Soldiers current weapon
     [Header("Soldier Weapons")]
-    //[Range(0,2)]
-    [Tooltip("0 = RocketLauncher, 1 = Minigun, 2 = Grenade")]
     public EWeaponType m_eCurrentWeapon;
 
     // Values for the inventory count of this Soldier
     [Tooltip("How many Grenades this Soldier has")]
     public int m_nGrenadeCount = 1;
-    public int m_nGotMinigun = 0;
     public int m_nGotGrenade = 1;
 
     // The GameObject RocketLauncher that the Soldier will be using
@@ -109,10 +98,6 @@ public class SoldierActor : MonoBehaviour
     [HideInInspector]
     public bool m_bFireAni;
 
-    // a boolean for an animation of the Death
-    [HideInInspector]
-    public bool m_bDeathAni;
-
     // a boolean for an animation for the winning.
     [HideInInspector]
     public bool m_bWinAni;
@@ -140,7 +125,7 @@ public class SoldierActor : MonoBehaviour
     public Animator m_aAnimator;
 
     // boolean for alternating footstep sounds
-    //private bool m_bFirstStep;
+    private int m_nStep;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -189,7 +174,6 @@ public class SoldierActor : MonoBehaviour
         m_aAnimator.SetBool("Damage", m_bDamageAni);
         m_aAnimator.SetBool("StartFire", m_bFireAni);
         m_aAnimator.SetBool("IsMoving", m_bMovingAni);
-        m_aAnimator.SetBool("DeadSoldier", m_bDeathAni);
         m_aAnimator.SetBool("HasWon", m_bWinAni);
         if (m_bDamageAni == true)
         {
@@ -212,18 +196,7 @@ public class SoldierActor : MonoBehaviour
         else
         {
             m_bMovingAni = true;
-            //if (m_bFirstStep)
-            //{
-            //    m_asAudioSource.PlayOneShot(m_acFootstep1);
-            //    m_bFirstStep = false;
-            //}
-            //else
-            //{
-            //    m_asAudioSource.PlayOneShot(m_acFootstep2);
-            //    m_bFirstStep = true;
-            //}
         }
-
     }
 
     //--------------------------------------------------------------------------------------
@@ -274,18 +247,9 @@ public class SoldierActor : MonoBehaviour
         {
             m_gLauncherScript.MouseDown();
         }
-        else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
-        {
-
-        }
         else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
         {
             m_gGrenadeScript.MouseDown();
-        }
-
-        else
-        {
-
         }
     }
 
@@ -296,16 +260,9 @@ public class SoldierActor : MonoBehaviour
             m_gLauncherScript.MouseHeld();
           
         }
-        else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
-        {
-
-        }
         else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
         {
             m_gGrenadeScript.MouseHeld();
-        }
-        else
-        {
         }
     }
 
@@ -317,16 +274,9 @@ public class SoldierActor : MonoBehaviour
             m_gLauncherScript.MouseUp();
            
         }
-        else if (m_eCurrentWeapon == EWeaponType.EWEP_MINIGUN)
-        {
-
-        }
         else if (m_eCurrentWeapon == EWeaponType.EWEP_GRENADE)
         {
             m_gGrenadeScript.MouseUp();
-        }
-        else
-        {
         }
     }
 
@@ -342,8 +292,6 @@ public class SoldierActor : MonoBehaviour
 
         // Update the rigidbody velocity.
         m_rbRigidBody.velocity = m_v3Movement * m_fSpeed;
-       
-
     }
 
     //--------------------------------------------------------------------------------------
@@ -386,9 +334,12 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void TakeDamage(float fDamage)
     {
-        // TODO: 
+        // play damage animation 
         m_bDamageAni = true;
+
+        // Play damage sound
         m_asAudioSource.PlayOneShot(m_acDamageSound);
+
         // Minus the soldiers currentHealth by the fDamage argument
         m_fCurrentHealth -= fDamage;
     }
@@ -398,24 +349,14 @@ public class SoldierActor : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void Die()
     {
-        m_bDeathAni = true;
-        m_asAudioSource.PlayOneShot(m_acDeathSound);
+        // Reset the Soldiers values to initial
+        m_bDamageAni = false;
+        m_bFireAni = false;
+        m_bMovingAni = false;
+        m_fCurrentHealth = m_fMaxHealth;
+        m_rbRigidBody.isKinematic = false;
 
-            m_bDamageAni = false;
-            m_bFireAni = false;
-            m_bMovingAni = false;
-            m_bDeathAni = false;
-            // Set the Soldier to inactive
-
-            // Reset the Soldiers values to initial
-            m_fCurrentHealth = m_fMaxHealth;
-        //GameObject gDeadSoldier = Instantiate(m_gSoldierDeath);
-        //gDeadSoldier.transform.SetParent(null);
-        //gDeadSoldier.transform.position = transform.position;
-        //gDeadSoldier.transform.rotation = transform.rotation;
-        //Destroy(gDeadSoldier, 5f);
-
-            m_rbRigidBody.isKinematic = false;
-            gameObject.SetActive(false);
+        // Set the Soldier to inactive
+        gameObject.SetActive(false);
     }
 }

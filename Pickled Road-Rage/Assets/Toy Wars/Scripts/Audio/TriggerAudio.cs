@@ -15,9 +15,6 @@ public class TriggerAudio : MonoBehaviour
     // the sound to play on Trigger.
     public AudioClip m_acSound;
 
-    // this objects collider.
-    private Collider m_cCollider;
-
     // this objects AudioSource.
     private AudioSource m_aAudioSource;
 
@@ -26,7 +23,6 @@ public class TriggerAudio : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Awake()
     {
-        m_cCollider = GetComponent<Collider>();
         m_aAudioSource = GetComponent<AudioSource>();
 	}
 

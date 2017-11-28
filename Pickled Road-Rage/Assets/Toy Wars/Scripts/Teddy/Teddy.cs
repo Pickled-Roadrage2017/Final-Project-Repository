@@ -24,6 +24,10 @@ public class Teddy : MonoBehaviour
     [Tooltip("Will play when Teddy takes damage")]
     public AudioClip m_acDamageSound;
 
+    [LabelOverride("Death Sound")]
+    [Tooltip("Will play when Teddy dies")]
+    public AudioClip m_acDeathSound;
+
     [Header("Health Variables")]
     [LabelOverride("Teddy Max Health")][Tooltip("Teddy bear Maximum health.")]
     public float m_fMaxHealth;
@@ -61,6 +65,8 @@ public class Teddy : MonoBehaviour
 
     // the bears animator
     private Animator m_aAnimator;
+
+    private bool m_bDeathPlayed;
     //--------------------------------------------------------------------------------------
     // Initialization.
     //--------------------------------------------------------------------------------------
@@ -70,6 +76,7 @@ public class Teddy : MonoBehaviour
         m_bPlaceSoldierAni = false;
         m_bWinAni = false;
         m_bDeathAni = false;
+        m_bDeathPlayed = false;
 
         m_aAnimator = GetComponent<Animator>();
         m_asAudioSource = GetComponent<AudioSource>();
@@ -114,6 +121,11 @@ public class Teddy : MonoBehaviour
         if(!IsAlive())
         {
             m_bDeathAni = true;
+            if (!m_asAudioSource.isPlaying && !m_bDeathPlayed)
+            {
+                m_asAudioSource.PlayOneShot(m_acDeathSound);
+                m_bDeathPlayed = true;
+            }
         }
     }
 
@@ -126,15 +138,19 @@ public class Teddy : MonoBehaviour
     public void TakeDamage(float fDamage)
     {
         if (fDamage > m_fMinDamage)
-       {
-            m_asAudioSource.PlayOneShot(m_acDamageSound);
-
+        {
             // Minus the Teddys currentHealth by the fDamage argument
             m_fCurrentHealth -= fDamage;
-            //Debug.Log(m_fCurrentHealth);
 
             if (m_fCurrentHealth > 0)
-                m_bDamageAni = true;
+            { 
+            m_bDamageAni = true;
+            }
+
+            if (IsAlive())
+            {
+                m_asAudioSource.PlayOneShot(m_acDamageSound);
+            }
         }
     }
 
