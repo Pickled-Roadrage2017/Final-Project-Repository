@@ -100,8 +100,7 @@ public class CreditsButton : MonoBehaviour
             m_gCredits.SetActive(false);
 
             // set the teddy animation back to idle.
-            m_bTeddyAni = false;
-            m_gTeddy.SetBool("CreditsAni", m_bTeddyAni);
+            m_gTeddy.SetBool("CreditsAni", false);
         }
 
         // if it is not a exit button.
@@ -112,8 +111,7 @@ public class CreditsButton : MonoBehaviour
             m_gCredits.SetActive(true);
 
             // Set the teddy animation to credits.
-            m_bTeddyAni = true;
-            m_gTeddy.SetBool("CreditsAni", m_bTeddyAni);
+            m_gTeddy.SetBool("CreditsAni", true);
         }
     }
 }

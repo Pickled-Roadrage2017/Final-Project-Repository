@@ -20,6 +20,20 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 public class ExitButton : MonoBehaviour
 {
+    // public bool for if this button is a menu button or pause button.
+    [LabelOverride("Main Menu Button")] [Tooltip("Is this button used for the main menu?")]
+    public bool m_bIsMenuButton = false;
+
+    // public Animator for the teddy bear object.
+    [LabelOverride("Teddy Animator")] [Tooltip("The teddy bear object with the animator.")]
+    public Animator m_gTeddy;
+
+    // private float timer for delaying the exit.
+    private float m_fTimer = 0.0f;
+
+    // bool for if the game is quiting.
+    private bool m_bIsQuiting = false;
+
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -33,7 +47,12 @@ public class ExitButton : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-
+        // if quiting
+        if (m_bIsQuiting)
+        {
+            // update timer by delta time.
+            m_fTimer += Time.deltaTime;
+        }
     }
 
     //--------------------------------------------------------------------------------------
@@ -41,13 +60,37 @@ public class ExitButton : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void QuitGame()
     {
+        // the project is quiting.
+        m_bIsQuiting = true;
+
         // make sure that it is unpaused.
         PauseManager.m_sbPaused = false;
 
-        // Close application.
-        Application.Quit();
+        // if the button is a menu button.
+        if (m_bIsMenuButton)
+        {
+            // Play teddy death
+            m_gTeddy.SetBool("HurtAni", true);
 
-        // Check that quit is actually being fired.
-        Debug.Log("Game is exiting");
+            // if timer is greater than animation time
+            if (m_fTimer > 3.25f)
+            {
+                // Close application.
+                Application.Quit();
+
+                // Check that quit is actually being fired.
+                Debug.Log("Game is exiting");
+            }
+        }
+
+        // if the button is not a menu button.
+        else if (!m_bIsMenuButton)
+        {
+            // Close application.
+            Application.Quit();
+
+            // Check that quit is actually being fired.
+            Debug.Log("Game is exiting");
+        }
     }
 }
