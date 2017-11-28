@@ -52,6 +52,16 @@ public class ExitButton : MonoBehaviour
         {
             // update timer by delta time.
             m_fTimer += Time.deltaTime;
+
+            // if timer is greater than animation time
+            if (m_fTimer > 1.7f)
+            {
+                // Close application.
+                Application.Quit();
+
+                // Check that quit is actually being fired.
+                Debug.Log("Game is exiting");
+            }
         }
     }
 
@@ -60,27 +70,17 @@ public class ExitButton : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void QuitGame()
     {
-        // the project is quiting.
-        m_bIsQuiting = true;
-
         // make sure that it is unpaused.
         PauseManager.m_sbPaused = false;
 
+        // the project is quiting.
+        m_bIsQuiting = true;
+        
         // if the button is a menu button.
         if (m_bIsMenuButton)
         {
             // Play teddy death
             m_gTeddy.SetBool("HurtAni", true);
-
-            // if timer is greater than animation time
-            if (m_fTimer > 3.25f)
-            {
-                // Close application.
-                Application.Quit();
-
-                // Check that quit is actually being fired.
-                Debug.Log("Game is exiting");
-            }
         }
 
         // if the button is not a menu button.
