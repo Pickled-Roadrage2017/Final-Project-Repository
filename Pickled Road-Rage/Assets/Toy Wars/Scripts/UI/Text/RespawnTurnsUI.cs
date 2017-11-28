@@ -26,8 +26,8 @@ public class RespawnTurnsUI : MonoBehaviour
     [LabelOverride("Player Object")] [Tooltip("The player object for which this respawn counter belongs to?")]
     public Player m_pPlayer;
 
-    // 
-    [LabelOverride("Helmet UI Object")] [Tooltip("")]
+    // public gameobject with image component.
+    [LabelOverride("Helmet UI Object")] [Tooltip("The object with the helmet image for the appropriate player.")]
     public GameObject m_iRespawnImage;
     //--------------------------------------------------------------------------------------
 
@@ -67,9 +67,10 @@ public class RespawnTurnsUI : MonoBehaviour
         // Count equals the RespawnCounter.
         m_nCount = pPlayer.m_nRespawnCounter;
 
-        // If the count is 0 and there is dead soldier than the text counter is 2.
+        // If the count is 0 and there is dead soldier than
         if (m_nCount == 0 && pPlayer.GetActiveSoldiers() < pPlayer.m_agSoldierSpawn.Length)
         {
+            // the text counter is 2.
             m_nCountText = 2;
 
             // Enable the UI

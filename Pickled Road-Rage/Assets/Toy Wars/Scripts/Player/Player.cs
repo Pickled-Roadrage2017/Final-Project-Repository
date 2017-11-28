@@ -139,18 +139,9 @@ public class Player : MonoBehaviour
     
     // An int for how many active soldier there is.
     private int m_nActiveSoldiers;
-
-
-
-
-
-    bool bMouseHeld = false;
-
-
-
-
-
-
+    
+    // bool for if the mouse is held or not.
+    private bool bMouseHeld = false;
     //--------------------------------------------------------------------------------------
 
     // GETTERS & SETTERS //
@@ -222,15 +213,8 @@ public class Player : MonoBehaviour
                 {
                     // Update the mouse face function in soldier.
                     sCurrentSoldier.FaceMouse();
-
-
-
-
-
-
-
                     
-
+                    // if not over a button or the mouse is held
                     if (!EventSystem.current.IsPointerOverGameObject() || bMouseHeld)
                     {
                         // Get the mouse input functions.
@@ -238,13 +222,7 @@ public class Player : MonoBehaviour
                         bMouseHeld = MouseHeld(sCurrentSoldier);
                         MouseUp(sCurrentSoldier);
                     }
-
                     
-
-
-
-
-
                     // if the mouse is not held.
                     if (!bMouseHeld)
                     {
@@ -495,23 +473,14 @@ public class Player : MonoBehaviour
             SwitchMesh(sCurrentSoldier, EWeaponType.EWEP_GRENADE, m_mGrenadeSoldierMesh, m_amGrenadeMaterials);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
+    
     //--------------------------------------------------------------------------------------
-    // SwitchWeapon: Function for switching the current soldiers weapon.
+    // SwitchRPGMouse: Function for switching the current soldiers weapon to the RPG when
+    // using the mouse to click the button.
     //--------------------------------------------------------------------------------------
     public void SwitchRPGMouse()
     {
+        // if the statemachines is currently in the action state.
         if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
         {
             // Get the soldier object and script.
@@ -524,10 +493,12 @@ public class Player : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------
-    // SwitchWeapon: Function for switching the current soldiers weapon.
+    // SwitchGrenadeMouse: Function for switching the current soldiers weapon to the grenade when
+    // using the mouse to click the button.
     //--------------------------------------------------------------------------------------
     public void SwitchGrenadeMouse()
     {
+        // if the statemachines is currently in the action state.
         if (StateMachine.GetState() == ETurnManagerStates.ETURN_ACTION)
         {
             // Get the soldier object and script.
@@ -538,18 +509,7 @@ public class Player : MonoBehaviour
             SwitchMesh(sCurrentSoldier, EWeaponType.EWEP_GRENADE, m_mGrenadeSoldierMesh, m_amGrenadeMaterials);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
+    
     //--------------------------------------------------------------------------------------
     // SwitchMesh: Function to switch the mesh, materials, weapon of the current solider.
     //

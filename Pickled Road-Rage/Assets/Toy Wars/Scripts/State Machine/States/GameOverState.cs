@@ -38,9 +38,6 @@ public class GameOverState : State
             // Play the teddy winning animation for the winning teddy.
             GetPlayerScript(2).m_gTeddyBase.GetComponent<Teddy>().m_bWinAni = true;
 
-            // Play the teddy death animation for the losing teddy.
-            //GetPlayerScript(1).m_gTeddyBase.GetComponent<Teddy>().m_bDeathAni = true;
-
             // Go through each soldier for player 1
             for (int i = 0; i < GetPlayerScript(1).m_agSoldierList.Length; ++i)
             {
@@ -55,23 +52,12 @@ public class GameOverState : State
             // Play the teddy winning animation for the winning teddy.
             GetPlayerScript(1).m_gTeddyBase.GetComponent<Teddy>().m_bWinAni = true;
 
-            // Play the teddy death animation for the losing teddy.
-            //GetPlayerScript(2).m_gTeddyBase.GetComponent<Teddy>().m_bDeathAni = true;
-
             // Go through each soldier for player 2 
             for (int i = 0; i < GetPlayerScript(1).m_agSoldierList.Length; ++i)
             {
                 // Set the soldier winning animation.
                 GetPlayerScript(1).m_agSoldierList[i].GetComponent<SoldierActor>().m_bWinAni = true;
             }
-        }
-
-        // If both players have gameover.
-        if (GetPlayerScript(1).CheckGameOver() && GetPlayerScript(2).CheckGameOver())
-        {
-            // Play the teddy death animation for both teddys.
-            //GetPlayerScript(1).m_gTeddyBase.GetComponent<Teddy>().m_bDeathAni = true;
-            //GetPlayerScript(2).m_gTeddyBase.GetComponent<Teddy>().m_bDeathAni = true;
         }
     }
 

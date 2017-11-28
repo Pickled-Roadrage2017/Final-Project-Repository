@@ -24,11 +24,11 @@ public class GameOverUI : MonoBehaviour
 
     // public player object.
     [LabelOverride("Player1 Object")] [Tooltip("The Player1 object.")]
-    public Player m_pPlayer1; // DO THIS BETTER!
+    public Player m_pPlayer1;
 
     // public player object.
     [LabelOverride("Player2 Object")] [Tooltip("The Player2 object.")]
-    public Player m_pPlayer2; // DO THIS BETTER!
+    public Player m_pPlayer2;
 
     //--------------------------------------------------------------------------------------
     // Initialization.

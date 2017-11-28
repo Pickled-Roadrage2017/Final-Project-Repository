@@ -29,13 +29,8 @@ public class PauseManager : MonoBehaviour
     [HideInInspector]
     public GameObject m_gGameOver;
 
-
-
-
-    AudioSource[] allAudioSources;
-
-
-
+    // private array of audio sources.
+    AudioSource[] m_aAudioSources;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -52,19 +47,6 @@ public class PauseManager : MonoBehaviour
 
         // set the default for pause to false.
         m_sbPaused = false;
-
-
-
-
-
-
-        
-
-
-
-
-
-
     }
 
     //--------------------------------------------------------------------------------------
@@ -93,25 +75,16 @@ public class PauseManager : MonoBehaviour
             // stop game clock.
             Time.timeScale = 0;
 
+            // Get all audio sources.
+            m_aAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
 
-
-
-
-
-            allAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
-            foreach (AudioSource audio in allAudioSources)
+            // loop through each audio source.
+            foreach (AudioSource audio in m_aAudioSources)
             {
+                // If the audio is not UI tagged than pause audio.
                 if (audio.tag != "UI")
                     audio.Pause();
             }
-
-
-
-
-
-
-            // Pause all the audio in the game.
-            //AudioListener.pause = true;
         }
 
         // if not paused.
@@ -127,24 +100,16 @@ public class PauseManager : MonoBehaviour
             // start game clock.
             Time.timeScale = 1;
 
+            // Get all audio sources.
+            m_aAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
 
-
-
-
-            allAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
-            foreach (AudioSource audio in allAudioSources)
+            // loop through each audio source.
+            foreach (AudioSource audio in m_aAudioSources)
             {
+                // If the audio is not UI tagged than pause audio.
                 if (audio.tag != "UI")
                     audio.UnPause();
             }
-
-
-
-
-
-
-            // Unpause all the audio in the game.
-            //AudioListener.pause = false;
         }
 	}
 
