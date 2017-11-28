@@ -26,7 +26,7 @@ public class ExitButton : MonoBehaviour
 
     // public Animator for the teddy bear object.
     [LabelOverride("Teddy Animator")] [Tooltip("The teddy bear object with the animator.")]
-    public Animator m_gTeddy;
+    public Animator m_aTeddy;
 
     // private float timer for delaying the exit.
     private float m_fTimer = 0.0f;
@@ -80,7 +80,7 @@ public class ExitButton : MonoBehaviour
         if (m_bIsMenuButton)
         {
             // Play teddy death
-            m_gTeddy.SetBool("HurtAni", true);
+            m_aTeddy.SetBool("HurtAni", true);
         }
 
         // if the button is not a menu button.

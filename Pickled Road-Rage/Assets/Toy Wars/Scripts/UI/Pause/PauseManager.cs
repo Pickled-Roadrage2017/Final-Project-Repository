@@ -30,7 +30,7 @@ public class PauseManager : MonoBehaviour
     public GameObject m_gGameOver;
 
     // private array of audio sources.
-    AudioSource[] m_aAudioSources;
+    AudioSource[] m_aaAudioSources;
 
     //--------------------------------------------------------------------------------------
     // initialization.
@@ -76,10 +76,10 @@ public class PauseManager : MonoBehaviour
             Time.timeScale = 0;
 
             // Get all audio sources.
-            m_aAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
+            m_aaAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
 
             // loop through each audio source.
-            foreach (AudioSource audio in m_aAudioSources)
+            foreach (AudioSource audio in m_aaAudioSources)
             {
                 // If the audio is not UI tagged than pause audio.
                 if (audio.tag != "UI")
@@ -101,10 +101,10 @@ public class PauseManager : MonoBehaviour
             Time.timeScale = 1;
 
             // Get all audio sources.
-            m_aAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
+            m_aaAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
 
             // loop through each audio source.
-            foreach (AudioSource audio in m_aAudioSources)
+            foreach (AudioSource audio in m_aaAudioSources)
             {
                 // If the audio is not UI tagged than pause audio.
                 if (audio.tag != "UI")

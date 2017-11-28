@@ -57,7 +57,7 @@ public class CreditsButton : MonoBehaviour
 
     // public Animator for the teddy bear object.
     [LabelOverride("Teddy Animator")] [Tooltip("The teddy bear object with the animator.")]
-    public Animator m_gTeddy;
+    public Animator m_aTeddy;
 
     // Leave a space in the inspector
     [Space]
@@ -100,7 +100,7 @@ public class CreditsButton : MonoBehaviour
             m_gCredits.SetActive(false);
 
             // set the teddy animation back to idle.
-            m_gTeddy.SetBool("CreditsAni", false);
+            m_aTeddy.SetBool("CreditsAni", false);
         }
 
         // if it is not a exit button.
@@ -111,7 +111,7 @@ public class CreditsButton : MonoBehaviour
             m_gCredits.SetActive(true);
 
             // Set the teddy animation to credits.
-            m_gTeddy.SetBool("CreditsAni", true);
+            m_aTeddy.SetBool("CreditsAni", true);
         }
     }
 }

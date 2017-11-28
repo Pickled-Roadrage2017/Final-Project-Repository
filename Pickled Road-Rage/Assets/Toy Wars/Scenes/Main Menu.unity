@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_bIsMenuButton: 1
-  m_gTeddy: {fileID: 1147928843}
+  m_aTeddy: {fileID: 1147928843}
 --- !u!114 &23643826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2151,7 +2151,7 @@ MonoBehaviour:
   m_gMainMenu: {fileID: 1572612896}
   m_gCredits: {fileID: 330835188}
   m_bIsExit: 0
-  m_gTeddy: {fileID: 1147928843}
+  m_aTeddy: {fileID: 1147928843}
   m_bTeddyAni: 0
 --- !u!114 &884528494
 MonoBehaviour:
@@ -3784,7 +3784,7 @@ MonoBehaviour:
   m_gMainMenu: {fileID: 1572612896}
   m_gCredits: {fileID: 330835188}
   m_bIsExit: 1
-  m_gTeddy: {fileID: 1147928843}
+  m_aTeddy: {fileID: 1147928843}
   m_bTeddyAni: 0
 --- !u!114 &1230474982
 MonoBehaviour:

@@ -35,8 +35,7 @@ public class TurnManager : MonoBehaviour
     public float m_fEndLength;
 
     // public float starting time for the spawm timer.
-    [LabelOverride("Respawn Timer Length")]
-    [Tooltip("The time in seconds for how long the soldier respawning state should be. This spawning state is just a delay for the spawning animation.")]
+    [LabelOverride("Respawn Timer Length")] [Tooltip("The time in seconds for how long the soldier respawning state should be. This spawning state is just a delay for the spawning animation.")]
     public float m_fSpawnLength;
     
     // Leave a space in the inspector

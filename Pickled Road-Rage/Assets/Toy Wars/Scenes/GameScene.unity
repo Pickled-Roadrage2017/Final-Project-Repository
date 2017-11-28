@@ -8055,7 +8055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_bIsMenuButton: 0
-  m_gTeddy: {fileID: 68564402}
+  m_aTeddy: {fileID: 0}
 --- !u!114 &466443883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20897,7 +20897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_pPlayer: {fileID: 1333348779}
-  m_iRespawnImage: {fileID: 13057263}
+  m_gRespawnImage: {fileID: 13057263}
 --- !u!114 &1270585597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23160,7 +23160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_pPlayer: {fileID: 2018936184}
-  m_iRespawnImage: {fileID: 1888291045}
+  m_gRespawnImage: {fileID: 1888291045}
 --- !u!114 &1432158295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33553,7 +33553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_bIsMenuButton: 0
-  m_gTeddy: {fileID: 68564402}
+  m_aTeddy: {fileID: 68564402}
 --- !u!82 &2102832184
 AudioSource:
   m_ObjectHideFlags: 0

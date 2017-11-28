@@ -28,7 +28,7 @@ public class RespawnTurnsUI : MonoBehaviour
 
     // public gameobject with image component.
     [LabelOverride("Helmet UI Object")] [Tooltip("The object with the helmet image for the appropriate player.")]
-    public GameObject m_iRespawnImage;
+    public GameObject m_gRespawnImage;
     //--------------------------------------------------------------------------------------
 
     // PRIVATE //
@@ -53,7 +53,7 @@ public class RespawnTurnsUI : MonoBehaviour
 
         // Default the UI disabled.
         m_tRespawnTurns.enabled = false;
-        m_iRespawnImage.SetActive(false);
+        m_gRespawnImage.SetActive(false);
     }
 
     //--------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ public class RespawnTurnsUI : MonoBehaviour
 
             // Enable the UI
             m_tRespawnTurns.enabled = true;
-            m_iRespawnImage.SetActive(true);
+            m_gRespawnImage.SetActive(true);
         }
 
         // If the count is 1 then the text counter is 1.
@@ -86,7 +86,7 @@ public class RespawnTurnsUI : MonoBehaviour
         if (m_nCount == 3 || pPlayer.m_nMaxRespawnCounter == pPlayer.m_nMaxRespawns || pPlayer.GetActiveSoldiers() > pPlayer.m_agSoldierSpawn.Length)
         {
             m_tRespawnTurns.enabled = false;
-            m_iRespawnImage.SetActive(false);
+            m_gRespawnImage.SetActive(false);
         }
 
         // Display the respawn turn timer.

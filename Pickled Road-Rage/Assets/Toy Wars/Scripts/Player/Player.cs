@@ -42,8 +42,7 @@ public class Player : MonoBehaviour
     [Header("Teddy:")]
 
     // public gameobject for the Teddy base of this player.
-    [LabelOverride("Teddy Object")]
-    [Tooltip("The Teddy Object for this player.")]
+    [LabelOverride("Teddy Object")] [Tooltip("The Teddy Object for this player.")]
     public GameObject m_gTeddyBase;
 
     // Leave a space in the inspector
@@ -68,8 +67,7 @@ public class Player : MonoBehaviour
     public Mesh m_mRPGSoldierMesh;
 
     // public mesh for when the grenade is selected.
-    [LabelOverride("Grenade Mesh")]
-    [Tooltip("The mesh to use while the player is using the Grenade.")]
+    [LabelOverride("Grenade Mesh")] [Tooltip("The mesh to use while the player is using the Grenade.")]
     public Mesh m_mGrenadeSoldierMesh;
 
     // public array of materials for when the rpg is selected.
@@ -141,7 +139,7 @@ public class Player : MonoBehaviour
     private int m_nActiveSoldiers;
     
     // bool for if the mouse is held or not.
-    private bool bMouseHeld = false;
+    private bool m_bMouseHeld = false;
     //--------------------------------------------------------------------------------------
 
     // GETTERS & SETTERS //
@@ -215,16 +213,16 @@ public class Player : MonoBehaviour
                     sCurrentSoldier.FaceMouse();
                     
                     // if not over a button or the mouse is held
-                    if (!EventSystem.current.IsPointerOverGameObject() || bMouseHeld)
+                    if (!EventSystem.current.IsPointerOverGameObject() || m_bMouseHeld)
                     {
                         // Get the mouse input functions.
                         MouseDown(sCurrentSoldier);
-                        bMouseHeld = MouseHeld(sCurrentSoldier);
+                        m_bMouseHeld = MouseHeld(sCurrentSoldier);
                         MouseUp(sCurrentSoldier);
                     }
                     
                     // if the mouse is not held.
-                    if (!bMouseHeld)
+                    if (!m_bMouseHeld)
                     {
                         // Switch soldier weapon on key presses.
                         SwitchWeapon(sCurrentSoldier);
@@ -234,7 +232,7 @@ public class Player : MonoBehaviour
                     }
 
                     // if mouse held.
-                    else if (bMouseHeld)
+                    else if (m_bMouseHeld)
                     {
                         // stop the current soldier from moving.
                         sCurrentSoldier.Move(0, 0);
