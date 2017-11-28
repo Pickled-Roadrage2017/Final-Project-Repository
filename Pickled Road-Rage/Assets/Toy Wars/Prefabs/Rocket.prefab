@@ -241,7 +241,7 @@ MonoBehaviour:
   m_lmEnvironmentMask:
     serializedVersion: 2
     m_Bits: 8388608
-  m_fDamage: 110
+  m_fDamage: 100
   m_fPower: 0
   m_gExplosion: {fileID: 1770641874940636, guid: 9b57595ad6662644e90908380de147ac,
     type: 2}
@@ -255,6 +255,7 @@ MonoBehaviour:
   m_rbRocket: {fileID: 0}
   m_bCameraShakeAni: 0
   m_bDisable: 0
+  m_fLifespan: 50
 --- !u!119 &119918221389181220
 Projector:
   m_ObjectHideFlags: 1

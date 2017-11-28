@@ -128,9 +128,9 @@ GameObject:
   - component: {fileID: 4428677557891060}
   - component: {fileID: 33953479925302298}
   - component: {fileID: 23922567568099836}
-  - component: {fileID: 120452622571503708}
   - component: {fileID: 114647353822735556}
   - component: {fileID: 114056655180334188}
+  - component: {fileID: 120452622571503708}
   - component: {fileID: 82445061112605200}
   m_Layer: 0
   m_Name: LaunchLocation
@@ -146,7 +146,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362723199391126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.746222, y: 0.04994609, z: -13.17447}
+  m_LocalPosition: {x: 640.45404, y: 2747.7822, z: -5862.6606}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4428677557891060}
@@ -582,7 +582,7 @@ MonoBehaviour:
     type: 2}
   m_acShotSound: {fileID: 8300000, guid: 6c9ddf7153fd89245a6d2bbdde71cc7d, type: 3}
   m_fMinVelocity: 1
-  m_fMaxVelocity: 10
+  m_fMaxVelocity: 9
   m_fAimSpeed: 12
   m_fLineAngle: -20
 --- !u!114 &114072480633714656
@@ -596,16 +596,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198b1d175209f6947b3e64e4bcb993cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_acFootstep1: {fileID: 8300000, guid: b1d6e8727116bdc449fd3ec2267b1900, type: 3}
-  m_acFootstep2: {fileID: 8300000, guid: d34e9cb9d8fd724489adf38c4a677d73, type: 3}
   m_acDamageSound: {fileID: 8300000, guid: b1d6e8727116bdc449fd3ec2267b1900, type: 3}
-  m_acDeathSound: {fileID: 8300000, guid: b1d6e8727116bdc449fd3ec2267b1900, type: 3}
-  m_fSpeed: 1.25
+  m_fSpeed: 1.5
   m_fRotSpeed: 5
   m_fMaxHealth: 100
   m_eCurrentWeapon: 0
   m_nGrenadeCount: 1
-  m_nGotMinigun: 0
   m_nGotGrenade: 1
   m_gRocketLauncher: {fileID: 1757745506353262}
   m_gGrenadeLauncher: {fileID: 1757745506353262}
@@ -615,7 +611,6 @@ MonoBehaviour:
   m_bDamageAni: 0
   m_bMovingAni: 0
   m_bFireAni: 0
-  m_bDeathAni: 0
   m_bWinAni: 0
   m_fMovementRadius: 1
   m_gMovementCirlceBluePrint: {fileID: 1675744469278078, guid: 1269110b8537c4c4081faf040aaf88a9,
@@ -665,7 +660,7 @@ MonoBehaviour:
   m_gAimingShadow: {fileID: 1753884671113676}
   m_acShotSound: {fileID: 8300000, guid: 7590d09272c505340a8bbbbb0020e0ef, type: 3}
   m_fMinVelocity: 1
-  m_fMaxVelocity: 10
+  m_fMaxVelocity: 9
   m_fAimSpeed: 12
   m_fLineAngle: -20
 --- !u!114 &114865555804714824
