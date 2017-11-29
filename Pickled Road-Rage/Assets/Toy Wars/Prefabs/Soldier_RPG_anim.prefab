@@ -146,7 +146,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362723199391126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 640.45404, y: 2747.7822, z: -5862.6606}
+  m_LocalPosition: {x: -573.82465, y: 907.9321, z: -549.3359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4428677557891060}
@@ -583,7 +583,7 @@ MonoBehaviour:
   m_acShotSound: {fileID: 8300000, guid: 6c9ddf7153fd89245a6d2bbdde71cc7d, type: 3}
   m_fMinVelocity: 1
   m_fMaxVelocity: 9
-  m_fAimSpeed: 12
+  m_fAimSpeed: 10
   m_fLineAngle: -20
 --- !u!114 &114072480633714656
 MonoBehaviour:
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_acShotSound: {fileID: 8300000, guid: 7590d09272c505340a8bbbbb0020e0ef, type: 3}
   m_fMinVelocity: 1
   m_fMaxVelocity: 9
-  m_fAimSpeed: 12
+  m_fAimSpeed: 10
   m_fLineAngle: -20
 --- !u!114 &114865555804714824
 MonoBehaviour:
