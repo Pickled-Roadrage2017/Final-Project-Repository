@@ -1596,7 +1596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_acPlaceSound: {fileID: 8300000, guid: 3bcc45dfb9d5fc54d84255d5ba350c8f, type: 3}
   m_acDamageSound: {fileID: 8300000, guid: 0bbae5c78a7bd2c4f9c4acae1f035148, type: 3}
-  m_acDeathSound: {fileID: 0}
+  m_acDeathSound: {fileID: 8300000, guid: fa77089123232124197ac46af9d27566, type: 3}
   m_fMaxHealth: 185
   m_fMinDamage: 5
   m_fCurrentHealth: 150
@@ -7092,7 +7092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_acPlaceSound: {fileID: 8300000, guid: 3bcc45dfb9d5fc54d84255d5ba350c8f, type: 3}
   m_acDamageSound: {fileID: 8300000, guid: 0bbae5c78a7bd2c4f9c4acae1f035148, type: 3}
-  m_acDeathSound: {fileID: 0}
+  m_acDeathSound: {fileID: 8300000, guid: fa77089123232124197ac46af9d27566, type: 3}
   m_fMaxHealth: 185
   m_fMinDamage: 5
   m_fCurrentHealth: 150
@@ -14709,9 +14709,10 @@ Transform:
   - {fileID: 291495392}
   - {fileID: 81101961}
   - {fileID: 199815433}
-  - {fileID: 577344749}
   - {fileID: 956813891}
   - {fileID: 1272758166}
+  - {fileID: 2144131645}
+  - {fileID: 577344749}
   - {fileID: 344626352}
   - {fileID: 1203139802}
   - {fileID: 808928462}
@@ -14731,7 +14732,6 @@ Transform:
   - {fileID: 1325094632}
   - {fileID: 1603318919}
   - {fileID: 520021604}
-  - {fileID: 2144131645}
   - {fileID: 1910208970}
   - {fileID: 58007980}
   - {fileID: 881907291}
@@ -15877,7 +15877,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 885936153}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &956813892
 MeshCollider:
@@ -21185,7 +21185,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10.000011}
   m_Children: []
   m_Father: {fileID: 885936153}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: -41.621002, y: 77.089005, z: -105.26301}
 --- !u!23 &1272758167
 MeshRenderer:
@@ -34377,7 +34377,7 @@ Transform:
   - {fileID: 1786865851}
   - {fileID: 1384256137}
   m_Father: {fileID: 885936153}
-  m_RootOrder: 50
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 147.126, z: 0}
 --- !u!65 &2144131646
 BoxCollider:
